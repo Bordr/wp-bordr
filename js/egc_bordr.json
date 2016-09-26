@@ -1,0 +1,338 @@
+{ 
+	"EN": {
+		"language_label": "English",
+		"title": "Post a Border Crossing",
+		"lng_btn": "post crossing",
+		"from_to": {
+			"label": "What border have you crossed?",
+			"from": "From",
+			"from_p": "where", 
+			"to": "To",
+			"to_p": "where"
+		},
+		"rel_departure": {
+			"label": "Which departure helped you cross this border?"
+		},
+		"appearance": {
+			"label": "As you crossed the border, did it appear ... ?",
+			"categories": {
+				"visibility": {
+					"min": "invisible",
+					"max": "visible"
+				},
+				"importance": {
+					"min": "unimportant",
+					"max": "important"
+				},
+				"artificiality": {
+					"min": "natural",
+					"max": "artificial"
+				}
+			}			
+		},
+		"expense": {
+			"label": "What did it take to cross the border?",
+			"categories": {
+				"time": {
+					"min": "no time",
+					"max": "a lot of time"
+				},
+				"money": {
+					"min": "no money",
+					"max": "a lot of money"
+				},
+				"risk": {
+					"min": "no risk",
+					"max": "a lot of risk"
+				}
+			}			
+		},
+		"feeling": {
+			"label": "How do you feel about this border?",
+			"categories": {
+				"positivity": {
+					"min": "negative",
+					"max": "positive"
+				}
+			}
+		},
+		"description": {
+			"label": "Describe experience crossing this border",
+			"placeholder": "comment here"
+		},
+		"map": {
+			"label": "Where did you cross this border?",
+			"center": "center map on my location"
+		},
+		"visual": {
+			"label": "What did the border look like?",
+			"assist": "Start by taking and sharing a photo or illustration of the border you crossed.",
+			"or": "lub",
+			"photo": {
+				"photo_btn": "Add a photo..."
+			},
+			"draw": {
+				"draw_btn": "add a drawing..."
+			},
+			"drawingbar": {
+				"assist": "Draw your impression of this border using your finger",
+				"erase_btn": "erase drawing"
+			}
+		},
+		"legal": {
+			"assist": "I accept that my story (including text, photo, drawing, location, and experience evaluations) will now become part of the public domain with rights and obligations for Bordr.org under a Creative Commons BY 4.0 license. <a href='https://creativecommons.org/licenses/by/4.0/'>Read more here</a>."
+		}
+	},
+	"PL": {
+		"language_label": "Polski",
+		"title": "Wyślij historię o przekraczaniu granicy",
+		"lng_btn": "Wyślij",
+		"from_to": {
+			"label": "Jaką granicę przekroczyłeś?",
+			"from": "Z",
+			"from_p": "Do", 
+			"to": "Skąd",
+			"to_p": "Dokąd?"
+		},
+		"rel_departure": {
+			"label": "Jaki punkt początkowy pomógł ci przekroczyć tę granicę?"
+		},
+		"appearance": {
+			"label": "Kiedy ją przekraczałeś, czy było to.. ?",
+			"categories": {
+				"visibility": {
+					"min": "Niewidoczne",
+					"max": "Widoczne"
+				},
+				"importance": {
+					"min": "Nieważne",
+					"max": "Ważne"
+				},
+				"artificiality": {
+					"min": "Naturalne",
+					"max": "Sztuczne"
+				}
+			}			
+		},
+		"expense": {
+			"label": "Co musiałeś poświęcić, żeby ją przekroczyć?",
+			"categories": {
+				"time": {
+					"min": "Dużo czasu",
+					"max": "Mało czasu"
+				},
+				"money": {
+					"min": "Mało pieniędzy",
+					"max": "Dużo pieniędzy"
+				},
+				"risk": {
+					"min": "Mało ryzykowne",
+					"max": "Bardzo ryzykowne"
+				}
+			}			
+		},
+		"feeling": {
+			"label": "Jak się czujesz wobec tej granicy?",
+			"categories": {
+				"positivity": {
+					"min": "Negatywnie",
+					"max": "Pozytywnie"
+				}
+			}
+		},
+		"description": {
+			"label": "Opisz swoje doświadczenie przekraczania granicy",
+			"placeholder": "Skomentuj tutaj"
+		},
+		"map": {
+			"label": "Gdzie przekroczyłeś tę granicę?",
+			"center": "Zaznacz to miejsce na mapie"
+		},
+		"visual": {
+			"label": "Jak wyglądało przekraczanie tej granicy?",
+			"assist": "Dodaj zdjęcie lub narysuj granicę, którą przekroczyłeś",
+			"or": "lub",
+			"photo": {
+				"photo_btn": "Dodaj zdjęcie"
+			},
+			"draw": {
+				"draw_btn": "Dodaj rysunek"
+			},
+			"drawingbar": {
+				"assist": "Draw your impression of this border using your finger",
+				"erase_btn": "erase drawing"
+			}
+		},
+		"legal": {
+			"assist": "Wyrażam zgodę, aby moja historia (tekst, zdjęcie, rysunek, lokalizacja i opisywane doświadczenia) stała się częścią domeny publicznej Bordr.org na prawach i obowiązkach licencji Creative Commons BY 4.0 <a href='https://creativecommons.org/licenses/by/4.0/'>Czytaj więcej</a>."
+		}
+	},
+	"SV": {
+		"language_label": "Svenska",
+		"title": "Boka en gränskorsning",
+		"lng_btn": "Boka min upplevelse",
+		"from_to": {
+			"label": "Vilken gräns har du korsat?",
+			"from": "Från",
+			"from_p": "Var", 
+			"to": "Till",
+			"to_p": "Var"
+		},
+		"rel_departure": {
+			"label": "Vilken avgång hjälpte dig korsa gränsen?"
+		},
+		"appearance": {
+			"label": "När du korsade gränser, hur upplevde du den?",
+			"categories": {
+				"visibility": {
+					"min": "Osynlig",
+					"max": "Synlig"
+				},
+				"importance": {
+					"min": "Oviktig",
+					"max": "Viktig"
+				},
+				"artificiality": {
+					"min": "Naturlig",
+					"max": "Konstgjord"
+				}
+			}			
+		},
+		"expense": {
+			"label": "Vad krävdes för att korsa gränsen?",
+			"categories": {
+				"time": {
+					"min": "Ingen tid",
+					"max": "Mycket tid"
+				},
+				"money": {
+					"min": "Inga pengar",
+					"max": "Mycket pengar"
+				},
+				"risk": {
+					"min": "Ingen risk",
+					"max": "Mycket risk"
+				}
+			}			
+		},
+		"feeling": {
+			"label": "Hur känner du för gränsen?",
+			"categories": {
+				"positivity": {
+					"min": "Negativt",
+					"max": "Positivt"
+				}
+			}
+		},
+		"description": {
+			"label": "Beskriv din upplevelse av att korsa denna gräns",
+			"placeholder": "Skriv här"
+		},
+		"map": {
+			"label": "Var korsade du gränsen?",
+			"center": "Centrera kartan på min plats"
+		},
+		"visual": {
+			"label": "Hur såg gränsen ut?",
+			"assist": "Ladda upp ett foto, eller gör en teckning av den gräns du korsat",
+			"or": "eller",
+			"photo": {
+				"photo_btn": "Lägg till foto"
+			},
+			"draw": {
+				"draw_btn": "Lägg till teckning"
+			},
+			"drawingbar": {
+				"assist": "Draw your impression of this border using your finger",
+				"erase_btn": "erase drawing"
+			}
+		},
+		"legal": {
+			"assist": "Jag accepterar att min berättelse (inclusive text, foto, teckning, plats och värderingar) nu blir allmän egendom med rättigheter och skyldigheter för Bordr.org enligt en Creative Commons BY 4.0 licens. <a href='https://creativecommons.org/licenses/by/4.0/'>Läs mer här.</a>."
+		}
+	},
+	"ES": {
+		"language_label": "Español",
+		"title": "Comparte tu historia",
+		"lng_btn": "Publica tu historia",
+		"from_to": {
+			"label": "¿Qué límite has cruzado?",
+			"from": "De",
+			"from_p": "dónde",
+			"to": "A",
+			"to_p": "dónde"
+		},
+		"rel_departure": {
+			"label": "¿Qué proyecto te ayudó a cruzar este límite?"
+		},
+		"appearance": {
+			"label": "Mientras cruzabas este límite, ¿cómo lo precibiste?",
+			"categories": {
+				"visibility": {
+					"min": "Poco visible",
+					"max": "Muy visible"
+				},
+				"importance": {
+					"min": "Poco importante",
+					"max": "Muy importante"
+				},
+				"artificiality": {
+					"min": "Más natural",
+					"max": "Más artificial"
+				}
+			}			
+		},
+		"expense": {
+			"label": "¿Cuánto te supuso cruzar este límite?",
+			"categories": {
+				"time": {
+					"min": "Poco tiempo",
+					"max": "Mucho tiempo"
+				},
+				"money": {
+					"min": "Poco dinero",
+					"max": "Mucho dinero"
+				},
+				"risk": {
+					"min": "Poco riesgo",
+					"max": "Mucho riesgo"
+				}
+			}			
+		},
+		"feeling": {
+			"label": "¿Cómo fue la sensación que experimentaste al cruzar este límite?",
+			"categories": {
+				"positivity": {
+					"min": "Negativa",
+					"max": "Positiva"
+				}
+			}
+		},
+		"description": {
+			"label": "Describe brevemente tu experiencia al cruzar este límite",
+			"placeholder": "Escribe aquí tu comentario"
+		},
+		"map": {
+			"label": "¿Dónde estabas cuando cruzaste este límite?",
+			"center": "Centrar el mapa sobre mi localización"
+		},
+		"visual": {
+			"label": "¿Qué aspecto tenía este límite?",
+			"assist": "Comparte una imagen del límite que cruzaste.",
+			"or": "lub",
+			"photo": {
+				"photo_btn": "Subir una foto"
+			},
+			"draw": {
+				"draw_btn": "Hacer un dibujo"
+			},
+			"drawingbar": {
+				"assist": "Usa el ratón o el dedo para hacer tu dibujo",
+				"erase_btn": "Borrar el dibujo"
+			}
+		},
+		"legal": {
+			"assist": "Acepto que mi historia, incluyendo el texto, fotografía, dibujo, localización y evaluación de la experiencia, pasen al dominio público a través de bordr.org bajo una licencia Creative Commons BY 4.0. <a href='https://creativecommons.org/licenses/by/4.0/'>Lee más (en inglés)</a>."
+		}
+	}
+}
