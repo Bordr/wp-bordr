@@ -5,37 +5,7 @@
  
 global $post;
 $post_slug=$post->post_name;
- 
-include "/home/154870/domains/bordr.org/html/crossings/connect.php";
 
-if ($post_slug) {
-
-	$brdr_cnt = " WHERE rel_dep = '".$post_slug."' "; 
-
-	// Number of borders
-	$query = "SELECT count(*) as borders_crossed FROM app_borders ".$brdr_cnt."";
-	$results = mysql_query($query);
-
-	while ($row = mysql_fetch_object($results)) {	
-		$num_borders = $row->borders_crossed;
-	}
-
-	// Number of borders
-	$travellerArr = array();
-	$query = "SELECT CASE
-			   WHEN app_borders.app_version != 1 AND app_borders.loc_img != '' THEN CONCAT('http://projectborders.com/app-imgs/',SUBSTRING_INDEX(app_borders.loc_img, '/', -1))
-			   WHEN app_borders.loc_img = '' THEN 'http://exhibit.bordr.org/app-imgs/000.jpg'
-			   WHEN app_borders.app_version = 1 THEN CONCAT('http://bordr.org/app-imgs/files/medium/',loc_img)
- 			   WHEN app_borders.app_version = 2 THEN CONCAT('http://exhibit.bordr.org/app-imgs/',loc_img)
-			END AS img FROM app_borders ".$brdr_cnt." LIMIT 4";
-	$results = mysql_query($query);
-
-	while ($row = mysql_fetch_object($results)) {	
-		$travellerArr[] = $row->img;
-	}
-
-} 
- 
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'box' ); ?>>
@@ -304,26 +274,48 @@ if( $gallery ): ?>
 
 		<h2>Results</h2>
 
-		<?php if ( $num_borders > 0 ) : ?>
+		<!-- The Loop -->
 
+			<?php
+			
+			$posts = get_posts(array(
+						'post_type'		=> 'bordr',
+						'numberposts'	=> 4,
+						'meta_query'		=> array(
+							array(
+								'key' => 'related_activity',
+								'value' =>  get_the_ID(),
+								'compare' => 'LIKE'
+								)
+							)
+			));
+			
+			if( $posts ): ?>
 			<h3>Bordr Stories</h3>	
-			<p>As part of this activity <?php echo $num_borders; ?> border-stories were booked.</p>
-			<a href="/crossing/<?php echo $post_slug; ?>/">	
-				<div class="row">
-				<?php 
-					foreach($travellerArr as $img):
-					?> 
-					<div class="col-sm-3">
-						<img src="<?php echo $img; ?>"/> 
-					</div>
-					<?php
-					endforeach;	
+			<p>As part of this activity, border-stories were booked.</p>	
+						<div id="masonry" class="row">
+		
+			<?php foreach( $posts as $post ): 
+		
+				setup_postdata( $post )
+		
 				?>
-				</div>
-			view the stories</a>
+
+					<div class="col-xs-6 col-sm-4 col-lg-3 masonry-item">
+						<?php get_template_part( 'bordrlittleloop', get_post_format() ); ?>
+					</div>
+
+			<?php endforeach; ?>
+					</div>
+	
+			<?php wp_reset_postdata(); ?>
+
+		<?php else: ?>
+				<p><?php _e('No stories from this activity at this time.'); ?></p>
 
 		<?php endif; ?>
 
+		<!-- End Loop -->
 
 		<?php
 		if (get_field('results_description')) :
