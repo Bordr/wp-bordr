@@ -181,7 +181,7 @@ class T5_Hide_Profile_Bio_Box
         $headline = __( IS_PROFILE_PAGE ? 'About Yourself' : 'About the user' );
         $html = str_replace( '<h2>' . $headline . '</h2>', '', $html );
         $html = str_replace( '<label for="nickname">Nickname', '<label for="nickname">Hub Name', $html );
-        $html = str_replace( 'Biographical Info', 'Short overview of who you are (as an Actor) and what you do?', $html );
+        $html = str_replace( 'Biographical Info', 'Short overview of who you are (as a Hub) and what you do?', $html );
         $html = str_replace( 'Share a little biographical information to fill out your profile. This may be shown publicly.', '', $html );
         // remove the table row
 //         $html = preg_replace( '~<tr class="user-description-wrap">\s*<th><label for="description".*</tr>~imsUu', '', $html );
@@ -396,6 +396,19 @@ function cptui_register_my_cpts() {
 	$labels = array(
 		"name" => __( 'Bordrs', 'bordr' ),
 		"singular_name" => __( 'Bordr', 'bordr' ),
+		"menu_name" => __( 'My Bordrs', 'bordr' ),
+		"all_items" => __( 'All Bordrs', 'bordr' ),
+		"add_new" => __( 'Add New Bordr', 'bordr' ),
+		"add_new_item" => __( 'Add New Bordr', 'bordr' ),
+		"edit_item" => __( 'Edit Bordr', 'bordr' ),
+		"new_item" => __( 'New Bordr', 'bordr' ),
+		"view_item" => __( 'View Bordr', 'bordr' ),
+		"search_items" => __( 'Search Bordrs', 'bordr' ),
+		"not_found" => __( 'No Bordrs Found', 'bordr' ),
+		"not_found_in_trash" => __( 'No Bordrs Found in Trash', 'bordr' ),
+		"archives" => __( 'Bordr archives', 'bordr' ),
+		"insert_into_item" => __( 'Insert into bordr', 'bordr' ),
+		"uploaded_to_this_item" => __( 'Upload to this bordr', 'bordr' ),
 		);
 
 	$args = array(
@@ -422,6 +435,20 @@ function cptui_register_my_cpts() {
 	$labels = array(
 		"name" => __( 'Activities', 'bordr' ),
 		"singular_name" => __( 'Activity', 'bordr' ),
+		"menu_name" => __( 'My Activities', 'bordr' ),
+		"all_items" => __( 'All Activities', 'bordr' ),
+		"add_new" => __( 'Add New Activity', 'bordr' ),
+		"add_new_item" => __( 'Add New Activity', 'bordr' ),
+		"edit_item" => __( 'Edit Activity', 'bordr' ),
+		"new_item" => __( 'New Activity', 'bordr' ),
+		"view_item" => __( 'View Activity', 'bordr' ),
+		"search_items" => __( 'Search Activity', 'bordr' ),
+		"not_found" => __( 'No Activities Found', 'bordr' ),
+		"not_found_in_trash" => __( 'No Activities Found in Trash', 'bordr' ),
+		"archives" => __( 'Activities Archive', 'bordr' ),
+		"insert_into_item" => __( 'Insert into activity', 'bordr' ),
+		"uploaded_to_this_item" => __( 'Uploaded to this activity', 'bordr' ),
+		"filter_items_list" => __( 'Filter Activity List', 'bordr' ),
 		);
 
 	$args = array(
@@ -445,8 +472,10 @@ function cptui_register_my_cpts() {
 		"supports" => array( "title", "editor", "thumbnail", "comments", "revisions", "author" ),					);
 	register_post_type( "activity", $args );
 
-} 
-// !--- End of cptui_register_my_cpts()
+// End of cptui_register_my_cpts()
+}
+
+
 
 
 // --- BEGIN CUSTOM FIELD GROUPS
@@ -762,7 +791,7 @@ acf_add_local_field_group(array (
 		),
 		array (
 			'key' => 'field_5703f367df759',
-			'label' => 'Other borders crossed in this activity',
+			'label' => 'Other borders explored in this activity',
 			'name' => 'other_borders',
 			'type' => 'repeater',
 			'instructions' => '',
@@ -862,7 +891,7 @@ acf_add_local_field_group(array (
 		),
 		array (
 			'key' => 'field_56fb18a433a5e',
-			'label' => 'What are the characteristics of the border?',
+			'label' => 'What are the characteristics of the activity?',
 			'name' => '',
 			'type' => 'message',
 			'instructions' => '',
@@ -1162,7 +1191,7 @@ Unknown people (100)',
 		),
 		array (
 			'key' => 'field_57be0ff8a98b9',
-			'label' => 'Describe the audience/participants',
+			'label' => 'Describe the audience/participants (your target group)',
 			'name' => 'audience_desc',
 			'type' => 'textarea',
 			'instructions' => '',
@@ -1181,7 +1210,7 @@ Unknown people (100)',
 		),
 		array (
 			'key' => 'field_57c08ba1444df',
-			'label' => 'How do/did you find, select, or reach out to your audience/participants?',
+			'label' => 'How do/did you find, select, or reach out to your audience/participants (your target group)?',
 			'name' => 'audience_discovery',
 			'type' => 'wysiwyg',
 			'instructions' => 'Explain using images, drawings, photographs, film, sound, or text.',
@@ -1625,7 +1654,7 @@ acf_add_local_field_group(array (
 			'label' => 'invisible — visible',
 			'name' => 'brdr_invisible_visible',
 			'type' => 'number_slider',
-			'instructions' => '0 is invisible, 100 is visible',
+			'instructions' => '1 is invisible, 100 is visible',
 			'required' => 1,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -1644,7 +1673,7 @@ acf_add_local_field_group(array (
 			'label' => 'unimportant — important',
 			'name' => 'brdr_unimportant_important',
 			'type' => 'number_slider',
-			'instructions' => '0 is unimportant, 100 is important',
+			'instructions' => '1 is unimportant, 100 is important',
 			'required' => 1,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -1680,7 +1709,7 @@ acf_add_local_field_group(array (
 			'label' => 'negative — positive',
 			'name' => 'brdr_negative_positive',
 			'type' => 'number_slider',
-			'instructions' => '0 is negative, 100 is positive',
+			'instructions' => '1 is negative, 100 is positive',
 			'required' => 1,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -1839,7 +1868,7 @@ acf_add_local_field_group(array (
 	'fields' => array (
 		array (
 			'key' => 'field_57043c98660f9',
-			'label' => 'Your Organization is a Hub',
+			'label' => 'You are a Hub',
 			'name' => '',
 			'type' => 'message',
 			'instructions' => '',
@@ -1850,7 +1879,7 @@ acf_add_local_field_group(array (
 				'class' => '',
 				'id' => '',
 			),
-			'message' => 'On Europe Grand Central, your organization is a hub performing projects which we call activities.
+			'message' => 'On Europe Grand Central, you are registered as a Hub, and your projects, actions, and interventions are called Activities.
 
 Please take a moment and describe your hub.',
 			'new_lines' => 'wpautop',
