@@ -1011,35 +1011,36 @@ jQuery(document).ready(function() {
 		renderMyDepartures($(this).data('char'),$(this).data('charval'));
 	});
 
+	embedVids();
 	
 });
 
 
 function embedVids() {
 
-	var pattern1 = /(?:http?s?:\/\/)?(?:www\.)?(?:vimeo\.com|player\.vimeo\.com\/video)\/?(.+)/g;
-	var pattern2 = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(.+)/g;
+	var pattern1 = /(?:http?s?:\/\/)?(?:www\.)?(?:vimeo\.com|player\.vimeo\.com\/video)\/?([^\< ]+)/g;
+	var pattern2 = /(?:http?s?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?([^\< ]+)/g;
 	
-	$(".lead:contains('vimeo.com')").each(function(i, el){
+	$(".bordr p:contains('vimeo.com')").each(function(i, el){
 
 	   var replacement = '<iframe width="420" height="345" src="//player.vimeo.com/video/$1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
 	   
 	   var found = $(this).html().replace(pattern1, replacement);
 	   var video = $(found).filter('iframe');
-	   $(this).prev("img").replaceWith(video);
+	   $(this).closest('article').find('img:first').replaceWith(video);
 
 	   var story = $(this).html().replace(pattern1, "");
 	   $(this).replaceWith(story);
 
 	});
 
-	$(".lead:contains('youtu')").each(function(i, el){
+	$(".bordr p:contains('youtu')").each(function(i, el){
 
 	   var replacement = '<iframe width="420" height="345" src="//player.vimeo.com/video/$1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
 	   
 	   var found = $(this).html().replace(pattern2, replacement);
 	   var video = $(found).filter('iframe');
-	   $(this).prev("img").replaceWith(video);
+	   $(this).closest('article').find('img:first').replaceWith(video);
 
 	   var story = $(this).html().replace(pattern2, "");
 	   $(this).replaceWith(story);
