@@ -26,25 +26,23 @@ get_header(); ?>
 		
 		$char_options = array(
 			'brdr_invisible_visible'=>array(
-				0 => '<a href="#charfilter" data-charval="0" data-char="brdr_invisible_visible" class="filter" data-filter="char">Visible</a>', 
-				100 => '<a href="#charfilter" data-charval="100" data-char="brdr_invisible_visible" class="filter" data-filter="char">Invisible</a>'),
+				0 => '<a href="#charfilter" data-charval="1" data-char="brdr_invisible_visible" class="filter" data-filter="char">Invisible</a>', 
+				100 => '<a href="#charfilter" data-charval="100" data-char="brdr_invisible_visible" class="filter" data-filter="char">Visible</a>'),
 			'brdr_negative_positive'=>array(
-				0 => '<a href="#charfilter" data-charval="0" data-char="brdr_negative_positive" class="filter" data-filter="char">Negative</a>', 
+				0 => '<a href="#charfilter" data-charval="1" data-char="brdr_negative_positive" class="filter" data-filter="char">Negative</a>', 
 				100 => '<a href="#charfilter" data-charval="100" data-char="brdr_negative_positive" class="filter" data-filter="char">Positive</a>'),
 			'brdr_unimportant_important'=>array(
-				0 => '<a href="#charfilter" data-charval="0" data-char="brdr_unimportant_important" class="filter" data-filter="char">Unimportant</a>', 
+				0 => '<a href="#charfilter" data-charval="1" data-char="brdr_unimportant_important" class="filter" data-filter="char">Unimportant</a>', 
 				100 => '<a href="#charfilter" data-charval="100" data-char="brdr_unimportant_important" class="filter" data-filter="char">Important</a>')
 		);
 		
-		$events = array(); 
+		$rel_act = array(); 
 		$charsavb = array();
-		$stationsavb = array();
-		$countriesavb = array();
-		if ( have_posts() ) : ?>
-		<?php while ( have_posts() ) : the_post(); ?>
-		<?php 
-			$author_id = get_the_author_meta('ID');
-			$deptname = get_field('brdr_from')." — ".get_field('brdr_to');
+		if ( have_posts() ) : 
+			while ( have_posts() ) : the_post(); 
+
+			$rel_act[] = get_field('related_activity');
+
 					
 			foreach ($char_options as $char_name => $char_ignore) {
 				if (get_field($char_name) == TRUE) {
@@ -53,81 +51,54 @@ get_header(); ?>
 				}
 			}
 			
-			$stationsavb[] = $author_id;
-			
-			$address = get_field('brdr_location');
-			$countriesavb[] = end(explode(",",$address['address']));
-			$countriesavb = array_unique($countriesavb);
 			endwhile;
-		endif; ?>
 
-<!-- 
-	<h2 class="entry-title" style="margin-left:20px; margin-top:30px;">Filter Bordrs</h2>
+			sort($rel_act);
+			
+		endif;
+		?>
+
+	<h2 class="entry-title" style="margin-left:0px; margin-top:30px;">Filter Bordrs</h2>
 
 	<div class="row" style="margin-bottom:30px;">
 	
 		<div class="col-sm-12">
-			<div class="btn-group filtergroup" style="margin-left:20px;">
-			  	<?php if ($_GET['station']) { ?>
-				  <button type="button" id="depstat" class="btn btn-primary dropdown-toggle selFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<?php echo ucwords(get_field('related_activity','user_'.$_GET['activity'])); ?> <span class="caret"></span>
+			<div class="btn-group filtergroup" style="margin-left:0px;">
+			  	<?php if ($_GET['relact']) { ?>
+				  <button type="button" id="brdract" class="btn btn-primary dropdown-toggle selFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<?php echo ucwords(get_post(get_field('related_activity'))->post_title); ?> <span class="caret"></span>
 				  </button>
 			  	<?php } else { ?>			  	
-				  <button type="button" id="depstat" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  <button type="button" id="brdract" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					By activity <span class="caret"></span>
 				  </button>
 			  	<?php } ?>			  	
-			  <ul class="dropdown-menu" id="depstatmenu">
-					<li><a href="#stationfilter" data-station="" data-filter="">All activities</a></li>
+			  <ul class="dropdown-menu" id="brdractmenu">
+					<li><a href="#actfilter" data-station="" data-filter="">All activities</a></li>
 
 				<?php
 				
-				$blogusers = get_users('role=station');
-				$stations_arr = array();
-	 
 				// Array of WP_User objects.
-				foreach ( $blogusers as $user ) {
-				
-					if (in_array($user->ID,$stationsavb)) {
-		
-						$user_info = get_userdata($user->ID);
-						$station = get_field('organization_name','user_'.$user->ID);
-						$location = get_field('organization_location','user_'.$user->ID);
-						
-						$location_ctry = trim(end(explode(",", $location['address'])));
-						$ctrysavb[] = $location_ctry;
-
-						$ctrystations[$location_ctry][] = "<li><a href=\"#stationfilter\" data-station=\"".$user->ID."\" class=\"filter\" data-filter=\"station\">".ucwords($station)."</a></li>";
-
+				foreach ( $rel_act as $activity ) {
+					if (get_post($activity)->ID != $last_activity) {
+						$activity_title = get_post($activity)->post_title;
+						$activity_name = get_post($activity)->post_name;
+						$activity_ID = get_post($activity)->ID;
+					
+						?><li><a href="#relact" data-relact="<?php echo $activity_ID; ?>" class="filter" data-filter="relact" style="font-weight:bold;"><?php echo $activity_title; ?></a></li><?php 
+						$last_activity = get_post($activity)->ID;
 					}
-
-				}
-				
-				$ctrysavb = array_unique($ctrysavb);
-				sort($ctrysavb);
-// 				print_r($ctrysavb);
-
-				foreach ( $ctrysavb as $ctry ) {
-				
-					?><li><a href="#ctryfilter" data-ctry="<?php echo $ctry; ?>" class="filter" data-filter="ctry" style="font-weight:bold;"><?php echo $ctry; ?></a></li><?php 
-					
-					foreach ( $ctrystations[$ctry] as $station ) {
-					
-						echo $station; 
-					
-					}
-				
 				}
 				
 				?>
 			  </ul>
 			</div>
-			
+			<!---
 			<div class="btn-group filtergroup" >
-			  <button type="button" id="depchar" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  <button type="button" id="brdrchar" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				By characteristics <span class="caret"></span>
 			  </button>
-				  <ul class="dropdown-menu" id="depcharmenu">
+				  <ul class="dropdown-menu" id="brdrcharmenu">
 					<li><a href="#charfilter" data-char="" data-charval="">All characteristics</a></li>
 					<?php 
 					foreach ( $char_options as $char => $char_arr ) {
@@ -142,10 +113,10 @@ get_header(); ?>
 				?>
 				  </ul>
 			</div>
-
+			--->
 		</div>					
 	</div>
- -->
+
 	<div class="row">	
 
 		

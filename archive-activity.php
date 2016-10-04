@@ -88,9 +88,6 @@ get_header(); ?>
 			$events = array_merge($events, $timeline); 
 		?>
 	<?php endwhile; 
-// 					print_r($countriesavb);
-// 					print_r($charsavb);
-// 					print_r($events);			
 		usort( $events, 'sort_by_date_ascending'); 
 	endif; ?>
 
@@ -138,7 +135,6 @@ get_header(); ?>
 				
 				$ctrysavb = array_unique($ctrysavb);
 				sort($ctrysavb);
-// 				print_r($ctrysavb);
 
 				foreach ( $ctrysavb as $ctry ) {
 				
@@ -207,40 +203,6 @@ get_header(); ?>
 
 		</div>					
 	</div>
-<!-- 
-			<div id="timelinewrap">
-				<h2 class="entry-title" style="margin-left:20px;">Notes from the field</h2>
-				<div class="ttimeline">
-					<div class='start'></div>
-				</div>
-
-				<div class="tcontainer">
-					<div class='tentries'>
-
-					<?php foreach ( $events as $idx => $event ) : ?>
-						<?php if (strtotime($event['event_date']) > strtotime("-6 month")) : ?>
-								<div class='tentry project'>
-								  <div class='dot'></div>
-								   <a href="<?php echo $event['uri']; ?>">
-								  <div class='tlabel'>
-									<div class='time'>
-									  <?php echo date( "j F Y", strtotime($event['event_date']) ); ?>
-									</div>
-									<div class='detail'>
-									  <b><?php echo $event['event_title']; ?></b><br/>
-									 <?php echo $event['departure']; ?><br/>
-									  from <?php echo $event['station']; ?>
-									</div>
-								  </div>
-								  </a>
-								</div>
-						<?php endif; ?>
-					<?php endforeach; ?>
-
-					</div>
-				</div>
-			</div>
- -->
 
 	<div class="row">	
 

@@ -225,6 +225,45 @@
 		window.location.replace( url );
 // 		console.log(url);
 	 }
+
+	 function renderMyBordrs(filter,value) {
+
+		// vars
+		var url = '<?php echo home_url('bordr/'); ?>';
+			args = {};
+
+		// loop over filters
+		$('.selFilter').each(function(){
+			// vars
+			var filter = $(this).data('filter'),
+				vals = $(this).data(filter);
+			// append to args
+			args[ filter ] = vals;
+			
+			if (filter == 'char') {
+				// vars
+				var filter = 'charval',
+					vals = $(this).data(filter);
+				// append to args
+				args[ filter ] = vals;			
+			}
+		});
+		
+		// update url
+		url += '?';
+		// loop over args
+		$.each(args, function( name, value ){
+			if ((name != 'charval' && value == undefined) || name == 'undefined') {}
+			else {
+				url += name + '=' + value + '&';
+			}
+		});
+		// remove last &
+			url = url.slice(0, -1);
+		// reload page
+		window.location.replace( url );
+// 		console.log(url);
+	 }
 	 
 	 jQuery(document).ready(function() {
 	 	var stationval = getUrlParameter('station');

@@ -962,16 +962,23 @@ jQuery(document).ready(function() {
 	
 	$('.dropdown-toggle').dropdown();
 	
-	$('#brdrcatmenu li > a').click(function(e){
-		$('#brdrcat').html(this.innerHTML+' borders <span class="caret"></span>');
-		$('#brdrdepart').html('All activities <span class="caret"></span>');
-		$('#categoryfilter').html(this.innerHTML+' border crossings');
+	$('#brdractmenu li > a').click(function(e){
+		$('#brdract').html(this.innerHTML+' <span class="caret"></span>');
+		$('#actfilter').html(this.innerHTML);
+		$('#brdract').addClass('selFilter');
+		$('#brdract').attr('data-filter',$(this).data('filter'));
+		$('#brdract').attr('data-relact',$(this).data('relact'));
+		renderMyBordrs($(this).data('relact'),'');
 	});
-
-	$('#brdrdepartmenu li > a').click(function(e){
-		$('#brdrdepart').html(this.innerHTML+' borders <span class="caret"></span>');
-		$('#brdrcat').html('All borders <span class="caret"></span>');
-		$('#categoryfilter').html(this.innerHTML+' border crossings');
+	
+	$('#brdrcharmenu li > a').click(function(e){
+		$('#brdrchar').html(this.innerHTML+' <span class="caret"></span>');
+		$('#charfilter').html(this.innerHTML);
+		$('#brdrchar').addClass('selFilter');
+		$('#brdrchar').attr('data-filter',$(this).data('filter'));
+		$('#brdrchar').attr('data-char',$(this).data('char'));
+		$('#brdrchar').attr('data-charval',$(this).data('charval'));
+		renderMyBordrs($(this).data('char'),$(this).data('charval'));
 	});
 
 	$('#depstatmenu li > a').click(function(e){

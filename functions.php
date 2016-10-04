@@ -262,7 +262,8 @@ function prefix_hide_personal_options() {
 
 $GLOBALS['my_query_filters'] = array( 
 	'author'	=> 'station',
-	'location'	=> 'ctry'
+	'location'	=> 'ctry',
+	'relact'	=> 'relact'
 );
 
 // array of filters (field key => field name)
@@ -317,6 +318,22 @@ function my_pre_get_posts( $query ) {
 			
 			$ctryusers = get_users($arg);
 			$query->set( 'author__in' , $ctryusers ); 
+		}
+
+		if ($key == "relact") {
+			$value = $_GET[ $name ];
+			
+			$arg = array(
+					'post_type'         => 'bordr',
+					'meta_query'        => array(
+						array(
+							'key'   => 'related_activity',
+							'value' => $value
+						)
+					)
+			);
+
+			$query->set('meta_query', $arg);
 		}
         
 	} 
