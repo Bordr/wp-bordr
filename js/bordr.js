@@ -971,14 +971,14 @@ jQuery(document).ready(function() {
 		renderMyBordrs($(this).data('relact'),'');
 	});
 	
-	$('#brdrcharmenu li > a').click(function(e){
-		$('#brdrchar').html(this.innerHTML+' <span class="caret"></span>');
-		$('#charfilter').html(this.innerHTML);
-		$('#brdrchar').addClass('selFilter');
-		$('#brdrchar').attr('data-filter',$(this).data('filter'));
-		$('#brdrchar').attr('data-char',$(this).data('char'));
-		$('#brdrchar').attr('data-charval',$(this).data('charval'));
-		renderMyBordrs($(this).data('char'),$(this).data('charval'));
+	$('#brdrperceptionmenu li > a').click(function(e){
+		$('#brdrperception').html(this.innerHTML+' <span class="caret"></span>');
+		$('#perceptionfilter').html(this.innerHTML);
+		$('#brdrperception').addClass('selFilter');
+		$('#brdrperception').attr('data-filter',$(this).data('filter'));
+		$('#brdrperception').attr('data-perception',$(this).data('perception'));
+		$('#brdrperception').attr('data-perceptionval',$(this).data('perceptionval'));
+		renderMyBordrs($(this).data('perception'),$(this).data('perceptionval'));
 	});
 
 	$('#depstatmenu li > a').click(function(e){

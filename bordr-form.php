@@ -240,9 +240,9 @@
 			// append to args
 			args[ filter ] = vals;
 			
-			if (filter == 'char') {
+			if (filter == 'perception') {
 				// vars
-				var filter = 'charval',
+				var filter = 'perceptionval',
 					vals = $(this).data(filter);
 				// append to args
 				args[ filter ] = vals;			
@@ -253,7 +253,7 @@
 		url += '?';
 		// loop over args
 		$.each(args, function( name, value ){
-			if ((name != 'charval' && value == undefined) || name == 'undefined') {}
+			if ((name != 'perceptionval' && value == undefined) || name == 'undefined') {}
 			else {
 				url += name + '=' + value + '&';
 			}

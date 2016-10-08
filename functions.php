@@ -269,7 +269,8 @@ $GLOBALS['my_query_filters'] = array(
 // array of filters (field key => field name)
 $GLOBALS['my_meta_query_filters'] = array( 
 	'field_1'	=> 'method', 
-	'field_2'	=> 'char'
+	'field_2'	=> 'char', 
+	'field_3'	=> 'perception'
 );
 
 // action
@@ -372,6 +373,22 @@ function my_pre_get_posts( $query ) {
 				'value'		=> 1,
 				'compare'	=> '='
 			);			
+		} else if (isset($_GET[ $name ]) && $name == 'perception') {
+		
+			$ckey = $_GET[ 'perception' ];
+			$cvalue = $_GET[ 'perceptionval' ];
+
+			if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
+			else { $cvalue = 40; $compare = "<"; }
+
+			// append meta query
+			$meta_query[] = array(
+				'key'		=> $ckey,
+				'value'		=> $cvalue,
+				'compare'	=> $compare,
+				'type' => 'numeric'
+			);
+		
 		} else if (isset($_GET[ $name ]) && $name == 'method') {
 		
 			$ckey = $_GET[ 'method' ];

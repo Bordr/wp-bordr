@@ -292,7 +292,7 @@ if( $gallery ): ?>
 			
 			if( $posts ): ?>
 			<h3>Bordr Stories</h3>	
-			<p>As part of this activity, border-stories were booked.</p>	
+			<p>As part of this activity, border-stories were booked. <a href="/bordr/?relact=<?php echo get_the_ID();?>">View all the stories posted with this activity</a></p>	
 						<div id="masonry" class="row">
 		
 			<?php foreach( $posts as $post ): 
@@ -307,7 +307,7 @@ if( $gallery ): ?>
 
 			<?php endforeach; ?>
 					</div>
-	
+					
 			<?php wp_reset_postdata(); ?>
 
 		<?php else: ?>

@@ -24,36 +24,39 @@ get_header(); ?>
 	<?php
 		// FILTER AND UPCOMING EVENTS SETUP
 		
-		$char_options = array(
+		$perception_options = array(
 			'brdr_invisible_visible'=>array(
-				0 => '<a href="#charfilter" data-charval="1" data-char="brdr_invisible_visible" class="filter" data-filter="char">Invisible</a>', 
-				100 => '<a href="#charfilter" data-charval="100" data-char="brdr_invisible_visible" class="filter" data-filter="char">Visible</a>'),
+				0 => '<a href="#perceptionfilter" data-perceptionval="1" data-perception="brdr_invisible_visible" class="filter" data-filter="perception">Invisible</a>', 
+				100 => '<a href="#perceptionfilter" data-perceptionval="100" data-perception="brdr_invisible_visible" class="filter" data-filter="perception">Visible</a>'),
 			'brdr_negative_positive'=>array(
-				0 => '<a href="#charfilter" data-charval="1" data-char="brdr_negative_positive" class="filter" data-filter="char">Negative</a>', 
-				100 => '<a href="#charfilter" data-charval="100" data-char="brdr_negative_positive" class="filter" data-filter="char">Positive</a>'),
+				0 => '<a href="#perceptionfilter" data-perceptionval="1" data-perception="brdr_negative_positive" class="filter" data-filter="perception">Negative</a>', 
+				100 => '<a href="#perceptionfilter" data-perceptionval="100" data-perception="brdr_negative_positive" class="filter" data-filter="perception">Positive</a>'),
 			'brdr_unimportant_important'=>array(
-				0 => '<a href="#charfilter" data-charval="1" data-char="brdr_unimportant_important" class="filter" data-filter="char">Unimportant</a>', 
-				100 => '<a href="#charfilter" data-charval="100" data-char="brdr_unimportant_important" class="filter" data-filter="char">Important</a>')
+				0 => '<a href="#perceptionfilter" data-perceptionval="1" data-perception="brdr_unimportant_important" class="filter" data-filter="perception">Unimportant</a>', 
+				100 => '<a href="#perceptionfilter" data-perceptionval="100" data-perception="brdr_unimportant_important" class="filter" data-filter="perception">Important</a>')
 		);
 		
 		$rel_act = array(); 
-		$charsavb = array();
-		if ( have_posts() ) : 
-			while ( have_posts() ) : the_post(); 
+		$perceptionsavb = array();
+		$act_q = new WP_Query(array('post_type' => 'bordr','posts_per_page' => -1));
+		if ( $act_q->have_posts() ) : 
+			while ( $act_q->have_posts() ) : $act_q->the_post(); 
 
 			$rel_act[] = get_field('related_activity');
 
 					
-			foreach ($char_options as $char_name => $char_ignore) {
-				if (get_field($char_name) == TRUE) {
-					$charval = get_field($char_name);
-					$charsavb[$char_name][] = round($charval/100)*100;
+			foreach ($perception_options as $perception_name => $perception_ignore) {
+				if (get_field($perception_name) == TRUE) {
+					$perceptionval = get_field($perception_name);
+					$perceptionsavb[$perception_name][] = round($perceptionval/100)*100;
 				}
 			}
 			
 			endwhile;
 
 			sort($rel_act);
+			
+			wp_reset_query();
 			
 		endif;
 		?>
@@ -93,19 +96,19 @@ get_header(); ?>
 				?>
 			  </ul>
 			</div>
-			<!---
+
 			<div class="btn-group filtergroup" >
-			  <button type="button" id="brdrchar" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  <button type="button" id="brdrperception" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				By characteristics <span class="caret"></span>
 			  </button>
-				  <ul class="dropdown-menu" id="brdrcharmenu">
-					<li><a href="#charfilter" data-char="" data-charval="">All characteristics</a></li>
+				  <ul class="dropdown-menu" id="brdrperceptionmenu">
+					<li><a href="#perceptionfilter" data-perception="" data-perceptionval="">All characteristics</a></li>
 					<?php 
-					foreach ( $char_options as $char => $char_arr ) {
-						if ($charsavb[$char]) {
-							foreach ( $char_arr as $charkey => $charved ) {							
-								if (in_array($charkey, $charsavb[$char])) {
-									?><li><?php echo $charved; ?></li><?php
+					foreach ( $perception_options as $perception => $perception_arr ) {
+						if ($perceptionsavb[$perception]) {
+							foreach ( $perception_arr as $perceptionkey => $perceptionved ) {							
+								if (in_array($perceptionkey, $perceptionsavb[$perception])) {
+									?><li><?php echo $perceptionved; ?></li><?php
 								}
 							}
 						}
@@ -113,7 +116,7 @@ get_header(); ?>
 				?>
 				  </ul>
 			</div>
-			--->
+
 		</div>					
 	</div>
 
