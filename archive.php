@@ -74,7 +74,6 @@ get_header(); ?>
 
 		<!-- #content --></main>
 
-		<?php if ( !is_category( 'notes' )) { get_sidebar(); } ?>
 	<!-- .row --></div>
 
 <?php get_footer(); ?>

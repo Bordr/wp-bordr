@@ -48,7 +48,6 @@ get_header(); ?>
 				100 => '<a href="#charfilter" data-charval="100" data-char="known_unknown" class="filter" data-filter="char">Audience: Unknown</a>'),
 		);
 		
-		$events = array(); 
 		$methodsavb = array();
 		$charsavb = array();
 		$stationsavb = array();
@@ -58,16 +57,7 @@ get_header(); ?>
 		<?php 
 			$author_id = get_the_author_meta('ID');
 			$deptname = get_field('from')." — ".get_field('to');
-			$timeline = get_field( 'timeline' );
-		
-			foreach($timeline as $key => $value) 
-			{
-			  $timeline[$key] = array_merge($timeline[$key], 
-				array("activity" => $deptname,
-				"station" => get_the_author(),
-				"uri" => get_permalink()));
-			}
-			
+					
 			if (get_field('method_icons')) {
 				$methodsavb = array_merge($methodsavb, get_field('method_icons'));
 			}
@@ -85,11 +75,10 @@ get_header(); ?>
 			$countriesavb[] = end(explode(",",$address['address']));
 			$countriesavb = array_unique($countriesavb);
 				
-			$events = array_merge($events, $timeline); 
 		?>
 	<?php endwhile; 
-		usort( $events, 'sort_by_date_ascending'); 
-	endif; ?>
+			wp_reset_query();
+		endif; ?>
 
 
 	<h2 class="entry-title" style="margin-left:0px; margin-top:30px;">Filter Activities</h2>
@@ -230,7 +219,6 @@ get_header(); ?>
 
 		<!-- #content --></main>
 
-		<?php if ( !is_category( 'notes' )) { get_sidebar(); } ?>
 	<!-- .row --></div>
 
 <?php get_footer(); ?>

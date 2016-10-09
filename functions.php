@@ -488,7 +488,7 @@ function cptui_register_my_cpts() {
 	$args = array(
 		"label" => __( 'Activities', 'bordr' ),
 		"labels" => $labels,
-		"description" => "",
+		"description" => "Activities are projects, actions, or interventions that explore borders and enable people to meet others",
 		"public" => true,
 		"publicly_queryable" => true,
 		"show_ui" => true,
