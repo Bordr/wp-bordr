@@ -291,6 +291,17 @@
 			$('#depchar').attr('data-char',charv);
 	 	}
 
+	 	var perceptionv = getUrlParameter('perception');
+	 	var perceptionval = getUrlParameter('perceptionval');
+	 	if (perceptionv && perceptionval) {
+	 		var perceptiontext = $('*[data-perception="'+perceptionv+'"][data-perceptionval="'+perceptionval+'"]').html();
+	 		$('#brdrperception').html(perceptiontext+' <span class="caret"></span>');
+			$('#brdrperception').addClass('selFilter');
+			$('#brdrperception').attr('data-filter',$('*[data-perception="'+perceptionv+'"][data-perceptionval="'+perceptionval+'"]').data('filter'));
+			$('#brdrperception').attr('data-perceptionval',perceptionval);
+			$('#brdrperception').attr('data-perception',perceptionv);
+	 	}
+
 	 	var methodv = getUrlParameter('method');
 	 	if (methodv) {
 			$('#depmet').addClass('selFilter');
