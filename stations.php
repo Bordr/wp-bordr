@@ -3,6 +3,10 @@
  * Template Name: All the Stations
  *
  */
+ 
+ $type_options = array('small'=>'<i class="fa fa-train" aria-hidden="true"></i>',
+ 						'medium' => '<i class="fa fa-industry" aria-hidden="true"></i>',
+ 						'large' => '<i class="fa fa-globe" aria-hidden="true"></i>');
 
 	$blogusers = get_users('role=station&orderby=nicename&order=DESC');
 	 
@@ -15,21 +19,25 @@
 		$location = get_field('organization_location','user_'.$user->ID);
 		$excerpt = $user_info->description;
 
-		$feature = array(
-			'type' => 'Feature', 
-		  'geometry' => array(
-			'type' => 'Point',
-			'coordinates' => array($location['lng'],$location['lat'])
-				),
-		  'properties' => array(
-				'name' => $station,
-				'description' => esc_html($excerpt)."<br/>",
-				'link' => 'author/'.$user->user_login,
-				'marker-color' => '#ffe267',
-				'marker-symbol' => 'industrial'
-				)
-			);
-		array_push($geojson['features'], $feature);
+		if ($location['lng']>0) {
+
+			$feature = array(
+				'type' => 'Feature', 
+			  'geometry' => array(
+				'type' => 'Point',
+				'coordinates' => array($location['lng'],$location['lat'])
+					),
+			  'properties' => array(
+					'name' => $station,
+					'description' => esc_html($excerpt)."<br/>",
+					'link' => 'author/'.$user->user_login,
+					'marker-color' => '#ffe267',
+					'marker-symbol' => 'industrial'
+					)
+				);
+			array_push($geojson['features'], $feature);
+
+		}
 
 	}
  
@@ -57,6 +65,9 @@ get_header(); ?>
 		
 		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.16.0/mapbox-gl.js'></script>
 		<script type='text/javascript'>
+
+		console.log(<?php echo $mapjson; ?>);
+
 		mapboxgl.accessToken = 'pk.eyJ1IjoiZGVrbGVyayIsImEiOiIyLXpKZDFvIn0.qiF1bsGVvvMt6EapjAs6pQ';
 		var map = new mapboxgl.Map({
 			container: 'map', // container id
@@ -71,6 +82,7 @@ get_header(); ?>
 		map.doubleClickZoom.disable();
 
 		map.on('style.load', function () {
+		
 
 			map.addSource("markers", {
 				"type": "geojson",
@@ -129,31 +141,55 @@ get_header(); ?>
 	
 		</script>
 		
-		<?php if ( $blogusers ) : ?>
+		
+		<?php
+		wp_reset_query();
+		$field_key = "field_57cf284c77dce";
+		$field = get_field_object($field_key);
+		
+		asort($field['choices']);
 
-				<div id="masonry" class="row">
-				<?php foreach ( $blogusers as $user ) { ?>
+		if( $field )
+		{
+			foreach( $field['choices'] as $k => $v )
+			{
+			?><h2><?php echo $type_options[$k]; ?> <?php echo $v; ?></h2><?php
+			
+			$arg = array(
+					'meta_key'		=> 'station_type',
+					'meta_value'	=> sprintf('%s";', $k),
+					'meta_compare'	=>'LIKE'
+			);
+			
+			$bloguser = get_users($arg);
 
-					<div class="col-xs-6 col-sm-3 col-lg-3 masonry-item" style="text-align:center;">
-						<a href="/author/<?php echo $user->user_login; ?>/">
-						<img src="<?php the_field('organization_logo','user_'.$user->ID) ?>" class="img-responsive"/>
-						<p><?php the_field('organization_name','user_'.$user->ID) ?></p>
-						</a>
-					</div>
+			if ( $bloguser ) : ?>
 
-				<?php } ?>
+					<div id="masonry" class="row">
+					<?php foreach ( $bloguser as $hub ) { ?>
 
-			<!-- #masonry --></div>
+						<div class="col-xs-6 col-sm-3 col-lg-3 masonry-item" style="text-align:center;">
+							<a href="/author/<?php echo $user->user_login; ?>/">
+							<img src="<?php the_field('organization_logo','user_'.$hub->ID) ?>" class="img-responsive"/>
+							<p><?php the_field('organization_name','user_'.$hub->ID) ?></p>
+							</a>
+						</div>
 
-			<?php nuthemes_content_nav( 'nav-below' ); ?>
+					<?php } ?>
 
-		<?php else : ?>
+				<!-- #masonry --></div>
 
-			<?php get_template_part( 'no-results', 'archive' ); ?>
+			<?php else : ?>
 
-		<?php endif; ?>
+				<?php get_template_part( 'no-results', 'archive' ); ?>
 
-		<?php if ( !is_category( 'notes' )) { get_sidebar(); } ?>
+			<?php endif;
+
+		
+			}
+		}
+		?>
+
 		</div>
 		</article>
 		<!-- #content --></main>
