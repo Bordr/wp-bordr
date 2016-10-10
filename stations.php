@@ -61,86 +61,87 @@ get_header(); ?>
 				<p></p>
 			</div>
 		
-			<div class="row">
+		</article>
 		
-		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.16.0/mapbox-gl.js'></script>
-		<script type='text/javascript'>
+			<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.16.0/mapbox-gl.js'></script>
+			<script type='text/javascript'>
 
-		console.log(<?php echo $mapjson; ?>);
+			console.log(<?php echo $mapjson; ?>);
 
-		mapboxgl.accessToken = 'pk.eyJ1IjoiZGVrbGVyayIsImEiOiIyLXpKZDFvIn0.qiF1bsGVvvMt6EapjAs6pQ';
-		var map = new mapboxgl.Map({
-			container: 'map', // container id
-			style: 'mapbox://styles/deklerk/cimdn7icb00gy9pm0abrzrgj1', //stylesheet location
-			center: [11, 48], // starting position
-			zoom: 3 // starting zoom
-		});
-
-		map.addControl(new mapboxgl.Navigation());
-
-		map.scrollZoom.disable();
-		map.doubleClickZoom.disable();
-
-		map.on('style.load', function () {
-		
-
-			map.addSource("markers", {
-				"type": "geojson",
-				"data": <?php echo $mapjson; ?>,
-				"cluster": false
+			mapboxgl.accessToken = 'pk.eyJ1IjoiZGVrbGVyayIsImEiOiIyLXpKZDFvIn0.qiF1bsGVvvMt6EapjAs6pQ';
+			var map = new mapboxgl.Map({
+				container: 'map', // container id
+				style: 'mapbox://styles/deklerk/cimdn7icb00gy9pm0abrzrgj1', //stylesheet location
+				center: [11, 48], // starting position
+				zoom: 3 // starting zoom
 			});
 
-			map.addLayer({
-				"id": "markers",
-				"interactive": true,
-				"type": "symbol",
-				"source": "markers",
-				"layout": {
-					"icon-image": "{marker-symbol}-24",
-					"text-field": "{name}",
-					"text-offset": [0, 1],
-					"text-size": 9,
-					"text-anchor": "top",
-					"icon-offset": [0,1]
-				},
-				"paint": {
-					"icon-color": "#ffffff",
-					"text-color": "#ffffff"
+			map.addControl(new mapboxgl.Navigation());
+
+			map.scrollZoom.disable();
+			map.doubleClickZoom.disable();
+
+			map.on('style.load', function () {
+		
+
+				map.addSource("markers", {
+					"type": "geojson",
+					"data": <?php echo $mapjson; ?>,
+					"cluster": false
+				});
+
+				map.addLayer({
+					"id": "markers",
+					"interactive": true,
+					"type": "symbol",
+					"source": "markers",
+					"layout": {
+						"icon-image": "{marker-symbol}-24",
+						"text-field": "{name}",
+						"text-offset": [0, 1],
+						"text-size": 9,
+						"text-anchor": "top",
+						"icon-offset": [0,1]
+					},
+					"paint": {
+						"icon-color": "#ffffff",
+						"text-color": "#ffffff"
+					}
+				});
+		
+			});
+
+			// When a click event occurs near a marker icon, open a popup at the location of
+			// the feature, with description HTML from its properties.
+			map.on('click', function (e) {
+				var features = map.queryRenderedFeatures(e.point, { layers: ['markers'] });
+
+				if (!features.length) {
+					return;
 				}
+
+				var feature = features[0];
+
+				// Populate the popup and set its coordinates
+				// based on the feature found.
+				var popup = new mapboxgl.Popup()
+					.setLngLat(feature.geometry.coordinates)
+					.setHTML('<h3>' + feature.properties.name + '</h3>' + 
+							'<p>' + feature.properties.description +'</p>' + 
+							'<p><a href="http://europegrandcentral.net/'+feature.properties.link+'">read more</a></p>')
+					.addTo(map);
 			});
-		
-		});
 
-		// When a click event occurs near a marker icon, open a popup at the location of
-		// the feature, with description HTML from its properties.
-		map.on('click', function (e) {
-			var features = map.queryRenderedFeatures(e.point, { layers: ['markers'] });
-
-			if (!features.length) {
-				return;
-			}
-
-			var feature = features[0];
-
-			// Populate the popup and set its coordinates
-			// based on the feature found.
-			var popup = new mapboxgl.Popup()
-				.setLngLat(feature.geometry.coordinates)
-				.setHTML('<h3>' + feature.properties.name + '</h3>' + 
-						'<p>' + feature.properties.description +'</p>' + 
-						'<p><a href="http://europegrandcentral.net/'+feature.properties.link+'">read more</a></p>')
-				.addTo(map);
-		});
-
-		// Use the same approach as above to indicate that the symbols are clickable
-		// by changing the cursor style to 'pointer'.
-		map.on('mousemove', function (e) {
-			var features = map.queryRenderedFeatures(e.point, { layers: ['markers'] });
-			map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
-		});
+			// Use the same approach as above to indicate that the symbols are clickable
+			// by changing the cursor style to 'pointer'.
+			map.on('mousemove', function (e) {
+				var features = map.queryRenderedFeatures(e.point, { layers: ['markers'] });
+				map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+			});
 	
-		</script>
-		
+			</script>
+
+		<div class="row">
 		
 		<?php
 		wp_reset_query();
@@ -191,7 +192,6 @@ get_header(); ?>
 		?>
 
 		</div>
-		</article>
 		<!-- #content --></main>
 	<!-- .row --></div>
 
