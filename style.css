@@ -1371,9 +1371,6 @@ body.single .entry-content {
 	.site-main {
 		margin-top:9.5em;
 	}
-	.home .site-main {
-		margin-top: 15px;
-	}
 	.btn-primary, .btn-default {
 		width: 100%;
 		margin-bottom: 5px;
