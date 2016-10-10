@@ -190,7 +190,7 @@
 	 function renderMyDepartures(filter,value) {
 
 		// vars
-		var url = '<?php echo home_url('activities/'); ?>';
+		var url = '<?php echo home_url(''); ?>';
 			args = {};
 
 		// loop over filters
