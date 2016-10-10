@@ -154,11 +154,15 @@ get_header(); ?>
 			{
 			?><h2><?php echo $type_options[$k]; ?> <?php echo $v; ?></h2><?php
 			
-			$arg = array(
-					'meta_key'		=> 'station_type',
-					'meta_value'	=> sprintf('%s";', $k),
-					'meta_compare'	=>'LIKE'
-			);
+			$arg = array('meta_query' => array('relation' => 'AND', array(
+					'key'		=> 'station_type',
+					'value'	=> sprintf('%s";', $k),
+					'compare'	=>'LIKE'
+			), array(
+					'key'		=> 'organization_logo',
+					'value'		=> 0,
+					'compare'	=>'>'
+			)));
 			
 			$bloguser = get_users($arg);
 
@@ -166,7 +170,7 @@ get_header(); ?>
 				<div class="row">
 
 					<div id="masonry" class="row">
-					<?php foreach ( $bloguser as $hub ) { ?>
+					<?php foreach ( $bloguser as $hub ) {  ?>
 						<div class="col-xs-6 col-sm-3 col-lg-3 masonry-item" style="text-align:center;">
 							<article class="box">
 								<a href="/author/<?php echo $user->user_login; ?>/">
