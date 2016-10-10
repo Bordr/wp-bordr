@@ -648,9 +648,6 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
 .entry-header {
 	margin-bottom: 20px;
 	}
-.home .entry-header .entry-meta, .category .entry-header .entry-meta {
-	display: none;
-	}
 .entry-title {
 	margin: 0 0 5px;
 	font-size: 14px;
