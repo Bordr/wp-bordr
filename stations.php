@@ -140,8 +140,6 @@ get_header(); ?>
 			});
 	
 			</script>
-
-		<div class="row">
 		
 		<?php
 		wp_reset_query();
@@ -165,6 +163,7 @@ get_header(); ?>
 			$bloguser = get_users($arg);
 
 			if ( $bloguser ) : ?>
+				<div class="row">
 
 					<div id="masonry" class="row">
 					<?php foreach ( $bloguser as $hub ) { ?>
@@ -179,7 +178,8 @@ get_header(); ?>
 					<?php } ?>
 
 				<!-- #masonry --></div>
-
+				</div>
+		
 			<?php else : ?>
 
 				<?php get_template_part( 'no-results', 'archive' ); ?>
