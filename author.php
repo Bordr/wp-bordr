@@ -74,7 +74,7 @@
 	<?php wp_reset_postdata(); ?>
 
 <?php else: ?>
-        <p><?php _e('No activities from this hub at this time.'); ?></p>
+        <p><?php _e('No activities organized by this hub at this time.'); ?></p>
 
     <?php endif; ?>
 
@@ -121,7 +121,7 @@
 	<?php wp_reset_postdata(); ?>
 
 <?php else: ?>
-        <p><?php _e('No activities from this hub at this time.'); ?></p>
+        <p><?php _e('No activities involving this hub at this time.'); ?></p>
 
     <?php endif; ?>
 
