@@ -37,7 +37,10 @@
 	<?php endif; ?>
 	<?php echo the_field('organization_profile'); ?>
 
-    <h2>Activities involving this hub</h2>
+	<h2>Website</h2>
+	<p><a href="<?php echo $curauth->user_url; ?>"><?php echo $curauth->user_url; ?></a></p>
+
+    <h2>Activities organized by this hub</h2>
 
 <!-- The Loop -->
 
@@ -47,20 +50,8 @@
 		'post_type'			=> 'activity',
 		'author'			=> $curauth->ID
 	));
-
-	$poststwo = get_posts(array(
-		'post_type'			=> 'activity',
-		'meta_query'		=> array(
-			'relation'		=> 'OR', 
-			array(
-				'key'	=> 'partner', // 'User' field type
-				'value' => sprintf(':"%s";', $curauth->ID),
-				'compare' => 'LIKE'
-			)
-		)
-	));
 	
-	$posts = array_merge($postsone,$poststwo);
+	$posts = $postsone;
 
 	
 	if( $posts ): ?>
@@ -89,9 +80,52 @@
 
 <!-- End Loop -->
 
-	<h2>Website</h2>
-	<p><a href="<?php echo $curauth->user_url; ?>"><?php echo $curauth->user_url; ?></a></p>
+    <h2>Activities involving this hub</h2>
+
+<!-- The Loop -->
+
+	<?php
+	
+	$poststwo = get_posts(array(
+		'post_type'			=> 'activity',
+		'meta_query'		=> array(
+			'relation'		=> 'OR', 
+			array(
+				'key'	=> 'partner', // 'User' field type
+				'value' => sprintf(':"%s";', $curauth->ID),
+				'compare' => 'LIKE'
+			)
+		)
+	));
+	
+	$posts = $poststwo;
+
+	
+	if( $posts ): ?>
+	
+				<div id="masonry" class="row">
+		
+	<?php foreach( $posts as $post ): 
+		
+		setup_postdata( $post )
+		
+		?>
+
+					<div class="col-xs-12 col-sm-6 col-lg-4 masonry-item">
+						<?php get_template_part( 'activityloop', get_post_format() ); ?>
+					</div>
+
+	<?php endforeach; ?>
+			</div>
+	
+	<?php wp_reset_postdata(); ?>
+
+<?php else: ?>
+        <p><?php _e('No activities from this hub at this time.'); ?></p>
+
+    <?php endif; ?>
+
+<!-- End Loop -->
 
 </div>
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>
