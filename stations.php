@@ -168,7 +168,7 @@ get_header(); ?>
 					<div id="masonry" class="row">
 					<?php foreach ( $bloguser as $hub ) { ?>
 
-						<div class="col-xs-6 col-sm-3 col-lg-3 masonry-item" style="text-align:center;">
+						<div class="col-xs-6 col-sm-4 col-lg-4 masonry-item" style="text-align:center;">
 							<a href="/author/<?php echo $user->user_login; ?>/">
 							<img src="<?php the_field('organization_logo','user_'.$hub->ID) ?>" class="img-responsive"/>
 							<p><?php the_field('organization_name','user_'.$hub->ID) ?></p>
