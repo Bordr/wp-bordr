@@ -26,7 +26,7 @@
 		
 		if (!$hub_type[0]) { $hub_itype = 'small'; } else { $hub_itype = $hub_type[0]; } 
 
-		if ($location['lng']>0) {
+		if ($location['lng']>0||$location['lng']<0) {
 
 			$feature = array(
 				'type' => 'Feature', 
@@ -105,7 +105,7 @@ get_header(); ?>
 						"icon-image": "{marker-symbol}-24",
 						"text-field": "{name}",
 						"text-offset": [0, 1],
-						"text-size": 11,
+						"text-size": 10,
 						"text-anchor": "top",
 						"icon-offset": [0,1]
 					},
