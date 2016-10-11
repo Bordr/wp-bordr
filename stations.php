@@ -176,7 +176,7 @@ get_header(); ?>
 						$image = wp_get_attachment_image_src($image_id,"thumbnail");
 						
 						?>
-						<div class="col-xs-6 col-sm-3 col-lg-2 masonry-item" style="text-align:center;">
+						<div class="col-xs-6 col-sm-3 col-lg-3 masonry-item" style="text-align:center;">
 							<article class="box">
 								<a href="/author/<?php echo $hub->user_login; ?>/">
 								<img src="<?php echo $image[0]; ?>" class="img-responsive"/>
