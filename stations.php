@@ -8,6 +8,10 @@
  						'medium' => '<i class="fa fa-industry" aria-hidden="true"></i>',
  						'large' => '<i class="fa fa-globe" aria-hidden="true"></i>');
 
+ $map_icos = array('small'=>'rail',
+ 						'medium' => 'industrial',
+ 						'large' => 'soccer');
+
 	$blogusers = get_users('role=station&orderby=nicename&order=DESC');
 	 
 	$geojson = array( 'type' => 'FeatureCollection', 'features' => array() );
@@ -29,10 +33,10 @@
 					),
 			  'properties' => array(
 					'name' => $station,
-					'description' => esc_html($excerpt)."<br/>",
+					'description' => esc_html($excerpt)." ".$map_icos[get_field('station_type','user_'.$user->ID)[0]]."<br/>",
 					'link' => 'author/'.$user->user_login,
 					'marker-color' => '#ffe267',
-					'marker-symbol' => 'industrial'
+					'marker-symbol' => $map_icos[get_field('station_type','user_'.$user->ID)[0]]
 					)
 				);
 			array_push($geojson['features'], $feature);
@@ -65,8 +69,6 @@ get_header(); ?>
 
 			<script src='//api.tiles.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.js'></script>		
 			<script type='text/javascript'>
-
-			console.log(<?php echo $mapjson; ?>);
 
 			mapboxgl.accessToken = 'pk.eyJ1IjoiZGVrbGVyayIsImEiOiIyLXpKZDFvIn0.qiF1bsGVvvMt6EapjAs6pQ';
 			var map = new mapboxgl.Map({
