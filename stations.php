@@ -79,7 +79,6 @@ get_header(); ?>
 			map.addControl(new mapboxgl.Navigation());
 
 			map.scrollZoom.disable();
-			map.doubleClickZoom.disable();
 
 			map.on('style.load', function () {
 		
@@ -94,14 +93,14 @@ get_header(); ?>
 
 				map.addLayer({
 					"id": "markers",
-					"interactive": false,
+					"interactive": true,
 					"type": "symbol",
 					"source": "markers",
 					"layout": {
 						"icon-image": "{marker-symbol}-24",
 						"text-field": "{name}",
 						"text-offset": [0, 1],
-						"text-size": 8,
+						"text-size": 9,
 						"text-anchor": "top",
 						"icon-offset": [0,1]
 					},
@@ -114,9 +113,9 @@ get_header(); ?>
 				// Display the earthquake data in three layers, each filtered to a range of
 				// count values. Each range gets a different fill color.
 				var layers = [
-					[150, '#f28cb1'],
-					[20, '#f1f075'],
-					[0, '#51bbd6']
+					[150, '#fff'],
+					[20, '#fff'],
+					[0, '#fff']
 				];
 
 				layers.forEach(function (layer, i) {
@@ -126,7 +125,7 @@ get_header(); ?>
 						"source": "markers",
 						"paint": {
 							"circle-color": layer[1],
-							"circle-radius": 18
+							"circle-radius": 10
 						},
 						"filter": i === 0 ?
 							[">=", "point_count", layer[0]] :
@@ -147,7 +146,7 @@ get_header(); ?>
 							"DIN Offc Pro Medium",
 							"Arial Unicode MS Bold"
 						],
-						"text-size": 12
+						"text-size": 10
 					}
 				});
 		
@@ -168,7 +167,7 @@ get_header(); ?>
 				// based on the feature found.
 				var popup = new mapboxgl.Popup()
 					.setLngLat(feature.geometry.coordinates)
-					.setHTML('<h3>' + feature.properties.name + '</h3>' + 
+					.setHTML('<h4>' + feature.properties.name + '</h4>' + 
 							'<p>' + feature.properties.description +'</p>' + 
 							'<p><a href="http://europegrandcentral.net/'+feature.properties.link+'">read more</a></p>')
 					.addTo(map);
