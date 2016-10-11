@@ -23,7 +23,7 @@
 		$location = get_field('organization_location','user_'.$user->ID);
 		$excerpt = $user_info->description;
 
-		if ($location['lng']>0 && get_field('station_type','user_'.$user->ID)[0] > 0) {
+		if ($location['lng']>0 && get_field('station_type','user_'.$user->ID) > 0) {
 
 			$feature = array(
 				'type' => 'Feature', 
