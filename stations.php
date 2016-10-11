@@ -22,8 +22,11 @@
 		$station = get_field('organization_name','user_'.$user->ID);
 		$location = get_field('organization_location','user_'.$user->ID);
 		$excerpt = $user_info->description;
+		$hub_type = get_field('station_type','user_'.$user->ID);
+		
+		if (!$hub_type[0]) { $hub_itype = 'small'; } else { $hub_itype = $hub_type[0]; } 
 
-		if ($location['lng']>0 && get_field('station_type','user_'.$user->ID) > 0) {
+		if ($location['lng']>0) {
 
 			$feature = array(
 				'type' => 'Feature', 
@@ -36,7 +39,7 @@
 					'description' => esc_html($excerpt)."<br/>",
 					'link' => 'author/'.$user->user_login,
 					'marker-color' => '#ffe267',
-					'marker-symbol' => $map_icos[get_field('station_type','user_'.$user->ID)[0]]
+					'marker-symbol' => $map_icos[$hub_itype]
 					)
 				);
 			array_push($geojson['features'], $feature);
