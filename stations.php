@@ -105,13 +105,16 @@ get_header(); ?>
 						"icon-image": "{marker-symbol}-24",
 						"text-field": "{name}",
 						"text-offset": [0, 1],
-						"text-size": 9,
+						"text-size": 11,
 						"text-anchor": "top",
 						"icon-offset": [0,1]
 					},
 					"paint": {
-						"icon-color": "#ffffff",
-						"text-color": "#ffffff"
+						"icon-color": "#000",
+						"text-color": "#000",
+						"text-halo-color": "#fff",
+						"text-halo-width": 1,
+						"text-halo-blur": 1
 					}
 				});
 
