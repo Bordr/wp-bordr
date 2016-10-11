@@ -159,7 +159,7 @@ get_header(); ?>
 					'value'	=> sprintf('%s";', $k),
 					'compare'	=>'LIKE'
 			), array(
-					'key'		=> 'organization_logo',
+					'key'		=> 'hub_logo',
 					'value'		=> 0,
 					'compare'	=>'>'
 			)));
@@ -176,10 +176,10 @@ get_header(); ?>
 						$image = wp_get_attachment_image_src($image_id,"thumbnail");
 						
 						?>
-						<div class="col-xs-6 col-sm-3 col-lg-3 masonry-item" style="text-align:center;">
+						<div class="col-xs-6 col-sm-3 col-lg-2 masonry-item" style="text-align:center;">
 							<article class="box">
 								<a href="/author/<?php echo $hub->user_login; ?>/">
-								<div><img src="<?php echo $image[0]; ?>" class="img-responsive"/></div>
+								<img src="<?php echo $image[0]; ?>" class="img-responsive"/>
 								<p><?php the_field('organization_name','user_'.$hub->ID) ?></p>
 								</a>
 							</article>
