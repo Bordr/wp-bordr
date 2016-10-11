@@ -62,8 +62,8 @@ get_header(); ?>
 			</div>
 		
 		</article>
-		
-			<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.16.0/mapbox-gl.js'></script>
+
+			<script src='//api.tiles.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.js'></script>		
 			<script type='text/javascript'>
 
 			console.log(<?php echo $mapjson; ?>);
@@ -71,9 +71,9 @@ get_header(); ?>
 			mapboxgl.accessToken = 'pk.eyJ1IjoiZGVrbGVyayIsImEiOiIyLXpKZDFvIn0.qiF1bsGVvvMt6EapjAs6pQ';
 			var map = new mapboxgl.Map({
 				container: 'map', // container id
-				style: 'mapbox://styles/deklerk/cimdn7icb00gy9pm0abrzrgj1', //stylesheet location
+				style: 'mapbox://styles/deklerk/ciu4zljnr00bb2hq5nkk9bfyr', //stylesheet location
 				center: [11, 48], // starting position
-				zoom: 3 // starting zoom
+				zoom: 1 // starting zoom
 			});
 
 			map.addControl(new mapboxgl.Navigation());
@@ -85,27 +85,69 @@ get_header(); ?>
 		
 
 				map.addSource("markers", {
-					"type": "geojson",
-					"data": <?php echo $mapjson; ?>,
-					"cluster": false
+					type: "geojson",
+					data: <?php echo $mapjson; ?>,
+					cluster: true,
+					clusterMaxZoom: 14, // Max zoom to cluster points on
+					clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
 				});
 
 				map.addLayer({
 					"id": "markers",
-					"interactive": true,
+					"interactive": false,
 					"type": "symbol",
 					"source": "markers",
 					"layout": {
 						"icon-image": "{marker-symbol}-24",
 						"text-field": "{name}",
 						"text-offset": [0, 1],
-						"text-size": 9,
+						"text-size": 8,
 						"text-anchor": "top",
 						"icon-offset": [0,1]
 					},
 					"paint": {
 						"icon-color": "#ffffff",
 						"text-color": "#ffffff"
+					}
+				});
+
+				// Display the earthquake data in three layers, each filtered to a range of
+				// count values. Each range gets a different fill color.
+				var layers = [
+					[150, '#f28cb1'],
+					[20, '#f1f075'],
+					[0, '#51bbd6']
+				];
+
+				layers.forEach(function (layer, i) {
+					map.addLayer({
+						"id": "cluster-" + i,
+						"type": "circle",
+						"source": "markers",
+						"paint": {
+							"circle-color": layer[1],
+							"circle-radius": 18
+						},
+						"filter": i === 0 ?
+							[">=", "point_count", layer[0]] :
+							["all",
+								[">=", "point_count", layer[0]],
+								["<", "point_count", layers[i - 1][0]]]
+					});
+				});
+
+				// Add a layer for the clusters' count labels
+				map.addLayer({
+					"id": "cluster-count",
+					"type": "symbol",
+					"source": "markers",
+					"layout": {
+						"text-field": "{point_count}",
+						"text-font": [
+							"DIN Offc Pro Medium",
+							"Arial Unicode MS Bold"
+						],
+						"text-size": 12
 					}
 				});
 		

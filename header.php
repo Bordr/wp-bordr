@@ -21,7 +21,8 @@
 	    <link href='//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css' rel='stylesheet' />
 	    <script src='//api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'></script>
 
-	    <link href='//api.tiles.mapbox.com/mapbox-gl-js/v0.16.0/mapbox-gl.css' rel='stylesheet' />
+	    <link href='//api.tiles.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.css' rel='stylesheet' />
+
 	    
 <!-- BORDR APP -->
 	    
