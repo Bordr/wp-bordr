@@ -179,7 +179,7 @@ get_header(); ?>
 						<div class="col-xs-6 col-sm-3 col-lg-3 masonry-item" style="text-align:center;">
 							<article class="box">
 								<a href="/author/<?php echo $hub->user_login; ?>/">
-								<img src="<?php echo $image[0]; ?>" class="img-responsive"/>
+								<img src="<?php echo $image[0]; ?>"/>
 								<p><?php the_field('organization_name','user_'.$hub->ID) ?></p>
 								</a>
 							</article>
