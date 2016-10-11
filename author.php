@@ -9,12 +9,15 @@
     
     $user_info = get_userdata($curauth->ID);
 	$excerpt = $user_info->description;
+	
+	$image_id = get_field('hub_logo','user_'.$curauth->ID);
+	$image = wp_get_attachment_image_src($image_id,"medium");
 		
     ?>
     
 	<div class="row">
 		<div class="col-xs-12 col-sm-6 col-lg-3" style="text-align:center;">
-		<img src="<?php the_field('organization_logo','user_'.$curauth->ID) ?>" class="img-responsive"/>
+		<img src="<?php echo $image[0]; ?>" class="img-responsive"/>
 		</div>
 	</div>
 

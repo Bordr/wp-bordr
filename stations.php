@@ -170,11 +170,16 @@ get_header(); ?>
 				<div class="row">
 
 					<div id="masonry" class="row">
-					<?php foreach ( $bloguser as $hub ) {  ?>
+					<?php foreach ( $bloguser as $hub ) {  
+					
+						$image_id = get_field('hub_logo','user_'.$hub->ID);
+						$image = wp_get_attachment_image_src($image_id,"thumbnail");
+						
+						?>
 						<div class="col-xs-6 col-sm-3 col-lg-3 masonry-item" style="text-align:center;">
 							<article class="box">
-								<a href="/author/<?php echo $user->user_login; ?>/">
-								<div><img src="<?php the_field('organization_logo','user_'.$hub->ID) ?>" class="img-responsive"/></div>
+								<a href="/author/<?php echo $hub->user_login; ?>/">
+								<div><img src="<?php echo $image[0]; ?>" class="img-responsive"/></div>
 								<p><?php the_field('organization_name','user_'.$hub->ID) ?></p>
 								</a>
 							</article>
