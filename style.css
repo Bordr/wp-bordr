@@ -588,16 +588,16 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
 	letter-spacing: 0.85px;
 	}
 .headroom {
-    will-change: transform;
-    transition: transform 200ms linear;
+/*     will-change: transform; */
+/*     transition: transform 200ms linear; */
 	 width:100%;
 	 z-index:100;
 }
 .headroom--pinned {
-    transform: translateY(0%);
+/*     transform: translateY(0%); */
 }
 .headroom--unpinned {
-    transform: translateY(-100%);
+/*     transform: translateY(-100%); */
 }
 .bordr .entry-header{
 	margin-top: -2em;
@@ -1362,9 +1362,6 @@ body.single .entry-content {
 }
 
 @media screen and (max-width: 450px) {
-	.site-main {
-		margin-top:9.5em;
-	}
 	.btn-primary, .btn-default {
 		width: 100%;
 		margin-bottom: 5px;

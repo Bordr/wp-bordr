@@ -56,11 +56,13 @@ get_header(); ?>
 		<main id="content" class="col-sm-12 content-area" role="main">		
 		<article class="page" style="margin-bottom:0px;" >
 			<div class="row">
-			<div class="col-xs-12 col-sm-9 col-lg-9">
-				<h1 class="entry-title" style="font-size:24px;">Hubs</h1>
-				<p>A hub is an organization or individual that work with audiences to explore borders</p>
-				<p>If you want to become a hub, <a href="/about/">contact us</a>.</p>
-			</div>
+				<div class="col-xs-12 col-sm-9 col-lg-9">
+					<h1 class="entry-title" style="font-size:24px;">Hubs</h1>
+					<p>A hub is an organization or individual that work with audiences to explore borders</p>
+				</div>
+				<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
+					<a href="/join/" class="btn btn-primary start">Request to Join</a>
+				</div>
 			</div>
 		
 			<div class="row">
