@@ -12,7 +12,7 @@ get_header(); ?>
 			<div class="row">
 			<div class="col-xs-12 col-sm-9 col-lg-9">
 				<h1 class="entry-title" style="font-size:24px;">Bordrs</h1>
-				<p>Bordrs are stories, impressions, experiences of a border. hello</p>
+				<p>Bordrs are stories, impressions, experiences of a border.</p>
 			</div>
 			<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
 				<a href="/add-bordr-story/" class="btn btn-primary start">Add Bordr Story</a>

@@ -1632,7 +1632,7 @@ acf_add_local_field_group(array (
 			'label' => 'What does this border look like?',
 			'name' => 'brdr_image',
 			'type' => 'image',
-			'instructions' => 'Share a photo',
+			'instructions' => 'Share a photo. Maximum file size is 6MB and a maximum width or height of 2,500px.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
