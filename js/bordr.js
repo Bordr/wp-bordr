@@ -1043,7 +1043,7 @@ function embedVids() {
 
 	$(".bordr p:contains('youtu')").each(function(i, el){
 
-	   var replacement = '<iframe width="420" height="345" src="//player.vimeo.com/video/$1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+	   var replacement = '<iframe width="420" height="345" src="https://www.youtube.com/embed/UfYWgCI8D9U" frameborder="0" allowfullscreen></iframe>';
 	   
 	   var found = $(this).html().replace(pattern2, replacement);
 	   var video = $(found).filter('iframe');
