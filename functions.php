@@ -246,7 +246,7 @@ function prefix_hide_personal_options() {
 // DEPARTURE FILTER FUNCTIONS
 
 $GLOBALS['my_query_filters'] = array( 
-	'author'	=> 'station',
+	'author'	=> 'hub',
 	'location'	=> 'ctry',
 	'relact'	=> 'relact'
 );
@@ -732,7 +732,7 @@ acf_add_local_field_group(array (
 		),
 		array (
 			'key' => 'field_573b394e55be5',
-			'label' => 'Are you partnering with other stations?',
+			'label' => 'Are you partnering with other hubs?',
 			'name' => 'partner',
 			'type' => 'user',
 			'instructions' => '',
@@ -744,7 +744,7 @@ acf_add_local_field_group(array (
 				'id' => '',
 			),
 			'role' => array (
-				0 => 'station',
+				0 => 'hub',
 			),
 			'allow_null' => 0,
 			'multiple' => 1,
@@ -1907,7 +1907,7 @@ Please take a moment and describe your hub.',
 		array (
 			'key' => 'field_57cf284c77dce',
 			'label' => 'Hub Type',
-			'name' => 'station_type',
+			'name' => 'hub_type',
 			'type' => 'checkbox',
 			'instructions' => 'I represent a',
 			'required' => 1,
@@ -2031,7 +2031,7 @@ Please take a moment and describe your hub.',
 		array (
 			'key' => 'field_573a144e5437f',
 			'label' => 'Photo Gallery',
-			'name' => 'station_images',
+			'name' => 'hub_images',
 			'type' => 'gallery',
 			'instructions' => 'Share images of your hub',
 			'required' => 0,
@@ -2059,7 +2059,7 @@ Please take a moment and describe your hub.',
 			array (
 				'param' => 'user_role',
 				'operator' => '==',
-				'value' => 'station',
+				'value' => 'hub',
 			),
 		),
 	),
