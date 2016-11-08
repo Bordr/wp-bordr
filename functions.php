@@ -1765,7 +1765,7 @@ acf_add_local_field_group(array (
 			'label' => 'Permission to share?',
 			'name' => 'brdr_cc',
 			'type' => 'checkbox',
-			'instructions' => 'I accept that my story (including text, photo, drawing, location, and experience evaluations) will now become part of the public domain with rights and obligations for Bordr.org under a Creative Commons BY 4.0 license. Read more here.',
+			'instructions' => 'I accept that my story (including text, photo, drawing, location, and experience evaluations) will now become part of the public domain with rights and obligations for Bordr.org under a Creative Commons BY 4.0 license. <a href="https://creativecommons.org/licenses/by-sa/4.0/">Read more here</a>.',
 			'required' => 1,
 			'conditional_logic' => 0,
 			'wrapper' => array (
