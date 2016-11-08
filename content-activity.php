@@ -47,7 +47,7 @@ if( $gallery ): ?>
         <ul class="slides">
             <?php foreach( $gallery as $image ): ?>
                 <li>
-                    <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+                    <img src="<?php echo $image['sizes']['medium'] ?>" alt="<?php echo $image['alt']; ?>" />
                     <p class="flex-caption"><?php echo $image['caption']; ?></p>
                 </li>
             <?php endforeach; ?>
