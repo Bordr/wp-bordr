@@ -101,7 +101,7 @@ get_header(); ?>
 
 				<?php
 				
-				$blogusers = get_users('role=station');
+				$blogusers = get_users('role=hub');
 				$stations_arr = array();
 	 
 				// Array of WP_User objects.
