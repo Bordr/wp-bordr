@@ -12,7 +12,7 @@
  						'medium' => 'industrial',
  						'large' => 'soccer');
 
-	$blogusers = get_users('role=station&orderby=nicename&order=DESC');
+	$blogusers = get_users('role=hub&orderby=nicename&order=DESC');
 	 
 	$geojson = array( 'type' => 'FeatureCollection', 'features' => array() );
 	 
