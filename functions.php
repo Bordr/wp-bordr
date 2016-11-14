@@ -1,5 +1,71 @@
 <?php
 
+// OPEN GRAPH
+
+function doctype_opengraph($output) {
+    return $output . '
+    xmlns:og="http://opengraphprotocol.org/schema/"
+    xmlns:fb="http://www.facebook.com/2008/fbml"';
+}
+add_filter('language_attributes', 'doctype_opengraph');
+
+function fb_opengraph() {
+    global $post;
+ 
+	if ( is_singular( 'bordr' ) ) {
+        if(get_field('brdr_image')) {
+			$image = get_field('brdr_image');
+			$img_src = $image['sizes'][ 'medium' ];
+        } else {
+            $img_src = get_stylesheet_directory_uri() . '/landing/imgs/egc_bg-cremesoda_400x300.jpg';
+        }
+        if(get_field('brdr_story') != '') {
+			$excerpt = get_field('brdr_story');
+            $excerpt = str_replace("", "'", $excerpt);
+        } else {
+            $excerpt = get_bloginfo('description');
+        }
+        ?>
+ 
+    <meta property="og:title" content="<?php echo the_title(); ?>"/>
+    <meta property="og:description" content="<?php echo $excerpt; ?>"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
+    <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
+    <meta property="og:image" content="<?php echo $img_src; ?>"/>
+ 
+<?php
+    } else if ( is_singular( 'activity' ) ) {
+        if(get_field('departure_images')) {
+			$image = get_field('departure_images');
+			$img_src = $image[0]['sizes']['large'];
+        } else {
+            $img_src = get_stylesheet_directory_uri() . '/landing/imgs/egc_bg-cremesoda_400x300.jpg';
+        }
+        if(get_field('brief_description') != '') {
+			$excerpt = get_field('brief_description');
+            $excerpt = str_replace("", "'", $excerpt);
+        } else {
+            $excerpt = get_bloginfo('description');
+        }
+        ?>
+ 
+    <meta property="og:title" content="<?php echo the_title(); ?>"/>
+    <meta property="og:description" content="<?php echo $excerpt; ?>"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
+    <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
+    <meta property="og:image" content="<?php echo $img_src; ?>"/>
+ 
+<?php
+    } else {
+        return;
+    }
+}
+add_action('wp_head', 'fb_opengraph', 5);
+
+
+
 // ADMIN FUNCTIONS
 
 add_filter('manage_bordr_posts_columns', 'bordr_table_head');
