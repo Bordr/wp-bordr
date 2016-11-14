@@ -30,21 +30,11 @@
 		<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/d3.js"></script>
 		<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/nv.d3.min.js"></script>
 		
-		<!-- Generic page styles -->
-		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/upload-style.css">
-		<!-- blueimp Gallery styles -->
-		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/blueimp-gallery.min.css">
-		<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/jquery.fileupload-ui.css">
-
-		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/flexslider.css" type="text/css">
-		
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" type="text/css">
 				
 		<!-- Custom CSS -->
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/nv.d3.css">
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/bordr.css">
-		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/jquery.signaturepad.css">
 
 
 <!-- END BORDR APP -->

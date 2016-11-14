@@ -828,44 +828,11 @@ function getBorderStats(border) {
 			  .attr("d", function(d) { return line(d.values); })
 			  .style("stroke", function(d) { return color(d.name); });
 
-	// 	  city.append("text")
-	// 		  .datum(function(d) { return {name: d.name, value: d.values[0]}; })
-	// 		  .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.metric) + ")"; })
-	// 		  .attr("x", 3)
-	// 		  .attr("dy", ".35em")
-	// 		  .text(function(d) { return d.name; });
-
 		} else {
 			$('#stats').prev().hide();
 			$('#stats').hide();
 		}	  
 	});
-
-}
-
-function activatePostBtn() {
-
-
-		var empty = false;
-		$('.required').each(function() {
-			if ($(this).val().length == 0) {
-				empty = true;
-			}
-		});
-
-// 		if (!$('.preview').is('*') && $('#output').val().length == 0) {
-// 			empty = true;
-// 		}
-		
-		if(!$("#cccheck").is(':checked')){
-			 empty = true;                           
-		}
-
-		if (empty) {
-			$('#btnStartPost').addClass('disabled');
-		} else {
-			$('#btnStartPost').removeClass('disabled');
-		}
 
 }
 
@@ -936,30 +903,6 @@ jQuery(document).ready(function() {
 		 	
 	});
 
-	$('#post').on('show.bs.modal', function (e) {
-
-		$('#post.acf-form').show();
-
-		$('.modal-dialog').css('padding','40px 0px');
-		
-		$(".canvas").css('width','100%');
-
-		$('#post').on('scroll', function (e) {
-			google.maps.event.trigger(window, 'resize', {});
-		});
-
-		$(".highlight-track").width('250px');
-		$(".dragger").css('left','250px');
-
-		console.log("open posting");
-
-// 		$('.slider').slider();
-	
-
-	})
-
-
-	
 	$('.dropdown-toggle').dropdown();
 	
 	$('#brdractmenu li > a').click(function(e){
@@ -1058,391 +1001,57 @@ function embedVids() {
 
 // END VIDEO EMBED CODE
 
-var geo_lat = "58.335901420448806";
-var geo_lng = "12.322883605957031";
+	 jQuery(document).ready(function() {
+	 	var stationval = getUrlParameter('station');
+	 	var ctryval = getUrlParameter('ctry');
+	 	if (stationval) {
+			$('#depstat').addClass('selFilter');
+			$('#depstat').attr('data-filter',$('*[data-station="'+stationval+'"]').data('filter'));
+			$('#depstat').attr('data-station',$('*[data-station="'+stationval+'"]').data('station'));
+	 	} else if (ctryval) {
+		 	var ctrtext = $('*[data-ctry="'+ctryval+'"]').html();
+	 		$('#depstat').html(ctrtext+' <span class="caret"></span>');
+			$('#depstat').addClass('selFilter');
+			$('#depstat').attr('data-filter',$('*[data-ctry="'+ctryval+'"]').data('filter'));
+			$('#depstat').attr('data-ctry',$('*[data-ctry="'+ctryval+'"]').data('ctry'));
+	 	}
 
-function handleGetCurrentPosition(location){
+	 	var charv = getUrlParameter('char');
+	 	var charval = getUrlParameter('charval');
+	 	if (charv && charval) {
+	 		var chartext = $('*[data-char="'+charv+'"][data-charval="'+charval+'"]').html();
+	 		$('#depchar').html(chartext+' <span class="caret"></span>');
+			$('#depchar').addClass('selFilter');
+			$('#depchar').attr('data-filter',$('*[data-char="'+charv+'"][data-charval="'+charval+'"]').data('filter'));
+			$('#depchar').attr('data-charval',charval);
+			$('#depchar').attr('data-char',charv);
+	 	}
 
-	geo_lat = location.coords.latitude;
-	geo_lng = location.coords.longitude;
+	 	var perceptionv = getUrlParameter('perception');
+	 	var perceptionval = getUrlParameter('perceptionval');
+	 	if (perceptionv && perceptionval) {
+	 		var perceptiontext = $('*[data-perception="'+perceptionv+'"][data-perceptionval="'+perceptionval+'"]').html();
+	 		$('#brdrperception').html(perceptiontext+' <span class="caret"></span>');
+			$('#brdrperception').addClass('selFilter');
+			$('#brdrperception').attr('data-filter',$('*[data-perception="'+perceptionv+'"][data-perceptionval="'+perceptionval+'"]').data('filter'));
+			$('#brdrperception').attr('data-perceptionval',perceptionval);
+			$('#brdrperception').attr('data-perception',perceptionv);
+	 	}
 
-	if ($.cookie('geoloc')) {
-		prev_geoloc = $.cookie('geoloc').split(",");
-		if (prev_geoloc) {
-			var prev_lat = prev_geoloc[0];
-			var prev_lng = prev_geoloc[1];
-		}
-	}
+	 	var methodv = getUrlParameter('method');
+	 	if (methodv) {
+			$('#depmet').addClass('selFilter');
+	 		var mettext = $('*[data-method="'+methodv+'"]').html();
+			$('#depmet').html(mettext+' <span class="caret"></span>');
+			$('#depmet').attr('data-filter',$('*[data-method="'+methodv+'"]').data('filter'));
+			$('#depmet').attr('data-method',$('*[data-method="'+methodv+'"]').data('method'));
+	 	}
+
+	 });
+	 	
+	(function($) {
 	
-	console.log(geo_lat+", "+geo_lng);
-
-	$("#geolat").val(geo_lat);
-	$("#geolng").val(geo_lng);	
-	$("#loc_latlng").val(geo_lat+", "+geo_lng);
-
-	if (typeof prev_lat === 'undefined') {
-		
-		console.log('no previous log');
-		var geo_loc = [];
-		geo_loc[0] = geo_lat;
-		geo_loc[1] = geo_lng;
-		$.cookie("geoloc", geo_loc);
+		// setup fields
+		acf.do_action('append', $('#popup-id'));
 	
-	} else if (getDistance(geo_lat, geo_lng, prev_lat, prev_lng)>1) {
-	
-		logcomparelocation(geo_lat, geo_lng);
-
-		var geo_loc = [];
-		geo_loc[0] = geo_lat;
-		geo_loc[1] = geo_lng;
-		$.cookie("geoloc", geo_loc);
-
-	} else {
-	
-		console.log('no signficant change');
-
-	}
-
-}
-
-function logcomparelocation(geo_lat, geo_lng) {
-
-	$.ajax({
-		url: "/data/d-detect.php",
-		data: {lat: geo_lat, lng: geo_lng},
-		cache: true,
-		dataType: "json",
-		success: function (data) {
-			if (typeof data[0].bordername != 'undefined') {
-				console.log(data[0].bordername);
-				$('#detectBorderName').html(data[0].bordername);
-				$('#mdlDetection').modal('show');
-				$.cookie("a_from", data[0].a_from);
-				$.cookie("b_from", data[0].b_from);
-				activatePostBtn();
-			}
-		},
-		error: function(model, response) {
-			console.log(response.responseText);
-		}
-	});	
-
-}
-
-function getDistance(lat1,lon1,lat2,lon2) {
-  var R = 6371; // Radius of the earth in km
-  var dLat = deg2rad(lat2-lat1);  // deg2rad below
-  var dLon = deg2rad(lon2-lon1); 
-  var a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-    ; 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-  var d = R * c; // Distance in km
-  return d;
-}
-
-function deg2rad(deg) {
-  return deg * (Math.PI/180)
-}
-
-function onError() {
-	console.log('no geolocation, using default'); 
-	geo_lat = "58.335901420448806"; 
-	geo_lng = "12.322883605957031"; 
-	
-	$("#loc_latlng").val(geo_lat+","+geo_lng);
-	
-}
-
-function changelng(lng) {
-
-	$.ajax({
-		url: "/wp-content/themes/pieces-child/js/egc_bordr.json",
-		cache: true,
-		dataType: "json",
-		success: function (json) {
-
-			var classes = '';
-
-			$.each(json[lng], function (key, data) {
-				brdlnglp(key, data, classes);
-			});
-
-		},
-		error: function(model, response) {
-			console.log(response.responseText);
-		}
-	});	
-
-}
-
-function brdlnglp(key, data, classes) {
-	if ($.type(data) == 'string') {
-		$(classes + '.brdr_'+key).html(data);
-		if (!!$('.brdr_'+key).attr('placeholder')) { $('.brdr_'+key).attr( "placeholder", data ); }
-	} else {
-		var c = classes + '.brdr_' + key + ' ';
-		$.each(data, function (k, d) { 
-			brdlnglp(k, d, c);
-		});
-	}
-}
-
-function resetContent() {
-
-	$('#btnStartPost').addClass('disabled');
-	
-	$('#cccheck').attr('checked', false); // Unchecks it
-
-	$("#loc_from").val('');
-	$("#loc_to").val('');
-	$("#brdDesc").val('');
-
-	$('#loc_visi').val(50);
-	$('#loc_arti').val(50);
-	$('#loc_impo').val(50);
-	$('#loc_ris').val(50);
-	$('#loc_tim').val(50);
-	$('#loc_mon').val(50);
-	$('#loc_posi').val(50);
-
-	$.removeCookie("a_from");
-	$.removeCookie("b_from");
-
-// 	navigator.geolocation.getCurrentPosition(handleGetCurrentPosition, onError);			
-
-	$('#btnDrawing').removeClass('btn-primary');
-	$('#btnDrawing').addClass('btn-default');
-	$('#camera').removeClass('btn-default');
-	$('#camera').addClass('btn-primary');
-	
-	$("#camera").fadeIn();
-
-	$('.sigPad').signaturePad().clearCanvas();
-	$('.sigPad').hide();
-					
-}
-
-  function uploadContent(name) {
-
-	var ibrdFrom = $("#loc_from").val().replace(';', ' ');
-	var ibrdTo = $("#loc_to").val().replace(';', ' ');
-	var ibrdDesc = $("#brdDesc").val().replace(';', ' ');
-
-	var iloc_visi = $("#loc_visi").val();
-	var iloc_impo = $("#loc_impo").val();
-	var iloc_arti = $("#loc_arti").val();
-	var iloc_posi = $("#loc_posi").val();
-	var iloc_tim = $("#loc_tim").val();
-	var iloc_mon = $("#loc_mon").val();
-	var iloc_ris = $("#loc_ris").val();
-
-	var idept = $("#rel_dept").val();
-
-	var iuser = $("#iuser").val();
-	
-	var iloc_latlng = $("#loc_latlng").val();
-	
-	var iuser = $("#iuser").val();
-	
-	var drawing = $("#output").val();
-					
-	$.ajax({
-		type: 'POST',
-		url: '/crossing-data/a-data.php',
-		data: 'save_form=Save Form&ibrdFrom='+ibrdFrom+'&ibrdTo='+ibrdTo+'&iloc_visi='+iloc_visi+'&iloc_impo='+iloc_impo+'&ibrdDesc='+ibrdDesc
-				+'&iloc_arti='+iloc_arti+'&iloc_tim='+iloc_tim+'&iloc_mon='+iloc_mon+'&iloc_ris='+iloc_ris+'&iloc_posi='+iloc_posi
-				+'&iuser='+iuser+'&iloc_img='+name+'&geolat='+iloc_latlng
-				+'&drawing='+drawing
-				+'&idept='+idept,
-		cache: false,
-		success: function(response){
-			response = unescape(response);
-			var response = response.split("|");
-			var responseType = response[0];
-			var lastID = response[1];
-			console.log(lastID);
-			if(responseType=="success"){
-
-					  $('#mdlProgress').modal('hide');
-					  $('#mdlProgressPic').modal('hide');
-					  goToCrossings(lastID);	// go to crossings page
-					  
-					  resetContent();
-
-			} else {
-			
-					$('#mdlProgress').modal('hide');
-					$('#post').modal('show');
-
-			}
-		}
-	});                                        
-
- }
-
- function renderLast () {
- 
-	  $('#statusd').html('');
-	  
-	  var iuser = $.cookie('user');
-	  
-		$.ajax({
-			url: "/crossing-data/l-data.php",
-			data: {device: iuser},
-			dataType: "json",
-			success: function (data) {
-			
-				console.log('renderlast '+data[0]['chash']);
-			
-				var chash = data[0]['chash'];
-				constructCard(chash);
-
-				if (data === null) { 
-				  $('#statusd').html('<p>Oops, looks like you have not crossed any borders yet.</p>');
-				  return; 
-				}
-			},
-			error: function(model, response) {
-				console.log(response.responseText);
-			}
-		});
- 
- }
- 
-  function constructCard(chash) {
-   		
-// 		history.replaceState('data', '', '//db.bordr.org/c/'+chash); 
-		console.log('constructing card ' + chash);
-   		renderCard(chash);
-  }
- 
-  function renderCard (bdvar) {
-  
-// 		var url = window.location.pathname;
-// 			url = url.split("/");
-// 		var bdcons = url[1];
-// 		var bdvar = url[2];
-
-		console.log("rendering card "+bdvar);
- 
-	  $('#bordercard').html('');
-	  $('#bcfooter').html('');
-	  
-	  var iuser = $.cookie('user');
-	  
-		$.ajax({
-			url: "/crossing-data/ad-card.php",
-			data: {card: bdvar},
-			dataType: "json",
-			success: function (data) {
-			
-				var statusd;
-				var bcfooter;
-				var bordrName = data[0]['border'];
-
-				statusd = ''+
-					'<div class="row"><div class="col-sm-12"><h2>'+data[0]['border']+'</h2></div></div>' +	
-					'<div class="row">' +
-					'	<div class="col-sm-5">' + 
-					'		<div class="row">' + 
-					'			<div class="col-sm-12">' +
-					'				<img src="'+data[0]['img']+'" class="img-rounded img-responsive" />' + 		
-					'				<p>'+data[0]['loc_desc']+'</p>' + 
-					'			</div>' + 
-					'		</div>' +
-					'	</div>' + 
-					'	<div class="col-sm-7">' +
-					'		<div class="row">' + 
-					'			<div class="col-sm-6">' +
-					'			<h5>How the experience was rated</h5>' +
-					'				<svg id="cardmetrics"></svg>' +
-					'			</div>' +
-					'			<div class="col-sm-6">' +
-					'			<h5 class="where">Location of the border</h5>' +
-					'				<img src="'+data[8]['map']+'" class="img-rounded img-responsive" />' + 
-					'			</div>' +
-					'		</div>' +
-					'	</div>' + 
-					'</div>' +
-					'<div class="row top-buffer">' +
-				'';
-				if (data[1]['img'] != undefined) {
-				statusd = statusd +
-						'	<div class="col-sm-2">' +
-						'		<a href="http://db.bordr.org/c/'+data[1]['hash']+'"><img src="'+data[1]['img']+'" class="img-rounded img-responsive" /></a>' +
-						'		<span class="'+data[1]['metric']+'">'+data[1]['border']+'</span>' +
-						'	</div>' +
-				'';
-				}
-				if (data[2]['img'] != undefined) {
-				statusd = statusd + 
-						'	<div class="col-sm-2">' +
-						'		<a href="http://db.bordr.org/c/'+data[2]['hash']+'"><img src="'+data[2]['img']+'" class="img-rounded img-responsive"/></a>' +
-						'		<span class="'+data[2]['metric']+'">'+data[2]['border']+'</span>' +
-						'	</div>' +
-				'';
-				}
-				if (data[3] != undefined) {
-				statusd = statusd +
-						'	<div class="col-sm-2">' +
-						'		<a href="http://db.bordr.org/c/'+data[3]['hash']+'"><img src="'+data[3]['img']+'" class="img-rounded img-responsive"/></a>' +
-						'		<span class="'+data[3]['metric']+'">'+data[3]['border']+'</span>' +
-						'	</div>' +
-				'';
-				}
-				if (data[4] != undefined) {
-				statusd = statusd + 
-						'	<div class="col-sm-2">' +
-						'		<a href="http://db.bordr.org/c/'+data[4]['hash']+'"><img src="'+data[4]['img']+'" class="img-rounded img-responsive"/></a>' +
-						'		<span class="'+data[4]['metric']+'">'+data[4]['border']+'</span>' +
-						'	</div>' +
-				'';
-				}
-				if (data[5] != undefined) {
-				statusd = statusd +
-						'	<div class="col-sm-2">' +
-						'		<a href="http://db.bordr.org/c/'+data[5]['hash']+'"><img src="'+data[5]['img']+'" class="img-rounded img-responsive"/></a>' +
-						'		<span class="'+data[5]['metric']+'">'+data[5]['border']+'</span>' +
-						'	</div>' +
-				'';
-				}
-				if (data[6] != undefined) {
-				statusd = statusd +									
-						'	<div class="col-sm-2">' +
-						'		<a href="http://db.bordr.org/c/'+data[6]['hash']+'"><img src="'+data[6]['img']+'" class="img-rounded img-responsive"/></a>' +
-						'		<span class="'+data[6]['metric']+'">'+data[6]['border']+'</span>' +
-						'	</div>';
-				}				
-				statusd = statusd + '</div></div>';					
-
-				$('#bordercard').append(statusd);
-				
-				if (data[8].cnt>0) {
-					if (data[8].cnt==1) {
-						$('#mdlOthers').html('<a href="http://db.bordr.org/border/'+data[8].slug+'/"><span  class="label label-info">'+data[8].cnt+' other person crossed this border</span></a>');
-					} else {
-						$('#mdlOthers').html('<a href="http://db.bordr.org/border/'+data[8].slug+'/"><span  class="label label-info">'+data[8].cnt+' others crossed this border</span></a>');					
-					}
-				} else {
-					$('#mdlOthers').html('');				
-				}
-				bcfooter = 'URI to your border card: <input type="text" class="form-control" value="http://db.bordr.org/c/'+bdvar+'"/> '
-				+'<p>&nbsp;&nbsp;Share card: <a href="https://twitter.com/intent/tweet?button_hashtag=Bordr&text=I%20crossed%20the%20'+bordrName+'%20border." target="_blank" class="twitter-hashtag-button" data-related="CrossBordr" data-url="http://db.bordr.org/c/'+bdvar+'"><img src="/wp-content/themes/pieces-child/img/twittershare.gif"/></a> <a href="https://www.facebook.com/sharer/sharer.php?u=http://db.bordr.org/c/'+bdvar+'" target="_blank"><img src="/wp-content/themes/pieces-child/img/fbshare.gif"/></a></p>';
-				$('#bcfooter').append(bcfooter);
-
-				if (data === null) { 
-				  $('#bordercard').html('<p>Oops, looks like you have not crossed any borders yet.</p>');
-				  return; 
-				}
-				$('#mdlCard').modal('show');
-				getCardStats(data[0]['id']);
-			},
-			error: function(model, response) {
-				console.log(response.responseText);
-			}
-		});
- 
- }
+	})(jQuery);	
