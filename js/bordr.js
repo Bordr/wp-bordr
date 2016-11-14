@@ -14,20 +14,6 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 
 function stripslashes (str) {
-  // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-  // +   improved by: Ates Goral (http://magnetiq.com)
-  // +      fixed by: Mick@el
-  // +   improved by: marrtins
-  // +   bugfixed by: Onno Marsman
-  // +   improved by: rezna
-  // +   input by: Rick Waldron
-  // +   reimplemented by: Brett Zamir (http://brett-zamir.me)
-  // +   input by: Brant Messenger (http://www.brantmessenger.com/)
-  // +   bugfixed by: Brett Zamir (http://brett-zamir.me)
-  // *     example 1: stripslashes('Kevin\'s code');
-  // *     returns 1: "Kevin's code"
-  // *     example 2: stripslashes('Kevin\\\'s code');
-  // *     returns 2: "Kevin\'s code"
   return (str + '').replace(/\\(.?)/g, function (s, n1) {
     switch (n1) {
     case '\\':
@@ -187,79 +173,83 @@ function toTitleCase(str)
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 
-function renderIndex() {
-	$.ajax({
-		url: "/data/d-index.php",
-		type: "GET",
-		cache: true,
-		dataType: "json",
-		success: function (data) {
-				
-			$('#itemBestBorder').html(data[0][0].border);
-			$('#itemBestStat').html(data[0][0].cqi);
+	 function renderMyBordrs(filter,value) {
 
-			$('#itemWorstBorder').html(data[1][0].border);
-			$('#itemWorstStat').html(data[1][0].cqi);
+		// vars
+		var url = '/bordr/';
+			args = {};
+
+		// loop over filters
+		$('.selFilter').each(function(){
+			// vars
+			var filter = $(this).data('filter'),
+				vals = $(this).data(filter);
+			// append to args
+			args[ filter ] = vals;
 			
-			$('.indexBorder').wrapInner(function() {
-			   var link = $('<a/>');
-			   link.attr('href', '/border/'+slug($(this).text())+'/');
-			   return link;
-			});
-			
-			$(data).each(function(i, el){
-				$.ajax({
-					url: "/data/d-border.php",
-					data: 'bdr='+slug(data[i][0].border).replace('raquo-', ''),
-					type: 'GET',
-					cache: false,
-					dataType: "json",
-					success: function (bdata) {
+			if (filter == 'perception') {
+				// vars
+				var filter = 'perceptionval',
+					vals = $(this).data(filter);
+				// append to args
+				args[ filter ] = vals;			
+			}
+		});
 		
-						$(bdata[0]).each(function(n, el){
-						
-							if (i===0){
-								$('#itemBestBorderImgs').append('<img src="'+bdata[0][n].img+'"></img>');
-							} else {
-								$('#itemWorstBorderImgs').append('<img src="'+bdata[0][n].img+'"></img>');
-							}
-							
-						});
-							
-					},
-					error: function(model, response) {
-						console.log(response.responseText);
-					}
-				});
-			});
+		// update url
+		url += '?';
+		// loop over args
+		$.each(args, function( name, value ){
+			if ((name != 'perceptionval' && value == undefined) || name == 'undefined') {}
+			else {
+				url += name + '=' + value + '&';
+			}
+		});
+		// remove last &
+			url = url.slice(0, -1);
+		// reload page
+		window.location.replace( url );
+// 		console.log(url);
+	 }
+
+	 function renderMyDepartures(filter,value) {
+
+		// vars
+		var url = '/';
+			args = {};
+
+		// loop over filters
+		$('.selFilter').each(function(){
+			// vars
+			var filter = $(this).data('filter'),
+				vals = $(this).data(filter);
+			// append to args
+			args[ filter ] = vals;
 			
-			// RENDER RECENT
-			$.ajax({
-				url: "/data/d-recent.php",
-				cache: true,
-				dataType: "json",
-				success: function (bdata) {
-	
-				$(bdata[0]).each(function(n, el){
-				
-					$('#itemRecentImgs').append('<img src="'+bdata[0][n].img+'"></img>');
-					$('#itemChange').append(bdata[0][n].border+' | ');
-				});
-						
-				},
-				error: function(model, response) {
-					console.log(response.responseText);
-				}
-			});
-			
-			renderList();
-					
-		},
-		error: function(model, response) {
-			console.log(response.responseText);
-		}
-	});
-}
+			if (filter == 'char') {
+				// vars
+				var filter = 'charval',
+					vals = $(this).data(filter);
+				// append to args
+				args[ filter ] = vals;			
+			}
+		});
+		
+		// update url
+		url += '?';
+		// loop over args
+		$.each(args, function( name, value ){
+			if ((name != 'charval' && value == undefined) || name == 'undefined') {}
+			else {
+				url += name + '=' + value + '&';
+			}
+		});
+		// remove last &
+			url = url.slice(0, -1);
+		// reload page
+		window.location.replace( url );
+// 		console.log(url);
+	 }
 
 function ValidURL(str) {
  var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -274,587 +264,6 @@ function ValidURL(str) {
     return true;
   }
 }
-
-function renderList () {
-  $('.listTops').html('');
-	$.ajax({
-		url: "/data/d-dash.php",
-		type: "GET",
-		cache: false,
-		dataType: "json",
-		success: function (data) {
-				
-// 			arrayToTable.setTable('tblvisi', data[0]);
-// 			arrayToTable.setTable('tblposi', data[1]);
-// 			arrayToTable.setTable('tblimpo', data[2]);
-// 			arrayToTable.setTable('tblarti', data[3]);
-// 			arrayToTable.setTable('tbltim', data[4]);
-// 			arrayToTable.setTable('tblmon', data[5]);
-// 			arrayToTable.setTable('tblris', data[6]);
-			
-			var tblvisi = "<div class='row'>";
-			$.each(data[0], function(key,value){  
-			 var link = "";
-			 link+= '<div class="col-sm-2 col-md-2"><div class="thumbnail"><a href="/border/'+slug(this.border)+'/">';
-			 link+= '<img src="'+this.image+'" />';
-			 link+= '<div class="caption"><h3>'+this.rank+'</h3><p>'+this.border+'</p></div>';
-			 link+= '</a></div></div>';
-			 tblvisi+=link;
-			});
-			tblvisi += "</div>";
-			$('#tblvisi').append(tblvisi);
-
-			var tblposi = "<div class='row'>";
-			$.each(data[1], function(key,value){  
-			 var link = "";
-			 link+= '<div class="col-md-2"><div class="thumbnail"><a href="/border/'+slug(this.border)+'/">';
-			 link+= '<img src="'+this.image+'" />';
-			 link+= '<div class="caption"><h3>'+this.rank+'</h3><p>'+this.border+'</p></div>';
-			 link+= '</a></div></div>';
-			 tblposi+=link;
-			});
-			tblposi += "</div>";
-			$('#tblposi').append(tblposi);
-			
-			var tblimpo = "<div class='row'>";
-			$.each(data[2], function(key,value){  
-			 var link = "";
-			 link+= '<div class="col-md-2"><div class="thumbnail"><a href="/border/'+slug(this.border)+'/">';
-			 link+= '<img src="'+this.image+'" />';
-			 link+= '<div class="caption"><h3>'+this.rank+'</h3><p>'+this.border+'</p></div>';
-			 link+= '</a></div></div>';
-			 tblimpo+=link;
-			});
-			tblimpo += "</div>";
-			$('#tblimpo').append(tblimpo);
-			
-			var tblarti = "<div class='row'>";
-			$.each(data[3], function(key,value){  
-			 var link = "";
-			 link+= '<div class="col-md-2"><div class="thumbnail"><a href="/border/'+slug(this.border)+'/">';
-			 link+= '<img src="'+this.image+'" />';
-			 link+= '<div class="caption"><h3>'+this.rank+'</h3><p>'+this.border+'</p></div>';
-			 link+= '</a></div></div>';
-			 tblarti+=link;
-			});
-			tblarti += "</div>";
-			$('#tblarti').append(tblarti);
-			
-			var tbltim = "<div class='row'>";
-			$.each(data[4], function(key,value){  
-			 var link = "";
-			 link+= '<div class="col-md-2"><div class="thumbnail"><a href="/border/'+slug(this.border)+'/">';
-			 link+= '<img src="'+this.image+'" />';
-			 link+= '<div class="caption"><h3>'+this.rank+'</h3><p>'+this.border+'</p></div>';
-			 link+= '</a></div></div>';
-			 tbltim+=link;
-			});
-			tbltim += "</div>";
-			$('#tbltim').append(tbltim);
-			
-			var tblmon = "<div class='row'>";
-			$.each(data[5], function(key,value){  
-			 var link = "";
-			 link+= '<div class="col-md-2"><div class="thumbnail"><a href="/border/'+slug(this.border)+'/">';
-			 link+= '<img src="'+this.image+'" />';
-			 link+= '<div class="caption"><h3>'+this.rank+'</h3><p>'+this.border+'</p></div>';
-			 link+= '</a></div></div>';
-			 tblmon+=link;
-			});
-			tblmon += "</div>";
-			$('#tblmon').append(tblmon);
-			
-			var tblris = "<div class='row'>";
-			$.each(data[6], function(key,value){  
-			 var link = "";
-			 link+= '<div class="col-md-2"><div class="thumbnail"><a href="/border/'+slug(this.border)+'/">';
-			 link+= '<img src="'+this.image+'" />';
-			 link+= '<div class="caption"><h3>'+this.rank+'</h3><p>'+this.border+'</p></div>';
-			 link+= '</a></div></div>';
-			 tblris+=link;
-			});
-			tblris += "</div>";
-			$('#tblris').append(tblris);
-			
-			var url = window.location.pathname;
-				url = url.split("/");
-			var bdvar = url[2];
-
-			var pathed = window.location.pathname.split('/').length - 1;
-			
-			if (pathed> 2 && isNaN(bdvar)) {
-				$(".page").hide();
-				$('#border').fadeIn();
-				$('.nav li').removeClass('active');
-				$('.nav li a[href^="#border"]').parent('li').addClass('active');
-			} else if (pathed> 2) {
-				$(".page").hide();
-				$('#crossing').fadeIn();
-				$('.nav li').removeClass('active');
-				$('.nav li a[href^="#border"]').parent('li').addClass('active');
-			} else if (window.location.hash == '#border') {
-				$(".page").hide();
-				$('#dashboard').fadeIn();
-				$('.nav li').removeClass('active');
-				$('.nav li a[href^="#border"]').parent('li').addClass('active');
-			} else if (url[1] === 'border') {
-			} else if (url[1] === 'c') {
-				renderCard();
-			} else if (window.location.hash == '') {
-				$(".page").hide();
-// 				renderMyCrossings();
-				$('#profile').fadeIn();
-			} else {
-				identifier = window.location.hash;
-				$(identifier).fadeIn();
-				$('.nav li').removeClass('active');
-				$('.nav li a[href^="' + identifier + '"]').parent('li').addClass('active');
-			}		
-		},
-		error: function(model, response) {
-			console.log(response.responseText);
-		}
-	});
-}
-
-function renderPost() {
-
-	var url = window.location.pathname;
-		url = url.split("/");
-	var bdcrossing = url[2];
-	var pathc = window.location.pathname.split('/').length - 1;
-	
-	$.cookie('currentcrossing',bdcrossing);
-
-	if (pathc > 2) {
-		$.ajax({
-		url: "/data/d-post.php",
-		data: 'cro='+bdcrossing,
-		type: 'GET',
-		cache: false,
-		dataType: "json",
-		success: function (data) {
-		
-			$('#crossingname').html('<a href="/border/'+data[0][0].slug+'/">'+data[0][0].border+' crossing</a> <small>at '+data[0][0].loc_date+'</small>');
-			$('#crossingimage').html("<img src="+data[0][0].img+" class='img-responsive'/>");
-			$('#crossingstory').html(stripslashes(data[0][0].loc_desc));
-			
-			$(data[1]).each(function(i, el){
-				$('#crossingstorydetails').append(data[1][i].det_embed+ '<p>'+data[1][i].det_desc + '</p>');
-			});
-			
-			if (data[0][0].device == $.cookie('user')) {
-				$('#postDetails').show();
-			}
-			
-			$.cookie('y_from',data[0][0].loc_from);
-			$.cookie('z_from',data[0][0].loc_to);	
-			
- 			getPostStats(bdcrossing);
-						
-		},
-		error: function(model, response) {
-			console.log(response.responseText);
-		}
-	});
-	}
-	
-	if ($('#crossingstorydetails').is(':empty')){
-	
-		$('#lblcrossingstorydetails').hide();
-	
-	}
-
-}
-
-function renderCrossing() {
-
-	var url = window.location.pathname;
-		url = url.split("/");
-	var bdborder = url[2];
-	var pathc = window.location.pathname.split('/').length - 1;
-
-	if (isNaN(bdborder)) {
-	
-		if (pathc > 2) {
-			$.ajax({
-			url: "/data/d-border.php",
-			data: 'bdr='+bdborder,
-			type: 'GET',
-			cache: false,
-			dataType: "json",
-			success: function (data) {
-		
-				$('#bordername').html(data[0][0].border+' border');
-				$.cookie('y_from',data[0][0].loc_from);
-				$.cookie('z_from',data[0][0].loc_to);	
-		
-				$(data[0]).each(function(i, el){
-	// 				console.log(data[i]);
-					$('#bdrCarousel .carousel-indicators').append('<li data-target="#bdrCarousel" data-slide-to="'+i+'"></li>');
-					$('#bdrCarousel .carousel-inner').append('<div class="item"><a href="/crossing/'+data[0][i].id+'/"><div class="inner-item" style="background: url(\''+data[0][i].img+'\');background-size: cover;"></div></a><div class="carousel-caption">'+stripslashes(data[0][i].loc_desc)+'</div></div>');
-				});
-
-				if (data.map) {			
-					$('#bordermap').append("<img src='"+data.map+"' class='img-responsive'/>");
-				} else {
-					$('#bordermap').hide();				
-					$('#bordermap').prev().hide();
-				}
-			
-				$("#bdrCarousel .carousel-inner div:first-child").addClass("active");
-				$("#bdrCarousel .carousel-indicators li:first-child").addClass("active");
-
-				if (bdborder != '') {
-	// 				console.log(bdborder+'bb');
-					getBorderStats(bdborder);
-// 					renderBorderRelated();
-				}		
-									
-			},
-			error: function(model, response) {
-				console.log(response.responseText);
-			}
-		});
-		}
-		
-	
-	} else {
-
-		renderPost();
-
-	}
-}
-
-function renderBorderRelated() {
-
-	var url = window.location.pathname;
-		url = url.split("/");
-	var bdborder = url[2];
-	var pathc = window.location.pathname.split('/').length - 1;
-
-	var bdname = $('#bordername').html();
-	
-	var id = 0;
-
-	if (isNaN(bdborder)) {
-	
-		if (pathc > 2) {
-			$.ajax({
-			url: "/data/d-border-related.php",
-			data: 'bdr='+bdborder,
-			type: 'GET',
-			cache: false,
-			dataType: "json",
-			success: function (data) {
-		
-// 				$('#relatedborders').html(data[0][0].border);
-		
-				$(data).each(function(i, el){
-	// 				console.log(data[i]);
-					if (i==0 || i==4) { $('#relatedborders').append('<div class="row" id="brow'+id+'">'); idd=id; id++; }
-					$('#brow'+idd+'').append('<div class="col-sm-3 col-md-3"> <a class="thumbnail" href="/border/'+data[i].slug+'/"> <img src="'+data[i].img+'"> <div class="captiontitle '+data[i].css+'"><b>'+data[i].metric+'</b></div> <div class="caption"><h5>'+stripslashes(data[i].border)+'</h5>  </div> </a> </div>');
-				});
-				$('#relatedborders').append('</div>');
-					
-			},
-			error: function(model, response) {
-				console.log(response.responseText);
-			}
-		});
-		}
-		
-	
-	} 
-}
-
-function getPostStats(postID) {
-
-	d3.json('/crossing-data/d-poststats.php?cr='+postID, function(data){
-	   nv.addGraph(function() {
-		 var chart = nv.models.multiBarHorizontalChart()
-			 .margin({top: 30, right: 20, bottom: 50, left: 90})
-			 .x(function(d) { return d.label; })
-			 .y(function(d) { return d.value })
-			 .forceY([0, 100])
-			 .showValues(false)
-			 .tooltips(false)
-			 .showControls(false);
-			 
-		var tickMarks = [0,24,50,75,100];
-		
-		chart.yAxis
-			.tickValues(tickMarks)
-			.tickFormat(function(d){ return d });
-  
-		 d3.select('#crossingmetric svg')
-			 .datum(data)
-		   .transition().duration(500)
-			 .call(chart);
- 
-		 nv.utils.windowResize(chart.update);
- 
-		 return chart;
-	   });
-	});
-	$('.nv-series:eq(1)').attr("transform","103,5");
-	
-}
-
-function getCardStats(postID) {
-
-	d3.json('/crossing-data/d-poststats.php?cd='+postID, function(data){
-	   nv.addGraph(function() {
-		 var chart = nv.models.multiBarHorizontalChart()
-			 .margin({top: 0, right: 8, bottom: 12, left: 70})
-			 .x(function(d) { return d.label; })
-			 .y(function(d) { return d.value })
-			 	.barColor(function(d) { return d.barColor; })
-			 .forceY([0, 100])
-			 .showValues(false)
-			 .tooltips(false)
-			 .showLegend(false)
-			 .showControls(false);
-			 
-		var tickMarks = [0,24,50,75,100];
-		
-		chart.yAxis
-			.tickValues(tickMarks)
-			.tickFormat(function(d){ return d });
-  
-		 d3.select('#cardmetrics')
-			 .datum(data)
-		   .transition().duration(500)
-			 .call(chart);
- 
-		 nv.utils.windowResize(chart.update);
- 
-		 return chart;
-	   });
-	});
-// 	$('.nv-series:eq(1)').attr("transform","103,5");
-	
-}
-
-function getFeedCardStats() {
-
-	$('.cardsm').each(function(i,el) {
-	
-		var id = $(el).data('bid');
-
-	d3.json('/crossing-data/d-poststats.php?cd='+id, function(data){
-	   nv.addGraph(function() {
-		 var chart = nv.models.multiBarHorizontalChart()
-			 .margin({top: 0, right: 8, bottom: 12, left: 70})
-			 .x(function(d) { return d.label; })
-			 .y(function(d) { return d.value })
-			 	.barColor(function(d) { return d.barColor; })
-			 .forceY([0, 100])
-			 .showValues(false)
-			 .tooltips(false)
-			 .showLegend(false)
-			 .showControls(false);
-			 
-		var tickMarks = [0,24,50,75,100];
-		
-		chart.yAxis
-			.tickValues(tickMarks)
-			.tickFormat(function(d){ return d });
-  
-		 d3.select('#cardsm'+id+'')
-			 .datum(data)
-		   .transition().duration(500)
-			 .call(chart);
- 
-		 nv.utils.windowResize(chart.update);
- 
-		 return chart;
-	   });
-	});
-// 	$('.nv-series:eq(1)').attr("transform","103,5");
-	});
-}
-
-function getBorderStatsB(border) {
-
-	d3.json('/data/dcrossb.json', function(data){	
-		nv.addGraph(function() {
-		 var chart = nv.models.lineChart();
- 
-		 chart.xAxis
-			 .tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
- 
-		 chart.yAxis
-			 .tickFormat(d3.format(',.2f'));
-			 
-// 		 chart.line
-// 		 	.interpolate("basis");
- 
-		 d3.select('#stats svg')
-		   .datum(data)
-			 .transition().duration(500).call(chart);
- 
-		 nv.utils.windowResize(chart.update);
- 
-		 return chart;
-	   });
-	});
-
-}
-
-function getBorderStats(border) {
-// 	console.log(border);
-	var margin = {top: 20, right: 200, bottom: 30, left: 50},
-		width = 960 - margin.left - margin.right,
-		height = 500 - margin.top - margin.bottom;
-
-	var parseDate = d3.time.format("%Y-%m-%d").parse;
-
-	var x = d3.time.scale()
-		.range([0, width]);
-
-	var y = d3.scale.linear()
-		.range([height, 0]);
-
-	var color = d3.scale.category10();
-
-	var xAxis = d3.svg.axis()
-		.scale(x)
-		.orient("bottom");
-
-	var yAxis = d3.svg.axis()
-		.scale(y)
-		.orient("left");
-
-	var line = d3.svg.line()
-		.interpolate("basis")
-		.x(function(d) { return x(d.date); })
-		.y(function(d) { return y(d.metric); });
-
-	var svg = d3.select("#stats svg")
-	  .append("g")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-	d3.json('/data/d-crossing.php?cr='+border, function(data){
-	
- 	  color.domain(d3.keys(data[0][0]));
-
-	  var lastdate;
-
-	  data[0].forEach(function(d) {
-		d.ldate = parseDate(d.ldate);
-		lastdate = d.ldate;
-	  });
-
-	  if(data[0][0].ldate != lastdate) {
-
-		  var bborder = color.domain().map(function(name) {
-			return {
-			  name: name,
-			  values: data[0].map(function(d) {
-				return {date: d.ldate, metric: +d[name]};
-			  })
-			};
-		  });
-				bborder.splice(0,1);
-	// 	  		console.log(bborder);
-
-		  x.domain(d3.extent(data[0], function(d) { return d.ldate; }));
-
-		  y.domain([
-			d3.min(bborder, function(c) { return d3.min(c.values, function(v) { return v.metric; }); }),
-			d3.max(bborder, function(c) { return d3.max(c.values, function(v) { return v.metric; }); })
-		  ]);
-	  
-		var legend = svg.selectAll('g')
-			.data(bborder)
-			.enter()
-		  .append('g')
-			.attr('class', 'legend');
-
-		legend.append('rect')
-			.attr('x', width + 20)
-			.attr('y', function(d, i){ return i *  30;})
-			.attr('width', 10)
-			.attr('height', 10)
-			.style('fill', function(d) { 
-			  return color(d.name);
-			});
-
-		legend.append('text')
-			.attr('x', width + 35)
-			.attr('y', function(d, i){ return (i *  30) + 9;})
-			.text(function(d){ return d.name; });		  
-
-
-		  svg.append("g")
-			  .attr("class", "x axis")
-			  .attr("transform", "translate(0," + height + ")")
-			  .call(xAxis);
-
-		  svg.append("g")
-			  .attr("class", "y axis")
-			  .call(yAxis)
-			.append("text")
-			  .attr("class", "highlow")
-			  .attr("transform", "rotate(0)")
-			  .attr("x", 40)
-			  .attr("y", 15)
-			  .attr("dy", ".71em")
-			  .style("text-anchor", "end")
-			  .text("High");
-
-		  svg.append("g")
-			  .attr("class", "y axis")
-			  .call(yAxis)
-			.append("text")
-			  .attr("class", "highlow")
-			  .attr("transform", "rotate(0)")
-			  .attr("x", 40)
-			  .attr("y", height - 15)
-			  .attr("dy", ".71em")
-			  .style("text-anchor", "end")
-			  .text("Low");
-		  
-		  var city = svg.selectAll(".city")
-			  .data(bborder)
-			.enter().append("g")
-			  .attr("class", "city");
-
-	// 	  console.log(city);
-
-		  city.append("path")
-			  .attr("class", "line")
-			  .attr("d", function(d) { return line(d.values); })
-			  .style("stroke", function(d) { return color(d.name); });
-
-		} else {
-			$('#stats').prev().hide();
-			$('#stats').hide();
-		}	  
-	});
-
-}
-
-var slug = function(str) {
-  str = str.replace(/^\s+|\s+$/g, ''); // trim
-  str = str.toLowerCase();
-
-  // remove accents, swap ñ for n, etc
-  var from = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;";
-  var to   = "aaaaaeeeeeiiiiooooouuuunc------";
-  for (var i=0, l=from.length ; i<l ; i++) {
-    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
-  }
-
-  str = str
-  	.replace(/[^a-z0-9 -]/g, '-x-') // remove invalid chars
-  	.replace(/raquo/g,'')
-    .replace(/\s+/g, '-') // collapse whitespace and replace by -
-    .replace(/-+/g, '-'); // collapse dashes
-
-  return str;
-};
 
 	var mobileWidth = 768;
 	
@@ -877,10 +286,6 @@ jQuery(document).ready(function() {
 		$('#post').modal('show');
 	});
 
-	$('#post').on('shown.bs.modal', function () {
-		$('#brdr_to').focus();
-	})
-	
 	$('.nav li').on('click', function() {
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
