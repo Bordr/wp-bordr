@@ -60,7 +60,7 @@ function hidden_type_title() {
 
 function my_acf_init() {
 	
-	acf_update_setting('google_api_key', 'AIzaSyBx_OgbI2PTKsYfIkalYigpEPdqyvR2LQo');
+	acf_update_setting('google_api_key', 'AIzaSyD46ZIXV0LS1gBcNiXMkV-Td66f0HpgNUY');
 }
 
 add_action('acf/init', 'my_acf_init');
