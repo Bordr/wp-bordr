@@ -27,6 +27,7 @@
 		<!-- #footer --></footer>
 
 		<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/bordr.js"></script>
+		<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/jquery.flexslider.js"></script>
 
 		<?php wp_footer(); ?>
 	
