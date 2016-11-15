@@ -15,7 +15,10 @@ function fb_opengraph() {
 	if ( is_singular( 'bordr' ) ) {
         if(get_field('brdr_image')) {
 			$image = get_field('brdr_image');
-			$img_src = $image['sizes'][ 'medium' ];
+			$img_src = $image['sizes'][ 'large' ];
+			if ($image['sizes'][ 'large-width' ] < 200 || $image['sizes'][ 'large-height' ] < 200) {
+				$img_src = get_stylesheet_directory_uri() . '/landing/imgs/egc_bg-cremesoda_400x300.jpg';			
+			}
         } else {
             $img_src = get_stylesheet_directory_uri() . '/landing/imgs/egc_bg-cremesoda_400x300.jpg';
         }
@@ -39,6 +42,9 @@ function fb_opengraph() {
         if(get_field('departure_images')) {
 			$image = get_field('departure_images');
 			$img_src = $image[0]['sizes']['large'];
+			if ($image[0]['sizes'][ 'large-width' ] < 200 || $image[0]['sizes'][ 'large-height' ] < 200) {
+				$img_src = get_stylesheet_directory_uri() . '/landing/imgs/egc_bg-cremesoda_400x300.jpg';			
+			}
         } else {
             $img_src = get_stylesheet_directory_uri() . '/landing/imgs/egc_bg-cremesoda_400x300.jpg';
         }
