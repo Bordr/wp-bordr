@@ -2143,4 +2143,6 @@ endif;
 
 // !--- END CUSTOM FIELD GROUPS
 
+add_filter( 'jetpack_enable_opengraph', '__return_false', 99 );
+
 ?>
