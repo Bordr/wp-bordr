@@ -11,6 +11,10 @@ add_filter('language_attributes', 'doctype_opengraph');
 
 function fb_opengraph() {
     global $post;
+    
+    ?>
+    <meta property="fb:app_id" content="1699080173711636"/>
+    <?php
  
 	if ( is_singular( 'bordr' ) ) {
         if(get_field('brdr_image')) {
