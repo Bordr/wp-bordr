@@ -370,8 +370,10 @@ if( $gallery ): ?>
 		?>
 
 <!-- Begin Timeline -->
-		<h2>Activity Timeline</h2>
-		<?php if ( $events = get_field( 'timeline' ) ) :
+		<?php $events = get_field( 'timeline' ); ?>
+		<?php if ( count($events) >= 1 ) : ?>
+			<h2>Activity Timeline</h2>
+		<?php
 			// Re-order our events just in case
 			usort( $events, 'sort_by_date_ascending');
 
