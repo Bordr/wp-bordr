@@ -280,7 +280,7 @@ if( $gallery ): ?>
 			
 			$posts = get_posts(array(
 						'post_type'		=> 'bordr',
-						'numberposts'	=> 4,
+						'numberposts'	=> 8,
 						'meta_query'		=> array(
 							array(
 								'key' => 'related_activity',
@@ -301,7 +301,7 @@ if( $gallery ): ?>
 		
 				?>
 
-					<div class="col-xs-6 col-sm-4 col-lg-3 masonry-item">
+					<div class="col-xs-6 col-sm-4 col-lg-4 masonry-item">
 						<?php get_template_part( 'bordrlittleloop', get_post_format() ); ?>
 					</div>
 
