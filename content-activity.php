@@ -292,21 +292,21 @@ if( $gallery ): ?>
 			
 			if( $posts ): ?>
 			<h3>Bordr Stories</h3>	
-			<p>As part of this activity, border-stories were booked. <a href="/bordr/?relact=<?php echo get_the_ID();?>">View all the stories posted with this activity</a></p>	
-						<div id="masonry" class="row">
+			<p>As part of this activity, border-stories were booked.</p>	
+				<div id="masonry" class="row">
 		
 			<?php foreach( $posts as $post ): 
-		
 				setup_postdata( $post )
-		
 				?>
-
 					<div class="col-xs-6 col-sm-4 col-lg-4 masonry-item">
 						<?php get_template_part( 'bordrlittleloop', get_post_format() ); ?>
 					</div>
 
 			<?php endforeach; ?>
+					<div class="col-xs-6 col-sm-4 col-lg-4 masonry-item">
+						<a href="/bordr/?relact=<?php echo get_the_ID();?>">View more stories posted with this activity</a>
 					</div>
+				</div>
 					
 			<?php wp_reset_postdata(); ?>
 
