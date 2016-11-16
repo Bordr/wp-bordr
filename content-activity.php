@@ -371,7 +371,7 @@ if( $gallery ): ?>
 
 <!-- Begin Timeline -->
 		<?php $events = get_field( 'timeline' ); ?>
-		<?php if ( count($events) >= 1 ) : ?>
+		<?php if ( $events[0]['event_title'] is not null ) : ?>
 			<h2>Activity Timeline</h2>
 		<?php
 			// Re-order our events just in case
