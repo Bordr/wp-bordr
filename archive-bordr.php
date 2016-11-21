@@ -99,10 +99,10 @@ get_header(); ?>
 
 			<div class="btn-group filtergroup" >
 			  <button type="button" id="brdrperception" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				By characteristics <span class="caret"></span>
+				By experience <span class="caret"></span>
 			  </button>
 				  <ul class="dropdown-menu" id="brdrperceptionmenu">
-					<li><a href="#perceptionfilter" data-perception="" data-perceptionval="">All characteristics</a></li>
+					<li><a href="#perceptionfilter" data-perception="" data-perceptionval="">All experiences</a></li>
 					<?php 
 					foreach ( $perception_options as $perception => $perception_arr ) {
 						if ($perceptionsavb[$perception]) {
