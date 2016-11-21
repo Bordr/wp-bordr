@@ -143,10 +143,10 @@ get_header(); ?>
 			
 			<div class="btn-group filtergroup" >
 			  <button type="button" id="depchar" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				By characteristics <span class="caret"></span>
+				By Setting / By Audience <span class="caret"></span>
 			  </button>
 				  <ul class="dropdown-menu" id="depcharmenu">
-					<li><a href="#charfilter" data-char="" data-charval="">All characteristics</a></li>
+					<li><a href="#charfilter" data-char="" data-charval="">By Setting / By Audience</a></li>
 					<?php 
 					foreach ( $char_options as $char => $char_arr ) {
 						if ($charsavb[$char]) {
