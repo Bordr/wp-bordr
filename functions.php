@@ -73,10 +73,10 @@ function fb_opengraph() {
 		$excerpt = get_bloginfo('description');
 ?>
  
-    <meta property="og:title" content="<?php echo the_title(); ?>"/>
+    <meta property="og:title" content="<?php echo wp_title(); ?>"/>
     <meta property="og:description" content="<?php echo $excerpt; ?>"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
+    <meta property="og:url" content="<?php echo esc_url( home_url() ); ?>"/>
     <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
  
