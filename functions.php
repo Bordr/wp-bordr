@@ -986,7 +986,7 @@ acf_add_local_field_group(array (
 		),
 		array (
 			'key' => 'field_56fb18a433a5e',
-			'label' => 'What are the characteristics of the activity?',
+			'label' => 'In what type of area was it held?',
 			'name' => '',
 			'type' => 'message',
 			'instructions' => '',
