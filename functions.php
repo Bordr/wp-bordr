@@ -68,6 +68,19 @@ function fb_opengraph() {
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
  
 <?php
+    } else if ( is_home() ) {
+		$img_src = get_stylesheet_directory_uri() . '/landing/imgs/egc_bg-cremesoda_400x300.jpg';			
+		$excerpt = get_bloginfo('description');
+?>
+ 
+    <meta property="og:title" content="<?php echo the_title(); ?>"/>
+    <meta property="og:description" content="<?php echo $excerpt; ?>"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
+    <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
+    <meta property="og:image" content="<?php echo $img_src; ?>"/>
+ 
+<?php
     } else {
         return;
     }
