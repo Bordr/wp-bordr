@@ -68,6 +68,28 @@ function fb_opengraph() {
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
  
 <?php
+    } else if ( is_page() ) {
+        if(has_post_thumbnail() ) {
+			$image_src = the_post_thumbnail_url('large');
+        } else {
+            $img_src = get_stylesheet_directory_uri() . '/img/egc_bg-cremesoda_400x300.jpg';
+        }
+        if(get_the_excerpt()) {
+			$excerpt = get_the_excerpt();
+            $excerpt = str_replace("", "'", $excerpt);
+        } else {
+            $excerpt = get_bloginfo('description');
+        }
+        ?>
+ 
+    <meta property="og:title" content="<?php echo the_title(); ?>"/>
+    <meta property="og:description" content="<?php echo $excerpt; ?>"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
+    <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
+    <meta property="og:image" content="<?php echo $img_src; ?>"/>
+ 
+<?php
     } else if ( is_post_type_archive( 'bordr' ) ) {
 		$img_src = get_stylesheet_directory_uri() . '/img/egc_logo_600x340.jpg';			
 ?>
