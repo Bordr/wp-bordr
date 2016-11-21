@@ -68,6 +68,18 @@ function fb_opengraph() {
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
  
 <?php
+    } else if ( is_post_type_archive( 'bordr' ) ) {
+		$img_src = get_stylesheet_directory_uri() . '/img/egc_logo_600x340.jpg';			
+?>
+ 
+    <meta property="og:title" content="Bordr Stories"/>
+    <meta property="og:description" content="Bordrs are stories, impressions, experiences of a border."/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="<?php echo esc_url( get_post_type_archive_link( 'bordr' ) ); ?>"/>
+    <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
+    <meta property="og:image" content="<?php echo $img_src; ?>"/>
+ 
+<?php
     } else if ( is_home() ) {
 		$img_src = get_stylesheet_directory_uri() . '/img/egc_logo_600x340.jpg';			
 		$excerpt = get_bloginfo('description');

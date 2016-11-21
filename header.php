@@ -54,7 +54,6 @@
 							<img src="/wp-content/themes/bordr/img/egc_logo_350x200.jpg">
 						</a>
 					</<?php echo $heading_tag; ?>>
-					<div class="site-description"><?php bloginfo( 'description' ); ?></div>
 				<!-- .site-branding --></div>
 
 				<div class="navbar navbar-default site-navigation" role="navigation">
