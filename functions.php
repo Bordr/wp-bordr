@@ -102,6 +102,33 @@ function fb_opengraph() {
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
  
 <?php
+    } else if ( is_author() ) {
+        if(get_field('organization_logo')) {
+			$image = get_field('organization_logo');
+			$img_src = $image[0]['sizes']['large'];
+			if ($image[0]['sizes'][ 'large-width' ] < 200 || $image[0]['sizes'][ 'large-height' ] < 200) {
+				$img_src = get_stylesheet_directory_uri() . '/img/egc_bg-cremesoda_400x300.jpg';			
+			}
+        } else {
+            $img_src = get_stylesheet_directory_uri() . '/img/egc_bg-cremesoda_400x300.jpg';
+        }
+        if(get_field('organization_profile') != '') {
+			$excerpt = get_field('organization_profile');
+            $excerpt = str_replace("", "'", $excerpt);
+        } else {
+            $excerpt = get_bloginfo('description');
+        }			
+		$excerpt = get_bloginfo('description');
+?>
+ 
+    <meta property="og:title" content="<?php echo get_field('organization_name'); ?>"/>
+    <meta property="og:description" content="<?php echo $excerpt; ?>"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
+    <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
+    <meta property="og:image" content="<?php echo $img_src; ?>"/>
+ 
+<?php
     } else if ( is_home() ) {
 		$img_src = get_stylesheet_directory_uri() . '/img/egc_logo_600x340.jpg';			
 		$excerpt = get_bloginfo('description');
