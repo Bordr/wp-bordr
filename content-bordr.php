@@ -133,7 +133,7 @@ $brdr_image = get_field('brdr_image');
 								  if($rimage) {
 									 ?><img src="<?php echo $rimage['sizes']['large']; ?>" alt="<?php echo $rimage['alt']; ?>" class="img-responsive"/><?php 
 								  } else {
-									 ?><img src="/landing/imgs/egc_bg-cremesoda_400x300.jpg" class="img-responsive"><?php
+									 ?><img src="/wp-content/uploads/2016/12/egc_bg-cremesoda_400x300.png" class="img-responsive"><?php
 								  }
 								?>
 								</a>
@@ -169,7 +169,7 @@ $brdr_image = get_field('brdr_image');
 								  if($rimage) {
 									 ?><img src="<?php echo $rimage['sizes']['large']; ?>" alt="<?php echo $rimage['alt']; ?>" class="img-responsive"/><?php 
 								  } else {
-									 ?><img src="/landing/imgs/egc_bg-cremesoda_400x300.jpg" class="img-responsive"><?php
+									 ?><img src="/wp-content/uploads/2016/12/egc_bg-cremesoda_400x300.png" class="img-responsive"><?php
 								  }
 								?>
 								</a>
@@ -205,7 +205,7 @@ $brdr_image = get_field('brdr_image');
 								  if($rimage) {
 									 ?><img src="<?php echo $rimage['sizes']['large']; ?>" alt="<?php echo $rimage['alt']; ?>" class="img-responsive"/><?php 
 								  } else {
-									 ?><img src="/landing/imgs/egc_bg-cremesoda_400x300.jpg" class="img-responsive"><?php
+									 ?><img src="/wp-content/uploads/2016/12/egc_bg-cremesoda_400x300.png" class="img-responsive"><?php
 								  }
 								?>
 								</a>

@@ -55,7 +55,7 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 				  if($gallery) {
 						?><img src="<?php echo $gallery[0]['sizes']['large']; ?>" alt="<?php echo $gallery[0]['alt']; ?>" class="img-responsive"/><?php 
 				  } else {
-					 ?><img src="/landing/imgs/egc_bg-cremesoda_400x300.jpg" class="img-responsive"><?php
+					 ?><img src="/wp-content/uploads/2016/12/egc_bg-cremesoda_400x300.png" class="img-responsive"><?php
 				  }
 				?>
 				</a>

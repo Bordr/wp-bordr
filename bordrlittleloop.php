@@ -19,7 +19,7 @@ $related_activity = get_field('related_activity');
 				  if($image) {
 					 ?><img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" class="img-responsive"/><?php 
 				  } else {
-					 ?><img src="/landing/imgs/egc_bg-cremesoda_400x300.jpg" class="img-responsive"><?php
+					 ?><img src="/wp-content/uploads/2016/12/egc_bg-cremesoda_400x300.png" class="img-responsive"><?php
 				  }
 				?>
 				<?php the_field('brdr_from'); ?> &raquo; <?php the_field('brdr_to'); ?>
