@@ -22,7 +22,7 @@
 		$station = get_field('organization_name','user_'.$user->ID);
 		$location = get_field('organization_location','user_'.$user->ID);
 		$excerpt = $user_info->description;
-		$hub_type = get_field('station_type','user_'.$user->ID);
+		$hub_type = get_field('hub_type','user_'.$user->ID);
 		
 		if (!$hub_type[0]) { $hub_itype = 'small'; } else { $hub_itype = $hub_type[0]; } 
 
@@ -206,7 +206,7 @@ get_header(); ?>
 			?><h2><?php echo $type_options[$k]; ?> <?php echo $v; ?></h2><?php
 			
 			$arg = array('meta_query' => array('relation' => 'AND', array(
-					'key'		=> 'station_type',
+					'key'		=> 'hub_type',
 					'value'	=> sprintf('%s";', $k),
 					'compare'	=>'LIKE'
 			), array(
