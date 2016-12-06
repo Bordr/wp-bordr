@@ -3,7 +3,7 @@
  * The template for displaying the footer.
  *
  * Contains the closing of the #content div and all content after
- *
+ * site-credit
  * @package Nu Themes
  */
 ?>
@@ -18,7 +18,7 @@
 					<!-- .site-info --></div>
 					<div class="col-sm-6 col-md-6 site-info">
 					<!-- .site-info --></div>
-					<div class="col-sm-6 col-md-3 site-credit">
+					<div class="col-sm-6 col-md-3">
 						<i class="fa fa-creative-commons" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Attribution-ShareAlike License</a><br/>
 						<i class="fa fa-paragraph" aria-hidden="true"></i> <a href="https://github.com/Bordr/bordr/wiki" target="_blank">Build standards with us</a><br/>
 						<i class="fa fa-github" aria-hidden="true"></i> <a href="https://github.com/Bordr/bordr" target="_blank">Code with us</a><br/>
