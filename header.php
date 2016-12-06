@@ -77,7 +77,7 @@
 							) );
 						else :
 							wp_nav_menu( array(
-								'menu'				=> 3,
+								'menu'				=> 'Logged Out',
 								'depth'				=> 2,
 								'menu_class'		=> 'nav navbar-nav',
 								'container_class'	=> 'navbar-collapse collapse main-navigation',
