@@ -14,7 +14,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-6 col-md-3 site-info">
-						<a href="http://ec.europa.eu/programmes/creative-europe/" target="_blank"><img src="/wp-content/uploads/2015/12/eu_flag_creative_europe_co_funded_pos_rgb_right.jpg" style="width:200px;"></a>
+						<a href="http://ec.europa.eu/programmes/creative-europe/projects/ce-project-details-page/?nodeRef=workspace://SpacesStore/92784398-e6d7-4950-b1e4-3bcde44e03fe" target="_blank"><img src="/wp-content/uploads/2015/12/eu_flag_creative_europe_co_funded_pos_rgb_right.jpg" style="width:200px;"></a>
 					<!-- .site-info --></div>
 					<div class="col-sm-6 col-md-6 site-info">
 					<!-- .site-info --></div>
