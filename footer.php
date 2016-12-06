@@ -19,7 +19,7 @@
 						<i class="fa fa-github" aria-hidden="true"></i> <a href="https://github.com/Bordr/bordr" target="_blank">Code with us</a><br/>
 						powered by <a href="http://bordr.org" target="_blank">Bordr.org</a>
 					<!-- .site-info --></div>
-					<div class="col-sm-6 col-md-3 site-info">
+					<div class="col-sm-6 col-md-6 site-info">
 					<!-- .site-info --></div>
 					<div class="col-sm-6 col-md-3 site-credit">
 						<a href="http://ec.europa.eu/programmes/creative-europe/" target="_blank"><img src="/wp-content/uploads/2015/12/eu_flag_creative_europe_co_funded_pos_rgb_right.jpg" style="width:200px;"></a>
