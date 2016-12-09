@@ -1,4 +1,4 @@
-# bordr
+# Bordr
 Border stories and activity sharing theme for wordpress
 
 # Plugins Required for this theme
