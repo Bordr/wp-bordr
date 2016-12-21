@@ -81,7 +81,7 @@ get_header(); ?>
 		endif; ?>
 
 
-	<h2 class="entry-title" style="margin-left:0px; margin-top:30px;">Filter Activities</h2>
+	<h2 class="entry-title" style="margin-left:0px; margin-top:30px;">Filter Activities By</h2>
 
 	<div class="row" style="margin-bottom:30px;">
 	
@@ -163,7 +163,7 @@ get_header(); ?>
 
 			<div class="btn-group filtergroup" >
 			  <button type="button" id="depmet" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				By method <span class="caret"></span>
+				How it was done <span class="caret"></span>
 			  </button>
 			  <ul class="dropdown-menu" id="depmetmenu">
 				<li><a href="#methodfilter" data-method="">All Methods</a></li>

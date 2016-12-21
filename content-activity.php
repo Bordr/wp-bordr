@@ -64,9 +64,8 @@ if( $gallery ): ?>
 <?php endif; ?>
 
 <!-- End Gallery -->
-		<p  class="lead">Activity: <?php the_title(); ?></p>
-		<p>Explores the space between</p>
-		<h1 class="lead"><?php the_field('from'); ?> — <?php the_field('to'); ?></h1>
+		<h1>Activity: <?php the_title(); ?></h1>
+		<p class="lead">Explores the space between <br/><?php the_field('from'); ?> — <?php the_field('to'); ?></p>
 		<?php if ( $oborders = get_field( 'other_borders' ) ) :
 		?>
 		<?php 
