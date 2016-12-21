@@ -5,6 +5,7 @@
  
 global $post;
 $post_slug=$post->post_name;
+$post_ID=$post->ID;
 
 ?>
 
@@ -304,7 +305,7 @@ if( $gallery ): ?>
 
 			<?php endforeach; ?>
 					<div class="col-xs-6 col-sm-4 col-lg-4 masonry-item">
-						<a href="/bordr/?relact=<?php echo get_the_ID();?>">View more stories posted with this activity</a>
+						<a href="/bordr/?relact=<?php echo $post_ID;?>">View more stories posted with this activity</a>
 					</div>
 				</div>
 					
