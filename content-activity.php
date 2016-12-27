@@ -284,7 +284,7 @@ if( $gallery ): ?>
 						'meta_query'		=> array(
 							array(
 								'key' => 'related_activity',
-								'value' =>  get_the_ID(),
+								'value' =>  $post_ID,
 								'compare' => 'LIKE'
 								)
 							)
@@ -310,12 +310,8 @@ if( $gallery ): ?>
 					
 			<?php wp_reset_postdata(); ?>
 
-		<?php else: ?>
-				<p><?php _e('No stories from this activity at this time.'); ?></p>
-
-		<?php endif; ?>
-
-		<!-- End Loop -->
+			<?php endif; ?>
+			<!-- End Bordr Stories Loop -->
 
 		<?php
 		if (get_field('results_description')) :
