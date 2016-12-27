@@ -2,7 +2,7 @@
 /**
  * The Template for displaying all single posts.
  *
- * Template Name Posts: View Departure
+ * Template Name Posts: View Bordr Story
  */
 
 get_header(); ?>

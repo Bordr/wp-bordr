@@ -1,6 +1,6 @@
 <?php
 /**
- * The Template for displaying departure form.
+ * The Template for displaying bordr story form.
  *
  * Template Name: Bordr Form
  */

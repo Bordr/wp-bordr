@@ -1,8 +1,8 @@
 <?php
 /**
- * The Template for displaying departure form.
+ * The Template for displaying activty form.
  *
- * Template Name: Departure Form
+ * Template Name: Activity Form
  */
 
 acf_form_head(); ?>
@@ -14,7 +14,7 @@ acf_form_head(); ?>
 			<div class="row">
 
 				<div class="col-xs-12">
-					<?php get_template_part( 'content', 'departureform' ); ?>
+					<?php get_template_part( 'content', 'activityform' ); ?>
 				</div>
 
 			<!-- .row --></div>

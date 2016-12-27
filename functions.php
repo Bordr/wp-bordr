@@ -393,7 +393,7 @@ function prefix_hide_personal_options() {
 }
 
 
-// DEPARTURE FILTER FUNCTIONS
+// ACTIVITY FILTER FUNCTIONS
 
 $GLOBALS['my_query_filters'] = array( 
 	'author'	=> 'hub',

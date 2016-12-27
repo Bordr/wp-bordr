@@ -15,7 +15,7 @@ $related_activity = get_field('related_activity');
 
 		<?php if ( 'bordr' == get_post_type() ) : ?>
 		<div class="entry-meta">
-			<p>A story from <a href='/departure/<?php echo get_post($related_activity)->post_name; ?>'><?php echo get_post($related_activity)->post_title; ?></a>
+			<p>A story from <a href='/activity/<?php echo get_post($related_activity)->post_name; ?>/'><?php echo get_post($related_activity)->post_title; ?></a>
 		<!-- .entry-meta --></div>
 		<?php endif; ?>
 	<!-- .entry-header --></header>
