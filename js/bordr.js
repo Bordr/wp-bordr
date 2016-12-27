@@ -279,7 +279,7 @@ jQuery(document).ready(function() {
 	});
 
 	$('.fbLogout').on('click', function() {
-		FB.logout(function(response) { $.removeCookie("user"); window.location.replace("http://europegrandcentral.net/"); } );
+		FB.logout(function(response) { $.removeCookie("user"); window.location.replace("http://globalgrandcentral.net/"); } );
 	});
 
 	$("#addBordr").click(function(){

@@ -114,7 +114,7 @@ map.on('click', function (e) {
         .setLngLat(feature.geometry.coordinates)
         .setHTML('<h3>' + feature.properties.name + '</h3>' + 
         		'<p>' + feature.properties.description +'</p>' + 
-                '<p><a href="http://europegrandcentral.net/'+feature.properties.link+'">read more</a></p>')
+                '<p><a href="http://globalgrandcentral.net/'+feature.properties.link+'">read more</a></p>')
         .addTo(map);
 });
 
