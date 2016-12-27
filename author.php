@@ -12,6 +12,8 @@
 	
 	$image_id = get_field('hub_logo','user_'.$curauth->ID);
 	$image = wp_get_attachment_image_src($image_id,"medium");
+	
+	$hub_id = $curauth->ID;
 		
     ?>
     
@@ -51,7 +53,7 @@
 	
 	$postsone = get_posts(array(
 		'post_type'			=> 'activity',
-		'author'			=> $curauth->ID
+		'author'			=> $hub_id
 	));
 	
 	$posts = $postsone;
@@ -95,7 +97,7 @@
 			'relation'		=> 'OR', 
 			array(
 				'key'	=> 'partner', // 'User' field type
-				'value' => sprintf(':"%s";', $curauth->ID),
+				'value' => sprintf(':"%s";', $hub_id),
 				'compare' => 'LIKE'
 			)
 		)
