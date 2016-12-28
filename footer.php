@@ -25,7 +25,7 @@
 						<a href="/privacy-policy/" target="_blank">Privacy Policy</a><br/>
 					<!-- .site-info --></div>
 					<div class="col-sm-4 col-md-3">
-						Global Grand Central, 2016—2017<br/>
+						Global Grand Central, 2017<br/>
 						<i class="fa fa-creative-commons" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Attribution-ShareAlike License</a><br/>
 					<!-- .site-info --></div>
 				</div>
