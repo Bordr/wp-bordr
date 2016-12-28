@@ -134,7 +134,7 @@ function fb_opengraph() {
 		$excerpt = get_bloginfo('description');
 ?>
  
-    <meta property="og:title" content="Europe Grand Central"/>
+    <meta property="og:title" content="Global Grand Central"/>
     <meta property="og:description" content="<?php echo $excerpt; ?>"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="<?php echo esc_url( home_url() ); ?>"/>
@@ -2048,7 +2048,7 @@ acf_add_local_field_group(array (
 				'class' => '',
 				'id' => '',
 			),
-			'message' => 'On Europe Grand Central, you are registered as a Hub, and your projects, actions, and interventions are called Activities.
+			'message' => 'On Global Grand Central, you are registered as a Hub, and your projects, actions, and interventions are called Activities.
 
 Please take a moment and describe your hub.',
 			'new_lines' => 'wpautop',
