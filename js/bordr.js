@@ -460,3 +460,20 @@ function embedVids() {
 		acf.do_action('append', $('#popup-id'));
 	
 	})(jQuery);	
+	
+	jQuery(document).ready(function($) {
+		// set the container that Masonry will be inside of in a var
+		if (document.querySelector('#masonryb')) {
+		var container = document.querySelector('#masonryb');
+
+		// create empty var msnry
+		var msnry;
+
+		// initialize Masonry after all images have loaded
+		imagesLoaded( container, function() {
+			msnry = new Masonry( container, {
+				itemSelector: '.masonry-item'
+			});
+		});
+		}
+	});

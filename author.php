@@ -110,7 +110,7 @@
 	
 	if( $posts ): ?>
 	
-				<div id="masonry" class="row">
+				<div id="masonryb" class="row">
 		
 	<?php foreach( $posts as $post ): 
 		
