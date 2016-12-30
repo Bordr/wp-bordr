@@ -53,6 +53,7 @@
 	
 	$postsone = get_posts(array(
 		'post_type'			=> 'activity',
+		'nopaging' 			=> true,
 		'author'			=> $hub_id
 	));
 	
@@ -93,6 +94,7 @@
 	
 	$poststwo = get_posts(array(
 		'post_type'			=> 'activity',
+		'nopaging' 			=> true,
 		'meta_query'		=> array(
 			'relation'		=> 'OR', 
 			array(
