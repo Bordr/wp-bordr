@@ -215,6 +215,7 @@ $brdr_image = get_field('brdr_image');
 						?>
 					</div>
 				</div>	
+				<?php the_excerpt(); ?>
 	<!-- .entry-content --></div>
 
 	<footer class="entry-meta entry-footer">

@@ -82,6 +82,7 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 				</div>
 			</div>
 		</div>	
+		<?php the_excerpt(); ?>
 	<!-- .entry-summary --></div>
 
 	<footer class="entry-meta entry-footer">
