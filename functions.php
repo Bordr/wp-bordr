@@ -42,7 +42,7 @@ function fb_opengraph() {
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
     
 	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:site" content="@crossbordr">
+	<meta name="twitter:site" content="@glograndcentral">
 	<meta name="twitter:title" content="<?php echo the_title(); ?>">
 	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
 	<meta name="twitter:image" content="<?php echo $img_src; ?>">
@@ -74,7 +74,7 @@ function fb_opengraph() {
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
  
  	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:site" content="@crossbordr">
+	<meta name="twitter:site" content="@glograndcentral">
 	<meta name="twitter:title" content="<?php echo the_title(); ?>">
 	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
 	<meta name="twitter:image" content="<?php echo $img_src; ?>">
@@ -102,7 +102,7 @@ function fb_opengraph() {
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
 
 	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:site" content="@crossbordr">
+	<meta name="twitter:site" content="@glograndcentral">
 	<meta name="twitter:title" content="<?php echo the_title(); ?>">
 	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
 	<meta name="twitter:image" content="<?php echo $img_src; ?>">
@@ -120,7 +120,7 @@ function fb_opengraph() {
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
 
 	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:site" content="@crossbordr">
+	<meta name="twitter:site" content="@glograndcentral">
 	<meta name="twitter:title" content="Bordr Stories">
 	<meta name="twitter:description" content="Bordrs are stories, impressions, experiences of a border.">
 	<meta name="twitter:image" content="<?php echo $img_src; ?>">
@@ -153,7 +153,7 @@ function fb_opengraph() {
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
  
  	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:site" content="@crossbordr">
+	<meta name="twitter:site" content="@glograndcentral">
 	<meta name="twitter:title" content="<?php echo get_field('organization_name'); ?>">
 	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
 	<meta name="twitter:image" content="<?php echo $img_src; ?>">
@@ -172,7 +172,7 @@ function fb_opengraph() {
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
  
   	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:site" content="@crossbordr">
+	<meta name="twitter:site" content="@glograndcentral">
 	<meta name="twitter:title" content="Global Grand Central">
 	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
 	<meta name="twitter:image" content="<?php echo $img_src; ?>">
