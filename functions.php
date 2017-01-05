@@ -40,6 +40,12 @@ function fb_opengraph() {
     <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
     <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
+    
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@crossbordr">
+	<meta name="twitter:title" content="<?php echo the_title(); ?>">
+	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
+	<meta name="twitter:image" content="<?php echo $img_src; ?>">
  
 <?php
     } else if ( is_singular( 'activity' ) ) {
@@ -67,6 +73,12 @@ function fb_opengraph() {
     <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
  
+ 	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@crossbordr">
+	<meta name="twitter:title" content="<?php echo the_title(); ?>">
+	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
+	<meta name="twitter:image" content="<?php echo $img_src; ?>">
+ 
 <?php
     } else if ( is_page() ) {
         if(has_post_thumbnail() ) {
@@ -88,6 +100,12 @@ function fb_opengraph() {
     <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
     <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@crossbordr">
+	<meta name="twitter:title" content="<?php echo the_title(); ?>">
+	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
+	<meta name="twitter:image" content="<?php echo $img_src; ?>">
  
 <?php
     } else if ( is_post_type_archive( 'bordr' ) ) {
@@ -100,6 +118,12 @@ function fb_opengraph() {
     <meta property="og:url" content="<?php echo esc_url( get_post_type_archive_link( 'bordr' ) ); ?>"/>
     <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@crossbordr">
+	<meta name="twitter:title" content="Bordr Stories">
+	<meta name="twitter:description" content="Bordrs are stories, impressions, experiences of a border.">
+	<meta name="twitter:image" content="<?php echo $img_src; ?>">
  
 <?php
     } else if ( is_author() ) {
@@ -128,6 +152,12 @@ function fb_opengraph() {
     <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
  
+ 	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@crossbordr">
+	<meta name="twitter:title" content="<?php echo get_field('organization_name'); ?>">
+	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
+	<meta name="twitter:image" content="<?php echo $img_src; ?>">
+ 
 <?php
     } else if ( is_home() ) {
 		$img_src = get_stylesheet_directory_uri() . '/img/egc_logo_600x340.jpg';			
@@ -140,6 +170,12 @@ function fb_opengraph() {
     <meta property="og:url" content="<?php echo esc_url( home_url() ); ?>"/>
     <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
     <meta property="og:image" content="<?php echo $img_src; ?>"/>
+ 
+  	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@crossbordr">
+	<meta name="twitter:title" content="Global Grand Central">
+	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
+	<meta name="twitter:image" content="<?php echo $img_src; ?>">
  
 <?php
     } else {
