@@ -5,7 +5,7 @@
  * @package Nu Themes
  */
  
-	$blogusers = get_users('role=station');
+	$blogusers = get_users('role=hub');
 	 
 	$geojson = array( 'type' => 'FeatureCollection', 'features' => array() );
 	 

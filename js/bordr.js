@@ -330,13 +330,13 @@ jQuery(document).ready(function() {
 	});
 
 	$('#depstatmenu li > a').click(function(e){
-		if ($(this).data('station') > 0) {
+		if ($(this).data('hub') > 0) {
 			$('#depstat').html(this.innerHTML+' <span class="caret"></span>');
-			$('#stationfilter').html(this.innerHTML);
+			$('#hubfilter').html(this.innerHTML);
 			$('#depstat').addClass('selFilter');
 			$('#depstat').attr('data-filter',$(this).data('filter'));
-			$('#depstat').attr('data-station',$(this).data('station'));
-			renderMyDepartures($(this).data('station'),'');
+			$('#depstat').attr('data-hub',$(this).data('hub'));
+			renderMyDepartures($(this).data('hub'),'');
 		} else {
 			$('#depstat').html(this.innerHTML+' <span class="caret"></span>');
 			$('#ctryfilter').html(this.innerHTML);
@@ -407,12 +407,12 @@ function embedVids() {
 // END VIDEO EMBED CODE
 
 	 jQuery(document).ready(function() {
-	 	var stationval = getUrlParameter('station');
+	 	var hubval = getUrlParameter('hub');
 	 	var ctryval = getUrlParameter('ctry');
-	 	if (stationval) {
+	 	if (hubval) {
 			$('#depstat').addClass('selFilter');
-			$('#depstat').attr('data-filter',$('*[data-station="'+stationval+'"]').data('filter'));
-			$('#depstat').attr('data-station',$('*[data-station="'+stationval+'"]').data('station'));
+			$('#depstat').attr('data-filter',$('*[data-hub="'+hubval+'"]').data('filter'));
+			$('#depstat').attr('data-hub',$('*[data-hub="'+hubval+'"]').data('hub'));
 	 	} else if (ctryval) {
 		 	var ctrtext = $('*[data-ctry="'+ctryval+'"]').html();
 	 		$('#depstat').html(ctrtext+' <span class="caret"></span>');

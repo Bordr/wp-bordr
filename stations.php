@@ -19,7 +19,7 @@
 	// Array of WP_User objects.
 	foreach ( $blogusers as $user ) {
 		$user_info = get_userdata($user->ID);
-		$station = get_field('organization_name','user_'.$user->ID);
+		$hub = get_field('organization_name','user_'.$user->ID);
 		$location = get_field('organization_location','user_'.$user->ID);
 		$excerpt = $user_info->description;
 		$hub_type = get_field('hub_type','user_'.$user->ID);
@@ -35,7 +35,7 @@
 				'coordinates' => array($location['lng'],$location['lat'])
 					),
 			  'properties' => array(
-					'name' => $station,
+					'name' => $hub,
 					'description' => esc_html($excerpt)."<br/>",
 					'link' => 'author/'.$user->user_login,
 					'marker-color' => '#ffe267',

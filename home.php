@@ -50,7 +50,7 @@ get_header(); ?>
 		
 		$methodsavb = array();
 		$charsavb = array();
-		$stationsavb = array();
+		$hubsavb = array();
 		$countriesavb = array();
 		if ( have_posts() ) : ?>
 		<?php while ( have_posts() ) : the_post(); ?>
@@ -69,7 +69,7 @@ get_header(); ?>
 				}
 			}
 			
-			$stationsavb[] = $author_id;
+			$hubsavb[] = $author_id;
 			
 			$address = get_field('departure_location');
 			$countriesavb[] = end(explode(",",$address['address']));
@@ -87,9 +87,9 @@ get_header(); ?>
 	
 		<div class="col-sm-12">
 			<div class="btn-group filtergroup" style="margin-left:0px;">
-			  	<?php if ($_GET['station']) { ?>
+			  	<?php if ($_GET['hub']) { ?>
 				  <button type="button" id="depstat" class="btn btn-primary dropdown-toggle selFilter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<?php echo ucwords(get_field('organization_name','user_'.$_GET['station'])); ?> <span class="caret"></span>
+					<?php echo ucwords(get_field('organization_name','user_'.$_GET['hub'])); ?> <span class="caret"></span>
 				  </button>
 			  	<?php } else { ?>			  	
 				  <button type="button" id="depstat" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -97,26 +97,26 @@ get_header(); ?>
 				  </button>
 			  	<?php } ?>			  	
 			  <ul class="dropdown-menu" id="depstatmenu">
-					<li><a href="#stationfilter" data-station="" data-filter="">All Hubs</a></li>
+					<li><a href="#hubfilter" data-hub="" data-filter="">All Hubs</a></li>
 
 				<?php
 				
 				$blogusers = get_users('role=hub');
-				$stations_arr = array();
+				$hubs_arr = array();
 	 
 				// Array of WP_User objects.
 				foreach ( $blogusers as $user ) {
 				
-					if (in_array($user->ID,$stationsavb)) {
+					if (in_array($user->ID,$hubsavb)) {
 		
 						$user_info = get_userdata($user->ID);
-						$station = get_field('organization_name','user_'.$user->ID);
+						$hub = get_field('organization_name','user_'.$user->ID);
 						$location = get_field('organization_location','user_'.$user->ID);
 						
 						$location_ctry = trim(end(explode(",", $location['address'])));
 						$ctrysavb[] = $location_ctry;
 
-						$ctrystations[$location_ctry][] = "<li><a href=\"#stationfilter\" data-station=\"".$user->ID."\" class=\"filter\" data-filter=\"station\">".ucwords($station)."</a></li>";
+						$ctryhubs[$location_ctry][] = "<li><a href=\"#hubfilter\" data-hub=\"".$user->ID."\" class=\"filter\" data-filter=\"hub\">".ucwords($hub)."</a></li>";
 
 					}
 
@@ -129,9 +129,9 @@ get_header(); ?>
 				
 					?><li><a href="#ctryfilter" data-ctry="<?php echo $ctry; ?>" class="filter" data-filter="ctry" style="font-weight:bold;"><?php echo $ctry; ?></a></li><?php 
 					
-					foreach ( $ctrystations[$ctry] as $station ) {
+					foreach ( $ctryhubs[$ctry] as $hub ) {
 					
-						echo $station; 
+						echo $hub; 
 					
 					}
 				

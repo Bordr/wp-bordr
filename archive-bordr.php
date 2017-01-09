@@ -77,7 +77,7 @@ get_header(); ?>
 				  </button>
 			  	<?php } ?>			  	
 			  <ul class="dropdown-menu" id="brdractmenu">
-					<li><a href="#actfilter" data-station="" data-filter="">All activities</a></li>
+					<li><a href="#actfilter" data-hub="" data-filter="">All activities</a></li>
 
 				<?php
 				
