@@ -54,7 +54,7 @@ acf_form_head(); ?>
 										'post_status'		=> 'publish'
 									),
 									'uploader' => 'basic',
-									'return' => '/bordr/',
+									'return' => '/bordr/#StoryAdded',
 									'submit_value'		=> 'Add a bordr story'
 								)); ?>
 

@@ -251,7 +251,7 @@ if( $gallery ): ?>
 		endif;
 		?>
 
-		<h2>Methods Used</h2>
+		<h2>How it was done</h2>
 		<div class="row">
 		<?php 
 		if( $methods ): ?> 

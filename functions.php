@@ -1495,7 +1495,7 @@ Unknown people (100)',
 		),
 		array (
 			'key' => 'field_5702d2d19ac49',
-			'label' => 'What was the results?',
+			'label' => 'What were the results?',
 			'name' => 'results_description',
 			'type' => 'wysiwyg',
 			'instructions' => 'Explain using images, drawings, photographs, film, sound, or text.',

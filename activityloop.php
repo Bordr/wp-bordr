@@ -68,7 +68,7 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 			</div>
 			<div class="col-sm-12">
 				<div class="row">
-					<div class="col-sm-12"><h3 class="entry-title">Methods Used</h3></div>
+					<div class="col-sm-12"><h3 class="entry-title">How it was done</h3></div>
 				</div>
 				<div class="row">
 				<?php 
