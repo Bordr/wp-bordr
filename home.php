@@ -11,7 +11,7 @@ get_header(); ?>
 		<article class="page" style="margin-bottom:0px;" >
 			<div class="row">
 			<div class="col-xs-12 col-sm-9 col-lg-9">
-				<h1 class="entry-title" style="font-size:24px;">It Works</h1>
+				<h1 class="entry-title" style="font-size:24px;">Activities.</h1>
 				<p>Activities are projects, actions, or interventions that explore borders and enable people to meet others.</p>
 			</div>
 			<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
