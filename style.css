@@ -1412,17 +1412,77 @@ body.single .entry-content {
 	.acf-form-submit {
 		margin-left: 15px;
 	}
-	
+
 }
 
+/* ACF customizations */
+
 .acf-google-map {
-	width: 100%;
-	height: 400px;
-	border: #ccc solid 1px;
-	margin: 20px 0px;
+  width: 100%;
+  height: 400px;
+  border: #ccc solid 1px;
+  margin: 20px 0px;
 }
 
 /* fixes potential theme css conflict */
 .acf-google-map img {
-   max-width: inherit !important;
+  max-width: inherit !important;
+}
+
+/* Style button anchors in frontend ACF forms */
+.acf-form a.button {
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: #ccc 0px 1px 0px 0px;
+  color: rgb(85, 85, 85);
+  cursor: pointer;
+  display: inline-block;
+  height: 32px;
+  line-height: normal;
+  margin: 0 5px 4px 0;
+  padding: 6px 7px 6px 5px;
+  text-align: center;
+}
+.acf-form a.button:hover {
+  background: #fafafa;
+  border-color: #999;
+  color: #23282d;
+}
+.acf-form a.button:active {
+  background: #eee;
+  border-color: #999;
+  color: #23282d;
+  -webkit-box-shadow: inset 0 2px 5px -3px rgba(0,0,0,.5);
+  box-shadow: inset 0 2px 5px -3px rgba(0,0,0,.5);
+  -webkit-transform: translateY(1px);
+  -ms-transform: translateY(1px);
+  transform: translateY(1px);
+}
+
+/* Normalize and increase font-sizes in frontend ACF forms */
+.acf-form .acf-field .acf-label label, /* Regular field labels */
+.acf-form .acf-input label { /* Inline checkbox labels */
+  font-size: 18px;
+}
+.acf-checkbox-list label { /* Method checkboxes */
+  font-weight: normal;
+}
+.acf-form .acf-field .acf-label p,
+.acf-form .acf-field .acf-input p {
+  font-size: 16px;
+}
+
+/* Make disabled AFC number-sliders slightly transparent instead of hidden */
+.acf-field-number-slider.hidden-by-conditional-logic {
+  display: block !important;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Bootstrap overrides */
+.acf-gallery-toolbar {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
 }
