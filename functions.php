@@ -595,6 +595,44 @@ function my_pre_get_posts( $query ) {
 
 }
 
+// --- BEGIN CUSTOM POST TYPE FILTERS
+add_action('acf/save_post', 'pre_save_activity_draft', 10, 1);
+function pre_save_activity_draft($post_id) {
+    // Enable saving activity posts as drafts in frontend form
+
+    // Bail-out if we are in admin or we are not creating an activity
+    if (is_admin() || get_post_type($post_id) != 'activity') {
+      return $post_id;
+    }
+
+    if ($_POST['acf']['field_588b28fa14472'][0] == 'draft') {
+        $post_status = 'draft';
+    } else {
+        $post_status = 'publish';
+    }
+    $args = array(
+        'ID' => $post_id,
+        'post_status' => $post_status
+    );
+    wp_update_post($args);
+    return $post_id;
+}
+
+add_filter('acf/prepare_field/key=field_588b28fa14472', 'hide_activity_draft_field_in_admin', 10, 2);
+function hide_activity_draft_field_in_admin($field) {
+    if(is_admin()) {
+        return false;
+    } else {
+        return $field;
+    }
+}
+
+add_filter('acf/load_value/key=field_588b28fa14472', 'load_activity_draft_field_value', 10, 3);
+function load_activity_draft_field_value($value, $post_id, $field) {
+    return (get_post_status($post_id) == 'draft');
+}
+
+
 // --- BEGIN CUSTOM POST TYPES
 add_action( 'init', 'cptui_register_my_cpts' );
 function cptui_register_my_cpts() {
@@ -1694,6 +1732,30 @@ Unknown people (100)',
 			),
 			'message' => '',
 			'default_value' => 0,
+		),
+        array (
+            'key' => 'field_588b28fa14472',
+			'label' => '',
+			'layout' => 'vertical',
+			'choices' => array (
+				'draft' => 'Save as draft?',
+			),
+			'default_value' => array (
+			),
+			'allow_custom' => 0,
+			'save_custom' => 0,
+			'toggle' => 0,
+			'return_format' => 'value',
+			'name' => 'save_as_draft',
+			'type' => 'checkbox',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
 		),
 	),
 	'location' => array (

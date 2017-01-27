@@ -22,8 +22,8 @@ get_header();
                   'post_status' => 'publish',
               ),
               'uploader' => 'basic',
-              'return' => '/',
-              'submit_value' => 'Add an activity'
+              'return' => '%post_url%',
+              'submit_value' => 'Add activity',
           )); ?>
         <?php endif ; ?>
     </div>
