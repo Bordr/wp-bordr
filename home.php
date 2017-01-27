@@ -15,8 +15,8 @@ get_header(); ?>
 				<p>Activities are projects, actions, or interventions that explore borders and enable people to meet others.</p>
 			</div>
 			<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
-				<?php if (is_user_logged_in()) :
-				?><a href="/wp-admin/post-new.php?post_type=activity" class="btn btn-primary start">Add Activity</a><?php
+				<?php if(is_user_logged_in()) :
+				?><a href="/add-activity" class="btn btn-primary start">Add Activity</a><?php
 					endif;
 				?>
 			</div>
