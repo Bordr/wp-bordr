@@ -916,7 +916,7 @@ acf_add_local_field_group(array (
 				'id' => '',
 			),
 			'message' => '<p>This is the place to log your audience inclusive projects, actions, or interventions. An activity may be anything from a big project, to a limited event. The most important is that something has been learned.</p>
-<p>Only a few questions are mandatory, but the more you answer, the more you and others will learn from your efforts.</p>',
+<p>Only a few questions are mandatory (marked with <span class="acf-required">*</span>), but the more you answer, the more you and others will learn from your efforts.</p>',
 			'new_lines' => 'wpautop',
 			'esc_html' => 0,
 		),
