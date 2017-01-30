@@ -596,9 +596,9 @@ function my_pre_get_posts( $query ) {
 }
 
 // --- BEGIN CUSTOM POST TYPE FILTERS
-add_action('acf/save_post', 'pre_save_activity_draft', 10, 1);
-function pre_save_activity_draft($post_id) {
-    // Enable saving activity posts as drafts in frontend form
+add_action('acf/save_post', 'pre_save_activity', 10, 1);
+function pre_save_activity($post_id) {
+    // Handle custom frontend fields: title and draft
 
     // Bail-out if we are in admin or we are not creating an activity
     if (is_admin() || get_post_type($post_id) != 'activity') {
@@ -612,14 +612,18 @@ function pre_save_activity_draft($post_id) {
     }
     $args = array(
         'ID' => $post_id,
-        'post_status' => $post_status
+        'post_status' => $post_status,
+        'post_title' => $_POST['acf']['field_588f1624311a8']
     );
     wp_update_post($args);
     return $post_id;
 }
 
-add_filter('acf/prepare_field/key=field_588b28fa14472', 'hide_activity_draft_field_in_admin', 10, 2);
-function hide_activity_draft_field_in_admin($field) {
+// Hide activity draft field
+add_filter('acf/prepare_field/key=field_588b28fa14472', 'hide_field_in_admin', 10, 2);
+// Hide frontend activity title field
+add_filter('acf/prepare_field/key=field_588f1624311a8', 'hide_field_in_admin', 10, 2);
+function hide_field_in_admin($field) {
     if(is_admin()) {
         return false;
     } else {
@@ -630,6 +634,11 @@ function hide_activity_draft_field_in_admin($field) {
 add_filter('acf/load_value/key=field_588b28fa14472', 'load_activity_draft_field_value', 10, 3);
 function load_activity_draft_field_value($value, $post_id, $field) {
     return (get_post_status($post_id) == 'draft');
+}
+
+add_filter('acf/load_value/key=field_588f1624311a8', 'load_activity_title_field_value', 10, 3);
+function load_activity_title_field_value($value, $post_id, $field) {
+    return get_the_title($post_id);
 }
 
 
@@ -910,6 +919,25 @@ acf_add_local_field_group(array (
 <p>Only a few questions are mandatory, but the more you answer, the more you and others will learn from your efforts.</p>',
 			'new_lines' => 'wpautop',
 			'esc_html' => 0,
+		),
+        array (
+            'key' => 'field_588f1624311a8',
+			'label' => 'Title',
+			'name' => 'title',
+			'type' => 'text',
+			'default_value' => '',
+			'maxlength' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'instructions' => '',
+			'required' => 1,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
 		),
 		array (
 			'key' => 'field_570c55618d71a',

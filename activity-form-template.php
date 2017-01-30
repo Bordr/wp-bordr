@@ -16,7 +16,6 @@ get_header();
         <?php if(current_user_can('publish_posts', the_post())) : ?>
           <?php acf_form(array(
               'post_id' => 'new_post',
-              'post_title' => true,
               'new_post' => array(
                   'post_type'	=> 'activity',
                   'post_status' => 'publish',
