@@ -20,9 +20,10 @@ get_header();
                   'post_type'	=> 'activity',
                   'post_status' => 'publish',
               ),
+              'html_after_fields' => '<div class="acf-field"><input type="hidden" name="post_type"><button type="submit" name="draft">Save draft</button><span class="acf-spinner"></span></div>',
               'uploader' => 'basic',
               'return' => '%post_url%',
-              'submit_value' => 'Add activity',
+              'submit_value' => 'Publish activity',
           )); ?>
         <?php endif ; ?>
     </div>
@@ -35,13 +36,30 @@ get_header();
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   }
-  <?php /* Create headings in "How"-textarea when choosing methods */ ?>
-  $('input[name^="acf[field_570d4d3b389ea]"]').change(function() {
-    if($(this).is(':checked')) {
-      tinymce.get($('textarea[name="acf[field_5702d2889ac48]"]').attr('id'))
-             .execCommand('mceInsertContent', false, "<p><b>" + toTitleCase($(this).val()) + "</b></p><p></p>");
-    }
-  });
+  (function($) {
+    <?php /* Create headings in "How"-textarea when choosing methods */ ?>
+    $('input[name^="acf[field_570d4d3b389ea]"]').change(function() {
+      if($(this).is(':checked')) {
+        tinymce.get($('textarea[name="acf[field_5702d2889ac48]"]').attr('id'))
+               .execCommand('mceInsertContent', false, "<p><b>" + toTitleCase($(this).val()) + "</b></p><p></p>");
+      }
+    });
+
+    <?php /* Save draft handler */ ?>
+    $('button[name="draft"]').click(function(e) {
+      var button = $(this);
+      button.prev('input[name="post_type"]').val('draft');
+      button.next().addClass('is-active');
+      <?php /* Hide publish button container */ ?>
+      button.parents('form').find('.acf-form-submit').hide();
+    });
+
+    <?php /* Reset display after form submit */ ?>
+    $('form').ajaxComplete(function(e) {
+      $('.acf-spinner').removeClass('is-active');
+      $(this).find('.acf-form-submit').show();
+    });
+  })(jQuery);
 </script>
 
 <?php get_footer(); ?>

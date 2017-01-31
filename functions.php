@@ -605,7 +605,7 @@ function pre_save_activity($post_id) {
       return $post_id;
     }
 
-    if ($_POST['acf']['field_588b28fa14472'][0] == 'draft') {
+    if ($_POST['post_type'] == 'draft') {
         $post_status = 'draft';
     } else {
         $post_status = 'publish';
@@ -619,8 +619,6 @@ function pre_save_activity($post_id) {
     return $post_id;
 }
 
-// Hide activity draft field
-add_filter('acf/prepare_field/key=field_588b28fa14472', 'hide_field_in_admin', 10, 2);
 // Hide frontend activity title field
 add_filter('acf/prepare_field/key=field_588f1624311a8', 'hide_field_in_admin', 10, 2);
 function hide_field_in_admin($field) {
@@ -631,14 +629,11 @@ function hide_field_in_admin($field) {
     }
 }
 
-add_filter('acf/load_value/key=field_588b28fa14472', 'load_activity_draft_field_value', 10, 3);
-function load_activity_draft_field_value($value, $post_id, $field) {
-    return (get_post_status($post_id) == 'draft');
-}
-
 add_filter('acf/load_value/key=field_588f1624311a8', 'load_activity_title_field_value', 10, 3);
 function load_activity_title_field_value($value, $post_id, $field) {
-    return get_the_title($post_id);
+    if($post_id) {
+        return get_the_title($post_id);
+    }
 }
 
 
@@ -1760,30 +1755,6 @@ Unknown people (100)',
 			),
 			'message' => '',
 			'default_value' => 0,
-		),
-        array (
-            'key' => 'field_588b28fa14472',
-			'label' => '',
-			'layout' => 'vertical',
-			'choices' => array (
-				'draft' => 'Save as draft?',
-			),
-			'default_value' => array (
-			),
-			'allow_custom' => 0,
-			'save_custom' => 0,
-			'toggle' => 0,
-			'return_format' => 'value',
-			'name' => 'save_as_draft',
-			'type' => 'checkbox',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
 		),
 	),
 	'location' => array (
