@@ -42,7 +42,7 @@
 		?>
 
 	<?php
-		if(file_exists('analytics.php')) {
+		if(file_exists(stream_resolve_include_path('analytics.php'))) {
     		include 'analytics.php';
     	}
 	?>
