@@ -1577,7 +1577,7 @@ Unknown people (100)',
 			'label' => '<h2>How it went</h2>',
 			'name' => 'success_rating',
 			'type' => 'number_slider',
-			'instructions' => 'Was it a success or failure? Failure — 0 Success — 10',
+			'instructions' => 'Was it a success or failure? Failure — 0 Success — 100',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
