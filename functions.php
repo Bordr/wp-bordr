@@ -1745,7 +1745,7 @@ Unknown people (100)',
 			'label' => 'Creative Commons License',
 			'name' => 'cc_license',
 			'type' => 'true_false',
-			'instructions' => 'By checking the box below, I accept that my story (including text, photo, drawing, location, and experience evaluations) will now become part of the public domain with rights and obligations for Bordr.org under a Creative Commons BY 4.0 license.',
+			'instructions' => 'By checking the box below, I accept that my story (including text, photo, drawing, location, and experience evaluations) will now become part of the public domain with rights and obligations for Global Grand Central under a Creative Commons BY 4.0 license, read more <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">here</a>.',
 			'required' => 1,
 			'conditional_logic' => 0,
 			'wrapper' => array (
