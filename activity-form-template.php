@@ -14,8 +14,9 @@ get_header();
 
 	  <div class="col-xs-12">
         <?php if(current_user_can('publish_posts', the_post())) : ?>
+          <?php $post_id = isset($_GET['post_id']) ? $_GET['post_id'] : 'new_post'; ?>
           <?php acf_form(array(
-              'post_id' => 'new_post',
+              'post_id' => $post_id,
               'new_post' => array(
                   'post_type'	=> 'activity',
                   'post_status' => 'publish',
