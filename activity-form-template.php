@@ -14,16 +14,32 @@ get_header();
 
 	  <div class="col-xs-12">
         <?php if(current_user_can('publish_posts', the_post())) : ?>
+          <?php
+          if(isset($_GET['post_id'])) {
+            $post_id = $_GET['post_id'];
+            if(get_post_status($post_id) == 'draft') {
+              $submit_button =  'Publish activity';
+              $draft_button = 'Save as draft and preview';
+            } else {
+              $submit_button = 'Update activity';
+              $draft_button = 'Unpublish, save as draft, and preview';
+            }
+          } else {
+            $post_id = 'new_post';
+            $submit_button = 'Publish activity';
+            $draft_button = 'Save as draft and preview';
+          }
+          ?>
           <?php acf_form(array(
-              'post_id' => 'new_post',
+              'post_id' => $post_id,
               'new_post' => array(
                   'post_type'	=> 'activity',
                   'post_status' => 'publish',
               ),
-              'html_after_fields' => '<div class="acf-field"><input type="hidden" name="post_type"><button type="submit" name="draft">Save draft</button><span class="acf-spinner"></span></div>',
+              'html_after_fields' => '<div class="acf-field"><input type="hidden" name="post_type"><button type="submit" name="draft">' . $draft_button . '</button><span class="acf-spinner"></span></div>',
               'uploader' => 'basic',
               'return' => '%post_url%',
-              'submit_value' => 'Publish activity',
+              'submit_value' => $submit_button,
           )); ?>
         <?php endif ; ?>
     </div>
