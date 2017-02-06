@@ -23,20 +23,22 @@ a.story-title {
 	padding-top: 0.5em;
 }
 
-img.related-story-img {
+img.related-story-img, img.related-story-img-even {
 	width:5em;
 	height: auto;
 	display: block;
-	float:left;
 	margin-right:1em;
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 	border: 1px solid #bcbcbc;
 }
 
-p.related-text {
-	display: block;
-	float: left;
+img.related-story-img {
+	float:left;
+}
+
+img.related-story-img-even {
+	float:right;
 }
 
 /* BEGIN TIMELINE */

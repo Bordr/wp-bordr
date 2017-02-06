@@ -93,9 +93,9 @@ $related_activity = get_field('related_activity');
 						 while ($second_query->have_posts() ) : $second_query->the_post(); $rimage = get_field('brdr_image'); ?>
 						 	<?php
 							  if($rimage) {
-								 ?><img src="<?php echo $rimage['sizes']['large']; ?>" alt="<?php echo $rimage['alt']; ?>" class="img-responsive related-story-img"/><?php 
+								 ?><img src="<?php echo $rimage['sizes']['large']; ?>" alt="<?php echo $rimage['alt']; ?>" class="img-responsive related-story-img-even"/><?php 
 							  } else {
-								 ?><img src="/wp-content/uploads/2016/12/egc_bg-cremesoda_400x300.png" class="img-responsive related-story-img"><?php
+								 ?><img src="/wp-content/uploads/2016/12/egc_bg-cremesoda_400x300.png" class="img-responsive related-story-img-even"><?php
 							  }
 							?>
 							 <p>as important as
