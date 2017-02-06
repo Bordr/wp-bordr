@@ -4,7 +4,22 @@
  *
  * Template Name: Bordr Form
  */
+function my_kses_post( $value ) {
+	
+	// is array
+	if( is_array($value) ) {
+	
+		return array_map('my_kses_post', $value);
+	
+	}
+	
+	
+	// return
+	return wp_kses_post( $value );
 
+}
+
+add_filter('acf/update_value', 'my_kses_post', 10, 1);
 acf_form_head(); ?>
 <?php get_header(); ?>
 
@@ -38,15 +53,15 @@ acf_form_head(); ?>
 								<?php acf_form(array(
 									'post_id'		=> 'new_post',
 									'fields'		=> array(
-										'brdr_from',
-										'brdr_to', 
-										'brdr_story',
-										'brdr_image',
-										'brdr_invisible_visible',
-										'brdr_unimportant_important',
-										'brdr_negative_positive',
-										'brdr_location',
-										'brdr_cc'
+										'field_57d820ae30eea',
+										'field_57d820c230eeb', 
+										'field_57d82e9f34b90',
+										'field_57d82ee034b91',
+										'field_57d82ff134b93',
+										'field_57d8304334b94',
+										'field_57d8306d34b95',
+										'field_57d8310a34b97',
+										'field_57d8319e34b98'
 									), 
 									'html_after_fields' => '<input type="hidden" name="acf[field_57d82e1934b8f]" value="697"/>',
 									'new_post'		=> array(
