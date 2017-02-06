@@ -2,6 +2,43 @@ a:active,a:hover {
 	color: #d46644;
 }
 
+.story-header {
+	background-color:#E45A33;
+	margin: -15px;
+	padding: 15px;
+}
+
+.story-header:hover {
+	background-color:#218387;
+}
+
+a.story-title {
+	color: white;
+	font-size: 1.5em;
+}
+
+.related-story {
+	clear:both;
+	border-top: 1px solid #bcbcbc;
+	padding-top: 0.5em;
+}
+
+img.related-story-img {
+	width:5em;
+	height: auto;
+	display: block;
+	float:left;
+	margin-right:1em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	border: 1px solid #bcbcbc;
+}
+
+p.related-text {
+	display: block;
+	float: left;
+}
+
 /* BEGIN TIMELINE */
 .tcontainer {
 /*   margin: 3rem 0; */
