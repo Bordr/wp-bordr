@@ -293,7 +293,7 @@ if( $gallery ): ?>
 							array(
 								'key' => 'related_activity',
 								'value' =>  $post_ID,
-								'compare' => 'LIKE'
+								'compare' => '='
 								)
 							)
 			));
@@ -311,10 +311,10 @@ if( $gallery ): ?>
 					</div>
 
 			<?php endforeach; ?>
-					<div class="col-xs-6 col-sm-4 col-lg-4 masonry-item">
-						<a href="/bordr/?relact=<?php echo $post_ID;?>">View more stories posted with this activity</a>
-					</div>
 				</div>
+				<p>
+					<a href="/bordr/?relact=<?php echo $post_ID;?>">View more stories posted with this activity</a>
+				</p>
 					
 			<?php wp_reset_postdata(); ?>
 

@@ -89,8 +89,10 @@ $related_activity = get_field('related_activity');
 					});
 					</script>
 				<?php endif; ?>
+				<?php if (isset($location['lng'])) { ?>
 				<b>Location of border</b>	
 				<p><img src="https://api.tiles.mapbox.com/v3/deklerk.map-57h1d46y/url-bit.ly%2F18KNEkg(<?php echo $location['lng'];?>,<?php echo $location['lat'];?>)/<?php echo $location['lng'];?>,<?php echo $location['lat'];?>,3/600x300.png" class="img-rounded img-responsive"></p>
+				<?php } ?>
 				<b>Related experiences</b>
 				<div class="row">
 					<div class="col-xs-4 col-sm-4">
