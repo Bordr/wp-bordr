@@ -16,7 +16,7 @@ get_header(); ?>
 			</div>
 			<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
 				<?php if (is_user_logged_in()) : ?>
-					<a href="/wp-admin/post-new.php?post_type=activity" class="btn btn-primary start">Add Activity</a>
+					<a href="/add-activity" class="btn btn-primary start">Add Activity</a>
 				<?php else : ?>
 					<a href="/join/" class="btn btn-primary start">Join to Add an Activity</a>
 				<?php endif; ?>
