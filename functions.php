@@ -636,6 +636,15 @@ function load_activity_title_field_value($value, $post_id, $field) {
     }
 }
 
+// Display activity image galleries as slideshows
+add_shortcode('gallery', 'activity_slideshow_gallery');
+function activity_slideshow_gallery($attr) {
+    if(is_singular('activity')) {
+        $attr['type']= 'slideshow';
+        $output = gallery_shortcode($attr);
+        return $output;
+    }
+}
 
 // --- BEGIN CUSTOM POST TYPES
 add_action( 'init', 'cptui_register_my_cpts' );
