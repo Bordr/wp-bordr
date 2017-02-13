@@ -101,8 +101,20 @@ get_header(); ?>
 					<li><a href="#hubfilter" data-hub="" data-filter="">All Hubs</a></li>
 
 				<?php
-								
-				$allhubs = get_users(array( 'role' => 'hub' ) );
+
+				// Get all authors
+				$hub_q = new WP_Query(array('post_type' => 'activity','posts_per_page' => -1));
+				if ( $hub_q->have_posts() ) : 
+					while ( $hub_q->have_posts() ) : $hub_q->the_post(); 
+						$hub_id = $hub_q->get_the_author_meta('ID');
+						$allhubsavb[] = $hub_id;
+			
+					endwhile;
+			
+				endif;
+				wp_reset_query();
+
+				$allhubs = get_users(array( 'role' => 'hub', who => 'authors' ) );
 	 
 				// Array of WP_User objects.
 				foreach ( $allhubs as $user ) {
@@ -118,7 +130,7 @@ get_header(); ?>
 
 						$ctryhubs[$location_ctry][] = "<li><a href=\"#hubfilter\" data-hub=\"".$user->ID."\" class=\"filter\" data-filter=\"hub\">".ucwords($hub)."</a></li>";
 
-					} else if (!$_GET['hub']) {
+					} else if (in_array($user->ID,$allhubsavb) && !$_GET['hub']) {
 
 						$user_info = get_userdata($user->ID);
 						$hub = get_field('organization_name','user_'.$user->ID);
