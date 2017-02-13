@@ -110,7 +110,7 @@ get_header(); ?>
 						$hub_id = get_the_author_meta('ID');
 						$allhubsavb[] = $hub_id;
 					endwhile;
-					wp_reset_query();			
+					wp_reset_postdata();			
 				endif;
 
 				$allhubs = get_users(array( 'role' => 'hub', who => 'authors' ) );
