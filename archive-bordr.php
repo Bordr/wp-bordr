@@ -11,8 +11,8 @@ get_header(); ?>
 		<article class="page" style="margin-bottom:0px;" >
 			<div class="row">
 			<div class="col-xs-12 col-sm-9 col-lg-9">
-				<h1 class="entry-title" style="font-size:24px;">Bordrs</h1>
-				<p>Bordrs are stories, impressions, experiences of a border.</p>
+				<h1 class="entry-title" style="font-size:24px;">Bordr stories</h1>
+				<p>Bordrs stories are impressions and experiences of a border.</p>
 			</div>
 			<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
 				<a href="/add-bordr-story/" class="btn btn-primary start">Add Bordr Story</a>

@@ -1,20 +1,79 @@
 a:active,a:hover {
 	color: #d46644;
 }
-
+.from-activity {
+	width:100%;
+	clear:both;
+}
 .story-header {
-	background-color:#E45A33;
-	margin: -15px;
-	padding: 15px;
+	background: rgba(255,255,255,1);
+	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(212,101,67,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(212,101,67,1)));
+	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(212,101,67,1) 100%);
+	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(212,101,67,1) 100%);
+	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(212,101,67,1) 100%);
+	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(212,101,67,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d46543', GradientType=0 );
+	margin-right: -15px;
+	margin-left: -15px;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+	padding: 20px 15px 2px 15px !important;
+	z-index: 100;
+	position: relative;
 }
 
-.story-header:hover {
-	background-color:#218387;
+.story-to {
+	background: rgba(33,132,135,1);
+	background: -moz-linear-gradient(top, rgba(33,132,135,1) 0%, rgba(255,255,255,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(33,132,135,1)), color-stop(100%, rgba(255,255,255,1)));
+	background: -webkit-linear-gradient(top, rgba(33,132,135,1) 0%, rgba(255,255,255,1) 100%);
+	background: -o-linear-gradient(top, rgba(33,132,135,1) 0%, rgba(255,255,255,1) 100%);
+	background: -ms-linear-gradient(top, rgba(33,132,135,1) 0%, rgba(255,255,255,1) 100%);
+	background: linear-gradient(to bottom, rgba(33,132,135,1) 0%, rgba(255,255,255,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#218487', endColorstr='#ffffff', GradientType=0 );
+	margin-left: -15px;
+	margin-right: -15px;
+	margin-top: 0 !important;
+	padding: 2px 15px 20px 15px !important;
+	text-align: right;
+	position: relative;
+	z-index: 100;
+}
+
+.down-arrow {
+	width: 100%;
+	text-align: left;
+	margin-top: -5px;
+}
+
+.up-arrow {
+	width: 100%;
+	text-align: right;
+	margin-bottom: -5px;
+}
+
+img.arrow-img {
+	width: auto;
+	position: relative;
+	z-index: 50;
+}
+
+.expand-story {
+	position: absolute;
+	font-size: 1.5em;
+	left: 0;
+	top: calc(50% - 1em);
+	width: 100%;
+	text-align: center;
+	color: #ffffff;
+	z-index: 100;
 }
 
 a.story-title {
 	color: white;
-	font-size: 1.5em;
+	font-size: 2.5em;
+	line-height: 1.2;
 }
 
 .related-story {
@@ -23,22 +82,43 @@ a.story-title {
 	padding-top: 0.5em;
 }
 
+.story-preview {
+	margin-top: -55px;
+	margin-bottom: -55px;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	float:left;
+	position: relative;
+	z-index: 0;
+	opacity: 0.5;
+}
+
+.story-preview:hover {
+	opacity: 1;
+}
+
 img.related-story-img, img.related-story-img-even {
 	width:5em;
 	height: auto;
 	display: block;
-	margin-right:1em;
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 	border: 1px solid #bcbcbc;
+	opacity: 0.5;
+}
+
+img.related-story-img:hover, img.related-story-img-even:hover {
+	opacity: 1;
 }
 
 img.related-story-img {
 	float:left;
+	margin-right:1em;
 }
 
 img.related-story-img-even {
 	float:right;
+	margin-left:1em;
 }
 
 /* BEGIN TIMELINE */
