@@ -103,6 +103,8 @@ get_header(); ?>
 
 				<?php
 
+				$allhubs = get_users(array( 'role' => 'hub', who => 'authors' ) );
+
 				// Get all authors
 				$hub_q = new WP_Query(array('post_type' => 'activity','posts_per_page' => -1));
 				if ( $hub_q->have_posts() ) : 
@@ -110,11 +112,11 @@ get_header(); ?>
 						$hub_id = get_the_author_meta('ID');
 						$allhubsavb[] = $hub_id;
 					endwhile;
-					wp_reset_postdata();			
+					wp_reset_query();			
 				endif;
-
-				$allhubs = get_users(array( 'role' => 'hub', who => 'authors' ) );
-	 
+				
+				$allhubsavb = array_unique($allhubsavb);
+ 
 				// Array of WP_User objects.
 				foreach ( $allhubs as $user ) {
 				
