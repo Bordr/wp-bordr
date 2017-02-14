@@ -103,7 +103,7 @@ get_header(); ?>
 
 				<?php
 
-				$allhubs = get_users(array( 'role' => 'hub', who => 'authors' ) );
+				$allhubs = get_users(array( 'role' => 'hub' ) );
 
 				// Get all authors
 				$hub_q = new WP_Query(array('post_type' => 'activity','posts_per_page' => -1));
@@ -120,25 +120,29 @@ get_header(); ?>
 				// Array of WP_User objects.
 				foreach ( $allhubs as $user ) {
 				
-					if (in_array($user->ID,$hubsavb) && $_GET['hub']>0) {
+					if (in_array($user->ID,$hubsavb) && ($_GET['hub']>0 || $_GET['ctry'])) {
 		
 						$user_info = get_userdata($user->ID);
 						$hub = get_field('organization_name','user_'.$user->ID);
 						$location = get_field('organization_location','user_'.$user->ID);
 						
 						$location_ctry = trim(end(explode(",", $location['address'])));
-						$ctrysavb[] = $location_ctry;
+						if ($location_ctry != '') {
+							$ctrysavb[] = $location_ctry;
+						}
 
 						$ctryhubs[$location_ctry][] = "<li><a href=\"#hubfilter\" data-hub=\"".$user->ID."\" class=\"filter\" data-filter=\"hub\">".ucwords($hub)."</a></li>";
 
-					} else if (in_array($user->ID,$allhubsavb) && !$_GET['hub']) {
+					} else if (in_array($user->ID,$allhubsavb) && !isset($_GET['hub']) && !isset($_GET['ctry'])) {
 					
 						$user_info = get_userdata($user->ID);
 						$hub = get_field('organization_name','user_'.$user->ID);
 						$location = get_field('organization_location','user_'.$user->ID);
 						
 						$location_ctry = trim(end(explode(",", $location['address'])));
-						$ctrysavb[] = $location_ctry;
+						if ($location_ctry != '') {
+							$ctrysavb[] = $location_ctry;
+						}
 
 						$ctryhubs[$location_ctry][] = "<li><a href=\"#hubfilter\" data-hub=\"".$user->ID."\" class=\"filter\" data-filter=\"hub\">".ucwords($hub)."</a></li>";					
 					
