@@ -15,10 +15,11 @@ get_header(); ?>
 				<p>Activities are projects, actions, or interventions that explore borders and enable people to meet others.</p>
 			</div>
 			<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
-				<?php if (is_user_logged_in()) :
-				?><a href="/wp-admin/post-new.php?post_type=activity" class="btn btn-primary start">Add Activity</a><?php
-					endif;
-				?>
+				<?php if (is_user_logged_in()) : ?>
+					<a href="/add-activity" class="btn btn-primary start">Add Activity</a>
+				<?php else : ?>
+					<a href="/join/" class="btn btn-primary start">Join to Add an Activity</a>
+				<?php endif; ?>
 			</div>
 			</div>
 		</article>
@@ -51,6 +52,7 @@ get_header(); ?>
 		$methodsavb = array();
 		$charsavb = array();
 		$hubsavb = array();
+		$allhubsavb = array();
 		$countriesavb = array();
 		if ( have_posts() ) : ?>
 		<?php while ( have_posts() ) : the_post(); ?>
@@ -100,24 +102,50 @@ get_header(); ?>
 					<li><a href="#hubfilter" data-hub="" data-filter="">All Hubs</a></li>
 
 				<?php
+
+				$allhubs = get_users(array( 'role' => 'hub' ) );
+
+				// Get all authors
+				$hub_q = new WP_Query(array('post_type' => 'activity','posts_per_page' => -1));
+				if ( $hub_q->have_posts() ) : 
+					while ( $hub_q->have_posts() ) : $hub_q->the_post(); 
+						$hub_id = get_the_author_meta('ID');
+						$allhubsavb[] = $hub_id;
+					endwhile;
+					wp_reset_query();			
+				endif;
 				
-				$blogusers = get_users('role=hub');
-				$hubs_arr = array();
-	 
+				$allhubsavb = array_unique($allhubsavb);
+ 
 				// Array of WP_User objects.
-				foreach ( $blogusers as $user ) {
+				foreach ( $allhubs as $user ) {
 				
-					if (in_array($user->ID,$hubsavb)) {
+					if (in_array($user->ID,$hubsavb) && ($_GET['hub']>0 || $_GET['ctry'])) {
 		
 						$user_info = get_userdata($user->ID);
 						$hub = get_field('organization_name','user_'.$user->ID);
 						$location = get_field('organization_location','user_'.$user->ID);
 						
 						$location_ctry = trim(end(explode(",", $location['address'])));
-						$ctrysavb[] = $location_ctry;
+						if ($location_ctry != '') {
+							$ctrysavb[] = $location_ctry;
+						}
 
 						$ctryhubs[$location_ctry][] = "<li><a href=\"#hubfilter\" data-hub=\"".$user->ID."\" class=\"filter\" data-filter=\"hub\">".ucwords($hub)."</a></li>";
 
+					} else if (in_array($user->ID,$allhubsavb) && !isset($_GET['hub']) && !isset($_GET['ctry'])) {
+					
+						$user_info = get_userdata($user->ID);
+						$hub = get_field('organization_name','user_'.$user->ID);
+						$location = get_field('organization_location','user_'.$user->ID);
+						
+						$location_ctry = trim(end(explode(",", $location['address'])));
+						if ($location_ctry != '') {
+							$ctrysavb[] = $location_ctry;
+						}
+
+						$ctryhubs[$location_ctry][] = "<li><a href=\"#hubfilter\" data-hub=\"".$user->ID."\" class=\"filter\" data-filter=\"hub\">".ucwords($hub)."</a></li>";					
+					
 					}
 
 				}

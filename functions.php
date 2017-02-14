@@ -245,7 +245,7 @@ function hidden_type_title() {
 // END ADMIN FUNCTIONS
 
 function my_acf_init() {
-	
+
 	acf_update_setting('google_api_key', 'AIzaSyD46ZIXV0LS1gBcNiXMkV-Td66f0HpgNUY');
 }
 
@@ -595,6 +595,57 @@ function my_pre_get_posts( $query ) {
 
 }
 
+// --- BEGIN CUSTOM POST TYPE FILTERS
+add_action('acf/save_post', 'pre_save_activity', 10, 1);
+function pre_save_activity($post_id) {
+    // Handle custom frontend fields: title and draft
+
+    // Bail-out if we are in admin or we are not creating an activity
+    if (is_admin() || get_post_type($post_id) != 'activity') {
+      return $post_id;
+    }
+
+    if ($_POST['post_type'] == 'draft') {
+        $post_status = 'draft';
+    } else {
+        $post_status = 'publish';
+    }
+    $args = array(
+        'ID' => $post_id,
+        'post_status' => $post_status,
+        'post_title' => $_POST['acf']['field_588f1624311a8']
+    );
+    wp_update_post($args);
+    return $post_id;
+}
+
+// Hide frontend activity title field
+add_filter('acf/prepare_field/key=field_588f1624311a8', 'hide_field_in_admin', 10, 2);
+function hide_field_in_admin($field) {
+    if(is_admin()) {
+        return false;
+    } else {
+        return $field;
+    }
+}
+
+add_filter('acf/load_value/key=field_588f1624311a8', 'load_activity_title_field_value', 10, 3);
+function load_activity_title_field_value($value, $post_id, $field) {
+    if($post_id) {
+        return get_the_title($post_id);
+    }
+}
+
+// Display activity image galleries as slideshows
+add_shortcode('gallery', 'activity_slideshow_gallery');
+function activity_slideshow_gallery($attr) {
+    if(is_singular('activity')) {
+        $attr['type']= 'slideshow';
+        $output = gallery_shortcode($attr);
+        return $output;
+    }
+}
+
 // --- BEGIN CUSTOM POST TYPES
 add_action( 'init', 'cptui_register_my_cpts' );
 function cptui_register_my_cpts() {
@@ -869,9 +920,28 @@ acf_add_local_field_group(array (
 				'id' => '',
 			),
 			'message' => '<p>This is the place to log your audience inclusive projects, actions, or interventions. An activity may be anything from a big project, to a limited event. The most important is that something has been learned.</p>
-<p>Only a few questions are mandatory, but the more you answer, the more you and others will learn from your efforts.</p>',
+<p>Only a few questions are mandatory (marked with <span class="acf-required">*</span>), but the more you answer, the more you and others will learn from your efforts.</p>',
 			'new_lines' => 'wpautop',
 			'esc_html' => 0,
+		),
+        array (
+            'key' => 'field_588f1624311a8',
+			'label' => 'Title',
+			'name' => 'title',
+			'type' => 'text',
+			'default_value' => '',
+			'maxlength' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'instructions' => '',
+			'required' => 1,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
 		),
 		array (
 			'key' => 'field_570c55618d71a',
@@ -898,49 +968,12 @@ acf_add_local_field_group(array (
 			'max_size' => 2,
 			'mime_types' => '',
 		),
-		array (
-			'key' => 'field_56fb0dcf64d76',
-			'label' => 'Where is your activity?',
-			'name' => 'departure_location',
-			'type' => 'google_map',
-			'instructions' => '9.8724052',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'center_lat' => '48.3995',
-			'center_lng' => '9.9832',
-			'zoom' => 3,
-			'height' => '',
-		),
-		array (
-			'key' => 'field_573b394e55be5',
-			'label' => 'Are you partnering with other hubs?',
-			'name' => 'partner',
-			'type' => 'user',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'role' => array (
-				0 => 'hub',
-			),
-			'allow_null' => 0,
-			'multiple' => 1,
-		),
-		array (
+        array (
 			'key' => 'field_56fb182433a5c',
-			'label' => 'What border are you exploring?',
+			'label' => '<h2>Explores the space between</h2>',
 			'name' => '',
 			'type' => 'message',
-			'instructions' => '',
+			'instructions' => 'What border are you exploring?',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -1057,6 +1090,25 @@ acf_add_local_field_group(array (
 				),
 			),
 		),
+        array (
+			'key' => 'field_573b394e55be5',
+			'label' => 'Are you partnering with other hubs?',
+			'name' => 'partner',
+			'type' => 'user',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'role' => array (
+				0 => 'hub',
+			),
+			'allow_null' => 0,
+			'multiple' => 1,
+		),
 		array (
 			'key' => 'field_570ce68c4fe89',
 			'label' => 'Brief Description',
@@ -1078,10 +1130,10 @@ acf_add_local_field_group(array (
 		),
 		array (
 			'key' => 'field_5702d2689ac47',
-			'label' => 'Why are you doing this?',
+			'label' => '<h2>Why</h2>',
 			'name' => 'why_description',
 			'type' => 'wysiwyg',
-			'instructions' => 'Explain using images, drawings, photographs, film, sound, or text.',
+			'instructions' => 'Why are you doing this? Explain using images, drawings, photographs, film, sound, or text.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -1094,12 +1146,30 @@ acf_add_local_field_group(array (
 			'toolbar' => 'basic',
 			'media_upload' => 1,
 		),
+        		array (
+			'key' => 'field_56fb0dcf64d76',
+			'label' => '<h2>Location</h2>',
+			'name' => 'departure_location',
+			'type' => 'google_map',
+			'instructions' => 'Where is your activity?',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'center_lat' => '48.3995',
+			'center_lng' => '9.9832',
+			'zoom' => 3,
+			'height' => '',
+		),
 		array (
 			'key' => 'field_56fb18a433a5e',
-			'label' => 'In what type of area was it held?',
+			'label' => '<h2>Characteristics</h2>',
 			'name' => '',
 			'type' => 'message',
-			'instructions' => '',
+			'instructions' => 'In what type of area was it held?',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -1113,7 +1183,7 @@ acf_add_local_field_group(array (
 		),
 		array (
 			'key' => 'field_570d2462d40fc',
-			'label' => 'It is held in an urban or rural area?',
+			'label' => '',
 			'name' => 'urban_rural_rel',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -1124,7 +1194,7 @@ acf_add_local_field_group(array (
 				'class' => '',
 				'id' => '',
 			),
-			'message' => 'check if relevant',
+			'message' => 'Is it held in an urban or rural area?',
 			'default_value' => 0,
 		),
 		array (
@@ -1157,7 +1227,7 @@ Rural area (100)',
 		),
 		array (
 			'key' => 'field_570d28163c50e',
-			'label' => 'It is held in a rich or poor area?',
+			'label' => '',
 			'name' => 'rich_poor_rel',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -1168,7 +1238,7 @@ Rural area (100)',
 				'class' => '',
 				'id' => '',
 			),
-			'message' => 'check if relevant',
+			'message' => 'It is held in a rich or poor area?',
 			'default_value' => 0,
 		),
 		array (
@@ -1201,7 +1271,7 @@ Poor area (100)',
 		),
 		array (
 			'key' => 'field_570d2a7d3c510',
-			'label' => 'It is held in a homogenous or pluralistic area?',
+			'label' => '',
 			'name' => 'homo_plural_rel',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -1212,7 +1282,7 @@ Poor area (100)',
 				'class' => '',
 				'id' => '',
 			),
-			'message' => 'check if relevant',
+			'message' => 'It is held in a homogenous or pluralistic area?',
 			'default_value' => 0,
 		),
 		array (
@@ -1264,7 +1334,7 @@ Pluralistic area (100)',
 		),
 		array (
 			'key' => 'field_570d2b113c512',
-			'label' => 'Does it affect a person or people?',
+			'label' => '',
 			'name' => 'one_many_rel',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -1275,7 +1345,7 @@ Pluralistic area (100)',
 				'class' => '',
 				'id' => '',
 			),
-			'message' => 'check if relevant',
+			'message' => 'Does it affect a person or people?',
 			'default_value' => 0,
 		),
 		array (
@@ -1308,7 +1378,7 @@ Many people (100)',
 		),
 		array (
 			'key' => 'field_570d2be23c514',
-			'label' => 'Does it affect the young or the old?',
+			'label' => '',
 			'name' => 'young_old_rel',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -1319,7 +1389,7 @@ Many people (100)',
 				'class' => '',
 				'id' => '',
 			),
-			'message' => 'check if relevant',
+			'message' => 'Does it affect the young or the old?',
 			'default_value' => 0,
 		),
 		array (
@@ -1352,7 +1422,7 @@ Old people (100)',
 		),
 		array (
 			'key' => 'field_570d2ca33c517',
-			'label' => 'Does it affect known or unknown people?',
+			'label' => '',
 			'name' => 'known_unknown_rel',
 			'type' => 'true_false',
 			'instructions' => '',
@@ -1363,7 +1433,7 @@ Old people (100)',
 				'class' => '',
 				'id' => '',
 			),
-			'message' => 'check if relevant',
+			'message' => 'Does it affect known or unknown people?',
 			'default_value' => 0,
 		),
 		array (
@@ -1415,10 +1485,10 @@ Unknown people (100)',
 		),
 		array (
 			'key' => 'field_57c08ba1444df',
-			'label' => 'How do/did you find, select, or reach out to your audience/participants (your target group)?',
+			'label' => '<h2>How the audience/participants were reached or discovered</h2>',
 			'name' => 'audience_discovery',
 			'type' => 'wysiwyg',
-			'instructions' => 'Explain using images, drawings, photographs, film, sound, or text.',
+			'instructions' => 'How do/did you find, select, or reach out to your audience/participants (your target group)? Explain using images, drawings, photographs, film, sound, or text.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -1433,10 +1503,10 @@ Unknown people (100)',
 		),
 		array (
 			'key' => 'field_570d4d3b389ea',
-			'label' => 'Select the methods you\'re using from the list of icons',
+			'label' => '<h2>How it was done</h2>',
 			'name' => 'method_icons',
 			'type' => 'checkbox',
-			'instructions' => '',
+			'instructions' => 'Select the methods you\'re using from the list of icons',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -1477,10 +1547,10 @@ Unknown people (100)',
 		),
 		array (
 			'key' => 'field_5702d2889ac48',
-			'label' => 'How are you using the above method(s)?',
+			'label' => '<h2>How</h2>',
 			'name' => 'how_description',
 			'type' => 'wysiwyg',
-			'instructions' => 'Explain using images, drawings, photographs, film, sound, or text.',
+			'instructions' => 'How are you using the above method(s)? Explain using images, drawings, photographs, film, sound, or text.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -1495,10 +1565,10 @@ Unknown people (100)',
 		),
 		array (
 			'key' => 'field_5702d2d19ac49',
-			'label' => 'What were the results?',
+			'label' => '<h2>Results</h2>',
 			'name' => 'results_description',
 			'type' => 'wysiwyg',
-			'instructions' => 'Explain using images, drawings, photographs, film, sound, or text.',
+			'instructions' => 'What were the results? Explain using images, drawings, photographs, film, sound, or text.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -1513,11 +1583,10 @@ Unknown people (100)',
 		),
 		array (
 			'key' => 'field_5702d38d9ac4b',
-			'label' => 'Was it a success or failure?',
+			'label' => '<h2>How it went</h2>',
 			'name' => 'success_rating',
 			'type' => 'number_slider',
-			'instructions' => 'Failure — 0
-Success — 10',
+			'instructions' => 'Was it a success or failure? Failure — 0 Success — 100',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -1536,10 +1605,10 @@ Success — 10',
 		),
 		array (
 			'key' => 'field_570d2d7a799fe',
-			'label' => 'In what way did it succeed/fail, and what were the main lessons?',
+			'label' => '<h2>Main lessons</h2>',
 			'name' => 'success_desc',
 			'type' => 'wysiwyg',
-			'instructions' => 'Explain using images, drawings, photographs, film, sound, or text.',
+			'instructions' => 'In what way did it succeed/fail, and what were the main lessons? Explain using images, drawings, photographs, film, sound, or text.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -1554,10 +1623,10 @@ Success — 10',
 		),
 		array (
 			'key' => 'field_5702d2f29ac4a',
-			'label' => 'What were your inspirations?',
+			'label' => '<h2>Inspiration</h2>',
 			'name' => 'inspiration_description',
 			'type' => 'wysiwyg',
-			'instructions' => 'Explain using images, drawings, photographs, film, sound, or text.',
+			'instructions' => 'What were your inspirations? Explain using images, drawings, photographs, film, sound, or text.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -1572,7 +1641,7 @@ Success — 10',
 		),
 		array (
 			'key' => 'field_575eeb8d38ab6',
-			'label' => 'Credits',
+			'label' => '<h2>Credits</h2>',
 			'name' => 'credits_description',
 			'type' => 'wysiwyg',
 			'instructions' => 'Who helped realize this activity and deserves mention?',
@@ -1590,7 +1659,7 @@ Success — 10',
 		),
 		array (
 			'key' => 'field_5703fc6d566ed',
-			'label' => 'Activity timeline and/or diary',
+			'label' => '<h2>Activity timeline</h2>',
 			'name' => 'timeline',
 			'type' => 'repeater',
 			'instructions' => '',
@@ -1685,7 +1754,7 @@ Success — 10',
 			'label' => 'Creative Commons License',
 			'name' => 'cc_license',
 			'type' => 'true_false',
-			'instructions' => 'By checking the box below, I accept that my story (including text, photo, drawing, location, and experience evaluations) will now become part of the public domain with rights and obligations for Bordr.org under a Creative Commons BY 4.0 license.',
+			'instructions' => 'By checking the box below, I accept that my story (including text, photo, drawing, location, and experience evaluations) will now become part of the public domain with rights and obligations for Global Grand Central under a Creative Commons BY 4.0 license, read more <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">here</a>.',
 			'required' => 1,
 			'conditional_logic' => 0,
 			'wrapper' => array (

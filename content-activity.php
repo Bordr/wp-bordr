@@ -9,6 +9,14 @@ $post_ID=$post->ID;
 
 ?>
 
+<?php if(current_user_can('edit_post')): ?>
+  <span class="edit-link">
+	<a href="/add-activity?post_id=<?php the_ID() ?>">
+	  <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?>
+	</a>
+  </span>
+<?php endif; ?>
+
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'box' ); ?>>
 	<header class="entry-header">
 
@@ -285,7 +293,7 @@ if( $gallery ): ?>
 							array(
 								'key' => 'related_activity',
 								'value' =>  $post_ID,
-								'compare' => 'LIKE'
+								'compare' => '='
 								)
 							)
 			));
@@ -303,10 +311,10 @@ if( $gallery ): ?>
 					</div>
 
 			<?php endforeach; ?>
-					<div class="col-xs-6 col-sm-4 col-lg-4 masonry-item">
-						<a href="/bordr/?relact=<?php echo $post_ID;?>">View more stories posted with this activity</a>
-					</div>
 				</div>
+				<p>
+					<a href="/bordr/?relact=<?php echo $post_ID;?>">View more stories posted with this activity</a>
+				</p>
 					
 			<?php wp_reset_postdata(); ?>
 
@@ -463,6 +471,12 @@ if( $gallery ): ?>
 				</div>
 		<?php endif; ?>
 
-		<?php edit_post_link( __( 'Edit', 'nuthemes' ), '<span class="edit-link">', '</span>' ); ?>
+        <?php if(current_user_can('edit_post')): ?>
+          <span class="edit-link">
+            <a href="/add-activity?post_id=<?php the_ID() ?>">
+              <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?>
+            </a>
+          </span>
+        <?php endif; ?>
 	<!-- .entry-footer --></footer>
 <!-- #post-<?php the_ID(); ?> --></article>

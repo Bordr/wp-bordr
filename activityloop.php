@@ -91,6 +91,8 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 		<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'nuthemes' ), __( '1 Comment', 'nuthemes' ), __( '% Comments', 'nuthemes' ) ); ?></span>
 		<?php endif; ?>
 
-		<?php edit_post_link( __( 'Edit', 'nuthemes' ), '<span class="edit-link">', '</span>' ); ?>
+        <?php if(current_user_can('edit_post')): ?>
+          <span class="edit-link"><a href="/add-activity?post_id=<?php the_ID(); ?>" class="button">Edit</a></span>
+        <?php endif; ?>
 	<!-- .entry-footer --></footer>
 <!-- #post-<?php the_ID(); ?> --></article>
