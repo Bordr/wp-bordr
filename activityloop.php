@@ -35,7 +35,7 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 						'making' => '<i class="fa fa-cogs" aria-hidden="true"></i> making');
 
 ?>
-<div class="col-xs-12 col-sm-6 col-lg-4 masonry-item">
+
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'box' ); ?>>
 	<header class="entry-header">
 		<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
@@ -96,4 +96,3 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
         <?php endif; ?>
 	<!-- .entry-footer --></footer>
 <!-- #post-<?php the_ID(); ?> --></article>
-</div>

@@ -477,22 +477,3 @@ function embedVids() {
 		});
 		}
 	});
-	
-	( function( $ ) {
-		$( document.body ).on( 'post-load', function () {
-			// set the container that Masonry will be inside of in a var
-			if (document.querySelector('#masonry')) {
-			var container = document.querySelector('#masonry');
-
-			// create empty var msnry
-			var msnry;
-
-			// initialize Masonry after all images have loaded
-			imagesLoaded( container, function() {
-				msnry = new Masonry( container, {
-					itemSelector: '.masonry-item'
-				});
-			});
-			}
-		} );
-	} )( jQuery );
