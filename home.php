@@ -229,9 +229,7 @@ get_header(); ?>
 				<div id="masonry" class="row">
 				<?php while ( have_posts() ) : the_post(); ?>
 
-					<div class="col-xs-12 col-sm-6 col-lg-4 masonry-item">
-						<?php get_template_part( 'activityloop', get_post_format() ); ?>
-					</div>
+					<?php get_template_part( 'activityloop', get_post_format() ); ?>
 
 				<?php endwhile; ?>
 

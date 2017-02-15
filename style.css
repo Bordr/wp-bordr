@@ -1250,6 +1250,24 @@ body.single .entry-content {
     	background-color: rgba(0, 0, 0, 0.40);
     
     }
+    
+	/* Hides navigation links and site footer when infinite scroll is active */
+	.infinite-scroll #navigation,
+	.infinite-scroll #nav-below,
+	.infinite-scroll.neverending #footer {
+		display: none;
+	}
+	/* Shows the footer again in case all posts have been loaded */
+	.infinity-end.neverending #footer {
+		display: block;
+	}
+	
+	/* Loader styling */
+	.infinite-loader {
+		bottom: 0px;
+		margin: -25px 45%;
+		position: absolute;
+	}
 
 /**
  * 9.0 Responsive Styling
