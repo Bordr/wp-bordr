@@ -257,7 +257,7 @@ $query->set('post_type', array( 'activity' ) );
     }
   }
 
-add_action('pre_get_posts','wpsites_home_page_cpt_filter');
+add_action('pre_get_posts','wpsites_home_page_cpt_filter',20);
 
 /**
  * Sort our repeater fields array by date subfield descending
@@ -445,7 +445,7 @@ $GLOBALS['my_meta_query_filters'] = array(
 );
 
 // action
-add_action('pre_get_posts', 'my_pre_get_posts');
+add_action('pre_get_posts', 'my_pre_get_posts', 20);
 
 function my_pre_get_posts( $query ) {
 	
@@ -2333,13 +2333,17 @@ endif;
 
 add_filter( 'jetpack_enable_opengraph', '__return_false', 99 );
 
-add_theme_support( 'infinite-scroll', array(
-	'type' => 'scroll',
-    'container' => 'masonry',
-    'wrapper' => false,
-    'footer' => false,
-    'render' => 'renderMasonry',
-) );
+function infinite_scroll_init() {
+	add_theme_support( 'infinite-scroll', array(
+		'type' => 'scroll',
+		'container' => 'masonry',
+		'wrapper' => false,
+		'footer' => false,
+		'render' => 'renderMasonry',
+	) );
+}
+add_action( 'after_setup_theme', 'infinite_scroll_init',10 );
+// add_filter( 'infinite_scroll_query_args', 'my_pre_get_posts' );
 
 function renderMasonry() {
 	while ( have_posts() ) : the_post(); 
