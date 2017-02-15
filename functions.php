@@ -2333,4 +2333,22 @@ endif;
 
 add_filter( 'jetpack_enable_opengraph', '__return_false', 99 );
 
+add_theme_support( 'infinite-scroll', array(
+	'type' => 'scroll',
+    'container' => 'masonry',
+    'wrapper' => false,
+    'footer' => false,
+    'render' => 'renderMasonry',
+) );
+
+function renderMasonry() {
+	while ( have_posts() ) : the_post(); 
+		if (get_post_type( get_the_ID() ) == 'activity') {
+		 get_template_part( 'activityloop', get_post_format() );
+		} else {
+		 get_template_part( 'bordrloop', get_post_format() ); 
+		}
+	endwhile;
+}
+
 ?>
