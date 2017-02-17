@@ -37,6 +37,9 @@
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/nv.d3.css">
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/bordr.css">
 
+		<head>
+		  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+		</head>
 
 <!-- END BORDR APP -->
 

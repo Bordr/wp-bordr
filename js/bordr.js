@@ -477,6 +477,24 @@ function embedVids() {
 		});
 		}
 	});
+
+	jQuery(document).ready(function($) {
+		// set the container that Masonry will be inside of in a var
+		if (document.querySelector('#masonry')) {
+		var container = document.querySelector('#masonry');
+
+		// create empty var msnry
+		var msnry;
+
+		// initialize Masonry after all images have loaded
+		imagesLoaded( container, function() {
+			msnry = new Masonry( container, {
+				itemSelector: '.masonry-item'
+			});
+			$('.masonry-item').addClass('animated fadeIn').fadeTo("fast",1);
+		});
+		}
+	});
 	
 	( function( $ ) {
 		$( document.body ).on( 'post-load', function () {
@@ -492,6 +510,7 @@ function embedVids() {
 				msnry = new Masonry( container, {
 					itemSelector: '.masonry-item'
 				});
+				$('.masonry-item').addClass('animated fadeIn').fadeTo("fast",1);
 			});
 			}
 		} );

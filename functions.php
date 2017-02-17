@@ -7,8 +7,12 @@ function register_my_session()
     session_start();
   }
 }
-
 add_action('init', 'register_my_session');
+
+function my_deregister_javascript() {
+	wp_deregister_script( 'nu-scripts' );
+}
+add_action( 'wp_print_scripts', 'my_deregister_javascript', 100 );
 
 // OPEN GRAPH
 
@@ -582,10 +586,12 @@ function my_pre_get_posts( $query ) {
 				$ckey = $_GET[ 'char' ];
 				$cvalue = $_GET[ 'charval' ];
 				$addQ = 1;
+				$addFQ = 1;
 			} else if (!empty($_SESSION[ 'char' ]) && ($_GET['infinity'] == 'scrolling')) {
 				$ckey = $_SESSION[ 'char' ];
 				$cvalue = $_SESSION[ 'charval' ];
 				$addQ = 1;
+				$addFQ = 1;
 			} else {
 				unset($_SESSION[ 'char' ]);
 				unset($_SESSION[ 'charval' ]);
@@ -619,10 +625,12 @@ function my_pre_get_posts( $query ) {
 				$ckey = $_GET[ 'perception' ];
 				$cvalue = $_GET[ 'perceptionval' ];
 				$addQ = 1;
+				$addFQ = 1;
 			} else if (!empty($_SESSION[ 'perception' ]) && ($_GET['infinity'] == 'scrolling')) {
 				$ckey = $_SESSION[ 'perception' ];
 				$cvalue = $_SESSION[ 'perceptionval' ];
 				$addQ = 1;
+				$addFQ = 1;
 			} else {
 				unset($_SESSION[ 'perception' ]);
 				unset($_SESSION[ 'perceptionval' ]);
@@ -653,9 +661,11 @@ function my_pre_get_posts( $query ) {
 				$_SESSION['method'] = $_GET[ 'method' ];
 				$ckey = $_GET[ 'method' ];
 				$addQ = 1;
+				$addFQ = 1;
 			} else if (!empty($_SESSION[ 'method' ]) && ($_GET['infinity'] == 'scrolling')) {
 				$ckey = $_SESSION[ 'method' ];
 				$addQ = 1;
+				$addFQ = 1;
 			} else {
 				unset($_SESSION[ 'method' ]);
 				$addQ = 0;
@@ -678,9 +688,11 @@ function my_pre_get_posts( $query ) {
 				$_SESSION[$name] = $_GET[ $name ];
 				$value = explode(',', $_GET[ $name ]);
 				$addQ = 1;
+				$addFQ = 1;
 			} else if (!empty($_SESSION[ $name ]) && ($_GET['infinity'] == 'scrolling')) {
 				$value = explode(',', $_SESSION[ $name ]);
 				$addQ = 1;
+				$addFQ = 1;
 			} else {
 				unset($_SESSION[ $name ]);
 				$addQ = 0;
@@ -699,9 +711,10 @@ function my_pre_get_posts( $query ) {
         
 	} 
 	
-	
-	// update meta query
-	$query->set('meta_query', $meta_query);
+		if ($addFQ > 0) {
+			// update meta query
+			$query->set('meta_query', $meta_query);
+		}
 
 	}
 
@@ -1633,7 +1646,7 @@ Unknown people (100)',
 				'drawing' => '<i class="fa fa-pencil" aria-hidden="true"></i> drawing',
 				'exhibitions' => '<i class="fa fa-picture-o" aria-hidden="true"></i> exhibitions',
 				'film' => '<i class="fa fa-video-camera" aria-hidden="true"></i> film',
-				'food' => '<i class="fa fa-cutlery" aria-hidden="true"></i> cooking',
+				'food' => '<i class="fa fa-cutlery" aria-hidden="true"></i> food',
 				'graffiti' => '<i class="fa fa-paint-brush" aria-hidden="true"></i> graffiti',
 				'interviews' => '<i class="fa fa-comment" aria-hidden="true"></i> interviews',
 				'lectures' => '<i class="fa fa-university" aria-hidden="true"></i> lecture',
