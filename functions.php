@@ -255,6 +255,13 @@ function hidden_type_title() {
     <?php
 }
 
+function remove_quick_edit($actions, $post) {
+    if(get_post_type() == 'activity' || get_post_type() == 'bordr') {
+        unset($actions['inline hide-if-no-js']);
+    }
+    return $actions;
+}
+add_filter('post_row_actions','remove_quick_edit', 10, 2);
 
 // END ADMIN FUNCTIONS
 
