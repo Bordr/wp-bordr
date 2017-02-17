@@ -1,5 +1,15 @@
 <?php
 
+function register_my_session()
+{
+  if( !session_id() )
+  {
+    session_start();
+  }
+}
+
+add_action('init', 'register_my_session');
+
 // OPEN GRAPH
 
 function doctype_opengraph($output) {
@@ -462,50 +472,89 @@ function my_pre_get_posts( $query ) {
 	foreach( $GLOBALS['my_query_filters'] as $key => $name ) {
 		
 		// continue if not found in url
-		if( empty($_GET[ $name ]) ) {
+		if( empty($_GET[ $name ]) && empty($_SESSION[ $name ])) {
 			
 			continue;
 			
 		}
 		
 		if ($key == "author") {
-			// get the value for this filter
-			// eg: http://www.website.com/events?city=melbourne,sydney
-			$value = explode(',', $_GET[ $name ]);
-		
-		
-			// append to query
-			$query->set( 'author__in' , $value ); 
-		}
+			if (!empty($_GET[ $name ])) {
+				// set session 
+				$_SESSION[$name] = $_GET[ $name ];
+				$value = explode(',', $_GET[ $name ]);
+				$addQ = 1;
+			} else if (!empty($_SESSION[ $name ]) && ($_GET['infinity'] == 'scrolling')) {
+				$value = explode(',', $_SESSION[ $name ]);
+				$addQ = 1;
+			} else {
+				unset($_SESSION[ $name ]);
+				$addQ = 0;
+			}
+
+			if ($addQ > 0) {		
+				// append to query
+				$query->set( 'author__in' , $value ); 
+			}
+		} 
 		
 		if ($key == "location") {
-			$value = $_GET[ $name ];
+
+			if (!empty($_GET[ $name ])) {
+				// set session 
+				$_SESSION[$name] = $_GET[ $name ];
+				$value = $_GET[ $name ];
+				$addQ = 1;
+			} else if (!empty($_SESSION[ $name ]) && ($_GET['infinity'] == 'scrolling')) {
+				$value = $_SESSION[ $name ];
+				$addQ = 1;
+			} else {
+				unset($_SESSION[ $name ]);
+				$addQ = 0;
+			}
 			
-			$arg = array(
-					'meta_key'		=> 'organization_location',
-					'meta_value'	=> sprintf('%s";', $value),
-					'meta_compare'	=>'LIKE',
-					'fields'	=> 'ID'
-			);
+			if ($addQ > 0) {
+				$arg = array(
+						'meta_key'		=> 'organization_location',
+						'meta_value'	=> sprintf('%s";', $value),
+						'meta_compare'	=>'LIKE',
+						'fields'	=> 'ID'
+				);
 			
-			$ctryusers = get_users($arg);
-			$query->set( 'author__in' , $ctryusers ); 
-		}
+				$ctryusers = get_users($arg);
+				$query->set( 'author__in' , $ctryusers ); 
+			}
+		} 
 
 		if ($key == "relact") {
-			$value = $_GET[ $name ];
-			
-			$arg = array(
-					'post_type'         => 'bordr',
-					'meta_query'        => array(
-						array(
-							'key'   => 'related_activity',
-							'value' => $value
-						)
-					)
-			);
+			if (!empty($_GET[ $name ])) {
+				// set session 
+				$_SESSION[$name] = $_GET[ $name ];
+				$value = $_GET[ $name ];
+				$addQ = 1;
+			} else if (!empty($_SESSION[ $name ]) && ($_GET['infinity'] == 'scrolling')) {
+				$value = $_SESSION[ $name ];
+				$addQ = 1;
+			} else {
+				unset($_SESSION[ $name ]);
+				$addQ = 0;
+			}
 
-			$query->set('meta_query', $arg);
+			if ($addQ > 0) {			
+				$arg = array(
+						'post_type'         => 'bordr',
+						'meta_query'        => array(
+							array(
+								'key'   => 'related_activity',
+								'value' => $value
+							)
+						)
+				);
+
+				$query->set('meta_query', $arg);
+
+			}
+
 		}
         
 	} 
@@ -518,71 +567,134 @@ function my_pre_get_posts( $query ) {
 	foreach( $GLOBALS['my_meta_query_filters'] as $key => $name ) {
 		
 		// continue if not found in url
-		if( empty($_GET[ $name ]) ) {
+		if( empty($_GET[ $name ]) && empty($_SESSION[ $name ])) {
 			
 			continue;
 			
 		}
 		
 		if (isset($_GET[ $name ]) && $name == 'char') {
+
+			if (!empty($_GET[ 'char' ])) {
+				// set session 
+				$_SESSION['char'] = $_GET[ 'char' ];
+				$_SESSION['charval'] = $_GET[ 'charval' ];
+				$ckey = $_GET[ 'char' ];
+				$cvalue = $_GET[ 'charval' ];
+				$addQ = 1;
+			} else if (!empty($_SESSION[ 'char' ]) && ($_GET['infinity'] == 'scrolling')) {
+				$ckey = $_SESSION[ 'char' ];
+				$cvalue = $_SESSION[ 'charval' ];
+				$addQ = 1;
+			} else {
+				unset($_SESSION[ 'char' ]);
+				unset($_SESSION[ 'charval' ]);
+				$addQ = 0;
+			}
 		
-			$ckey = $_GET[ 'char' ];
-			$cvalue = $_GET[ 'charval' ];
+			if ($addQ > 0) {
+				if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
+				else { $cvalue = 40; $compare = "<"; }
 
-			if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
-			else { $cvalue = 40; $compare = "<"; }
-
-			// append meta query
-			$meta_query[] = array(
-				'key'		=> $ckey,
-				'value'		=> $cvalue,
-				'compare'	=> $compare,
-				'type' => 'numeric'
-			);
-			$meta_query[] = array(
-				'key'		=> $ckey."_rel",
-				'value'		=> 1,
-				'compare'	=> '='
-			);			
+				// append meta query
+				$meta_query[] = array(
+					'key'		=> $ckey,
+					'value'		=> $cvalue,
+					'compare'	=> $compare,
+					'type' => 'numeric'
+				);
+				$meta_query[] = array(
+					'key'		=> $ckey."_rel",
+					'value'		=> 1,
+					'compare'	=> '='
+				);		
+			}	
+			
 		} else if (isset($_GET[ $name ]) && $name == 'perception') {
+
+			if (!empty($_GET[ 'perception' ])) {
+				// set session 
+				$_SESSION['perception'] = $_GET[ 'perception' ];
+				$_SESSION['perceptionval'] = $_GET[ 'perceptionval' ];
+				$ckey = $_GET[ 'perception' ];
+				$cvalue = $_GET[ 'perceptionval' ];
+				$addQ = 1;
+			} else if (!empty($_SESSION[ 'perception' ]) && ($_GET['infinity'] == 'scrolling')) {
+				$ckey = $_SESSION[ 'perception' ];
+				$cvalue = $_SESSION[ 'perceptionval' ];
+				$addQ = 1;
+			} else {
+				unset($_SESSION[ 'perception' ]);
+				unset($_SESSION[ 'perceptionval' ]);
+				$addQ = 0;
+			}
 		
-			$ckey = $_GET[ 'perception' ];
-			$cvalue = $_GET[ 'perceptionval' ];
+			if ($addQ > 0) {
+		
+				$ckey = $_GET[ 'perception' ];
+				$cvalue = $_GET[ 'perceptionval' ];
 
-			if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
-			else { $cvalue = 40; $compare = "<"; }
+				if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
+				else { $cvalue = 40; $compare = "<"; }
 
-			// append meta query
-			$meta_query[] = array(
-				'key'		=> $ckey,
-				'value'		=> $cvalue,
-				'compare'	=> $compare,
-				'type' => 'numeric'
-			);
+				// append meta query
+				$meta_query[] = array(
+					'key'		=> $ckey,
+					'value'		=> $cvalue,
+					'compare'	=> $compare,
+					'type' => 'numeric'
+				);
+			}
 		
 		} else if (isset($_GET[ $name ]) && $name == 'method') {
-		
-			$ckey = $_GET[ 'method' ];
 
-			// append meta query
-			$meta_query[] = array(
-				'key'		=> 'method_icons',
-				'value'		=> '"'.$ckey.'"',
-				'compare'	=> 'LIKE'
-			);
+			if (!empty($_GET[ 'method' ])) {
+				// set session 
+				$_SESSION['method'] = $_GET[ 'method' ];
+				$ckey = $_GET[ 'method' ];
+				$addQ = 1;
+			} else if (!empty($_SESSION[ 'method' ]) && ($_GET['infinity'] == 'scrolling')) {
+				$ckey = $_SESSION[ 'method' ];
+				$addQ = 1;
+			} else {
+				unset($_SESSION[ 'method' ]);
+				$addQ = 0;
+			}
+		
+			if ($addQ > 0) {
+		
+				// append meta query
+				$meta_query[] = array(
+					'key'		=> 'method_icons',
+					'value'		=> '"'.$ckey.'"',
+					'compare'	=> 'LIKE'
+				);
+
+			}
 			
 		} else {
+			if (!empty($_GET[ $name ])) {
+				// set session 
+				$_SESSION[$name] = $_GET[ $name ];
+				$value = explode(',', $_GET[ $name ]);
+				$addQ = 1;
+			} else if (!empty($_SESSION[ $name ]) && ($_GET['infinity'] == 'scrolling')) {
+				$value = explode(',', $_SESSION[ $name ]);
+				$addQ = 1;
+			} else {
+				unset($_SESSION[ $name ]);
+				$addQ = 0;
+			}
 
-			// get the value for this filter
-			// eg: http://www.website.com/events?city=melbourne,sydney
-			$value = explode(',', $_GET[ $name ]);
+			if ($addQ > 0) {		
+				// append meta query
+				$meta_query[] = array(
+					'key'		=> $key,
+					'value'		=> $value,
+					'compare'	=> 'IN'
+				);
+			}
 
-			// append meta query
-			$meta_query[] = array(
-				'key'		=> $key,
-				'value'		=> $value,
-				'compare'	=> 'IN'
-			);
 		}
         
 	} 
@@ -2342,8 +2454,8 @@ function infinite_scroll_init() {
 		'render' => 'renderMasonry',
 	) );
 }
-add_action( 'after_setup_theme', 'infinite_scroll_init',10 );
-// add_filter( 'infinite_scroll_query_args', 'my_pre_get_posts' );
+add_action( 'after_setup_theme', 'infinite_scroll_init' );
+// add_filter( 'infinite_scroll_query_args', 'my_auto_args' );
 
 function renderMasonry() {
 	while ( have_posts() ) : the_post(); 
@@ -2353,6 +2465,62 @@ function renderMasonry() {
 		 get_template_part( 'bordrloop', get_post_format() ); 
 		}
 	endwhile;
+}
+
+function my_auto_args($args) {
+		
+	// loop over filters
+	foreach( $GLOBALS['my_query_filters'] as $key => $name ) {
+	
+		// continue if not found in url
+		if( empty($_SESSION[ $name ]) ) {
+			
+			continue;
+			
+		}
+			
+		if ($key == "author") {
+			// get the value for this filter
+			$value = explode(',', $_SESSION[ $name ]);
+		
+			// append to query
+			$args['author__in'] = $value;
+		}
+		
+		if ($key == "location") {
+			$value = $_SESSION[ $name ];
+			
+			$arg = array(
+					'meta_key'		=> 'organization_location',
+					'meta_value'	=> sprintf('%s";', $value),
+					'meta_compare'	=>'LIKE',
+					'fields'	=> 'ID'
+			);
+			
+			$ctryusers = get_users($arg);
+			$args['author__in'] = $ctryusers;
+		}
+
+		if ($key == "relact") {
+			$value = $_SESSION[ $name ];
+			
+			$arg = array(
+					'post_type'         => 'bordr',
+					'meta_query'        => array(
+						array(
+							'key'   => 'related_activity',
+							'value' => $value
+						)
+					)
+			);
+
+			$args['meta_query'] = $arg;
+		}
+        
+	} 
+		
+	return $args;
+
 }
 
 ?>
