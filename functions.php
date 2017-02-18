@@ -253,7 +253,7 @@ add_action('acf/init', 'my_acf_init');
 
 function wpsites_home_page_cpt_filter($query) {
 if ( !is_admin() && $query->is_main_query() && is_home() ) {
-$query->set('post_type', array( 'activity' ) );
+$query->set('post_type', array( 'activity', 'bordr' ) );
     }
   }
 
