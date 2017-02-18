@@ -88,7 +88,7 @@ get_header(); ?>
 						$activity_name = get_post($activity)->post_name;
 						$activity_ID = get_post($activity)->ID;
 					
-						?><li><a href="#relact" data-relact="<?php echo $activity_ID; ?>" class="filter" data-filter="relact" style="font-weight:bold;"><?php echo $activity_title; ?></a></li><?php 
+						?><li><a href="#relact" data-relact="<?php echo $activity_ID; ?>" class="filter" data-filter="relact"><?php echo $activity_title; ?></a></li><?php 
 						$last_activity = get_post($activity)->ID;
 					}
 				}
@@ -127,10 +127,8 @@ get_header(); ?>
 
 				<div id="masonry" class="row">
 				<?php while ( have_posts() ) : the_post(); ?>
-
-					<div class="col-xs-12 col-sm-6 col-lg-4 masonry-item">
+					
 						<?php get_template_part( 'bordrloop', get_post_format() ); ?>
-					</div>
 
 				<?php endwhile; ?>
 

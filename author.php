@@ -70,9 +70,7 @@
 		
 		?>
 
-					<div class="col-xs-12 col-sm-6 col-lg-4 masonry-item">
-						<?php get_template_part( 'activityloop', get_post_format() ); ?>
-					</div>
+		<?php get_template_part( 'activityloop', get_post_format() ); ?>
 
 	<?php endforeach; ?>
 			</div>
@@ -118,9 +116,7 @@
 		
 		?>
 
-					<div class="col-xs-12 col-sm-6 col-lg-4 masonry-item">
-						<?php get_template_part( 'activityloop', get_post_format() ); ?>
-					</div>
+		<?php get_template_part( 'activityloop', get_post_format() ); ?>
 
 	<?php endforeach; ?>
 			</div>

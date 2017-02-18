@@ -31,7 +31,7 @@ get_header(); ?>
 			<h1 class="entry-title" style="font-size:24px;">Activities</h1>
 			<p>Activities are projects, actions, or interventions that explore borders and enable people to meet others.</p>
 		</div>
-		<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
+		<div class="col-xs-12 col-sm-12 col-lg-12" style="text-align:right;" >
 			<?php if (is_user_logged_in()) : ?>
 				<a href="/add-activity" class="btn btn-primary start">Add Activity</a>
 			<?php else : ?>
@@ -51,9 +51,7 @@ get_header(); ?>
 				<div id="masonry" class="row">
 				<?php while ( $activities_query->have_posts() ) : $activities_query->the_post(); ?>
 
-					<div class="col-xs-12 col-sm-6 col-lg-4 masonry-item">
 						<?php get_template_part( 'activityloop', get_post_format() ); ?>
-					</div>
 
 				<?php endwhile; ?>
 
@@ -73,7 +71,7 @@ get_header(); ?>
 	</div><!-- .row -->
 </div><!-- end actitivies teaser -->
 <div class="see-all text-center">
-	<a href="/activity">See all of the Activities...</a>
+	<a href="/activity">See more Activities...</a>
 </div>
 
 <div class="page-teaser"><!-- begin stories teaser -->
@@ -94,9 +92,7 @@ get_header(); ?>
 				<div id="masonry" class="row">
 				<?php while ( $stories_query->have_posts() ) : $stories_query->the_post(); ?>
 
-					<div class="col-xs-12 col-sm-6 col-lg-4 masonry-item">
 						<?php get_template_part( 'bordrloop', get_post_format() ); ?>
-					</div>
 
 				<?php endwhile; ?>
 
@@ -115,7 +111,7 @@ get_header(); ?>
 	</div><!-- .row -->
 </div><!-- end stories teaser -->
 <div class="see-all text-center">
-	<a href="/bordr">See all of the Bordr Stories...</a>
+	<a href="/bordr">See more Bordr Stories...</a>
 </div>
 </main><!-- #content -->
 

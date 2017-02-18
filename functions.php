@@ -1,14 +1,23 @@
 <?php
-
+function register_my_session()
+{
+  if( !session_id() )
+  {
+    session_start();
+  }
+}
+add_action('init', 'register_my_session');
+function my_deregister_javascript() {
+	wp_deregister_script( 'nu-scripts' );
+}
+add_action( 'wp_print_scripts', 'my_deregister_javascript', 100 );
 // OPEN GRAPH
-
 function doctype_opengraph($output) {
     return $output . '
     xmlns:og="http://opengraphprotocol.org/schema/"
     xmlns:fb="http://www.facebook.com/2008/fbml"';
 }
 add_filter('language_attributes', 'doctype_opengraph');
-
 function fb_opengraph() {
     global $post;
     
@@ -183,40 +192,31 @@ function fb_opengraph() {
     }
 }
 add_action('wp_head', 'fb_opengraph', 5);
-
-
-
 // ADMIN FUNCTIONS
-
 add_filter('manage_bordr_posts_columns', 'bordr_table_head');
 function bordr_table_head( $defaults ) {
     $defaults['related_activity'] = 'Related Activity';
     return $defaults;
 }
-
 /**
  * Fill custom field value
  */
 add_action('manage_bordr_posts_custom_column', 'bordr_table_content', 10, 2);
 function bordr_table_content( $column_name, $post_id ) {
-
   switch ($column_name) {
     case 'title':
       $brdr_from = get_post_meta( $post_id, 'brdr_from', true );
       $brdr_to = get_post_meta( $post_id, 'brdr_to', true );
       echo $first_name . ' > ' . $last_name;
       break;
-
     case 'related_activity':
       $activity = get_post_meta( $post_id, 'related_activity', true );
 //       $activity = get_post_meta( $activity, 'related_activity', true );
 	  $activity = get_post($activity);
       echo $activity->post_title;
       break;
-
   }
 }
-
 add_filter('the_title', 'bordr_meta_on_title',10, 2);
 function bordr_meta_on_title($title, $id) {
   if('bordr' == get_post_type($id)) {
@@ -226,39 +226,34 @@ function bordr_meta_on_title($title, $id) {
       return $title;
   }
 }
-
 add_action( 'submitpost_box', 'hidden_type_title' );
-
 function hidden_type_title() {
     global $current_user, $post, $post_type;
-
     // If the current type supports the title, nothing to done, return
     if( post_type_supports( $post_type, 'title' ) )
         return;
-
     ?>
     <input type="hidden" name="post_title" value="" id="title" />
     <?php
 }
-
-
+function remove_quick_edit($actions, $post) {
+    if(get_post_type() == 'activity' || get_post_type() == 'bordr') {
+        unset($actions['inline hide-if-no-js']);
+    }
+    return $actions;
+}
+add_filter('post_row_actions','remove_quick_edit', 10, 2);
 // END ADMIN FUNCTIONS
-
 function my_acf_init() {
-
 	acf_update_setting('google_api_key', 'AIzaSyD46ZIXV0LS1gBcNiXMkV-Td66f0HpgNUY');
 }
-
 add_action('acf/init', 'my_acf_init');
-
 function wpsites_home_page_cpt_filter($query) {
 if ( !is_admin() && $query->is_main_query() && is_home() ) {
 $query->set('post_type', array( 'activity', 'bordr' ) );
     }
   }
-
-add_action('pre_get_posts','wpsites_home_page_cpt_filter');
-
+add_action('pre_get_posts','wpsites_home_page_cpt_filter',20);
 /**
  * Sort our repeater fields array by date subfield descending
  * @param  mixed $a first
@@ -271,7 +266,6 @@ function sort_by_date_descending($a, $b) {
     }
     return (strtotime($a['event_date']) > strtotime($b['event_date'])) ? -1 : 1;
 }
-
 /**
  * Sort our repeater fields array by date subfield ascending
  * @param  mixed $a first
@@ -284,27 +278,20 @@ function sort_by_date_ascending($a, $b) {
     }
     return (strtotime($a['event_date']) < strtotime($b['event_date'])) ? -1 : 1;
 }
-
 add_action( 'admin_enqueue_scripts', function() {
     wp_enqueue_style('fontawesome', '//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
 });
-
 function custom_rewrite_tag() {
   add_rewrite_tag('%travdept%', '([^&]+)');
   add_rewrite_tag('%story%', '([^&]+)');
 }
 add_action('init', 'custom_rewrite_tag', 10, 0);
-
 function custom_rewrite_rule() {
   add_rewrite_rule('^crossing/([^/]*)/?','index.php?page_id=219&travdept=$matches[1]','top');
 }
 add_action('init', 'custom_rewrite_rule', 10, 0);
-
-
 add_filter( 'wp_nav_menu_items', 'my_custom_menu_item', 10, 2 );
-
 function my_custom_menu_item( $items, $args ) {
-
 	if ( isset( $args ) && $args->theme_location === 'primary' ) {
         $user=wp_get_current_user();
         $name=$user->display_name; // or user_login , user_firstname, user_lastname
@@ -313,9 +300,7 @@ function my_custom_menu_item( $items, $args ) {
 	}
 	return $items;
 }
-
 // Remove Bio box
-
 add_action( 'personal_options', array ( 'T5_Hide_Profile_Bio_Box', 'start' ) );
 /**
  * Captures the part with the biobox in an output buffer and removes it.
@@ -336,7 +321,6 @@ class T5_Hide_Profile_Bio_Box
         add_action( $action, array ( __CLASS__, 'stop' ) );
         ob_start();
     }
-
     /**
      * Strips the bio box from the buffered content.
      *
@@ -346,7 +330,6 @@ class T5_Hide_Profile_Bio_Box
     {
         $html = ob_get_contents();
         ob_end_clean();
-
         // remove the headline
         $html = str_replace( '<h2>Name</h2>', '<h2>Name of you or your hub</h2>', $html );
         $headline = __( IS_PROFILE_PAGE ? 'About Yourself' : 'About the user' );
@@ -359,10 +342,7 @@ class T5_Hide_Profile_Bio_Box
         print $html;
     }
 }
-
-
 // Image upload function
-
 function sanitize_filename_on_upload($filename) {
 	$ext = end(explode('.',$filename));
 	// Replace all weird characters
@@ -372,7 +352,6 @@ function sanitize_filename_on_upload($filename) {
 	return strtolower($sanitized.'.'.$ext);
 }
 add_filter('sanitize_file_name', 'sanitize_filename_on_upload', 10);
-
 // ONLY SHOW TO HUBS CONTENT THAT IS RELEVANT TO THEM
 add_filter( 'ajax_query_attachments_args', 'show_current_user_attachments' );
 function show_current_user_attachments( $query ) {
@@ -384,10 +363,8 @@ function show_current_user_attachments( $query ) {
 }
 function posts_for_current_author($query) {
 	global $pagenow;
-
 	if( 'edit.php' != $pagenow || !$query->is_admin )
 	    return $query;
-
 	if( !current_user_can( 'edit_others_posts' ) ) {
 		global $user_ID;
 		$query->set('author', $user_ID );
@@ -397,10 +374,8 @@ function posts_for_current_author($query) {
 add_filter('pre_get_posts', 'posts_for_current_author');
 function comments_for_current_author($query) {
 	global $pagenow;
-
 	if( 'edit-comments.php' != $pagenow )
 	    return $query;
-
 	if( !current_user_can( 'edit_others_posts' ) ) {
 		global $user_ID, $wpdb;
 		$clauses['join'] = ", ".$wpdb->base_prefix."posts";
@@ -411,9 +386,7 @@ function comments_for_current_author($query) {
 }
 add_filter('comments_clauses', 'comments_for_current_author');
 // END FILTER
-
 // HIDE SOME PROFILE ELEMENTS FOR HUBS
-
 // remove personal options block
 if(is_admin()){
   add_action( 'personal_options', 'prefix_hide_personal_options' );
@@ -427,30 +400,23 @@ function prefix_hide_personal_options() {
 </script>
 <?php
 }
-
-
 // ACTIVITY FILTER FUNCTIONS
-
 $GLOBALS['my_query_filters'] = array( 
 	'author'	=> 'hub',
 	'location'	=> 'ctry',
 	'relact'	=> 'relact'
 );
-
 // array of filters (field key => field name)
 $GLOBALS['my_meta_query_filters'] = array( 
 	'field_1'	=> 'method', 
 	'field_2'	=> 'char', 
 	'field_3'	=> 'perception'
 );
-
 // action
-add_action('pre_get_posts', 'my_pre_get_posts');
-
+add_action('pre_get_posts', 'my_pre_get_posts', 20);
 function my_pre_get_posts( $query ) {
 	
   if( $query->is_main_query() ){
-
 	// bail early if is in admin
 	if( is_admin() ) {
 		
@@ -462,149 +428,238 @@ function my_pre_get_posts( $query ) {
 	foreach( $GLOBALS['my_query_filters'] as $key => $name ) {
 		
 		// continue if not found in url
-		if( empty($_GET[ $name ]) ) {
+		if( empty($_GET[ $name ]) && empty($_SESSION[ $name ])) {
 			
 			continue;
 			
 		}
 		
 		if ($key == "author") {
-			// get the value for this filter
-			// eg: http://www.website.com/events?city=melbourne,sydney
-			$value = explode(',', $_GET[ $name ]);
-		
-		
-			// append to query
-			$query->set( 'author__in' , $value ); 
-		}
+			if (!empty($_GET[ $name ])) {
+				// set session 
+				$_SESSION[$name] = $_GET[ $name ];
+				$value = explode(',', $_GET[ $name ]);
+				$addQ = 1;
+			} else if (!empty($_SESSION[ $name ]) && ($_GET['infinity'] == 'scrolling')) {
+				$value = explode(',', $_SESSION[ $name ]);
+				$addQ = 1;
+			} else {
+				unset($_SESSION[ $name ]);
+				$addQ = 0;
+			}
+			if ($addQ > 0) {		
+				// append to query
+				$query->set( 'author__in' , $value ); 
+			}
+		} 
 		
 		if ($key == "location") {
-			$value = $_GET[ $name ];
+			if (!empty($_GET[ $name ])) {
+				// set session 
+				$_SESSION[$name] = $_GET[ $name ];
+				$value = $_GET[ $name ];
+				$addQ = 1;
+			} else if (!empty($_SESSION[ $name ]) && ($_GET['infinity'] == 'scrolling')) {
+				$value = $_SESSION[ $name ];
+				$addQ = 1;
+			} else {
+				unset($_SESSION[ $name ]);
+				$addQ = 0;
+			}
 			
-			$arg = array(
-					'meta_key'		=> 'organization_location',
-					'meta_value'	=> sprintf('%s";', $value),
-					'meta_compare'	=>'LIKE',
-					'fields'	=> 'ID'
-			);
+			if ($addQ > 0) {
+				$arg = array(
+						'meta_key'		=> 'organization_location',
+						'meta_value'	=> sprintf('%s";', $value),
+						'meta_compare'	=>'LIKE',
+						'fields'	=> 'ID'
+				);
 			
-			$ctryusers = get_users($arg);
-			$query->set( 'author__in' , $ctryusers ); 
-		}
-
+				$ctryusers = get_users($arg);
+				$query->set( 'author__in' , $ctryusers ); 
+			}
+		} 
 		if ($key == "relact") {
-			$value = $_GET[ $name ];
-			
-			$arg = array(
-					'post_type'         => 'bordr',
-					'meta_query'        => array(
-						array(
-							'key'   => 'related_activity',
-							'value' => $value
+			if (!empty($_GET[ $name ])) {
+				// set session 
+				$_SESSION[$name] = $_GET[ $name ];
+				$value = $_GET[ $name ];
+				$addQ = 1;
+			} else if (!empty($_SESSION[ $name ]) && ($_GET['infinity'] == 'scrolling')) {
+				$value = $_SESSION[ $name ];
+				$addQ = 1;
+			} else {
+				unset($_SESSION[ $name ]);
+				$addQ = 0;
+			}
+			if ($addQ > 0) {			
+				$arg = array(
+						'post_type'         => 'bordr',
+						'meta_query'        => array(
+							array(
+								'key'   => 'related_activity',
+								'value' => $value
+							)
 						)
-					)
-			);
-
-			$query->set('meta_query', $arg);
+				);
+				$query->set('meta_query', $arg);
+			}
 		}
         
 	} 
 	
 	// get meta query
 	$meta_query = $query->get('meta_query');
-
 	
 	// loop over filters
 	foreach( $GLOBALS['my_meta_query_filters'] as $key => $name ) {
 		
 		// continue if not found in url
-		if( empty($_GET[ $name ]) ) {
+		if( empty($_GET[ $name ]) && empty($_SESSION[ $name ])) {
 			
 			continue;
 			
 		}
 		
 		if (isset($_GET[ $name ]) && $name == 'char') {
+			if (!empty($_GET[ 'char' ])) {
+				// set session 
+				$_SESSION['char'] = $_GET[ 'char' ];
+				$_SESSION['charval'] = $_GET[ 'charval' ];
+				$ckey = $_GET[ 'char' ];
+				$cvalue = $_GET[ 'charval' ];
+				$addQ = 1;
+				$addFQ = 1;
+			} else if (!empty($_SESSION[ 'char' ]) && ($_GET['infinity'] == 'scrolling')) {
+				$ckey = $_SESSION[ 'char' ];
+				$cvalue = $_SESSION[ 'charval' ];
+				$addQ = 1;
+				$addFQ = 1;
+			} else {
+				unset($_SESSION[ 'char' ]);
+				unset($_SESSION[ 'charval' ]);
+				$addQ = 0;
+			}
 		
-			$ckey = $_GET[ 'char' ];
-			$cvalue = $_GET[ 'charval' ];
-
-			if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
-			else { $cvalue = 40; $compare = "<"; }
-
-			// append meta query
-			$meta_query[] = array(
-				'key'		=> $ckey,
-				'value'		=> $cvalue,
-				'compare'	=> $compare,
-				'type' => 'numeric'
-			);
-			$meta_query[] = array(
-				'key'		=> $ckey."_rel",
-				'value'		=> 1,
-				'compare'	=> '='
-			);			
+			if ($addQ > 0) {
+				if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
+				else { $cvalue = 40; $compare = "<"; }
+				// append meta query
+				$meta_query[] = array(
+					'key'		=> $ckey,
+					'value'		=> $cvalue,
+					'compare'	=> $compare,
+					'type' => 'numeric'
+				);
+				$meta_query[] = array(
+					'key'		=> $ckey."_rel",
+					'value'		=> 1,
+					'compare'	=> '='
+				);		
+			}	
+			
 		} else if (isset($_GET[ $name ]) && $name == 'perception') {
+			if (!empty($_GET[ 'perception' ])) {
+				// set session 
+				$_SESSION['perception'] = $_GET[ 'perception' ];
+				$_SESSION['perceptionval'] = $_GET[ 'perceptionval' ];
+				$ckey = $_GET[ 'perception' ];
+				$cvalue = $_GET[ 'perceptionval' ];
+				$addQ = 1;
+				$addFQ = 1;
+			} else if (!empty($_SESSION[ 'perception' ]) && ($_GET['infinity'] == 'scrolling')) {
+				$ckey = $_SESSION[ 'perception' ];
+				$cvalue = $_SESSION[ 'perceptionval' ];
+				$addQ = 1;
+				$addFQ = 1;
+			} else {
+				unset($_SESSION[ 'perception' ]);
+				unset($_SESSION[ 'perceptionval' ]);
+				$addQ = 0;
+			}
 		
-			$ckey = $_GET[ 'perception' ];
-			$cvalue = $_GET[ 'perceptionval' ];
-
-			if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
-			else { $cvalue = 40; $compare = "<"; }
-
-			// append meta query
-			$meta_query[] = array(
-				'key'		=> $ckey,
-				'value'		=> $cvalue,
-				'compare'	=> $compare,
-				'type' => 'numeric'
-			);
+			if ($addQ > 0) {
+		
+				$ckey = $_GET[ 'perception' ];
+				$cvalue = $_GET[ 'perceptionval' ];
+				if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
+				else { $cvalue = 40; $compare = "<"; }
+				// append meta query
+				$meta_query[] = array(
+					'key'		=> $ckey,
+					'value'		=> $cvalue,
+					'compare'	=> $compare,
+					'type' => 'numeric'
+				);
+			}
 		
 		} else if (isset($_GET[ $name ]) && $name == 'method') {
+			if (!empty($_GET[ 'method' ])) {
+				// set session 
+				$_SESSION['method'] = $_GET[ 'method' ];
+				$ckey = $_GET[ 'method' ];
+				$addQ = 1;
+				$addFQ = 1;
+			} else if (!empty($_SESSION[ 'method' ]) && ($_GET['infinity'] == 'scrolling')) {
+				$ckey = $_SESSION[ 'method' ];
+				$addQ = 1;
+				$addFQ = 1;
+			} else {
+				unset($_SESSION[ 'method' ]);
+				$addQ = 0;
+			}
 		
-			$ckey = $_GET[ 'method' ];
-
-			// append meta query
-			$meta_query[] = array(
-				'key'		=> 'method_icons',
-				'value'		=> '"'.$ckey.'"',
-				'compare'	=> 'LIKE'
-			);
+			if ($addQ > 0) {
+		
+				// append meta query
+				$meta_query[] = array(
+					'key'		=> 'method_icons',
+					'value'		=> '"'.$ckey.'"',
+					'compare'	=> 'LIKE'
+				);
+			}
 			
 		} else {
-
-			// get the value for this filter
-			// eg: http://www.website.com/events?city=melbourne,sydney
-			$value = explode(',', $_GET[ $name ]);
-
-			// append meta query
-			$meta_query[] = array(
-				'key'		=> $key,
-				'value'		=> $value,
-				'compare'	=> 'IN'
-			);
+			if (!empty($_GET[ $name ])) {
+				// set session 
+				$_SESSION[$name] = $_GET[ $name ];
+				$value = explode(',', $_GET[ $name ]);
+				$addQ = 1;
+				$addFQ = 1;
+			} else if (!empty($_SESSION[ $name ]) && ($_GET['infinity'] == 'scrolling')) {
+				$value = explode(',', $_SESSION[ $name ]);
+				$addQ = 1;
+				$addFQ = 1;
+			} else {
+				unset($_SESSION[ $name ]);
+				$addQ = 0;
+			}
+			if ($addQ > 0) {		
+				// append meta query
+				$meta_query[] = array(
+					'key'		=> $key,
+					'value'		=> $value,
+					'compare'	=> 'IN'
+				);
+			}
 		}
         
 	} 
 	
-	
-	// update meta query
-	$query->set('meta_query', $meta_query);
-
+		if ($addFQ > 0) {
+			// update meta query
+			$query->set('meta_query', $meta_query);
+		}
 	}
-
 }
-
 // --- BEGIN CUSTOM POST TYPE FILTERS
 add_action('acf/save_post', 'pre_save_activity', 10, 1);
 function pre_save_activity($post_id) {
     // Handle custom frontend fields: title and draft
-
     // Bail-out if we are in admin or we are not creating an activity
     if (is_admin() || get_post_type($post_id) != 'activity') {
       return $post_id;
     }
-
     if ($_POST['post_type'] == 'draft') {
         $post_status = 'draft';
     } else {
@@ -618,7 +673,6 @@ function pre_save_activity($post_id) {
     wp_update_post($args);
     return $post_id;
 }
-
 // Hide frontend activity title field
 add_filter('acf/prepare_field/key=field_588f1624311a8', 'hide_field_in_admin', 10, 2);
 function hide_field_in_admin($field) {
@@ -628,14 +682,12 @@ function hide_field_in_admin($field) {
         return $field;
     }
 }
-
 add_filter('acf/load_value/key=field_588f1624311a8', 'load_activity_title_field_value', 10, 3);
 function load_activity_title_field_value($value, $post_id, $field) {
     if($post_id) {
         return get_the_title($post_id);
     }
 }
-
 // Display activity image galleries as slideshows
 add_shortcode('gallery', 'activity_slideshow_gallery');
 function activity_slideshow_gallery($attr) {
@@ -645,7 +697,6 @@ function activity_slideshow_gallery($attr) {
         return $output;
     }
 }
-
 // --- BEGIN CUSTOM POST TYPES
 add_action( 'init', 'cptui_register_my_cpts' );
 function cptui_register_my_cpts() {
@@ -666,7 +717,6 @@ function cptui_register_my_cpts() {
 		"insert_into_item" => __( 'Insert into bordr', 'bordr' ),
 		"uploaded_to_this_item" => __( 'Upload to this bordr', 'bordr' ),
 		);
-
 	$args = array(
 		"label" => __( 'Bordrs', 'bordr' ),
 		"labels" => $labels,
@@ -687,7 +737,6 @@ function cptui_register_my_cpts() {
 		"menu_icon" => "dashicons-leftright",
 		"supports" => false,					);
 	register_post_type( "bordr", $args );
-
 	$labels = array(
 		"name" => __( 'Activities', 'bordr' ),
 		"singular_name" => __( 'Activity', 'bordr' ),
@@ -706,7 +755,6 @@ function cptui_register_my_cpts() {
 		"uploaded_to_this_item" => __( 'Uploaded to this activity', 'bordr' ),
 		"filter_items_list" => __( 'Filter Activity List', 'bordr' ),
 		);
-
 	$args = array(
 		"label" => __( 'Activities', 'bordr' ),
 		"labels" => $labels,
@@ -727,16 +775,10 @@ function cptui_register_my_cpts() {
 		"menu_icon" => "dashicons-universal-access",
 		"supports" => array( "title", "editor", "thumbnail", "comments", "revisions", "author" ),					);
 	register_post_type( "activity", $args );
-
 // End of cptui_register_my_cpts()
 }
-
-
-
-
 // --- BEGIN CUSTOM FIELD GROUPS
 if( function_exists('acf_add_local_field_group') ):
-
 acf_add_local_field_group(array (
 	'key' => 'group_5762ca8985b91',
 	'title' => 'About',
@@ -901,7 +943,6 @@ acf_add_local_field_group(array (
 	'active' => 1,
 	'description' => '',
 ));
-
 acf_add_local_field_group(array (
 	'key' => 'group_5703f201f38b0',
 	'title' => 'Activity',
@@ -1521,7 +1562,7 @@ Unknown people (100)',
 				'drawing' => '<i class="fa fa-pencil" aria-hidden="true"></i> drawing',
 				'exhibitions' => '<i class="fa fa-picture-o" aria-hidden="true"></i> exhibitions',
 				'film' => '<i class="fa fa-video-camera" aria-hidden="true"></i> film',
-				'food' => '<i class="fa fa-cutlery" aria-hidden="true"></i> cooking',
+				'food' => '<i class="fa fa-cutlery" aria-hidden="true"></i> food',
 				'graffiti' => '<i class="fa fa-paint-brush" aria-hidden="true"></i> graffiti',
 				'interviews' => '<i class="fa fa-comment" aria-hidden="true"></i> interviews',
 				'lectures' => '<i class="fa fa-university" aria-hidden="true"></i> lecture',
@@ -1796,7 +1837,6 @@ Unknown people (100)',
 	'active' => 1,
 	'description' => '',
 ));
-
 acf_add_local_field_group(array (
 	'key' => 'group_57d8203caf147',
 	'title' => 'Bordr',
@@ -2071,7 +2111,6 @@ acf_add_local_field_group(array (
 	'active' => 1,
 	'description' => '',
 ));
-
 acf_add_local_field_group(array (
 	'key' => 'group_5783ddc72821a',
 	'title' => 'Home Page',
@@ -2134,7 +2173,6 @@ acf_add_local_field_group(array (
 	'active' => 1,
 	'description' => '',
 ));
-
 acf_add_local_field_group(array (
 	'key' => 'group_57042512f1df9',
 	'title' => 'Hub Profile',
@@ -2153,7 +2191,6 @@ acf_add_local_field_group(array (
 				'id' => '',
 			),
 			'message' => 'On Global Grand Central, you are registered as a Hub, and your projects, actions, and interventions are called Activities.
-
 Please take a moment and describe your hub.',
 			'new_lines' => 'wpautop',
 			'esc_html' => 0,
@@ -2326,11 +2363,79 @@ Please take a moment and describe your hub.',
 	'active' => 1,
 	'description' => '',
 ));
-
 endif;
-
 // !--- END CUSTOM FIELD GROUPS
-
 add_filter( 'jetpack_enable_opengraph', '__return_false', 99 );
-
+function infinite_scroll_init() {
+	add_theme_support( 'infinite-scroll', array(
+		'type' => 'scroll',
+		'container' => 'masonry',
+		'wrapper' => false,
+		'footer' => false,
+		'render' => 'renderMasonry',
+	) );
+}
+add_action( 'after_setup_theme', 'infinite_scroll_init' );
+// add_filter( 'infinite_scroll_query_args', 'my_auto_args' );
+function renderMasonry() {
+	while ( have_posts() ) : the_post(); 
+		if (get_post_type( get_the_ID() ) == 'activity') {
+		 get_template_part( 'activityloop', get_post_format() );
+		} else {
+		 get_template_part( 'bordrloop', get_post_format() ); 
+		}
+	endwhile;
+}
+function my_auto_args($args) {
+		
+	// loop over filters
+	foreach( $GLOBALS['my_query_filters'] as $key => $name ) {
+	
+		// continue if not found in url
+		if( empty($_SESSION[ $name ]) ) {
+			
+			continue;
+			
+		}
+			
+		if ($key == "author") {
+			// get the value for this filter
+			$value = explode(',', $_SESSION[ $name ]);
+		
+			// append to query
+			$args['author__in'] = $value;
+		}
+		
+		if ($key == "location") {
+			$value = $_SESSION[ $name ];
+			
+			$arg = array(
+					'meta_key'		=> 'organization_location',
+					'meta_value'	=> sprintf('%s";', $value),
+					'meta_compare'	=>'LIKE',
+					'fields'	=> 'ID'
+			);
+			
+			$ctryusers = get_users($arg);
+			$args['author__in'] = $ctryusers;
+		}
+		if ($key == "relact") {
+			$value = $_SESSION[ $name ];
+			
+			$arg = array(
+					'post_type'         => 'bordr',
+					'meta_query'        => array(
+						array(
+							'key'   => 'related_activity',
+							'value' => $value
+						)
+					)
+			);
+			$args['meta_query'] = $arg;
+		}
+        
+	} 
+		
+	return $args;
+}
 ?>
