@@ -21,7 +21,7 @@ $related_activity = get_field('related_activity');
 			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark" class="story-title"><?php the_field('brdr_from'); ?></a>
 		<!-- .entry-header --></header>
 		<div class="down-arrow">
-			<img class="arrow-img" src="../wp-content/themes/bordr/img/down-arrow.png" />
+			<img class="arrow-img" src="/wp-content/themes/bordr/img/down-arrow.png" />
 		</div>
 
 		<div class="clearfix entry-summary">
@@ -32,7 +32,7 @@ $related_activity = get_field('related_activity');
 						 ?><img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" class="img-responsive story-img"/><?php 
 					  }
 					  else {
-						?><img src="../wp-content/themes/bordr/img/ggc-default-img.png" class="img-responsive story-img"/><?php
+						?><img src="/wp-content/themes/bordr/img/ggc-default-img.png" class="img-responsive story-img"/><?php
 					  }
 					?>
 					<div class="expand-story">Learn more...</div>
@@ -40,7 +40,7 @@ $related_activity = get_field('related_activity');
 			</div>
 		</div>
 		<div class="up-arrow">
-			<img class="arrow-img" src="../wp-content/themes/bordr/img/up-arrow.png" />
+			<img class="arrow-img" src="/wp-content/themes/bordr/img/up-arrow.png" />
 		</div>
 		<header class="entry-header story-to">
 			<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark" class="story-title"><?php the_field('brdr_to'); ?></a>
