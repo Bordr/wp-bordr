@@ -7,6 +7,17 @@ global $post;
 $post_slug=$post->post_name;
 $post_ID=$post->ID;
 
+$posts = get_posts(array(
+  'post_type'		=> 'bordr',
+  'numberposts'	=> 8,
+  'meta_query'		=> array(
+	array(
+	  'key' => 'related_activity',
+	  'value' =>  $post_ID,
+	  'compare' => '='
+	)
+  )
+));
 ?>
 
 <?php if(current_user_can('edit_post')): ?>
@@ -116,6 +127,9 @@ if( $gallery ): ?>
           <?php endif; ?>
 		  <li><a href="#how">How it was done</a></li>
 		  <li><a href="#results">Results and Lessons</a></li>
+          <?php if( $posts ): ?>
+            <li><a href="bordrs">Bordr Stories</a></li>
+          <?php endif; ?>
 		  <?php if ( get_field('timeline')[0]['event_title'] ) : ?>
 		    <li><a href="#timeline">Timeline</a></li>
           <?php endif; ?>
@@ -361,20 +375,8 @@ if( $gallery ): ?>
 
 			<?php
 			
-			$posts = get_posts(array(
-						'post_type'		=> 'bordr',
-						'numberposts'	=> 8,
-						'meta_query'		=> array(
-							array(
-								'key' => 'related_activity',
-								'value' =>  $post_ID,
-								'compare' => '='
-								)
-							)
-			));
-			
 			if( $posts ): ?>
-			<h3>Bordr Stories</h3>	
+			<h3 id="bordrs">Bordr Stories</h3>	
 			<p>As part of this activity, border-stories were booked.</p>	
 				<div id="masonry" class="row">
 		
