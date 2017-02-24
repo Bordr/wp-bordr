@@ -2,11 +2,22 @@
 /**
  * @package Nu Themes
  */
- 
+
 global $post;
 $post_slug=$post->post_name;
 $post_ID=$post->ID;
 
+$posts = get_posts(array(
+  'post_type'		=> 'bordr',
+  'numberposts'	=> 6,
+  'meta_query'		=> array(
+	array(
+	  'key' => 'related_activity',
+	  'value' =>  $post_ID,
+	  'compare' => '='
+	)
+  )
+));
 ?>
 
 <?php if(current_user_can('edit_post')): ?>
@@ -24,7 +35,7 @@ $post_ID=$post->ID;
 
 <!-- Begin Gallery -->
 
-<?php 
+<?php
 
 $gallery = get_field('departure_images');
 $methods = get_field('method_icons');
@@ -36,10 +47,10 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 						'film' => '<i class="fa fa-video-camera" aria-hidden="true"></i> film',
 						'lectures' => '<i class="fa fa-university" aria-hidden="true"></i> lectures',
 						'theatre' => '<i class="fa fa-users" aria-hidden="true"></i> theatre',
-						'coding' => '<i class="fa fa-code" aria-hidden="true"></i> coding', 
-						'bordr' => '<i class="fa fa-map-signs" aria-hidden="true"></i> Bordr', 
-						'public art' => '<i class="fa fa-street-view" aria-hidden="true"></i> public art', 
-						'travel' => '<i class="fa fa-globe" aria-hidden="true"></i> travel', 
+						'coding' => '<i class="fa fa-code" aria-hidden="true"></i> coding',
+						'bordr' => '<i class="fa fa-map-signs" aria-hidden="true"></i> Bordr',
+						'public art' => '<i class="fa fa-street-view" aria-hidden="true"></i> public art',
+						'travel' => '<i class="fa fa-globe" aria-hidden="true"></i> travel',
 						'workshops' => '<i class="fa fa-bolt" aria-hidden="true"></i> workshops',
 						'archiving' => '<i class="fa fa-archive" aria-hidden="true"></i> archiving',
 						'drawing' => '<i class="fa fa-pencil" aria-hidden="true"></i> drawing',
@@ -49,8 +60,8 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 						'performance' => '<i class="fa fa-users" aria-hidden="true"></i> performance',
 						'sound' => '<i class="fa fa-volume-up" aria-hidden="true"></i> sound',
 						'exhibitions' => '<i class="fa fa-picture-o" aria-hidden="true"></i> exhibitions',
-						'textile' => '<i class="fa fa-scissors" aria-hidden="true"></i> textile', 
-						'other' => '<i class="fa fa-ellipsis-h" aria-hidden="true"></i> other',  
+						'textile' => '<i class="fa fa-scissors" aria-hidden="true"></i> textile',
+						'other' => '<i class="fa fa-ellipsis-h" aria-hidden="true"></i> other',
 						'making' => '<i class="fa fa-cogs" aria-hidden="true"></i> making');
 
 if( $gallery ): ?>
@@ -63,7 +74,7 @@ if( $gallery ): ?>
                 </li>
             <?php endforeach; ?>
         </ul>
-    </div>   
+    </div>
 <?php endif; ?>
 
 <!-- End Gallery -->
@@ -76,10 +87,10 @@ if( $gallery ): ?>
 	    el.removeClass('hidden');
 	  } else {
 	    el.addClass('hidden');
-	  } 
+	  }
     }
   }
-  
+
   function initContentNavigation() {
 	var fixedMenu = $('.header-menu.fixed');
 	var menu = $('.header-menu:not(.fixed)');
@@ -116,6 +127,9 @@ if( $gallery ): ?>
           <?php endif; ?>
 		  <li><a href="#how">How it was done</a></li>
 		  <li><a href="#results">Results and Lessons</a></li>
+          <?php if( $posts ): ?>
+            <li><a href="bordrs">Bordr Stories</a></li>
+          <?php endif; ?>
 		  <?php if ( get_field('timeline')[0]['event_title'] ) : ?>
 		    <li><a href="#timeline">Timeline</a></li>
           <?php endif; ?>
@@ -124,7 +138,7 @@ if( $gallery ): ?>
 		<?php endfor; ?>
 
 		<p class="before-header"><a href="/activity">Activity</a></p>
-        
+
 		<h1><?php the_title(); ?></h1>
 
 		<div class="lead">
@@ -139,7 +153,7 @@ if( $gallery ): ?>
 		?><br>partnering with <?php
 				             $partners = get_field('partner');
 				             $resultstr = array();
-				             foreach( $partners as $partner ): 
+				             foreach( $partners as $partner ):
 						                  $resultstr[] = "<a href=\"/author/".$partner['user_nicename']."/\">".$partner['display_name']."</a>";
 				             endforeach;
 				             $result = implode(", ",$resultstr);
@@ -147,7 +161,7 @@ if( $gallery ): ?>
 		                     endif;
 		                     ?>
 		</p>
-        
+
 		<h3>Explores the bordrs</h3>
         <table class="bordr">
           <tr>
@@ -163,7 +177,7 @@ if( $gallery ): ?>
           </tr>
 		  <?php if ( $oborders = get_field( 'other_borders' ) ) : ?>
             <tr>
-		      <?php 
+		      <?php
 			  $resultstr = array();
 			  foreach ( $oborders as $idx => $border ) : ?>
 				<td>
@@ -181,7 +195,7 @@ if( $gallery ): ?>
         </table>
 
 			<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
-<!-- 
+<!--
 			<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'nuthemes' ), __( '1 Comment', 'nuthemes' ), __( '% Comments', 'nuthemes' ) ); ?></span>
  -->
 			<?php endif; ?>
@@ -196,11 +210,11 @@ if( $gallery ): ?>
 			endif;
 			?>
 
-			<h2 id="location">Location</h2><?php		
+			<h2 id="location">Location</h2><?php
 			$location = get_field('departure_location');
-			
+
 			echo $location['address'];
-			
+
 			?><img src="https://api.tiles.mapbox.com/v3/deklerk.map-57h1d46y/url-bit.ly%2F18KNEkg(<?php echo $location['lng'];?>,<?php echo $location['lat'];?>)/<?php echo $location['lng'];?>,<?php echo $location['lat'];?>,4/1000x300.png" class="img-rounded img-responsive">
 
 		<h2>Characteristics</h2>
@@ -221,14 +235,14 @@ if( $gallery ): ?>
 					  'rightField': 'Rural'
 					}
 					var chart = ".chart_rural";
-					drawdotchart(data, chart);	
+					drawdotchart(data, chart);
 				});
 				</script>
 				<?php endif; ?>
-			
+
 				<?php if (get_field('rich_poor_rel') == TRUE) : ?>
 				<div class="chart_rich barchart"></div>
-				<?php // the_field('rich_poor_desc'); ?>	
+				<?php // the_field('rich_poor_desc'); ?>
 				<script>
 				$(function() {
 					var data = {
@@ -240,7 +254,7 @@ if( $gallery ): ?>
 					  'rightField': 'Poor'
 					}
 					var chart = ".chart_rich";
-					drawdotchart(data, chart);	
+					drawdotchart(data, chart);
 				});
 				</script>
 				<?php endif; ?>
@@ -259,7 +273,7 @@ if( $gallery ): ?>
 					  'rightField': 'Pluralistic area'
 					}
 					var chart = ".chart_homo";
-					drawdotchart(data, chart);		
+					drawdotchart(data, chart);
 				});
 				</script>
 				<?php endif; ?>
@@ -281,11 +295,11 @@ if( $gallery ): ?>
 					  'rightField': 'Affects many people'
 					}
 					var chart = ".chart_one";
-					drawdotchart(data, chart);		
+					drawdotchart(data, chart);
 				});
 				</script>
 				<?php endif; ?>
-			
+
 				<?php if (get_field('young_old_rel') == TRUE) : ?>
 				<div class="chart_young barchart"></div>
 				<?php // the_field('young_old_desc'); ?>
@@ -300,10 +314,10 @@ if( $gallery ): ?>
 					  'rightField': 'Affects the eldery'
 					}
 					var chart = ".chart_one";
-					drawdotchart(data, chart);		
+					drawdotchart(data, chart);
 				});
 				</script>
-				<?php endif; ?>			
+				<?php endif; ?>
 
 				<?php if (get_field('known_unknown_rel') == TRUE) : ?>
 				<div class="chart_known barchart"></div>
@@ -319,10 +333,10 @@ if( $gallery ): ?>
 					  'rightField': 'Affects unknown people'
 					}
 					var chart = ".chart_known";
-					drawdotchart(data, chart);		
+					drawdotchart(data, chart);
 				});
 				</script>
-				<?php endif; ?>		
+				<?php endif; ?>
 				<?php the_field('audience_desc'); ?>
 			</div>
 		</div>
@@ -336,8 +350,8 @@ if( $gallery ): ?>
 
 		<h2 id="how">How it was done</h2>
 		<div class="row">
-		<?php 
-		if( $methods ): ?> 
+		<?php
+		if( $methods ): ?>
 			<?php foreach( $methods as $method ): ?>
 				<div class="col-xs-4 col-sm-2">
 					<?php echo $method_options[$method]; ?>
@@ -360,33 +374,20 @@ if( $gallery ): ?>
 		<!-- The Loop -->
 
 			<?php
-			
-			$posts = get_posts(array(
-						'post_type'		=> 'bordr',
-						'numberposts'	=> 6,
-						'meta_query'		=> array(
-							array(
-								'key' => 'related_activity',
-								'value' =>  $post_ID,
-								'compare' => '='
-								)
-							)
-			));
-			
 			if( $posts ): ?>
-			<h3>Bordr Stories</h3>	
-			<p>As part of this activity, border-stories were booked.</p>	
+			<h3 id="bordrs">Bordr Stories</h3>
+			<p>As part of this activity, border-stories were booked.</p>
 				<div id="masonry" class="row">
-		
-			<?php foreach( $posts as $post ): 
+
+			<?php foreach( $posts as $post ):
 					setup_postdata( $post );
-					get_template_part( 'bordrloop', get_post_format() ); 
+					get_template_part( 'bordrloop', get_post_format() );
 				endforeach; ?>
 				</div>
 				<p>
 					<a href="/bordr/?relact=<?php echo $post_ID;?>">View more stories posted with this activity</a>
 				</p>
-					
+
 			<?php wp_reset_postdata(); ?>
 
 			<?php endif; ?>
@@ -413,10 +414,10 @@ if( $gallery ): ?>
 			  'rightField': 'Success'
 			}
 			var chart = ".chart_success";
-			drawdotchart(data, chart);		
+			drawdotchart(data, chart);
 		});
 		</script>
-		<?php endif; ?>		
+		<?php endif; ?>
 		<h3>Main lessons learned</h3>
 		<?php the_field('success_desc'); ?>
 
@@ -425,7 +426,7 @@ if( $gallery ): ?>
 			?><h2>Inspiration</h2><?php
 			the_field('inspiration_description');
 			endif;
-		
+
 		?>
 
 
@@ -433,7 +434,7 @@ if( $gallery ): ?>
 		?><h2>Partners</h2><?php
 				$partners = get_field('partner');
 				foreach( $partners as $partner ): ?>
-						
+
 						<a href="/author/<?php echo($partner['user_nicename']); ?>/"><?php echo($partner['display_name']); ?></a><br/>
 				<?php endforeach;
 		endif;
@@ -457,7 +458,7 @@ if( $gallery ): ?>
 			$is_new_year = false;
 		?>
 		<div class="timeline">
-	
+
 
 		<?php foreach ( $events as $idx => $event ) :
 
@@ -475,7 +476,7 @@ if( $gallery ): ?>
 
 		<?php if ( $idx > 0 ) { // If it's not the first event, we need to end the current list ?>
 					</ul>
-		
+
 
 		<?php } ?>
 
