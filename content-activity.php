@@ -63,8 +63,11 @@ if( $gallery ): ?>
                 </li>
             <?php endforeach; ?>
         </ul>
-    </div>
-    
+    </div>   
+<?php endif; ?>
+
+<!-- End Gallery -->
+
 <script type="text/javascript" charset="utf-8">
   function toggleDisplay(el, offset) {
     var $window = $(window);
@@ -91,13 +94,15 @@ if( $gallery ): ?>
   };
 
   $(window).load(function() {
-    $('.flexslider').flexslider({ start: initContentNavigation });
+    var $flexslider = $('.flexslider');
+    if($flexslider.exists()) {
+      $flexslider.flexslider({ start: initContentNavigation });
+    } else {
+      // If activitiy image gallery is empty
+      initContentNavigation();
+    }
   });
 </script>
-    
-<?php endif; ?>
-
-<!-- End Gallery -->
 
 		<?php for ($i = 0; $i < 2; $i++): ?>
 		<div class="header-menu <?php if ($i == 1) : echo "fixed hidden"; endif; ?>">
