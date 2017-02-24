@@ -732,8 +732,12 @@ body.single .entry-title {
 	text-align: center;
 }
 
-.entry-header + .share-daddy {
-  z-index: 10; /* Place above gallery */
+.entry-header .sharedaddy {
+  z-index: 10; /* Place above gallery */ 
+}
+
+.entry-header .sharedaddy .sd-title {
+  display: none;
 }
 
 .before-header {
@@ -769,6 +773,10 @@ body.single .entry-title {
 	background-color: white;
 	box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
 	margin: 0;
+}
+
+.header-menu.fixed.with-wpadminbar {
+  top: 32px;
 }
 
 .header-menu ol {
