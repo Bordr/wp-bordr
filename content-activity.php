@@ -67,21 +67,27 @@ if( $gallery ): ?>
     
 <script type="text/javascript" charset="utf-8">
   function toggleDisplay(el, offset) {
-	if(window.scrollY > offset) {
-	  el.removeClass('hidden');
-	} else {
-	  el.addClass('hidden');
-	}
+    var $window = $(window);
+    return function() {
+      if($window.scrollTop() > offset) {
+	    el.removeClass('hidden');
+	  } else {
+	    el.addClass('hidden');
+	  } 
+    }
   }
   
   function initContentNavigation() {
 	var fixedMenu = $('.header-menu.fixed');
 	var menu = $('.header-menu:not(.fixed)');
 	var offset = menu.offset().top + menu.height();
-	$(window).on('scroll', function() {
-	  toggleDisplay(fixedMenu, offset);
-	});
-	toggleDisplay(fixedMenu, offset);
+    var toggleMenu = toggleDisplay(fixedMenu, offset);
+    window.tm = toggleMenu;
+	$(window).on('scroll', toggleMenu);
+	toggleMenu();
+    if($('#wpadminbar').exists()) {
+      fixedMenu.addClass('with-wpadminbar');
+    }
   };
 
   $(window).load(function() {
