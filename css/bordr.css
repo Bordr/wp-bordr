@@ -11,22 +11,26 @@ a:active,a:hover {
 	-webkit-box-shadow: 0px 5px 5px 0px rgba(119,119,119,0.36);
 	-moz-box-shadow: 0px 5px 5px 0px rgba(119,119,119,0.36);
 	box-shadow: 0px 5px 5px 0px rgba(119,119,119,0.36);
+	padding: 1.5em;
 }
 .intro-text {
 	max-width: 600px; /* slighly narrower than video */
 }
-
 .intro-text p {
 	font-size: 1.2em;
 }
-
 .page-teaser {
 	height: 700px;
 	overflow:hidden;
 	margin-top: 60px;
 	padding: 0 1em;
 }
-
+.section-head {
+	margin-bottom:1.5em;
+}
+.carousel-item {
+	height: 700px;
+}
 .see-all {
 	position: relative;
 	z-index: 100;
@@ -704,6 +708,9 @@ label {
 		margin: 0 auto;
 		max-width: 400px;
 	}
+	#activities-carousel, #stories-carousel {
+		display: none;
+	}
 	#stats svg text {
 		font-size: 1em;
 	}
@@ -860,5 +867,7 @@ label {
 	  background-color: white;
   
 	}
-
+	#activities-masonry, #stories-masonry {
+		display: none;
+	}
 }

@@ -26,7 +26,7 @@ get_header(); ?>
 </div>
 
 <div class="page-teaser">
-	<div class="row">
+	<div class="row section-head">
 		<div class="col-xs-12 col-sm-9 col-lg-9">
 			<h1 class="entry-title" style="font-size:24px;">Activities</h1>
 			<p>Activities are projects, actions, or interventions that explore borders and enable people to meet others.</p>
@@ -42,22 +42,35 @@ get_header(); ?>
 
 
 	<div class="row">	
-		<?php $activities_query = new WP_Query( array( 'post_type' => 'activity' )); ?>
- 
 
+		<!-- carousel for small screens -->
+		<?php $activities_query = new WP_Query( array( 'post_type' => 'activity', 'posts_per_page' => '6' )); ?>
 		
 		<?php if ( $activities_query->have_posts() ) : ?>
 
-				<div id="masonry" class="row">
-				<?php while ( $activities_query->have_posts() ) : $activities_query->the_post(); ?>
+			<div id="activities-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
+				<ol class="carousel-indicators">
+					<li data-target="#activities-carousel" data-slide-to="0" class="active"></li>
+					<li data-target="#activities-carousel" data-slide-to="1"></li>
+					<li data-target="#activities-carousel" data-slide-to="2"></li>
+				</ol>
 
-						<?php get_template_part( 'activityloop', get_post_format() ); ?>
-
-				<?php endwhile; ?>
-
-			<!-- #masonry --></div>
-
-			<?php nuthemes_content_nav( 'nav-below' ); ?>
+				<div class="carousel-inner" role="listbox">
+					<?php $i=0; ?>
+					<?php while ( $activities_query->have_posts() ) : $activities_query->the_post(); ?>
+						<?php
+							if ( $i == 0 )
+								$itemClass = "item active";
+							else
+								$itemClass = "item";
+						?>
+						<div id="activity-<?php echo $i; ?>" class="<?php echo $itemClass ?>" >
+							<?php get_template_part( 'activityteaser', get_post_format() ); ?>
+						</div>
+						<?php $i++; ?>
+					<?php endwhile; ?>
+				</div>
+			</div>
 
 		<?php else : ?>
 
@@ -68,32 +81,18 @@ get_header(); ?>
 			wp_reset_postdata();
 		?>
 
-	</div><!-- .row -->
-</div><!-- end actitivies teaser -->
-<div class="see-all text-center">
-	<a href="/activity">See more Activities...</a>
-</div>
-
-<div class="page-teaser"><!-- begin stories teaser -->
-	<div class="row">
-		<div class="col-xs-12 col-sm-9 col-lg-9">
-			<h1 class="entry-title" style="font-size:24px;">Bordr stories</h1>
-			<p>Bordrs stories are impressions and experiences of a border.</p>
-		</div>
-		<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
-			<a href="/add-bordr-story/" class="btn btn-primary start">Add Bordr Story</a>
-		</div>
-	</div>
-	<div class="row">	
-		<?php $stories_query = new WP_Query( array( 'post_type' => 'bordr' )); ?>
+		<!-- more at once for bigger screens -->
+		<?php $activities_query = new WP_Query( array( 'post_type' => 'activity', 'posts_per_page' => '6' )); ?>
 		
-		<?php if ( $stories_query->have_posts() ) : ?>
+		<?php if ( $activities_query->have_posts() ) : ?>
 
-				<div id="masonry" class="row">
-				<?php while ( $stories_query->have_posts() ) : $stories_query->the_post(); ?>
-
-						<?php get_template_part( 'bordrloop', get_post_format() ); ?>
-
+			<div id="masonry activities-masonry" class="row">
+				<?php $i=0; ?>
+				<?php while ( $activities_query->have_posts() ) : $activities_query->the_post(); ?>
+					<div id="story-<?php echo $i; ?>" >
+						<?php get_template_part( 'activityloop', get_post_format() ); ?>
+					</div>
+					<?php $i++; ?>
 				<?php endwhile; ?>
 
 			<!-- #masonry --></div>
@@ -106,9 +105,86 @@ get_header(); ?>
 
 		<?php endif; ?>
 
-		
-
 	</div><!-- .row -->
+</div><!-- end actitivies teaser -->
+<div class="see-all text-center">
+	<a href="/activity">See more Activities...</a>
+</div>
+
+<div class="page-teaser"><!-- begin stories teaser -->
+	<div class="row section-head">
+		<div class="col-xs-12 col-sm-9 col-lg-9">
+			<h1 class="entry-title" style="font-size:24px;">Bordr stories</h1>
+			<p>Bordrs stories are impressions and experiences of a border.</p>
+		</div>
+		<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
+			<a href="/add-bordr-story/" class="btn btn-primary start">Add Bordr Story</a>
+		</div>
+	</div>
+
+	<div class="row">
+		<?php $stories_query = new WP_Query( array( 'post_type' => 'bordr', 'posts_per_page' => '6' )); ?>
+		
+		<?php if ( $stories_query->have_posts() ) : ?>
+
+			<div id="stories-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
+				<ol class="carousel-indicators">
+					<li data-target="#stories-carousel" data-slide-to="0" class="active"></li>
+					<li data-target="#stories-carousel" data-slide-to="1"></li>
+					<li data-target="#stories-carousel" data-slide-to="2"></li>
+				</ol>
+
+				<div class="carousel-inner" role="listbox">
+					<?php $i=0; ?>
+					<?php while ( $stories_query->have_posts() ) : $stories_query->the_post(); ?>
+						<?php
+							if ( $i == 0 )
+								$itemClass = "item active";
+							else
+								$itemClass = "item";
+						?>
+						<div id="story-<?php echo $i; ?>" class="<?php echo $itemClass ?>" >
+							<?php get_template_part( 'bordrteaser', get_post_format() ); ?>
+						</div>
+						<?php $i++; ?>
+					<?php endwhile; ?>
+				</div>
+			</div>
+
+		<?php else : ?>
+
+			<?php get_template_part( 'no-results', 'archive' ); ?>
+
+		<?php
+			endif;
+			wp_reset_postdata();
+		?>
+
+		<!-- more at once for bigger screens -->
+		<?php $stories_query = new WP_Query( array( 'post_type' => 'bordr', 'posts_per_page' => '6' )); ?>
+		
+		<?php if ( $stories_query->have_posts() ) : ?>
+
+			<div id="masonry" class="row">
+				<?php $i=0; ?>
+				<?php while ( $stories_query->have_posts() ) : $stories_query->the_post(); ?>
+					<div id="story-<?php echo $i; ?>" >
+						<?php get_template_part( 'bordrloop', get_post_format() ); ?>
+					</div>
+					<?php $i++; ?>
+				<?php endwhile; ?>
+
+			<!-- #masonry --></div>
+
+			<?php nuthemes_content_nav( 'nav-below' ); ?>
+
+		<?php else : ?>
+
+			<?php get_template_part( 'no-results', 'archive' ); ?>
+
+		<?php endif; ?>
+	</div><!-- .row -->
+
 </div><!-- end stories teaser -->
 <div class="see-all text-center">
 	<a href="/bordr">See more Bordr Stories...</a>
