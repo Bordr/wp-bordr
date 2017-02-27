@@ -2381,7 +2381,7 @@ function renderMasonry() {
 	while ( have_posts() ) : the_post(); 
 		if (get_post_type( get_the_ID() ) == 'activity') {
 		 get_template_part( 'activityloop', get_post_format() );
-		} else {
+		} else if (get_post_type( get_the_ID() ) == 'bordr') {
 		 get_template_part( 'bordrloop', get_post_format() ); 
 		}
 	endwhile;
