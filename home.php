@@ -189,9 +189,5 @@ get_header(); ?>
 <div class="see-all text-center">
 	<a href="/bordr">See more Bordr Stories...</a>
 </div>
-</main><!-- #content -->
-
-<div class="row">
-</div>
 
 <?php get_footer(); ?>
