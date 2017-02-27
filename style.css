@@ -602,6 +602,7 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
 .bordr .entry-header{
 /* 	margin-top: -2em; */
 }
+
 /**
  * 5.0 Content
  * ----------------------------------------------------------------------------
@@ -792,6 +793,21 @@ body.single .entry-content {
 	position: relative;
 	top: 2px;
 	}
+
+/* Story Format */
+
+a.story-title {
+	color: white;
+	text-decoration: none;
+	font-size: 2.5em;
+	line-height: 1.2;
+}
+
+a.story-title:hover {
+    color: #FFFDE7;
+    text-decoration: none;
+    outline: 0;
+}
 
 /* 5.6. Gallery */
 .row-gallery [class^="col-sm-"],
