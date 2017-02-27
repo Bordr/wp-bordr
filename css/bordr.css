@@ -1,6 +1,64 @@
 a:active,a:hover {
 	color: #d46644;
 }
+
+/* homepage-specific styles */
+.intro-video {
+	margin:1em auto;
+	display:block;
+}
+.intro-container {
+	-webkit-box-shadow: 0px 5px 5px 0px rgba(119,119,119,0.36);
+	-moz-box-shadow: 0px 5px 5px 0px rgba(119,119,119,0.36);
+	box-shadow: 0px 5px 5px 0px rgba(119,119,119,0.36);
+	padding: 1.5em;
+}
+.intro-text {
+	max-width: 600px; /* slighly narrower than video */
+}
+.intro-text p {
+	font-size: 1.2em;
+}
+.page-teaser {
+	height: 700px;
+	overflow:hidden;
+	margin-top: 60px;
+	padding: 0 1em;
+}
+.section-head {
+	margin-bottom:1.5em;
+}
+.carousel-item {
+	height: 700px;
+}
+.see-all {
+	position: relative;
+	z-index: 100;
+	width:100%;
+	height:200px;
+	color:#218387;
+	margin-top:-200px;
+	padding-top: 150px;
+	padding-bottom: 20px;
+	-webkit-box-shadow: 0px 5px 5px 0px rgba(119,119,119,0.36);
+	-moz-box-shadow: 0px 5px 5px 0px rgba(119,119,119,0.36);
+	box-shadow: 0px 5px 5px 0px rgba(119,119,119,0.36);
+	background: rgba(255,255,255,0);
+	background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,0)), color-stop(100%, rgba(255,255,255,1)));
+	background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+	background: -o-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+	background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+	background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=0 );
+}
+.see-all a {
+	font-size: 1.6em;
+	color: #218387;
+}
+/* end homepage-specific styles */
+
+/* bordr stories-specific styles */
 .from-activity {
 	width:100%;
 	clear:both;
@@ -114,6 +172,7 @@ img.related-story-img-even {
 	float:right;
 	margin-left:1em;
 }
+/* end bordr stories styles */
 
 /* BEGIN TIMELINE */
 .tcontainer {
@@ -643,6 +702,9 @@ label {
 		margin: 0 auto;
 		max-width: 400px;
 	}
+	#activities-carousel, #stories-carousel {
+		display: none;
+	}
 	#stats svg text {
 		font-size: 1em;
 	}
@@ -799,5 +861,7 @@ label {
 	  background-color: white;
   
 	}
-
+	#activities-masonry, #stories-masonry {
+		display: none;
+	}
 }
