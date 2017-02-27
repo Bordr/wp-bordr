@@ -288,7 +288,7 @@ if( $gallery ): ?>
 			
 			$posts = get_posts(array(
 						'post_type'		=> 'bordr',
-						'numberposts'	=> 8,
+						'numberposts'	=> 6,
 						'meta_query'		=> array(
 							array(
 								'key' => 'related_activity',
@@ -304,13 +304,9 @@ if( $gallery ): ?>
 				<div id="masonry" class="row">
 		
 			<?php foreach( $posts as $post ): 
-				setup_postdata( $post )
-				?>
-					<div class="col-xs-6 col-sm-4 col-lg-4 masonry-item">
-						<?php get_template_part( 'bordrlittleloop', get_post_format() ); ?>
-					</div>
-
-			<?php endforeach; ?>
+					setup_postdata( $post );
+					get_template_part( 'bordrloop', get_post_format() ); 
+				endforeach; ?>
 				</div>
 				<p>
 					<a href="/bordr/?relact=<?php echo $post_ID;?>">View more stories posted with this activity</a>

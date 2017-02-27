@@ -37,9 +37,9 @@ function fb_opengraph() {
         }
         if(get_field('brdr_story') != '') {
 			$excerpt = get_field('brdr_story');
-            $excerpt = str_replace("", "'", $excerpt);
+            $excerpt = strip_tags(str_replace("", "'", $excerpt));
         } else {
-            $excerpt = get_bloginfo('description');
+            $excerpt = strip_tags(get_bloginfo('description'));
         }
         ?>
  
@@ -69,9 +69,9 @@ function fb_opengraph() {
         }
         if(get_field('brief_description') != '') {
 			$excerpt = get_field('brief_description');
-            $excerpt = str_replace("", "'", $excerpt);
+            $excerpt = strip_tags(str_replace("", "'", $excerpt));
         } else {
-            $excerpt = get_bloginfo('description');
+            $excerpt = strip_tags(get_bloginfo('description'));
         }
         ?>
  
@@ -97,9 +97,9 @@ function fb_opengraph() {
         }
         if(get_the_excerpt()) {
 			$excerpt = get_the_excerpt();
-            $excerpt = str_replace("", "'", $excerpt);
+            $excerpt = strip_tags(str_replace("", "'", $excerpt));
         } else {
-            $excerpt = get_bloginfo('description');
+            $excerpt = strip_tags(get_bloginfo('description'));
         }
         ?>
  
@@ -147,11 +147,11 @@ function fb_opengraph() {
         }
         if(get_field('organization_profile') != '') {
 			$excerpt = get_field('organization_profile');
-            $excerpt = str_replace("", "'", $excerpt);
+            $excerpt = strip_tags(str_replace("", "'", $excerpt));
         } else {
-            $excerpt = get_bloginfo('description');
+            $excerpt = strip_tags(get_bloginfo('description'));
         }			
-		$excerpt = get_bloginfo('description');
+		$excerpt = strip_tags(get_bloginfo('description'));
 ?>
  
     <meta property="og:title" content="<?php echo get_field('organization_name'); ?>"/>
@@ -170,7 +170,7 @@ function fb_opengraph() {
 <?php
     } else if ( is_home() ) {
 		$img_src = get_stylesheet_directory_uri() . '/img/egc_logo_600x340.jpg';			
-		$excerpt = get_bloginfo('description');
+		$excerpt = strip_tags(get_bloginfo('description'));
 ?>
  
     <meta property="og:title" content="Global Grand Central"/>
