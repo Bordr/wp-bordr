@@ -61,19 +61,13 @@ img.arrow-img {
 
 .expand-story {
 	position: absolute;
-	font-size: 1.5em;
+	font-size: 0.5em;
 	left: 0;
 	top: calc(50% - 1em);
 	width: 100%;
 	text-align: center;
 	color: #ffffff;
 	z-index: 100;
-}
-
-a.story-title {
-	color: white;
-	font-size: 2.5em;
-	line-height: 1.2;
 }
 
 .related-story {
@@ -93,7 +87,7 @@ a.story-title {
 	opacity: 0.5;
 }
 
-.story-preview:hover {
+a.story-title:hover .story-preview {
 	opacity: 1;
 }
 
