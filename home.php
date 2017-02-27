@@ -191,4 +191,7 @@ get_header(); ?>
 </div>
 </main><!-- #content -->
 
+<div class="row">
+</div>
+
 <?php get_footer(); ?>
