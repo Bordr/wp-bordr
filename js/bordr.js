@@ -215,7 +215,7 @@ function toTitleCase(str)
 	 function renderMyDepartures(filter,value) {
 
 		// vars
-		var url = '/';
+		var url = '/activity/';
 			args = {};
 
 		// loop over filters
