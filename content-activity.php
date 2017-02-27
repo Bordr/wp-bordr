@@ -7,6 +7,17 @@ global $post;
 $post_slug=$post->post_name;
 $post_ID=$post->ID;
 
+$posts = get_posts(array(
+  'post_type'		=> 'bordr',
+  'numberposts'	=> 8,
+  'meta_query'		=> array(
+	array(
+	  'key' => 'related_activity',
+	  'value' =>  $post_ID,
+	  'compare' => '='
+	)
+  )
+));
 ?>
 
 <?php if(current_user_can('edit_post')): ?>
@@ -19,6 +30,8 @@ $post_ID=$post->ID;
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'box' ); ?>>
 	<header class="entry-header">
+
+<?php the_excerpt(); ?>
 
 <!-- Begin Gallery -->
 
@@ -61,45 +74,126 @@ if( $gallery ): ?>
                 </li>
             <?php endforeach; ?>
         </ul>
-    </div>
-    
-<script type="text/javascript" charset="utf-8">
-  $(window).load(function() {
-    $('.flexslider').flexslider();
-  });
-</script>
-    
+    </div>   
 <?php endif; ?>
 
 <!-- End Gallery -->
-		<h1>Activity: <?php the_title(); ?></h1>
-		<p class="lead">Explores the space between <br/><?php the_field('from'); ?> — <?php the_field('to'); ?></p>
-		<?php if ( $oborders = get_field( 'other_borders' ) ) :
-		?>
-		<?php 
-			$resultstr = array();
-			foreach ( $oborders as $idx => $border ) :
-				$resultstr[] = $border['ofrom']." – ".$border['oto'];
-			endforeach;
-			$result = implode(", ",$resultstr);
-			?><p>It also explores the borders between: <?php echo $result; ?>.</p> <?php
-		endif;
-		?>
-		<p  class="lead">An activity by    
-		<?php nuthemes_posted_by(); ?>
-		</p>
+
+<script type="text/javascript" charset="utf-8">
+  function toggleDisplay(el, offset) {
+    var $window = $(window);
+    return function() {
+      if($window.scrollTop() > offset) {
+	    el.removeClass('hidden');
+	  } else {
+	    el.addClass('hidden');
+	  } 
+    }
+  }
+  
+  function initContentNavigation() {
+	var fixedMenu = $('.header-menu.fixed');
+	var menu = $('.header-menu:not(.fixed)');
+	var offset = menu.offset().top + menu.height();
+    var toggleMenu = toggleDisplay(fixedMenu, offset);
+    window.tm = toggleMenu;
+	$(window).on('scroll', toggleMenu);
+	toggleMenu();
+    if($('#wpadminbar').exists()) {
+      fixedMenu.addClass('with-wpadminbar');
+    }
+  };
+
+  $(window).load(function() {
+    var $flexslider = $('.flexslider');
+    if($flexslider.exists()) {
+      $flexslider.flexslider({ start: initContentNavigation });
+    } else {
+      // If activitiy image gallery is empty
+      initContentNavigation();
+    }
+  });
+</script>
+
+		<?php for ($i = 0; $i < 2; $i++): ?>
+		<div class="header-menu <?php if ($i == 1) : echo "fixed hidden"; endif; ?>">
+        <ol>
+		  <?php if (get_field('why_description')) : ?>
+		    <li><a href="#why">Why</a></li>
+          <?php endif; ?>
+		  <li><a href="#location">Location/Area/Audience</a></li>
+          <?php if (get_field('audience_discovery')) : ?>
+		    <li><a href="#outreach">Outreach</a></li>
+          <?php endif; ?>
+		  <li><a href="#how">How it was done</a></li>
+		  <li><a href="#results">Results and Lessons</a></li>
+          <?php if( $posts ): ?>
+            <li><a href="#bordrs">Bordr Stories</a></li>
+          <?php endif; ?>
+		  <?php if ( get_field('timeline')[0]['event_title'] ) : ?>
+		    <li><a href="#timeline">Timeline</a></li>
+          <?php endif; ?>
+		</ol>
+	    </div>
+		<?php endfor; ?>
+
+		<p class="before-header"><a href="/activity">Activity</a></p>
+        
+		<h1><?php the_title(); ?></h1>
+
+		<div class="lead">
+		<?php the_field('brief_description'); ?>
+		</div>
+
+		<p class="lead author <?php if(get_field('partner')): echo "with-partner"; endif; ?>">
+		<?php $image_id = get_field('hub_logo','user_'.get_the_author_meta( 'ID' )); ?>
+          <img src="<?php echo wp_get_attachment_image_src($image_id,"thumbnail")[0]; ?>" class="hub-logo">
+			An activity by <?php nuthemes_posted_by(); ?>
 		<?php if (get_field('partner')) :
-		?><p>Partnering with <?php
-				$partners = get_field('partner');
-				$resultstr = array();
-				foreach( $partners as $partner ): 
-						$resultstr[] = "<a href=\"/author/".$partner['user_nicename']."/\">".$partner['display_name']."</a>";
-				endforeach;
-				$result = implode(", ",$resultstr);
-				echo $result;
-		endif;
-		?>
+		?><br>partnering with <?php
+				             $partners = get_field('partner');
+				             $resultstr = array();
+				             foreach( $partners as $partner ): 
+						                  $resultstr[] = "<a href=\"/author/".$partner['user_nicename']."/\">".$partner['display_name']."</a>";
+				             endforeach;
+				             $result = implode(", ",$resultstr);
+				             echo $result;
+		                     endif;
+		                     ?>
 		</p>
+        
+		<h3>Explores the bordrs</h3>
+        <table class="bordr">
+          <tr>
+            <td>
+              <?php the_field('from'); ?>
+            </td>
+            <td>
+              <img src="/wp-content/themes/bordr/img/egc_bg-cremesoda_400x300.jpg" width="32">
+            </td>
+            <td>
+              <?php the_field('to'); ?>
+            </td>
+          </tr>
+		  <?php if ( $oborders = get_field( 'other_borders' ) ) : ?>
+            <tr>
+		      <?php 
+			  $resultstr = array();
+			  foreach ( $oborders as $idx => $border ) : ?>
+				<td>
+                  <?php echo $border['ofrom']; ?>
+                </td>
+                <td>
+                  <img src="/wp-content/themes/bordr/img/egc_bg-cremesoda_400x300.jpg" width="32">
+                </td>
+                <td>
+                  <?php echo $border['oto']; ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+          <?php endif; ?>
+        </table>
+
 			<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
 <!-- 
 			<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'nuthemes' ), __( '1 Comment', 'nuthemes' ), __( '% Comments', 'nuthemes' ) ); ?></span>
@@ -110,18 +204,13 @@ if( $gallery ): ?>
 
 	<div class="clearfix entry-content">
 		<?php
-
-			?><div class="lead"><?php 
-			the_field('brief_description');
-			?></div><?php
-			
 			if (get_field('why_description')) :
-			?><h2>Why</h2><?php
+			?><h2 id="why">Why</h2><?php
 			the_field('why_description');
 			endif;
 			?>
 
-			<h2>Location</h2><?php		
+			<h2 id="location">Location</h2><?php		
 			$location = get_field('departure_location');
 			
 			echo $location['address'];
@@ -254,12 +343,12 @@ if( $gallery ): ?>
 
 		<?php
 		if (get_field('audience_discovery')) :
-		?><h2>How the audience/participants were reached or discovered</h2><?php
+		?><h2 id="outreach">How the audience/participants were reached or discovered</h2><?php
 		the_field('audience_discovery');
 		endif;
 		?>
 
-		<h2>How it was done</h2>
+		<h2 id="how">How it was done</h2>
 		<div class="row">
 		<?php 
 		if( $methods ): ?> 
@@ -280,26 +369,14 @@ if( $gallery ): ?>
 		?>
 
 
-		<h2>Results</h2>
+		<h2 id="results">Results</h2>
 
 		<!-- The Loop -->
 
 			<?php
 			
-			$posts = get_posts(array(
-						'post_type'		=> 'bordr',
-						'numberposts'	=> 8,
-						'meta_query'		=> array(
-							array(
-								'key' => 'related_activity',
-								'value' =>  $post_ID,
-								'compare' => '='
-								)
-							)
-			));
-			
 			if( $posts ): ?>
-			<h3>Bordr Stories</h3>	
+			<h3 id="bordrs">Bordr Stories</h3>	
 			<p>As part of this activity, border-stories were booked.</p>	
 				<div id="masonry" class="row">
 		
@@ -376,7 +453,7 @@ if( $gallery ): ?>
 <!-- Begin Timeline -->
 		<?php $events = get_field( 'timeline' ); ?>
 		<?php if ( $events[0]['event_title'] ) : ?>
-			<h2>Activity Timeline</h2>
+			<h2 id="timeline">Activity Timeline</h2>
 		<?php
 			// Re-order our events just in case
 			usort( $events, 'sort_by_date_ascending');
