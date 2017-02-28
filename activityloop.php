@@ -42,37 +42,31 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 
 		<?php if ( 'activity' == get_post_type() ) : ?>
 		<div class="entry-meta">
-			An activity of <?php nuthemes_posted_by(); ?> in <?php echo $location_ctry; ?>
+			by<br> <?php nuthemes_posted_by(); ?> in <?php echo $location_ctry; ?>
 		<!-- .entry-meta --></div>
 		<?php endif; ?>
 	<!-- .entry-header --></header>
 
 	<div class="clearfix entry-summary">
 		<div class="row">
-			<div class="col-sm-12">
 				<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark">
 				<?php
 				  if($gallery) {
-						?><img src="<?php echo $gallery[0]['sizes']['large']; ?>" alt="<?php echo $gallery[0]['alt']; ?>" class="img-responsive"/><?php 
+						?><img src="<?php echo $gallery[0]['sizes']['large']; ?>" alt="<?php echo $gallery[0]['alt']; ?>" class="img-responsive"/><?php
 				  } else {
 					 ?><img src="/wp-content/uploads/2016/12/egc_bg-cremesoda_400x300.png" class="img-responsive"><?php
 				  }
 				?>
 				</a>
-			</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
-			<h3 class="entry-title">Brief</h3>
-			<p><?php the_field('brief_description'); ?></p>
+ 			<p><?php the_field('brief_description'); ?></p>
 			</div>
 			<div class="col-sm-12">
 				<div class="row">
-					<div class="col-sm-12"><h3 class="entry-title">How it was done</h3></div>
-				</div>
-				<div class="row">
-				<?php 
-				if( $methods ): ?> 
+				<?php
+				if( $methods ): ?>
 					<?php foreach( $methods as $method ): ?>
 						<div class="col-xs-6">
 							<?php echo $method_options[$method]; ?>
@@ -81,19 +75,25 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 				<?php endif; ?>
 				</div>
 			</div>
-		</div>	
-		<?php the_excerpt(); ?>
+		</div>
+
+		<div class="chart_success_<?php the_ID(); ?> barchart"></div>
+		<script>
+		$(function() {
+			var data = {
+			  'totalMin': 0,
+			  'totalMax': 100,
+			  'totalAverage': 50,
+			  'postTotal': <?php the_field('success_rating'); ?>,
+			  'leftField': 'Failure',
+			  'rightField': 'Success'
+			}
+            var chart = ".chart_success_<?php the_ID(); ?>";
+			drawdotchart(data, chart);
+		});
+		</script>
+
 	<!-- .entry-summary --></div>
 
-	<footer class="entry-meta entry-footer">
-
-		<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
-		<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'nuthemes' ), __( '1 Comment', 'nuthemes' ), __( '% Comments', 'nuthemes' ) ); ?></span>
-		<?php endif; ?>
-
-        <?php if(current_user_can('edit_post')): ?>
-          <span class="edit-link"><a href="/add-activity?post_id=<?php the_ID(); ?>" class="button">Edit</a></span>
-        <?php endif; ?>
-	<!-- .entry-footer --></footer>
 <!-- #post-<?php the_ID(); ?> --></article>
 </div>
