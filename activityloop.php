@@ -38,7 +38,7 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 <div class="col-xs-12 col-sm-6 col-lg-4 masonry-item">
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'box' ); ?>>
 	<header class="entry-header">
-		<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
+		<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark"><?php echo wp_trim_words( get_the_title(), 8 ); ?></a></h2>
 
 		<?php if ( 'activity' == get_post_type() ) : ?>
 		<div class="entry-meta">
