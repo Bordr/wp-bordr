@@ -1557,7 +1557,6 @@ Unknown people (100)',
 			),
 			'choices' => array (
 				'archiving' => '<i class="fa fa-archive" aria-hidden="true"></i> archiving',
-				'bordr' => '<i class="fa fa-map-signs" aria-hidden="true"></i> Bordr',
 				'coding' => '<i class="fa fa-code" aria-hidden="true"></i> coding',
 				'drawing' => '<i class="fa fa-pencil" aria-hidden="true"></i> drawing',
 				'exhibitions' => '<i class="fa fa-picture-o" aria-hidden="true"></i> exhibitions',

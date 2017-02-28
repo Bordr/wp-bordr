@@ -48,7 +48,6 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 						'lectures' => '<i class="fa fa-university" aria-hidden="true"></i> lectures',
 						'theatre' => '<i class="fa fa-users" aria-hidden="true"></i> theatre',
 						'coding' => '<i class="fa fa-code" aria-hidden="true"></i> coding',
-						'bordr' => '<i class="fa fa-map-signs" aria-hidden="true"></i> Bordr',
 						'public art' => '<i class="fa fa-street-view" aria-hidden="true"></i> public art',
 						'travel' => '<i class="fa fa-globe" aria-hidden="true"></i> travel',
 						'workshops' => '<i class="fa fa-bolt" aria-hidden="true"></i> workshops',
@@ -357,6 +356,12 @@ if( $gallery ): ?>
 					<?php echo $method_options[$method]; ?>
 				</div>
 			<?php endforeach; ?>
+		<?php endif; ?>
+		<?php
+        if( $posts ) : ?>
+        	<div class="col-xs-4 col-sm-2">
+				<i class="fa fa-map-signs" aria-hidden="true"></i> Bordr
+			</div>
 		<?php endif; ?>
 		</div>
 
