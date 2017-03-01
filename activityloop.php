@@ -77,6 +77,8 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 				<?php
 				if( $methods ): ?>
 					<?php foreach( $methods as $method ): ?>
+                      <?php /* Skip bordr method, this is handled separately */
+                        if($method == 'bordr'): continue; endif; ?>
 						<div class="col-xs-6">
 							<?php echo $method_options[$method]; ?>
 						</div>
