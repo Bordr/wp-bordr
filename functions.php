@@ -10,6 +10,44 @@ add_action('init', 'register_my_session');
 function my_deregister_javascript() {
 	wp_deregister_script( 'nu-scripts' );
 }
+// Adds shortcode for hub email as recipient for hub contact form  
+function custom_wpcf7_special_mail_tag( $output, $name, $html  ) {
+
+	$name = preg_replace( '/^wpcf7\./', '_', $name ); // for back-compat 
+	
+	$submission = WPCF7_Submission::get_instance(); 
+	
+	if ( ! $submission ) { 
+        return $output; 
+    } 
+	
+	if ( '_url' == $name ) { 
+        if ( $url = $submission->get_meta( 'url' ) ) { 
+            return esc_url( $url ); 
+        } else { 
+            return ''; 
+        } 
+    } 
+
+    if ( '_hub_email' == $name) {
+    	$url = $submission->get_meta( 'url' );
+		$tokens = explode('/', $url);
+		$youser = $tokens[sizeof($tokens)-2];
+
+		$hub = get_user_by('slug', $youser); 
+
+		if ($hub) {
+			$hubemail = $hub->user_email;
+		    return $hubemail;
+		} else {
+			return "no email ".$username;
+		}	
+		
+    }
+
+}
+add_filter( 'wpcf7_special_mail_tags', 'custom_wpcf7_special_mail_tag', 20, 3 );
+
 add_action( 'wp_print_scripts', 'my_deregister_javascript', 100 );
 // OPEN GRAPH
 function doctype_opengraph($output) {
