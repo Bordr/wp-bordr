@@ -127,7 +127,7 @@ if( $gallery ): ?>
 		  <li><a href="#how">How it was done</a></li>
 		  <li><a href="#results">Results and Lessons</a></li>
           <?php if( $posts ): ?>
-            <li><a href="bordrs">Bordr Stories</a></li>
+            <li><a href="#bordrs">Bordr Stories</a></li>
           <?php endif; ?>
 		  <?php if ( get_field('timeline')[0]['event_title'] ) : ?>
 		    <li><a href="#timeline">Timeline</a></li>
