@@ -2,14 +2,24 @@
 /**
  * @package Nu Themes
  */
- 
+
 $location = get_field('departure_location');
 $gallery = get_field('departure_images');
 $methods = get_field('method_icons');
- 
+
 $location_ctry = trim(end(explode(",", $location['address'])));
 
- 
+$has_bordr_posts = (! empty(get_posts(array(
+  'post_type'		=> 'bordr',
+  'meta_query'		=> array(
+	array(
+	  'key' => 'related_activity',
+	  'value' =>  get_the_ID(),
+	  'compare' => '='
+	)
+  )
+))));
+
 $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidden="true"></i> photos',
  						'music' => '<i class="fa fa-music" aria-hidden="true"></i> music',
  						'food' => '<i class="fa fa-cutlery" aria-hidden="true"></i> food',
@@ -17,10 +27,9 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 						'film' => '<i class="fa fa-video-camera" aria-hidden="true"></i> film',
 						'lectures' => '<i class="fa fa-university" aria-hidden="true"></i> lectures',
 						'theatre' => '<i class="fa fa-users" aria-hidden="true"></i> theatre',
-						'coding' => '<i class="fa fa-code" aria-hidden="true"></i> coding', 
-						'bordr' => '<i class="fa fa-map-signs" aria-hidden="true"></i> Bordr', 
-						'public art' => '<i class="fa fa-street-view" aria-hidden="true"></i> public art', 
-						'travel' => '<i class="fa fa-globe" aria-hidden="true"></i> travel', 
+						'coding' => '<i class="fa fa-code" aria-hidden="true"></i> coding',
+						'public art' => '<i class="fa fa-street-view" aria-hidden="true"></i> public art',
+						'travel' => '<i class="fa fa-globe" aria-hidden="true"></i> travel',
 						'workshops' => '<i class="fa fa-bolt" aria-hidden="true"></i> workshops',
 						'archiving' => '<i class="fa fa-archive" aria-hidden="true"></i> archiving',
 						'drawing' => '<i class="fa fa-pencil" aria-hidden="true"></i> drawing',
@@ -72,6 +81,12 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 							<?php echo $method_options[$method]; ?>
 						</div>
 					<?php endforeach; ?>
+				<?php endif; ?>
+                <?php
+                if( $has_bordr_posts ): ?>
+                	<div class="col-xs-6">
+						<i class="fa fa-map-signs" aria-hidden="true"></i> Bordr
+					</div>
 				<?php endif; ?>
 				</div>
 			</div>
