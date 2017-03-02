@@ -87,7 +87,7 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
                 <?php
                 if( $has_bordr_posts ): ?>
                 	<div class="col-xs-6">
-						<i class="fa fa-map-signs" aria-hidden="true"></i> Bordr
+					  <img src="/wp-content/themes/bordr/img/ggc-arrows-96x104.png" width="18"> Bordr stories
 					</div>
 				<?php endif; ?>
 				</div>

@@ -360,7 +360,7 @@ if( $gallery ): ?>
 		<?php
         if( $posts ) : ?>
         	<div class="col-xs-4 col-sm-2">
-				<i class="fa fa-map-signs" aria-hidden="true"></i> Bordr
+				<img src="/wp-content/themes/bordr/img/ggc-arrows-96x104.png" width="18"> Bordr stories
 			</div>
 		<?php endif; ?>
 		</div>

@@ -854,7 +854,7 @@ body.single .entry-content {
 	line-height: 1.6;
 	}
 
-.entry-summary img {
+.entry-summary a img {
 	margin-bottom: 20px;
 }
 
