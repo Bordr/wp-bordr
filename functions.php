@@ -282,6 +282,16 @@ function remove_quick_edit($actions, $post) {
 }
 add_filter('post_row_actions','remove_quick_edit', 10, 2);
 // END ADMIN FUNCTIONS
+
+function brdr_archive_random( $query ) {
+
+    if( $query->is_main_query() && !is_admin() && (is_post_type_archive( 'bordr' ) ||  is_post_type_archive( 'activity' ))) {
+        $query->set( 'orderby', 'rand' );
+    }
+
+}
+add_action( 'pre_get_posts', 'brdr_archive_random' );
+
 function my_acf_init() {
 	acf_update_setting('google_api_key', 'AIzaSyD46ZIXV0LS1gBcNiXMkV-Td66f0HpgNUY');
 }
