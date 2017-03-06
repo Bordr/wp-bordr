@@ -300,7 +300,7 @@ add_filter('post_row_actions','remove_quick_edit', 10, 2);
 
 function brdr_archive_random( $query ) {
 
-    if( $query->is_main_query() && !is_admin() && (is_post_type_archive( 'bordr' ) ||  is_post_type_archive( 'activity' ))) {
+    if( $query->is_main_query() && !is_admin() && (is_post_type_archive( 'bordr' ))) {
         $query->set( 'orderby', 'rand' );
     }
 
