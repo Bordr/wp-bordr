@@ -46,6 +46,21 @@ function custom_wpcf7_special_mail_tag( $output, $name, $html  ) {
     }
 
 }
+
+add_filter('posts_orderby', 'edit_posts_orderby');
+
+function edit_posts_orderby($orderby_statement) {
+
+    $seed = $_SESSION['seed'];
+    if (empty($seed)) {
+      $seed = rand();
+      $_SESSION['seed'] = $seed;
+    }
+
+    $orderby_statement = 'RAND('.$seed.')';
+    return $orderby_statement;
+}
+
 add_filter( 'wpcf7_special_mail_tags', 'custom_wpcf7_special_mail_tag', 20, 3 );
 
 add_action( 'wp_print_scripts', 'my_deregister_javascript', 100 );
