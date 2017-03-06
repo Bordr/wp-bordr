@@ -1288,6 +1288,17 @@ a.story-title:hover {
 	background: #fff;
 	}
 
+.site-sidebar {
+	visibility: visible;
+	display: block;
+	position: fixed;
+	top: 20%;
+	left: 20px;
+	float: left;
+	z-index: 99;
+	width: 100px;
+	}
+
 /* 7.1. Sidebar Widget Archive & Categories */
 .site-sidebar .widget select {
 	width: 100%;
@@ -1431,6 +1442,10 @@ a.story-title:hover {
 	.site-credit,
 	.site-info {
 		text-align: center;
+		}
+	.site-sidebar {
+		visibility: hidden;
+		display: none;
 		}
 	.navbar-header {
 		text-align: right;

@@ -21,17 +21,19 @@ $posts = get_posts(array(
 ?>
 
 <?php if(current_user_can('edit_post')): ?>
-  <span class="edit-link">
-	<a href="/add-activity?post_id=<?php the_ID() ?>">
-	  <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?>
-	</a>
-  </span>
+  <div class="row"> 
+  	<div class="col-xs-12" style="text-align:right;">
+	  <div style="margin: 0 0 1em;">
+		<a href="/add-activity?post_id=<?php the_ID() ?>" class="btn btn-primary">
+		  <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?>
+		</a>
+	  </div>
+	</div>
+  </div>
 <?php endif; ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'box' ); ?>>
 	<header class="entry-header">
-
-<?php the_excerpt(); ?>
 
 <!-- Begin Gallery -->
 
@@ -519,25 +521,6 @@ if( $gallery ): ?>
 	<!-- .entry-content --></div>
 
 	<footer class="entry-meta entry-footer">
-		<?php if ( 'post' == get_post_type() ) : ?>
-			<?php
-				$categories_list = get_the_category_list( __( ', ', 'nuthemes' ) );
-				if ( $categories_list && nuthemes_categorized_blog() ) :
-			?>
-			<span class="cat-links">
-				<?php printf( __( '%1$s', 'nuthemes' ), $categories_list ); ?>
-			</span>
-			<?php endif; ?>
-
-			<?php
-				$tags_list = get_the_tag_list( '', __( ', ', 'nuthemes' ) );
-				if ( $tags_list ) :
-			?>
-			<span class="tags-links">
-				<?php printf( __( '%1$s', 'nuthemes' ), $tags_list ); ?>
-			</span>
-			<?php endif; ?>
-		<?php endif; ?>
 
 		<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
 				<div class="col-xs-12">
@@ -548,12 +531,20 @@ if( $gallery ): ?>
 				</div>
 		<?php endif; ?>
 
-        <?php if(current_user_can('edit_post')): ?>
-          <span class="edit-link">
-            <a href="/add-activity?post_id=<?php the_ID() ?>">
-              <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?>
-            </a>
-          </span>
-        <?php endif; ?>
 	<!-- .entry-footer --></footer>
 <!-- #post-<?php the_ID(); ?> --></article>
+
+	<div class="site-sidebar">
+		<?php the_excerpt(); ?>
+		<?php if(current_user_can('edit_post')): ?>
+		  <div class="row"> 
+			<div class="col-xs-12" style="text-align:right;">
+			  <div style="margin: 0;">
+				<a href="/add-activity?post_id=<?php the_ID() ?>" class="btn btn-primary">
+				  <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?>
+				</a>
+			  </div>
+			</div>
+		  </div>
+		<?php endif; ?>
+	</div>
