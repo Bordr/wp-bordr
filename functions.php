@@ -47,19 +47,19 @@ function custom_wpcf7_special_mail_tag( $output, $name, $html  ) {
 
 }
 
-add_filter('posts_orderby', 'edit_posts_orderby');
-
-function edit_posts_orderby($orderby_statement) {
-
-    $seed = $_SESSION['seed'];
-    if (empty($seed)) {
-      $seed = rand();
-      $_SESSION['seed'] = $seed;
-    }
-
-    $orderby_statement = 'RAND('.$seed.')';
-    return $orderby_statement;
-}
+// add_filter('posts_orderby', 'edit_posts_orderby');
+// 
+// function edit_posts_orderby($orderby_statement) {
+// 
+//     $seed = $_SESSION['seed'];
+//     if (empty($seed)) {
+//       $seed = rand();
+//       $_SESSION['seed'] = $seed;
+//     }
+// 
+//     $orderby_statement = 'RAND('.$seed.')';
+//     return $orderby_statement;
+// }
 
 add_filter( 'wpcf7_special_mail_tags', 'custom_wpcf7_special_mail_tag', 20, 3 );
 
@@ -301,7 +301,13 @@ add_filter('post_row_actions','remove_quick_edit', 10, 2);
 function brdr_archive_random( $query ) {
 
     if( $query->is_main_query() && !is_admin() && (is_post_type_archive( 'bordr' ))) {
-        $query->set( 'orderby', 'rand' );
+		$seed = $_SESSION['seed'];
+		if (empty($seed)) {
+		  $seed = rand();
+		  $_SESSION['seed'] = $seed;
+		}
+
+        $query->set( 'orderby', 'rand('.$seed.')' );
     }
 
 }
@@ -2426,78 +2432,6 @@ Please take a moment and describe your hub.',
 	'active' => 1,
 	'description' => '',
 ));
-endif;
-
-if( function_exists('acf_add_local_field_group') ):
-
-acf_add_local_field_group(array (
-    'key' => 'group_58b925f2137e1',
-    'title' => 'Featured',
-    'fields' => array (
-        array (
-            'multiple' => 0,
-            'allow_null' => 0,
-            'choices' => array (
-                'no' => 'No',
-                'yes' => 'Yes',
-            ),
-            'default_value' => array (
-                0 => 'no',
-            ),
-            'ui' => 0,
-            'ajax' => 0,
-            'placeholder' => '',
-            'return_format' => 'value',
-            'key' => 'field_58b925f973f77',
-            'label' => 'Featured',
-            'name' => 'featured',
-            'type' => 'select',
-            'instructions' => 'Is this a featured post?',
-            'required' => 0,
-            'conditional_logic' => 0,
-            'wrapper' => array (
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-        ),
-    ),
-    'location' => array (
-        array (
-            array (
-                'param' => 'post_type',
-                'operator' => '==',
-                'value' => 'bordr',
-            ),
-            array (
-                'param' => 'current_user_role',
-                'operator' => '==',
-                'value' => 'administrator',
-            ),
-        ),
-        array (
-            array (
-                'param' => 'post_type',
-                'operator' => '==',
-                'value' => 'activity',
-            ),
-            array (
-                'param' => 'current_user_role',
-                'operator' => '==',
-                'value' => 'administrator',
-            ),
-        ),
-    ),
-    'menu_order' => 0,
-    'position' => 'normal',
-    'style' => 'default',
-    'label_placement' => 'top',
-    'instruction_placement' => 'label',
-    'hide_on_screen' => '',
-    'active' => 1,
-    'description' => '',
-));
-
 endif;
 // !--- END CUSTOM FIELD GROUPS
 add_filter( 'jetpack_enable_opengraph', '__return_false', 99 );
