@@ -11,25 +11,21 @@ $post_slug=$post->post_name;
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'box' ); ?>>
 	<header class="entry-header">
 
-<!-- Begin Gallery -->
+		<!-- Begin Gallery -->
 
-<?php 
+		<?php 
 
-$related_activity = get_field('related_activity');
-$brdr_story = get_field('brdr_story');
-$brdr_image = get_field('brdr_image');
+		$related_activity = get_field('related_activity');
+		$brdr_story = get_field('brdr_story');
+		$brdr_image = get_field('brdr_image');
 
-?>
-
+		?>
 		<p><img src="<?php echo $brdr_image['url']; ?>" alt="<?php echo $brdr_image['alt']; ?>" class="img-responsive"/></p>
 		<h1 class="entry-title"><?php the_field('brdr_from'); ?> &raquo; <?php the_field('brdr_to'); ?><br/></h1>
-		<div class="entry-meta">
-		<p>A story from <a href='/activity/<?php echo get_post($related_activity)->post_name; ?>'><?php echo get_post($related_activity)->post_title; ?></a>
+		<p class="lead">
+			A story from <a href='/activity/<?php echo get_post($related_activity)->post_name; ?>'><?php echo get_post($related_activity)->post_title; ?></a>
 		</p>
-			<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
-			<?php endif; ?>
-		<!-- .entry-meta --></div>
-	<!-- .entry-header --></header>
+	</header>
 
 	<div class="clearfix entry-content">
 		<?php

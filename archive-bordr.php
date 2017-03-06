@@ -15,7 +15,7 @@ get_header(); ?>
 				<p>Bordrs stories are impressions and experiences of a border.</p>
 			</div>
 			<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
-				<a href="/add-bordr-story/" class="btn btn-primary start">Add Bordr Story</a>
+				<a href="/add-bordr-story/" class="btn btn-primary start" style="margin-top:1.5em;">Add Bordr Story</a>
 			</div>
 			</div>
 		</article>

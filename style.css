@@ -562,12 +562,10 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
 /* 4.2. Header/Logo */
 .site-header {
 	background: #fff;
-/* 	margin-bottom: 30px; */
-/* 	border: #d46643 solid; */
-/* 	border-width: 0px 0px 1.5em 0; */
-	margin: 0 0 10px 0;
+    border: #d6d6d6 solid;
 	border-width: 0px 0px 1px 0;
-	box-shadow: 0px 2px 2px lightgrey;
+	margin: 0 0 10px 0;
+/* 	box-shadow: 0px 2px 2px lightgrey; */
 	}
 .site-header-fp {
 	margin: 10px 0;
@@ -1023,6 +1021,7 @@ a.story-title:hover {
 /* 5.12. Comments */
 .comments-area {
 	margin-bottom: 30px;
+	text-align: left;
 	}
 .comments-title {
 	margin: 0 0 20px;
@@ -1031,6 +1030,7 @@ a.story-title:hover {
 	font-weight: 400;
 	text-transform: uppercase;
 	letter-spacing: 2px;
+	text-align: center;
 	}
 
 /* 5.12.1. Comment List */
