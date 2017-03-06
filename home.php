@@ -44,7 +44,14 @@ get_header(); ?>
 	<div class="row">	
 
 		<!-- carousel for small screens -->
-		<?php $activities_query = new WP_Query( array( 'post_type' => 'activity', 'posts_per_page' => '6' )); ?>
+		<?php
+			$activities_query = new WP_Query( array(
+				'post_type' => 'activity',
+				'posts_per_page' => '6',
+				'meta_key' => 'featured',
+				'meta_value' => 'yes',
+			));
+		?>
 		
 		<?php if ( $activities_query->have_posts() ) : ?>
 
@@ -82,7 +89,14 @@ get_header(); ?>
 		?>
 
 		<!-- more at once for bigger screens -->
-		<?php $activities_query = new WP_Query( array( 'post_type' => 'activity', 'posts_per_page' => '6' )); ?>
+		<?php
+			$activities_query = new WP_Query( array(
+				'post_type' => 'activity',
+				'posts_per_page' => '6',
+				'meta_key' => 'featured',
+				'meta_value' => 'yes',
+			));
+		?>
 		
 		<?php if ( $activities_query->have_posts() ) : ?>
 
@@ -123,7 +137,14 @@ get_header(); ?>
 	</div>
 
 	<div class="row">
-		<?php $stories_query = new WP_Query( array( 'post_type' => 'bordr', 'posts_per_page' => '6' )); ?>
+		<?php
+			$stories_query = new WP_Query( array(
+				'post_type' => 'bordr',
+				'posts_per_page' => '6',
+				'meta_key' => 'featured',
+				'meta_value' => 'yes'
+			));
+		?>
 		
 		<?php if ( $stories_query->have_posts() ) : ?>
 
@@ -161,7 +182,14 @@ get_header(); ?>
 		?>
 
 		<!-- more at once for bigger screens -->
-		<?php $stories_query = new WP_Query( array( 'post_type' => 'bordr', 'posts_per_page' => '6' )); ?>
+		<?php
+			$stories_query = new WP_Query( array(
+				'post_type' => 'bordr',
+				'posts_per_page' => '6',
+				'meta_key' => 'featured',
+				'meta_value' => 'yes'
+			));
+		?>
 		
 		<?php if ( $stories_query->have_posts() ) : ?>
 
