@@ -9,6 +9,7 @@
     
     $user_info = get_userdata($curauth->ID);
 	$excerpt = $user_info->description;
+	$hubemail = $user_info->user_email;
 	
 	$image_id = get_field('hub_logo','user_'.$curauth->ID);
 	$image = wp_get_attachment_image_src($image_id,"medium");
@@ -27,6 +28,8 @@
 
 	<p class="lead"><?php echo esc_html($excerpt); ?></p>
 
+	<p><a href="<?php echo $curauth->user_url; ?>"><?php echo $curauth->user_url; ?></a></p>
+
 	<h2>Hub location</h2>
 	<p>
 	<?php
@@ -42,8 +45,10 @@
 	<?php endif; ?>
 	<?php echo the_field('organization_profile'); ?>
 
-	<h2>Website</h2>
-	<p><a href="<?php echo $curauth->user_url; ?>"><?php echo $curauth->user_url; ?></a></p>
+	<h2>Contact <?php echo the_field('organization_name'); ?></h2>
+	<?php 
+	
+	echo do_shortcode( '[contact-form-7 id="6076" title="Hub Contact"]' ); ?>
 
     <h2>Activities organized by this hub</h2>
 
@@ -108,25 +113,25 @@
 	
 	if( $posts ): ?>
 	
-				<div id="masonryb" class="row">
+		<div id="masonryb" class="row">
 		
-	<?php foreach( $posts as $post ): 
+			<?php foreach( $posts as $post ): 
 		
-		setup_postdata( $post )
+			setup_postdata( $post )
 		
-		?>
+			?>
 
-		<?php get_template_part( 'activityloop', get_post_format() ); ?>
+			<?php get_template_part( 'activityloop', get_post_format() ); ?>
 
-	<?php endforeach; ?>
-			</div>
+			<?php endforeach; ?>
+		</div>
 	
 	<?php wp_reset_postdata(); ?>
 
 <?php else: ?>
         <p><?php _e('No activities involving this hub at this time.'); ?></p>
 
-    <?php endif; ?>
+<?php endif; ?>
 
 <!-- End Loop -->
 

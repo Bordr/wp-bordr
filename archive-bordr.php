@@ -124,13 +124,57 @@ get_header(); ?>
 
 		
 		<?php if ( have_posts() ) : ?>
+			<?php
+				$i=0; //increment
+				$n=2; //in
+			?>
 
-				<div id="masonry" class="row">
-				<?php while ( have_posts() ) : the_post(); ?>
-					
-						<?php get_template_part( 'bordrloop', get_post_format() ); ?>
+			<div id="masonry" class="row">
+			<?php while ( have_posts() ) : the_post(); ?>
+				<?php //add increment to loop, if i == i+2, show "what's your story"
+					if ($i == $n) { ?>
+						<div class="col-xs-12 col-sm-6 col-lg-4 masonry-item">
+							<article class="box bordr type-bordr status-publish hentry">
+								<div class="from-activity">
+												<div class="entry-meta">
+														<a href='/add-bordr-story/'>Add your own story!</em></a>
+													<!-- .entry-meta --></div>
+											</div>
+								<a href="/add-bordr-story/" title="Add your bordr story" rel="bookmark" class="story-title">
+								<header class="entry-header story-header">
+									From...		<!-- .entry-header --></header>
+								<div class="down-arrow">
+									<img class="arrow-img" src="/wp-content/themes/bordr/img/down-arrow.png" />
+								</div>
 
-				<?php endwhile; ?>
+								<div class="clearfix entry-summary">
+									<div class="row story-preview">
+											<img src="/wp-content/themes/bordr/img/ggc-default-img.png" class="img-responsive story-img"/>
+											<div class="expand-story">What's your story?</div>
+									</div>
+								</div>
+								<div class="up-arrow">
+									<img class="arrow-img" src="/wp-content/themes/bordr/img/up-arrow.png" />
+								</div>
+								<header class="entry-header story-to">
+									to...?		<!-- .entry-header --></header>
+								</a>
+								
+								<footer class="entry-meta">
+										<span class="edit-link"><a class="post-edit-link" href="http://www.globalgrandcentral.net/wp-admin/post.php?post=6145&#038;action=edit">Edit</a></span>		<!-- .entry-footer --></footer>
+
+							</article>
+						</div>
+					<?php
+						$n = $n + (2 * $i); //somewhat arbitrary increasing interval
+					}
+				?>
+					<?php
+						get_template_part( 'bordrloop', get_post_format() );
+						$i++;
+					?>
+
+			<?php endwhile; ?>
 
 			<!-- #masonry --></div>
 
