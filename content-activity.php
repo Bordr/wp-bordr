@@ -543,14 +543,14 @@ if( $gallery ): ?>
 <!-- #post-<?php the_ID(); ?> --></article>
 
 	<div class="site-sidebar">
-		<h5><?php the_title(); ?></h5>
+		<h4><?php the_title(); ?></h4>
 		<small>
 		<?php $image_id = get_field('hub_logo','user_'.get_the_author_meta( 'ID' )); ?>
 			An activity by <?php nuthemes_posted_by(); ?>
 		</small>
 		
 		<h5>Contents</h5>
-        <ul>
+        <ul style="list-style: none;padding-left: 10px;">
 		  <?php if (get_field('why_description')) : ?>
 		    <li><a href="#why">Why</a></li>
           <?php endif; ?>
@@ -570,16 +570,10 @@ if( $gallery ): ?>
 		<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
 			<h5><?php comments_popup_link( __( 'Leave a comment', 'nuthemes' ), __( '1 Comment', 'nuthemes' ), __( '% Comments', 'nuthemes' ) ); ?></h5>
 			<?php endif; ?>
-		<?php the_excerpt(); ?>
 		<?php if(current_user_can('edit_post')): ?>
-		  <div class="row"> 
-			<div class="col-xs-12">
-			  <div style="margin: 0;">
-				<a href="/add-activity?post_id=<?php the_ID() ?>">
-				  <h5><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?></h5>
-				</a>
-			  </div>
-			</div>
-		  </div>
+		<a href="/add-activity?post_id=<?php the_ID() ?>">
+		  <h5><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?></h5>
+		</a>
 		<?php endif; ?>
+		<?php the_excerpt(); ?>
 	</div>
