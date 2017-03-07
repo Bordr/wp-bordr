@@ -111,6 +111,8 @@ $post_slug=$post->post_name;
 			<?php echo $location['address']; ?>
 			</div>
 		</div>
+		<?php the_excerpt(); ?>
+		<footer class="entry-meta entry-footer">
 		<h2>Related experiences</h2>
 				<div id="masonry" class="row">
 					<?php
@@ -189,22 +191,6 @@ $post_slug=$post->post_name;
 							<?php endwhile; wp_reset_query();
 					   } ?>
 				</div>	
-				<?php the_excerpt(); ?>
 	<!-- .entry-content --></div>
-
+			</footer>
 <!-- #post-<?php the_ID(); ?> --></article>
-		
-	<div class="site-sidebar">
-		<?php the_excerpt(); ?>
-		<?php if(current_user_can('edit_post')): ?>
-		  <div class="row"> 
-			<div class="col-xs-12" style="text-align:right;">
-			  <div style="margin: 0em;">
-				<a href="/wp-admin/post.php?post=<?php the_ID() ?>&action=edit" class="btn btn-primary">
-				  <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?>
-				</a>
-			  </div>
-			</div>
-		  </div>
-		<?php endif; ?>
-	</div>

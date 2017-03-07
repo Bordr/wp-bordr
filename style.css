@@ -1290,13 +1290,13 @@ a.story-title:hover {
 
 .site-sidebar {
 	visibility: visible;
-	display: block;
+	display: none;
 	position: fixed;
-	top: 20%;
+	top: 10px;
 	left: 20px;
 	float: left;
 	z-index: 99;
-	width: 100px;
+	width: 150px;
 	}
 
 /* 7.1. Sidebar Widget Archive & Categories */
@@ -1436,16 +1436,19 @@ a.story-title:hover {
 	}
 }
 
+@media screen and (max-width: 1220px) {
+	.site-sidebar {
+		visibility: hidden;
+		display: none;
+		}
+}
+
 @media screen and (max-width: 760px) {
 	.site-header,
 	.site-footer,
 	.site-credit,
 	.site-info {
 		text-align: center;
-		}
-	.site-sidebar {
-		visibility: hidden;
-		display: none;
 		}
 	.navbar-header {
 		text-align: right;

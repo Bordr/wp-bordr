@@ -85,9 +85,17 @@ if( $gallery ): ?>
     var $window = $(window);
     return function() {
       if($window.scrollTop() > offset) {
-	    el.removeClass('hidden');
+	    if ($( window ).width() > 1200) {
+		    $('.site-sidebar').fadeIn();
+		} else {
+			el.removeClass('hidden');		
+		}
 	  } else {
-	    el.addClass('hidden');
+	    if ($( window ).width() > 1200) {
+		    $('.site-sidebar').fadeOut();
+		} else {
+			el.addClass('hidden');		
+		}
 	  }
     }
   }
@@ -535,13 +543,40 @@ if( $gallery ): ?>
 <!-- #post-<?php the_ID(); ?> --></article>
 
 	<div class="site-sidebar">
+		<h5><?php the_title(); ?></h5>
+		<small>
+		<?php $image_id = get_field('hub_logo','user_'.get_the_author_meta( 'ID' )); ?>
+			An activity by <?php nuthemes_posted_by(); ?>
+		</small>
+		
+		<h5>Contents</h5>
+        <ul>
+		  <?php if (get_field('why_description')) : ?>
+		    <li><a href="#why">Why</a></li>
+          <?php endif; ?>
+		  <li><a href="#location">Location/Area/Audience</a></li>
+          <?php if (get_field('audience_discovery')) : ?>
+		    <li><a href="#outreach">Outreach</a></li>
+          <?php endif; ?>
+		  <li><a href="#how">How it was done</a></li>
+		  <li><a href="#results">Results and Lessons</a></li>
+          <?php if( $posts ): ?>
+            <li><a href="#bordrs">Bordr Stories</a></li>
+          <?php endif; ?>
+		  <?php if ( get_field('timeline')[0]['event_title'] ) : ?>
+		    <li><a href="#timeline">Timeline</a></li>
+          <?php endif; ?>
+		</ul>
+		<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
+			<h5><?php comments_popup_link( __( 'Leave a comment', 'nuthemes' ), __( '1 Comment', 'nuthemes' ), __( '% Comments', 'nuthemes' ) ); ?></h5>
+			<?php endif; ?>
 		<?php the_excerpt(); ?>
 		<?php if(current_user_can('edit_post')): ?>
 		  <div class="row"> 
-			<div class="col-xs-12" style="text-align:right;">
+			<div class="col-xs-12">
 			  <div style="margin: 0;">
-				<a href="/add-activity?post_id=<?php the_ID() ?>" class="btn btn-primary">
-				  <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?>
+				<a href="/add-activity?post_id=<?php the_ID() ?>">
+				  <h5><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?></h5>
 				</a>
 			  </div>
 			</div>
