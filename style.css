@@ -80,6 +80,15 @@ a:hover {
 	text-decoration: none;
 	}
 
+a.maximized {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
 /* Typography */
 p {
 	margin-bottom: 1em;
@@ -483,14 +492,19 @@ background: #fff;
 border-width: 1px;
 border-radius: 3px;
 box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+position: relative;
 	}
+
+.post-type-archive-activity .box {
+  padding-top: 0;
+}
 
 .homebox {
 	margin-bottom: 30px;
 	padding: 0px;
 	background: #fff;
 	border: lightgrey solid;
-	border-width: 0 0 1px 0; 
+	border-width: 0 0 1px 0;
 /* 	border-radius: 0px; */
 /* 	box-shadow: 1px 1px 10px rgba(0, 0, 0, .15); */
 	}
@@ -637,6 +651,11 @@ box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
 .masonry-item {
 	opacity: 0;
 }
+
+.hentry > .row > img {
+  margin-bottom: 20px;
+}
+
 
 /* 5.1. Entry Thumbnail */
 .entry-thumbnail {
@@ -851,10 +870,6 @@ body.single .entry-content {
 	font-size: 1.6rem;
 	line-height: 1.6;
 	}
-
-.entry-summary a img {
-	margin-bottom: 20px;
-}
 
 .entry-summary .barchart {
   margin-top: 20px;
