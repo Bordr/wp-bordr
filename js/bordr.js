@@ -135,7 +135,7 @@ function drawdotchart(data, chart) {
 		.attr('x',marLeft)
 		.attr('fill', '#646677');
 	  svg.append('circle')
-		.attr('fill', '#ffd200')
+		.attr('fill', '#d46643')
 		.attr('cx', marLeft)
 		.attr('cy', 20)
 		.attr('r', 10)

@@ -1614,7 +1614,6 @@ Unknown people (100)',
 			),
 			'choices' => array (
 				'archiving' => '<i class="fa fa-archive" aria-hidden="true"></i> archiving',
-				'bordr' => '<i class="fa fa-map-signs" aria-hidden="true"></i> Bordr',
 				'coding' => '<i class="fa fa-code" aria-hidden="true"></i> coding',
 				'drawing' => '<i class="fa fa-pencil" aria-hidden="true"></i> drawing',
 				'exhibitions' => '<i class="fa fa-picture-o" aria-hidden="true"></i> exhibitions',
@@ -2420,6 +2419,78 @@ Please take a moment and describe your hub.',
 	'active' => 1,
 	'description' => '',
 ));
+endif;
+
+if( function_exists('acf_add_local_field_group') ):
+
+acf_add_local_field_group(array (
+    'key' => 'group_58b925f2137e1',
+    'title' => 'Featured',
+    'fields' => array (
+        array (
+            'multiple' => 0,
+            'allow_null' => 0,
+            'choices' => array (
+                'no' => 'No',
+                'yes' => 'Yes',
+            ),
+            'default_value' => array (
+                0 => 'no',
+            ),
+            'ui' => 0,
+            'ajax' => 0,
+            'placeholder' => '',
+            'return_format' => 'value',
+            'key' => 'field_58b925f973f77',
+            'label' => 'Featured',
+            'name' => 'featured',
+            'type' => 'select',
+            'instructions' => 'Is this a featured post?',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array (
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+        ),
+    ),
+    'location' => array (
+        array (
+            array (
+                'param' => 'post_type',
+                'operator' => '==',
+                'value' => 'bordr',
+            ),
+            array (
+                'param' => 'current_user_role',
+                'operator' => '==',
+                'value' => 'administrator',
+            ),
+        ),
+        array (
+            array (
+                'param' => 'post_type',
+                'operator' => '==',
+                'value' => 'activity',
+            ),
+            array (
+                'param' => 'current_user_role',
+                'operator' => '==',
+                'value' => 'administrator',
+            ),
+        ),
+    ),
+    'menu_order' => 0,
+    'position' => 'normal',
+    'style' => 'default',
+    'label_placement' => 'top',
+    'instruction_placement' => 'label',
+    'hide_on_screen' => '',
+    'active' => 1,
+    'description' => '',
+));
+
 endif;
 // !--- END CUSTOM FIELD GROUPS
 add_filter( 'jetpack_enable_opengraph', '__return_false', 99 );

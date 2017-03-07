@@ -7,29 +7,38 @@ global $post;
 $post_slug=$post->post_name;
  
 ?>
+<?php if(current_user_can('edit_post')): ?>
+  <div class="row"> 
+  	<div class="col-xs-12" style="text-align:right;">
+	  <div style="margin: 0 0 1em;">
+		<a href="/wp-admin/post.php?post=<?php the_ID() ?>&action=edit" class="btn btn-primary">
+		  <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?>
+		</a>
+	  </div>
+	</div>
+  </div>
+<?php endif; ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'box' ); ?>>
 	<header class="entry-header">
 
-<!-- Begin Gallery -->
+		<!-- Begin Gallery -->
 
-<?php 
+		<?php 
 
-$related_activity = get_field('related_activity');
-$brdr_story = get_field('brdr_story');
-$brdr_image = get_field('brdr_image');
+		$related_activity = get_field('related_activity');
+		$brdr_story = get_field('brdr_story');
+		$brdr_image = get_field('brdr_image');
 
-?>
-
+		?>
 		<p><img src="<?php echo $brdr_image['url']; ?>" alt="<?php echo $brdr_image['alt']; ?>" class="img-responsive"/></p>
+		<a href="<?php the_permalink(); ?>" title="an experience of the <?php the_title_attribute(); ?> border">
 		<h1 class="entry-title"><?php the_field('brdr_from'); ?> &raquo; <?php the_field('brdr_to'); ?><br/></h1>
-		<div class="entry-meta">
-		<p>A story from <a href='/activity/<?php echo get_post($related_activity)->post_name; ?>'><?php echo get_post($related_activity)->post_title; ?></a>
+		</a>
+		<p class="lead">
+			A story from <a href='/activity/<?php echo get_post($related_activity)->post_name; ?>'><?php echo get_post($related_activity)->post_title; ?></a>
 		</p>
-			<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
-			<?php endif; ?>
-		<!-- .entry-meta --></div>
-	<!-- .entry-header --></header>
+	</header>
 
 	<div class="clearfix entry-content">
 		<?php
@@ -104,6 +113,8 @@ $brdr_image = get_field('brdr_image');
 			<?php echo $location['address']; ?>
 			</div>
 		</div>
+		<?php the_excerpt(); ?>
+		<footer class="entry-meta entry-footer">
 		<h2>Related experiences</h2>
 				<div id="masonry" class="row">
 					<?php
@@ -182,39 +193,6 @@ $brdr_image = get_field('brdr_image');
 							<?php endwhile; wp_reset_query();
 					   } ?>
 				</div>	
-				<?php the_excerpt(); ?>
 	<!-- .entry-content --></div>
-
-	<footer class="entry-meta entry-footer">
-		<?php if ( 'post' == get_post_type() ) : ?>
-			<?php
-				$categories_list = get_the_category_list( __( ', ', 'nuthemes' ) );
-				if ( $categories_list && nuthemes_categorized_blog() ) :
-			?>
-			<span class="cat-links">
-				<?php printf( __( '%1$s', 'nuthemes' ), $categories_list ); ?>
-			</span>
-			<?php endif; ?>
-
-			<?php
-				$tags_list = get_the_tag_list( '', __( ', ', 'nuthemes' ) );
-				if ( $tags_list ) :
-			?>
-			<span class="tags-links">
-				<?php printf( __( '%1$s', 'nuthemes' ), $tags_list ); ?>
-			</span>
-			<?php endif; ?>
-		<?php endif; ?>
-
-		<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
-				<div class="col-xs-12">
-					<?php
-						if ( comments_open() || '0' != get_comments_number() )
-							comments_template();
-					?>
-				</div>
-		<?php endif; ?>
-
-		<?php edit_post_link( __( 'Edit', 'nuthemes' ), '<span class="edit-link">', '</span>' ); ?>
-	<!-- .entry-footer --></footer>
+			</footer>
 <!-- #post-<?php the_ID(); ?> --></article>
