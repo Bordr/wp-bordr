@@ -46,8 +46,19 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 ?>
 <div class="col-xs-12 col-sm-6 col-lg-4 masonry-item">
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'box' ); ?>>
+	<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark" class="maximized"></a>
+	<div class="row">
+			<?php
+			  if($gallery) {
+					?><img src="<?php echo $gallery[0]['sizes']['large']; ?>" alt="<?php echo $gallery[0]['alt']; ?>" class="img-responsive"/><?php
+			  } else {
+				 ?><img src="/wp-content/uploads/2016/12/egc_bg-cremesoda_400x300.png" class="img-responsive"><?php
+			  }
+			?>
+	</div>
+
 	<header class="entry-header">
-		<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark"><?php echo wp_trim_words( get_the_title(), 8 ); ?></a></h2>
+		<h2 class="entry-title"><?php echo wp_trim_words( get_the_title(), 8 ); ?></h2>
 
 		<?php if ( 'activity' == get_post_type() ) : ?>
 		<div class="entry-meta">
@@ -57,17 +68,6 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 	<!-- .entry-header --></header>
 
 	<div class="clearfix entry-summary">
-		<div class="row">
-				<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark">
-				<?php
-				  if($gallery) {
-						?><img src="<?php echo $gallery[0]['sizes']['large']; ?>" alt="<?php echo $gallery[0]['alt']; ?>" class="img-responsive"/><?php
-				  } else {
-					 ?><img src="/wp-content/uploads/2016/12/egc_bg-cremesoda_400x300.png" class="img-responsive"><?php
-				  }
-				?>
-				</a>
-		</div>
 		<div class="row">
 			<div class="col-sm-12">
  			<p><?php the_field('brief_description'); ?></p>
