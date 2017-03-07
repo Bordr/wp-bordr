@@ -147,8 +147,10 @@ if( $gallery ): ?>
 		<?php endfor; ?>
 
 		<p class="before-header"><a href="/activity">Activity</a></p>
-
+		
+		<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
 		<h1><?php the_title(); ?></h1>
+		</a>
 
 		<div class="lead">
 		<?php the_field('brief_description'); ?>
@@ -543,7 +545,9 @@ if( $gallery ): ?>
 <!-- #post-<?php the_ID(); ?> --></article>
 
 	<div class="site-sidebar">
+		<a href="#">
 		<h4><?php the_title(); ?></h4>
+		</a>
 		<small>
 		<?php $image_id = get_field('hub_logo','user_'.get_the_author_meta( 'ID' )); ?>
 			An activity by <?php nuthemes_posted_by(); ?>

@@ -32,7 +32,9 @@ $post_slug=$post->post_name;
 
 		?>
 		<p><img src="<?php echo $brdr_image['url']; ?>" alt="<?php echo $brdr_image['alt']; ?>" class="img-responsive"/></p>
+		<a href="<?php the_permalink(); ?>" title="an experience of the <?php the_title_attribute(); ?> border">
 		<h1 class="entry-title"><?php the_field('brdr_from'); ?> &raquo; <?php the_field('brdr_to'); ?><br/></h1>
+		</a>
 		<p class="lead">
 			A story from <a href='/activity/<?php echo get_post($related_activity)->post_name; ?>'><?php echo get_post($related_activity)->post_title; ?></a>
 		</p>
