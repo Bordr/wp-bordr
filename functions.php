@@ -2057,23 +2057,6 @@ acf_add_local_field_group(array (
 			'increment_value' => 1,
 		),
 		array (
-			'key' => 'field_57d830a734b96',
-			'label' => 'How do you feel about this border?',
-			'name' => '',
-			'type' => 'message',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'message' => '',
-			'new_lines' => 'wpautop',
-			'esc_html' => 0,
-		),
-		array (
 			'key' => 'field_57d8306d34b95',
 			'label' => 'negative — positive',
 			'name' => 'brdr_negative_positive',
