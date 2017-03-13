@@ -122,10 +122,10 @@ get_header(); ?>
 				} 
 	
 				// Get all authors
-				$hub_q = new WP_Query(array('post_type' => 'activity','posts_per_page' => -1));
+				$hub_q = new WP_Query(array('post_type' => 'activity','posts_per_page' => -1,'meta_query' => $meta_query));
 				if ($addFQ > 0) {
 					// update meta query
-					$hub_q->set('meta_query', $meta_query);
+// 					$hub_q->set('meta_query', $meta_query);
 				}
 				if ( $hub_q->have_posts() ) : 
 					while ( $hub_q->have_posts() ) : $hub_q->the_post(); 
@@ -170,19 +170,21 @@ get_header(); ?>
 
 				}
 				
-				$ctrysavb = array_unique($ctrysavb);
-				sort($ctrysavb);
+				if ($ctrysavb) {
+					$ctrysavb = array_unique($ctrysavb);
+					sort($ctrysavb);
 
-				foreach ( $ctrysavb as $ctry ) {
+					foreach ( $ctrysavb as $ctry ) {
 				
-					?><li><a href="#ctryfilter" data-ctry="<?php echo $ctry; ?>" class="filter" data-filter="ctry" style="font-weight:bold;"><?php echo $ctry; ?></a></li><?php 
+						?><li><a href="#ctryfilter" data-ctry="<?php echo $ctry; ?>" class="filter" data-filter="ctry" style="font-weight:bold;"><?php echo $ctry; ?></a></li><?php 
 					
-					foreach ( $ctryhubs[$ctry] as $hub ) {
+						foreach ( $ctryhubs[$ctry] as $hub ) {
 					
-						echo $hub; 
+							echo $hub; 
 					
+						}
+				
 					}
-				
 				}
 				
 				?>
