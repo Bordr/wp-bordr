@@ -123,6 +123,8 @@ $post_slug=$post->post_name;
 				<div id="masonry" class="row">
 					<?php
 					$cvalue = get_field('brdr_invisible_visible'); 
+					$excludePosts = array();
+					$excludePosts[] = get_the_ID();
 					if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
 					else { $cvalue = 40; $compare = "<"; }
 					  $second_query = new WP_Query( array(
@@ -136,13 +138,14 @@ $post_slug=$post->post_name;
 						  'posts_per_page' => 1,
 						  'ignore_sticky_posts' => 1,
 						  'orderby' => 'rand',
-						  'post__not_in'=>array(get_the_ID())
+						  'post__not_in'=>$excludePosts
 					   ) );
 					//Loop through posts and display...
 						if($second_query->have_posts()) {
 						 while ($second_query->have_posts() ) : $second_query->the_post(); $image = get_field('brdr_image'); $cat_title = "as visible as"; ?>								
 							
-							<?php include(locate_template('bordrloop.php')); ?>
+							<?php include(locate_template('bordrloop.php')); ?>				
+							<?php $excludePosts[] = get_the_ID(); ?>
 						
 							<?php endwhile; wp_reset_query();
 					   } ?>
@@ -161,14 +164,15 @@ $post_slug=$post->post_name;
 						  'posts_per_page' => 1,
 						  'ignore_sticky_posts' => 1,
 						  'orderby' => 'rand',
-						  'post__not_in'=>array(get_the_ID())
+						  'post__not_in'=>$excludedPosts
 					   ) );
 					//Loop through posts and display...
 						if($second_query->have_posts()) {
 						 while ($second_query->have_posts() ) : $second_query->the_post(); $image = get_field('brdr_image'); $cat_title = "as important as"; ?>
 								
 							<?php include(locate_template('bordrloop.php')); ?>
-						
+							<?php $excludePosts[] = get_the_ID(); ?>
+													
 							<?php endwhile; wp_reset_query();
 					   } ?>				
 					<?php
@@ -186,13 +190,14 @@ $post_slug=$post->post_name;
 						  'posts_per_page' => 1,
 						  'ignore_sticky_posts' => 1,
 						  'orderby' => 'rand',
-						  'post__not_in'=>array(get_the_ID())
+						  'post__not_in'=>$excludePosts
 					   ) );
 					//Loop through post and display...
 						if($second_query->have_posts()) {
 						 while ($second_query->have_posts() ) : $second_query->the_post(); $cat_title = "as positive as"; ?>
 								
 							<?php include(locate_template('bordrloop.php')); ?>
+							<?php $excludePosts[] = get_the_ID(); ?>
 						
 							<?php endwhile; wp_reset_query();
 					   } ?>
