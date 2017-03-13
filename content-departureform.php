@@ -23,12 +23,6 @@ if ( has_post_thumbnail() ) {
 		<h1 class="entry-title"><?php the_title(); ?></h1>
 
 		<div class="entry-meta">
-			<?php 
-// 				nuthemes_posted_on(); 
-				?>
-			<?php 
-// 				nuthemes_posted_by(); 
-				?>
 
 			<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
 			<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'nuthemes' ), __( '1 Comment', 'nuthemes' ), __( '% Comments', 'nuthemes' ) ); ?></span>

@@ -128,6 +128,31 @@ img.arrow-img {
 	z-index: 100;
 }
 
+.add-story-wrap {
+	background-color: grey;
+	height: 250px;
+    margin-right: -15px;
+    margin-left: -15px;
+	margin-top: -55px;
+	margin-bottom: -55px;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	position: relative;
+	z-index: 0;
+	opacity: 0.5;
+}
+
+.add-story {
+	position: absolute;
+	font-size: 0.5em;
+	left: 0;
+	top: calc(50% - 1em);
+	width: 100%;
+	text-align: center;
+	color: #ffffff;
+	z-index: 100;
+}
+
 .related-story {
 	clear:both;
 	border-top: 1px solid #bcbcbc;
