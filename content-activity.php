@@ -173,7 +173,7 @@ if( $gallery ): ?>
 		                     ?>
 		</p>
 
-		<h3>Explores the bordrs</h3>
+		<h3>Explores the borders</h3>
         <table class="bordr">
           <tr>
             <td>
