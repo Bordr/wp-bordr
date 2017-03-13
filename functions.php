@@ -578,7 +578,7 @@ function my_pre_get_posts( $query ) {
 			
 		}
 		
-		if (isset($_GET[ $name ]) && $name == 'char') {
+		if ((isset($_GET[ $name ]) && $name == 'char') || isset($_SESSION[ 'char' ])) {
 			if (!empty($_GET[ 'char' ])) {
 				// set session 
 				$_SESSION['char'] = $_GET[ 'char' ];
@@ -615,7 +615,7 @@ function my_pre_get_posts( $query ) {
 				);		
 			}	
 			
-		} else if (isset($_GET[ $name ]) && $name == 'perception') {
+		} else if ((isset($_GET[ $name ]) && $name == 'perception') || isset($_SESSION[ 'perception' ])) {
 			if (!empty($_GET[ 'perception' ])) {
 				// set session 
 				$_SESSION['perception'] = $_GET[ 'perception' ];
@@ -650,7 +650,7 @@ function my_pre_get_posts( $query ) {
 				);
 			}
 		
-		} else if (isset($_GET[ $name ]) && $name == 'method') {
+		} else if ((isset($_GET[ $name ]) && $name == 'method') || isset($_SESSION[ 'method' ])) {
 			if (!empty($_GET[ 'method' ])) {
 				// set session 
 				$_SESSION['method'] = $_GET[ 'method' ];
