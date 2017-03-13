@@ -106,11 +106,15 @@ $post_slug=$post->post_name;
 			<?php endif; ?>
 			</div>
 			<div class="col-md-6">
-			<h2>Location of border</h2><?php
-			$location = get_field('brdr_location');
-			
+			<?php
+			if (get_field('brdr_location')) : ?>
+			<h2>Location of border</h2>
+			<?php
+			$location = get_field('brdr_location');			
 			?><img src="https://api.tiles.mapbox.com/v3/deklerk.map-57h1d46y/url-bit.ly%2F18KNEkg(<?php echo $location['lng'];?>,<?php echo $location['lat'];?>)/<?php echo $location['lng'];?>,<?php echo $location['lat'];?>,4/800x400.png" class="img-rounded img-responsive">
-			<?php echo $location['address']; ?>
+			<?php echo $location['address']; 
+			endif;
+			?>
 			</div>
 		</div>
 		<?php the_excerpt(); ?>
