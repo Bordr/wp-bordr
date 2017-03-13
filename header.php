@@ -51,7 +51,7 @@
 		<header id="site-header" class="site-header headroom" role="banner">
 			<div class="container">
 				<div class="site-branding">
-					<?php $heading_tag = ( is_home() || is_front_page() ) ? 'h1' : 'div'; ?>
+					<?php $heading_tag = ( is_home() || is_front_page() ) ? 'div' : 'div'; ?>
 					<<?php echo $heading_tag; ?> class="site-title">
 						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
 							<img src="/wp-content/themes/bordr/img/egc_logo_350x200.jpg">

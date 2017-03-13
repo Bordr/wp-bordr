@@ -742,6 +742,11 @@ body.single .entry-title {
 	padding: 25px 25px 5px;
 	text-align: center;
 	}
+
+.lead a {
+    color: rgb(67, 128, 133);
+    font-weight: 600;
+}
 	
 .welcome {
 	margin-top: 225px;
