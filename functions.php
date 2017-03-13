@@ -636,9 +636,6 @@ function my_pre_get_posts( $query ) {
 			}
 		
 			if ($addQ > 0) {
-		
-				$ckey = $_GET[ 'perception' ];
-				$cvalue = $_GET[ 'perceptionval' ];
 				if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
 				else { $cvalue = 40; $compare = "<"; }
 				// append meta query
