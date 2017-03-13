@@ -12,7 +12,7 @@ get_header(); ?>
 			<div class="row">
 			<div class="col-xs-12 col-sm-9 col-lg-9">
 				<h1 class="entry-title" style="font-size:24px;">Bordr stories</h1>
-				<p>Bordrs stories are impressions and experiences of a border.</p>
+				<p>Bordr stories are impressions and experiences of a border.</p>
 			</div>
 			<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
 				<a href="/add-bordr-story/" class="btn btn-primary start" style="margin-top:1.5em;">Add Bordr Story</a>
@@ -136,10 +136,10 @@ get_header(); ?>
 						<div class="col-xs-12 col-sm-6 col-lg-4 masonry-item">
 							<article class="box bordr type-bordr status-publish hentry">
 								<div class="from-activity">
-												<div class="entry-meta">
-														<a href='/add-bordr-story/'>Add your own story!</em></a>
-													<!-- .entry-meta --></div>
-											</div>
+									<div class="entry-meta">
+										<p><a href='/add-bordr-story/'>Add your own story!</em></a></p>
+									</div>
+								</div>
 								<a href="/add-bordr-story/" title="Add your bordr story" rel="bookmark" class="story-title">
 								<header class="entry-header story-header">
 									From...		<!-- .entry-header --></header>
@@ -147,21 +147,18 @@ get_header(); ?>
 									<img class="arrow-img" src="/wp-content/themes/bordr/img/down-arrow.png" />
 								</div>
 
-								<div class="clearfix entry-summary">
-									<div class="row story-preview">
-											<img src="/wp-content/themes/bordr/img/ggc-default-img.png" class="img-responsive story-img"/>
-											<div class="expand-story">What's your story?</div>
-									</div>
+								<div class="add-story-wrap">
+									<div class="add-story">What's your story?</div>
 								</div>
+
 								<div class="up-arrow">
 									<img class="arrow-img" src="/wp-content/themes/bordr/img/up-arrow.png" />
 								</div>
 								<header class="entry-header story-to">
-									to...?		<!-- .entry-header --></header>
+									to...?</header>
 								</a>
 								
-								<footer class="entry-meta">
-										<span class="edit-link"><a class="post-edit-link" href="http://www.globalgrandcentral.net/wp-admin/post.php?post=6145&#038;action=edit">Edit</a></span>		<!-- .entry-footer --></footer>
+								<footer class="entry-meta"></footer>
 
 							</article>
 						</div>

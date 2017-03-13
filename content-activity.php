@@ -173,7 +173,7 @@ if( $gallery ): ?>
 		                     ?>
 		</p>
 
-		<h3>Explores the bordrs</h3>
+		<h3>Explores the borders</h3>
         <table class="bordr">
           <tr>
             <td>
@@ -393,7 +393,7 @@ if( $gallery ): ?>
 			<?php
 			if( $posts ): ?>
 			<h3 id="bordrs">Bordr Stories</h3>
-			<p>As part of this activity, border-stories were booked.</p>
+			<p>As part of this activity, Bordr stories were booked.</p>
 				<div id="masonry" class="row">
 
 			<?php foreach( $posts as $post ):

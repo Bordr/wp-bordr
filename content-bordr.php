@@ -106,11 +106,15 @@ $post_slug=$post->post_name;
 			<?php endif; ?>
 			</div>
 			<div class="col-md-6">
-			<h2>Location of border</h2><?php
-			$location = get_field('brdr_location');
-			
+			<?php
+			if (get_field('brdr_location')) : ?>
+			<h2>Location of border</h2>
+			<?php
+			$location = get_field('brdr_location');			
 			?><img src="https://api.tiles.mapbox.com/v3/deklerk.map-57h1d46y/url-bit.ly%2F18KNEkg(<?php echo $location['lng'];?>,<?php echo $location['lat'];?>)/<?php echo $location['lng'];?>,<?php echo $location['lat'];?>,4/800x400.png" class="img-rounded img-responsive">
-			<?php echo $location['address']; ?>
+			<?php echo $location['address']; 
+			endif;
+			?>
 			</div>
 		</div>
 		<?php the_excerpt(); ?>
@@ -119,6 +123,8 @@ $post_slug=$post->post_name;
 				<div id="masonry" class="row">
 					<?php
 					$cvalue = get_field('brdr_invisible_visible'); 
+					$excludePosts = array();
+					$excludePosts[] = get_the_ID();
 					if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
 					else { $cvalue = 40; $compare = "<"; }
 					  $second_query = new WP_Query( array(
@@ -132,13 +138,14 @@ $post_slug=$post->post_name;
 						  'posts_per_page' => 1,
 						  'ignore_sticky_posts' => 1,
 						  'orderby' => 'rand',
-						  'post__not_in'=>array(get_the_ID())
+						  'post__not_in'=>$excludePosts
 					   ) );
 					//Loop through posts and display...
 						if($second_query->have_posts()) {
 						 while ($second_query->have_posts() ) : $second_query->the_post(); $image = get_field('brdr_image'); $cat_title = "as visible as"; ?>								
 							
-							<?php include(locate_template('bordrloop.php')); ?>
+							<?php include(locate_template('bordrloop.php')); ?>				
+							<?php $excludePosts[] = get_the_ID(); ?>
 						
 							<?php endwhile; wp_reset_query();
 					   } ?>
@@ -157,14 +164,15 @@ $post_slug=$post->post_name;
 						  'posts_per_page' => 1,
 						  'ignore_sticky_posts' => 1,
 						  'orderby' => 'rand',
-						  'post__not_in'=>array(get_the_ID())
+						  'post__not_in'=>$excludedPosts
 					   ) );
 					//Loop through posts and display...
 						if($second_query->have_posts()) {
 						 while ($second_query->have_posts() ) : $second_query->the_post(); $image = get_field('brdr_image'); $cat_title = "as important as"; ?>
 								
 							<?php include(locate_template('bordrloop.php')); ?>
-						
+							<?php $excludePosts[] = get_the_ID(); ?>
+													
 							<?php endwhile; wp_reset_query();
 					   } ?>				
 					<?php
@@ -182,13 +190,14 @@ $post_slug=$post->post_name;
 						  'posts_per_page' => 1,
 						  'ignore_sticky_posts' => 1,
 						  'orderby' => 'rand',
-						  'post__not_in'=>array(get_the_ID())
+						  'post__not_in'=>$excludePosts
 					   ) );
 					//Loop through post and display...
 						if($second_query->have_posts()) {
 						 while ($second_query->have_posts() ) : $second_query->the_post(); $cat_title = "as positive as"; ?>
 								
 							<?php include(locate_template('bordrloop.php')); ?>
+							<?php $excludePosts[] = get_the_ID(); ?>
 						
 							<?php endwhile; wp_reset_query();
 					   } ?>

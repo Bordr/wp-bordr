@@ -578,7 +578,7 @@ function my_pre_get_posts( $query ) {
 			
 		}
 		
-		if (isset($_GET[ $name ]) && $name == 'char') {
+		if ((isset($_GET[ $name ]) && $name == 'char') || (isset($_SESSION[ $name ]) && $name == 'char')) {
 			if (!empty($_GET[ 'char' ])) {
 				// set session 
 				$_SESSION['char'] = $_GET[ 'char' ];
@@ -615,7 +615,7 @@ function my_pre_get_posts( $query ) {
 				);		
 			}	
 			
-		} else if (isset($_GET[ $name ]) && $name == 'perception') {
+		} else if ((isset($_GET[ $name ]) && $name == 'perception') || (isset($_SESSION[ $name ]) && $name == 'perception')) {
 			if (!empty($_GET[ 'perception' ])) {
 				// set session 
 				$_SESSION['perception'] = $_GET[ 'perception' ];
@@ -636,9 +636,6 @@ function my_pre_get_posts( $query ) {
 			}
 		
 			if ($addQ > 0) {
-		
-				$ckey = $_GET[ 'perception' ];
-				$cvalue = $_GET[ 'perceptionval' ];
 				if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
 				else { $cvalue = 40; $compare = "<"; }
 				// append meta query
@@ -650,7 +647,7 @@ function my_pre_get_posts( $query ) {
 				);
 			}
 		
-		} else if (isset($_GET[ $name ]) && $name == 'method') {
+		} else if ((isset($_GET[ $name ]) && $name == 'method') || (isset($_SESSION[ $name ]) && $name == 'method')) {
 			if (!empty($_GET[ 'method' ])) {
 				// set session 
 				$_SESSION['method'] = $_GET[ 'method' ];
@@ -2057,23 +2054,6 @@ acf_add_local_field_group(array (
 			'increment_value' => 1,
 		),
 		array (
-			'key' => 'field_57d830a734b96',
-			'label' => 'How do you feel about this border?',
-			'name' => '',
-			'type' => 'message',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'message' => '',
-			'new_lines' => 'wpautop',
-			'esc_html' => 0,
-		),
-		array (
 			'key' => 'field_57d8306d34b95',
 			'label' => 'negative — positive',
 			'name' => 'brdr_negative_positive',
@@ -2115,7 +2095,7 @@ acf_add_local_field_group(array (
 			'label' => 'Permission to share?',
 			'name' => 'brdr_cc',
 			'type' => 'checkbox',
-			'instructions' => 'I accept that my story (including text, photo, drawing, location, and experience evaluations) will now become part of the public domain with rights and obligations for Bordr.org under a Creative Commons BY 4.0 license. <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Read more here</a>.',
+			'instructions' => 'I accept that my story (including text, photo, drawing, location, and experience evaluations) will now become part of the public domain with rights and obligations for Global Grand Central under a Creative Commons BY 4.0 license. <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Read more here</a>.',
 			'required' => 1,
 			'conditional_logic' => 0,
 			'wrapper' => array (

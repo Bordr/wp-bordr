@@ -33,9 +33,9 @@ get_header(); ?>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-lg-12" style="text-align:right;" >
 			<?php if (is_user_logged_in()) : ?>
-				<a href="/add-activity" class="btn btn-primary start">Add Activity</a>
+				<a href="/add-activity" class="btn btn-primary start" style="margin-top:1.5em;">Add Activity</a>
 			<?php else : ?>
-				<a href="/join/" class="btn btn-primary start">Join to Add an Activity</a>
+				<a href="/join/" class="btn btn-primary start" style="margin-top:1.5em;">Join to Add an Activity</a>
 			<?php endif; ?>
 		</div>
 	</div>
@@ -129,10 +129,10 @@ get_header(); ?>
 	<div class="row section-head">
 		<div class="col-xs-12 col-sm-9 col-lg-9">
 			<h1 class="entry-title" style="font-size:24px;">Bordr stories</h1>
-			<p>Bordrs stories are impressions and experiences of a border.</p>
+			<p>Bordr stories are impressions and experiences of a border.</p>
 		</div>
 		<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
-			<a href="/add-bordr-story/" class="btn btn-primary start">Add Bordr Story</a>
+			<a href="/add-bordr-story/" class="btn btn-primary start" style="margin-top:1.5em;">Add Bordr Story</a>
 		</div>
 	</div>
 
