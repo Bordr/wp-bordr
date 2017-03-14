@@ -1671,7 +1671,7 @@ a.story-title:hover {
     }
     
     .site-title a[href]:after {
-		content: "" attr(title) " (" attr(href) ")";
+		content: "(" attr(href) ")";
 		font-size: 0.7em;
 	}
 	
@@ -1681,6 +1681,7 @@ a.story-title:hover {
 	
 	.featuredonpost {
 		max-height: 600px;
+		margin-bottom: 1.5em;
 	}
 	
 	.timeline h3 {
@@ -1690,4 +1691,32 @@ a.story-title:hover {
 	.timeline li {
 		border: 1px solid lightgrey;
 	}	
+	
+	.bordr {
+		max-width: 250px;
+		margin: 0;
+		padding: 0 0 0 15px;
+	}
+	
+	.bordr p {
+		margin: .5em;
+    	padding: 0;
+	}
+	
+	.bordr a.story-title {
+		font-size: 1.5em;
+	}
+	
+	.activity-title[href]:before {
+		content: "(" attr(href) ")";
+		font-size: 0.95em;	
+	}
+	
+	.story-to, .story-header {
+		padding: 0 !important;
+	}
+	
+	#why {
+		page-break-before: always;
+	}
 }

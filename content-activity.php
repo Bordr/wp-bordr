@@ -148,7 +148,7 @@ if( $gallery ): ?>
 
 		<p class="before-header"><a href="/activity">Activity</a></p>
 		
-		<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
+		<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" class="activity-title">
 		<h1><?php the_title(); ?></h1>
 		</a>
 
