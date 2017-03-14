@@ -1662,3 +1662,61 @@ a.story-title:hover {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
+
+@media print
+{    
+    .no-print, .no-print *, .comment-respond
+    {
+        display: none !important;
+    }
+    
+    .site-title a[href]:after {
+		content: "(" attr(href) ")";
+		font-size: 0.7em;
+	}
+	
+	a[href]:after {
+		content: "";
+	}
+	
+	.featuredonpost {
+		max-height: 600px;
+		margin-bottom: 1.5em;
+	}
+	
+	.timeline h3 {
+		padding-top: 0;
+	}
+	
+	.timeline li {
+		border: 1px solid lightgrey;
+	}	
+	
+	.bordr {
+		max-width: 250px;
+		margin: 0;
+		padding: 0 0 0 15px;
+	}
+	
+	.bordr p {
+		margin: .5em;
+    	padding: 0;
+	}
+	
+	.bordr a.story-title {
+		font-size: 1.5em;
+	}
+	
+	.activity-title[href]:before {
+		content: "(" attr(href) ")";
+		font-size: 0.95em;	
+	}
+	
+	.story-to, .story-header {
+		padding: 0 !important;
+	}
+	
+	#why {
+		page-break-before: always;
+	}
+}
