@@ -125,7 +125,7 @@ if( $gallery ): ?>
 </script>
 
 		<?php for ($i = 0; $i < 2; $i++): ?>
-		<div class="header-menu <?php if ($i == 1) : echo "fixed hidden"; endif; ?>">
+		<div class="header-menu no-print <?php if ($i == 1) : echo "fixed hidden"; endif; ?>">
         <ol>
 		  <?php if (get_field('why_description')) : ?>
 		    <li><a href="#why">Why</a></li>
@@ -204,12 +204,6 @@ if( $gallery ): ?>
             <?php endforeach; ?>
           <?php endif; ?>
         </table>
-
-			<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
-<!--
-			<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'nuthemes' ), __( '1 Comment', 'nuthemes' ), __( '% Comments', 'nuthemes' ) ); ?></span>
- -->
-			<?php endif; ?>
 		<!-- .entry-meta -->
 	<!-- .entry-header --></header>
 
@@ -544,7 +538,7 @@ if( $gallery ): ?>
 	<!-- .entry-footer --></footer>
 <!-- #post-<?php the_ID(); ?> --></article>
 
-	<div class="site-sidebar">
+	<div class="site-sidebar no-print">
 		<a href="#">
 		<h4><?php the_title(); ?></h4>
 		</a>

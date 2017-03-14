@@ -1662,3 +1662,32 @@ a.story-title:hover {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
+
+@media print
+{    
+    .no-print, .no-print *, .comment-respond
+    {
+        display: none !important;
+    }
+    
+    .site-title a[href]:after {
+		content: "" attr(title) " (" attr(href) ")";
+		font-size: 0.7em;
+	}
+	
+	a[href]:after {
+		content: "";
+	}
+	
+	.featuredonpost {
+		max-height: 600px;
+	}
+	
+	.timeline h3 {
+		padding-top: 0;
+	}
+	
+	.timeline li {
+		border: 1px solid lightgrey;
+	}	
+}

@@ -13,7 +13,7 @@ get_header(); ?>
 				<h1 class="entry-title" style="font-size:24px;">Activities</h1>
 				<p>Activities are projects, actions, or interventions that explore borders and enable people to meet others.</p>
 			</div>
-			<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
+			<div class="col-xs-12 col-sm-3 col-lg-3 no-print" style="text-align:right;" >
 				<?php if (is_user_logged_in()) : ?>
 					<a href="/add-activity" class="btn btn-primary start" style="margin-top:1.5em;">Add Activity</a>
 				<?php else : ?>
@@ -82,9 +82,9 @@ get_header(); ?>
 		endif; ?>
 
 
-	<h2 class="entry-title" style="margin-left:0px; margin-top:30px;">Filter Activities By</h2>
+	<h2 class="entry-title no-print" style="margin-left:0px; margin-top:30px;">Filter Activities By</h2>
 
-	<div class="row" style="margin-bottom:30px;">
+	<div class="row no-print" style="margin-bottom:30px;">
 	
 		<div class="col-sm-12">
 			<div class="btn-group filtergroup" style="margin-left:0px;">
@@ -108,9 +108,7 @@ get_header(); ?>
 					if (!empty($_GET[ 'method' ])) {
 						$ckey = $_GET[ 'method' ];
 						$addQ = 1;
-						$addFQ = 1;
 					} 
-		
 					if ($addQ > 0) {
 						// append meta query
 						$meta_query[] = array(
@@ -120,13 +118,32 @@ get_header(); ?>
 						);
 					}
 				} 
+
+				if (!empty($_GET[ 'char' ])) {
+					$ckey = $_GET[ 'char' ];
+					$cvalue = $_GET[ 'charval' ];
+					$addQC = 1;
+				} 
+		
+				if ($addQC > 0) {
+					if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
+					else { $cvalue = 40; $compare = "<"; }
+					// append meta query
+					$meta_query[] = array(
+						'key'		=> $ckey,
+						'value'		=> $cvalue,
+						'compare'	=> $compare,
+						'type' => 'numeric'
+					);
+					$meta_query[] = array(
+						'key'		=> $ckey."_rel",
+						'value'		=> 1,
+						'compare'	=> '='
+					);		
+				}	
 	
 				// Get all authors
 				$hub_q = new WP_Query(array('post_type' => 'activity','posts_per_page' => -1,'meta_query' => $meta_query));
-				if ($addFQ > 0) {
-					// update meta query
-// 					$hub_q->set('meta_query', $meta_query);
-				}
 				if ( $hub_q->have_posts() ) : 
 					while ( $hub_q->have_posts() ) : $hub_q->the_post(); 
 						$hub_id = get_the_author_meta('ID');
