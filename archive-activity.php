@@ -108,7 +108,9 @@ get_header(); ?>
 					if (!empty($_GET[ 'method' ])) {
 						$ckey = $_GET[ 'method' ];
 						$addQ = 1;
+
 					} 
+
 					if ($addQ > 0) {
 						// append meta query
 						$meta_query[] = array(
@@ -118,6 +120,7 @@ get_header(); ?>
 						);
 					}
 				} 
+
 
 				if (!empty($_GET[ 'char' ])) {
 					$ckey = $_GET[ 'char' ];
@@ -144,6 +147,7 @@ get_header(); ?>
 	
 				// Get all authors
 				$hub_q = new WP_Query(array('post_type' => 'activity','posts_per_page' => -1,'meta_query' => $meta_query));
+
 				if ( $hub_q->have_posts() ) : 
 					while ( $hub_q->have_posts() ) : $hub_q->the_post(); 
 						$hub_id = get_the_author_meta('ID');
