@@ -292,23 +292,29 @@ function brdr_archive_random( $query ) {
 		   $seed = rand();
 		   $_SESSION['seed'] = $seed;
 		  }
-
         $query->set( 'orderby', 'rand('.$seed.')' );
-
     }
 
 }
 add_action( 'pre_get_posts', 'brdr_archive_random' );
+
+function bordr_infinite_scroll_paging( $args ) {
+    if ( 'bordr' === $args['post_type'] ) {
+        $args['paged']++;
+    }
+    return $args;
+}
+add_filter( 'infinite_scroll_query_args', 'bordr_infinite_scroll_paging', 100 );
 
 function my_acf_init() {
 	acf_update_setting('google_api_key', 'AIzaSyD46ZIXV0LS1gBcNiXMkV-Td66f0HpgNUY');
 }
 add_action('acf/init', 'my_acf_init');
 function wpsites_home_page_cpt_filter($query) {
-if ( !is_admin() && $query->is_main_query() && is_home() ) {
-$query->set('post_type', array( 'activity', 'bordr' ) );
-    }
+  if ( !is_admin() && $query->is_main_query() && is_home() ) {
+    $query->set('post_type', array( 'activity', 'bordr' ) );
   }
+}
 add_action('pre_get_posts','wpsites_home_page_cpt_filter',20);
 /**
  * Sort our repeater fields array by date subfield descending

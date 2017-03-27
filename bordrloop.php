@@ -1,12 +1,12 @@
 <?php
 /**
- * @package Nu Themes
+ * @package Bordr
  */
- 
+
 $location = get_field('brdr_location');
 $image = get_field('brdr_image');
 $related_activity = get_field('related_activity');
- 
+
 ?>
 <div class="col-xs-12 col-sm-6 col-lg-4 masonry-item">
 	<article id="post-<?php the_ID(); ?>" <?php post_class( 'box' ); ?>>
@@ -31,7 +31,7 @@ $related_activity = get_field('related_activity');
 			<div class="row story-preview">
 					<?php
 					  if($image) {
-						 ?><img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" class="img-responsive story-img"/><?php 
+						 ?><img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" class="img-responsive story-img"/><?php
 					  }
 					  else {
 						?><img src="/wp-content/themes/bordr/img/ggc-default-img.png" class="img-responsive story-img"/><?php
@@ -47,7 +47,7 @@ $related_activity = get_field('related_activity');
 			<?php the_field('brdr_to'); ?>
 		<!-- .entry-header --></header>
 		</a>
-		
+
 		<footer class="entry-meta">
 				<?php edit_post_link( __( 'Edit', 'nuthemes' ), '<span class="edit-link">', '</span>' ); ?>
 		<!-- .entry-footer --></footer>

@@ -9,14 +9,14 @@ $methods = get_field('method_icons');
 
 $location_ctry = trim(end(explode(",", $location['address'])));
 
-$has_bordr_posts = (! empty(get_posts(array(
+$has_bordr_posts = (!empty(get_posts(array(
   'post_type'		=> 'bordr',
   'meta_query'		=> array(
-	array(
-	  'key' => 'related_activity',
-	  'value' =>  get_the_ID(),
-	  'compare' => '='
-	)
+  	array(
+  	  'key' => 'related_activity',
+  	  'value' =>  get_the_ID(),
+  	  'compare' => '='
+  	)
   )
 ))));
 
@@ -39,8 +39,8 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 						'performance' => '<i class="fa fa-users" aria-hidden="true"></i> performance',
 						'sound' => '<i class="fa fa-volume-up" aria-hidden="true"></i> sound',
 						'exhibitions' => '<i class="fa fa-picture-o" aria-hidden="true"></i> exhibitions',
-						'textile' => '<i class="fa fa-scissors" aria-hidden="true"></i> textile', 
-						'other' => '<i class="fa fa-ellipsis-h" aria-hidden="true"></i> other',  
+						'textile' => '<i class="fa fa-scissors" aria-hidden="true"></i> textile',
+						'other' => '<i class="fa fa-ellipsis-h" aria-hidden="true"></i> other',
 						'making' => '<i class="fa fa-cogs" aria-hidden="true"></i> making');
 
 ?>
