@@ -276,6 +276,8 @@ get_header(); ?>
 				$field_key = "field_570d4d3b389ea";
 				$field = get_field_object($field_key);
 
+				natsort($methodsavb);
+
 				if( $field )
 				{
 						foreach( $field['choices'] as $k => $v )
