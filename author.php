@@ -6,18 +6,18 @@
 
     <?php
     $curauth = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : get_userdata(intval($author));
-    
+
     $user_info = get_userdata($curauth->ID);
 	$excerpt = $user_info->description;
 	$hubemail = $user_info->user_email;
-	
+
 	$image_id = get_field('hub_logo','user_'.$curauth->ID);
 	$image = wp_get_attachment_image_src($image_id,"medium");
-	
+
 	$hub_id = $curauth->ID;
-		
+
     ?>
-    
+
 	<div class="row">
 		<div class="col-xs-12 col-sm-6 col-lg-3" style="text-align:center;">
 		<img src="<?php echo $image[0]; ?>" class="img-responsive"/>
@@ -34,9 +34,9 @@
 	<p>
 	<?php
 		$location = get_field('organization_location');
-		
+
 		echo $location['address'];
-		
+
 		?><img src="https://api.tiles.mapbox.com/v3/deklerk.map-57h1d46y/url-bit.ly%2F18KNEkg(<?php echo $location['lng'];?>,<?php echo $location['lat'];?>)/<?php echo $location['lng'];?>,<?php echo $location['lat'];?>,4/1000x300.png" class="img-rounded img-responsive">
 	</p>
 
@@ -46,8 +46,8 @@
 	<?php echo the_field('organization_profile'); ?>
 
 	<h2>Contact <?php echo the_field('organization_name'); ?></h2>
-	<?php 
-	
+	<?php
+
 	echo do_shortcode( '[contact-form-7 id="6076" title="Hub Contact"]' ); ?>
 
     <h2>Activities organized by this hub</h2>
@@ -55,31 +55,31 @@
 <!-- The Loop -->
 
 	<?php
-	
+
 	$postsone = get_posts(array(
 		'post_type'			=> 'activity',
 		'nopaging' 			=> true,
 		'author'			=> $hub_id
 	));
-	
+
 	$posts = $postsone;
 
-	
+
 	if( $posts ): ?>
-	
+
 				<div id="masonry" class="row">
-		
-	<?php foreach( $posts as $post ): 
-		
+
+	<?php foreach( $posts as $post ):
+
 		setup_postdata( $post )
-		
+
 		?>
 
 		<?php get_template_part( 'activityloop', get_post_format() ); ?>
 
 	<?php endforeach; ?>
 			</div>
-	
+
 	<?php wp_reset_postdata(); ?>
 
 <?php else: ?>
@@ -94,12 +94,12 @@
 <!-- The Loop -->
 
 	<?php
-	
+
 	$poststwo = get_posts(array(
 		'post_type'			=> 'activity',
 		'nopaging' 			=> true,
 		'meta_query'		=> array(
-			'relation'		=> 'OR', 
+			'relation'		=> 'OR',
 			array(
 				'key'	=> 'partner', // 'User' field type
 				'value' => sprintf(':"%s";', $hub_id),
@@ -107,25 +107,25 @@
 			)
 		)
 	));
-	
+
 	$posts = $poststwo;
 
-	
+
 	if( $posts ): ?>
-	
+
 		<div id="masonryb" class="row">
-		
-			<?php foreach( $posts as $post ): 
-		
+
+			<?php foreach( $posts as $post ):
+
 			setup_postdata( $post )
-		
+
 			?>
 
 			<?php get_template_part( 'activityloop', get_post_format() ); ?>
 
 			<?php endforeach; ?>
 		</div>
-	
+
 	<?php wp_reset_postdata(); ?>
 
 <?php else: ?>

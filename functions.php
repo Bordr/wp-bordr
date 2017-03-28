@@ -10,39 +10,39 @@ add_action('init', 'register_my_session');
 function my_deregister_javascript() {
 	wp_deregister_script( 'nu-scripts' );
 }
-// Adds shortcode for hub email as recipient for hub contact form  
+// Adds shortcode for hub email as recipient for hub contact form
 function custom_wpcf7_special_mail_tag( $output, $name, $html  ) {
 
-	$name = preg_replace( '/^wpcf7\./', '_', $name ); // for back-compat 
-	
-	$submission = WPCF7_Submission::get_instance(); 
-	
-	if ( ! $submission ) { 
-        return $output; 
-    } 
-	
-	if ( '_url' == $name ) { 
-        if ( $url = $submission->get_meta( 'url' ) ) { 
-            return esc_url( $url ); 
-        } else { 
-            return ''; 
-        } 
-    } 
+	$name = preg_replace( '/^wpcf7\./', '_', $name ); // for back-compat
+
+	$submission = WPCF7_Submission::get_instance();
+
+	if ( ! $submission ) {
+        return $output;
+    }
+
+	if ( '_url' == $name ) {
+        if ( $url = $submission->get_meta( 'url' ) ) {
+            return esc_url( $url );
+        } else {
+            return '';
+        }
+    }
 
     if ( '_hub_email' == $name) {
     	$url = $submission->get_meta( 'url' );
-		$tokens = explode('/', $url);
-		$youser = $tokens[sizeof($tokens)-2];
+  		$tokens = explode('/', $url);
+  		$youser = $tokens[sizeof($tokens)-2];
 
-		$hub = get_user_by('slug', $youser); 
+  		$hub = get_user_by('slug', $youser);
 
-		if ($hub) {
-			$hubemail = $hub->user_email;
+  		if ($hub) {
+  			$hubemail = $hub->user_email;
 		    return $hubemail;
-		} else {
-			return "no email ".$username;
-		}	
-		
+  		} else {
+  			return "no email ".$username;
+  		}
+
     }
 
 }
@@ -59,17 +59,17 @@ function doctype_opengraph($output) {
 add_filter('language_attributes', 'doctype_opengraph');
 function fb_opengraph() {
     global $post;
-    
+
     ?>
     <meta property="fb:app_id" content="1699080173711636"/>
     <?php
- 
+
 	if ( is_singular( 'bordr' ) ) {
         if(get_field('brdr_image')) {
 			$image = get_field('brdr_image');
 			$img_src = $image['sizes'][ 'large' ];
 			if ($image['sizes'][ 'large-width' ] < 200 || $image['sizes'][ 'large-height' ] < 200) {
-				$img_src = get_stylesheet_directory_uri() . '/img/egc_bg-cremesoda_400x300.jpg';			
+				$img_src = get_stylesheet_directory_uri() . '/img/egc_bg-cremesoda_400x300.jpg';
 			}
         } else {
             $img_src = get_stylesheet_directory_uri() . '/img/egc_bg-cremesoda_400x300.jpg';
@@ -81,27 +81,27 @@ function fb_opengraph() {
             $excerpt = strip_tags(get_bloginfo('description'));
         }
         ?>
- 
-    <meta property="og:title" content="<?php echo the_title(); ?>"/>
-    <meta property="og:description" content="<?php echo $excerpt; ?>"/>
-    <meta property="og:type" content="article"/>
-    <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
-    <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
-    <meta property="og:image" content="<?php echo $img_src; ?>"/>
-    
+
+  <meta property="og:title" content="<?php echo the_title(); ?>"/>
+  <meta property="og:description" content="<?php echo $excerpt; ?>"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
+  <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
+  <meta property="og:image" content="<?php echo $img_src; ?>"/>
+
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:site" content="@glograndcentral">
 	<meta name="twitter:title" content="<?php echo the_title(); ?>">
 	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
 	<meta name="twitter:image" content="<?php echo $img_src; ?>">
- 
+
 <?php
     } else if ( is_singular( 'activity' ) ) {
         if(get_field('departure_images')) {
 			$image = get_field('departure_images');
 			$img_src = $image[0]['sizes']['large'];
 			if ($image[0]['sizes'][ 'large-width' ] < 200 || $image[0]['sizes'][ 'large-height' ] < 200) {
-				$img_src = get_stylesheet_directory_uri() . '/img/egc_bg-cremesoda_400x300.jpg';			
+				$img_src = get_stylesheet_directory_uri() . '/img/egc_bg-cremesoda_400x300.jpg';
 			}
         } else {
             $img_src = get_stylesheet_directory_uri() . '/img/egc_bg-cremesoda_400x300.jpg';
@@ -113,20 +113,20 @@ function fb_opengraph() {
             $excerpt = strip_tags(get_bloginfo('description'));
         }
         ?>
- 
-    <meta property="og:title" content="<?php echo the_title(); ?>"/>
-    <meta property="og:description" content="<?php echo $excerpt; ?>"/>
-    <meta property="og:type" content="article"/>
-    <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
-    <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
-    <meta property="og:image" content="<?php echo $img_src; ?>"/>
- 
+
+  <meta property="og:title" content="<?php echo the_title(); ?>"/>
+  <meta property="og:description" content="<?php echo $excerpt; ?>"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
+  <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
+  <meta property="og:image" content="<?php echo $img_src; ?>"/>
+
  	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:site" content="@glograndcentral">
 	<meta name="twitter:title" content="<?php echo the_title(); ?>">
 	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
 	<meta name="twitter:image" content="<?php echo $img_src; ?>">
- 
+
 <?php
     } else if ( is_page() ) {
         if(has_post_thumbnail() ) {
@@ -141,45 +141,45 @@ function fb_opengraph() {
             $excerpt = strip_tags(get_bloginfo('description'));
         }
         ?>
- 
-    <meta property="og:title" content="<?php echo the_title(); ?>"/>
-    <meta property="og:description" content="<?php echo $excerpt; ?>"/>
-    <meta property="og:type" content="article"/>
-    <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
-    <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
-    <meta property="og:image" content="<?php echo $img_src; ?>"/>
+
+  <meta property="og:title" content="<?php echo the_title(); ?>"/>
+  <meta property="og:description" content="<?php echo $excerpt; ?>"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="<?php echo the_permalink(); ?>"/>
+  <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
+  <meta property="og:image" content="<?php echo $img_src; ?>"/>
 
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:site" content="@glograndcentral">
 	<meta name="twitter:title" content="<?php echo the_title(); ?>">
 	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
 	<meta name="twitter:image" content="<?php echo $img_src; ?>">
- 
+
 <?php
     } else if ( is_post_type_archive( 'bordr' ) ) {
-		$img_src = get_stylesheet_directory_uri() . '/img/egc_logo_600x340.jpg';			
+		$img_src = get_stylesheet_directory_uri() . '/img/egc_logo_600x340.jpg';
 ?>
- 
-    <meta property="og:title" content="Bordr Stories"/>
-    <meta property="og:description" content="Bordrs are stories, impressions, experiences of a border."/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="<?php echo esc_url( get_post_type_archive_link( 'bordr' ) ); ?>"/>
-    <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
-    <meta property="og:image" content="<?php echo $img_src; ?>"/>
+
+  <meta property="og:title" content="Bordr Stories"/>
+  <meta property="og:description" content="Bordrs are stories, impressions, experiences of a border."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="<?php echo esc_url( get_post_type_archive_link( 'bordr' ) ); ?>"/>
+  <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
+  <meta property="og:image" content="<?php echo $img_src; ?>"/>
 
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:site" content="@glograndcentral">
 	<meta name="twitter:title" content="Bordr Stories">
 	<meta name="twitter:description" content="Bordrs are stories, impressions, experiences of a border.">
 	<meta name="twitter:image" content="<?php echo $img_src; ?>">
- 
+
 <?php
     } else if ( is_author() ) {
         if(get_field('organization_logo')) {
 			$image = get_field('organization_logo');
 			$img_src = $image[0]['sizes']['large'];
 			if ($image[0]['sizes'][ 'large-width' ] < 200 || $image[0]['sizes'][ 'large-height' ] < 200) {
-				$img_src = get_stylesheet_directory_uri() . '/img/egc_bg-cremesoda_400x300.jpg';			
+				$img_src = get_stylesheet_directory_uri() . '/img/egc_bg-cremesoda_400x300.jpg';
 			}
         } else {
             $img_src = get_stylesheet_directory_uri() . '/img/egc_bg-cremesoda_400x300.jpg';
@@ -189,42 +189,42 @@ function fb_opengraph() {
             $excerpt = strip_tags(str_replace("", "'", $excerpt));
         } else {
             $excerpt = strip_tags(get_bloginfo('description'));
-        }			
+        }
 		$excerpt = strip_tags(get_bloginfo('description'));
 ?>
- 
-    <meta property="og:title" content="<?php echo get_field('organization_name'); ?>"/>
-    <meta property="og:description" content="<?php echo $excerpt; ?>"/>
-    <meta property="og:type" content="article"/>
-    <meta property="og:url" content="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>"/>
-    <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
-    <meta property="og:image" content="<?php echo $img_src; ?>"/>
- 
+
+  <meta property="og:title" content="<?php echo get_field('organization_name'); ?>"/>
+  <meta property="og:description" content="<?php echo $excerpt; ?>"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>"/>
+  <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
+  <meta property="og:image" content="<?php echo $img_src; ?>"/>
+
  	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:site" content="@glograndcentral">
 	<meta name="twitter:title" content="<?php echo get_field('organization_name'); ?>">
 	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
 	<meta name="twitter:image" content="<?php echo $img_src; ?>">
- 
+
 <?php
     } else if ( is_home() ) {
-		$img_src = get_stylesheet_directory_uri() . '/img/egc_logo_600x340.jpg';			
+		$img_src = get_stylesheet_directory_uri() . '/img/egc_logo_600x340.jpg';
 		$excerpt = strip_tags(get_bloginfo('description'));
 ?>
- 
-    <meta property="og:title" content="Global Grand Central"/>
-    <meta property="og:description" content="<?php echo $excerpt; ?>"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="<?php echo esc_url( home_url() ); ?>"/>
-    <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
-    <meta property="og:image" content="<?php echo $img_src; ?>"/>
- 
-  	<meta name="twitter:card" content="summary_large_image">
+
+  <meta property="og:title" content="Global Grand Central"/>
+  <meta property="og:description" content="<?php echo $excerpt; ?>"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="<?php echo esc_url( home_url() ); ?>"/>
+  <meta property="og:site_name" content="<?php echo get_bloginfo(); ?>"/>
+  <meta property="og:image" content="<?php echo $img_src; ?>"/>
+
+	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:site" content="@glograndcentral">
 	<meta name="twitter:title" content="Global Grand Central">
 	<meta name="twitter:description" content="<?php echo $excerpt; ?>">
 	<meta name="twitter:image" content="<?php echo $img_src; ?>">
- 
+
 <?php
     } else {
         return;
@@ -250,7 +250,6 @@ function bordr_table_content( $column_name, $post_id ) {
       break;
     case 'related_activity':
       $activity = get_post_meta( $post_id, 'related_activity', true );
-//       $activity = get_post_meta( $activity, 'related_activity', true );
 	  $activity = get_post($activity);
       echo $activity->post_title;
       break;
@@ -293,23 +292,29 @@ function brdr_archive_random( $query ) {
 		   $seed = rand();
 		   $_SESSION['seed'] = $seed;
 		  }
-
         $query->set( 'orderby', 'rand('.$seed.')' );
-
     }
 
 }
 add_action( 'pre_get_posts', 'brdr_archive_random' );
+
+function bordr_infinite_scroll_paging( $args ) {
+    if ( 'bordr' === $args['post_type'] ) {
+        $args['paged']++;
+    }
+    return $args;
+}
+add_filter( 'infinite_scroll_query_args', 'bordr_infinite_scroll_paging', 100 );
 
 function my_acf_init() {
 	acf_update_setting('google_api_key', 'AIzaSyD46ZIXV0LS1gBcNiXMkV-Td66f0HpgNUY');
 }
 add_action('acf/init', 'my_acf_init');
 function wpsites_home_page_cpt_filter($query) {
-if ( !is_admin() && $query->is_main_query() && is_home() ) {
-$query->set('post_type', array( 'activity', 'bordr' ) );
-    }
+  if ( !is_admin() && $query->is_main_query() && is_home() ) {
+    $query->set('post_type', array( 'activity', 'bordr' ) );
   }
+}
 add_action('pre_get_posts','wpsites_home_page_cpt_filter',20);
 /**
  * Sort our repeater fields array by date subfield descending
@@ -353,7 +358,9 @@ function my_custom_menu_item( $items, $args ) {
         $user=wp_get_current_user();
         $name=$user->display_name; // or user_login , user_firstname, user_lastname
 		$loginurl=$user->user_login; // or user_login , user_firstname, user_lastname
-        $items .= '<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . home_url() . '/author/' . $loginurl . '/" data-toggle="dropdown" class="dropdown-toggle">Hello, '.$name.' <i class="fa fa-angle-down" aria-hidden="true"></i></a><ul role="menu" class="dropdown-menu"><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . home_url() . '/author/' . $loginurl . '/">View Your Hub Profile</a><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/wp-admin/profile.php">Edit Your Hub Profile</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/wp-admin/edit.php?post_type=activity">Edit Activities</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/wp-admin/edit.php?post_type=bordr">Edit Bordr Stories</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/wp-admin/edit-comments.php">Moderate Comments</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="'.wp_logout_url( get_permalink() ).'">Logout</a></li></ul></li>';
+        $items .= '<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . home_url() . '/author/' . $loginurl . '/" data-toggle="dropdown" class="dropdown-toggle">Hello, '.$name.' <i class="fa fa-angle-down" aria-hidden="true"></i></a><ul role="menu" class="dropdown-menu"><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="' . home_url() . '/author/' . $loginurl . '/">View Your Hub Profile</a>';
+        $items .= '<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/wp-admin/profile.php">Edit Your Hub Profile</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/wp-admin/edit.php?post_type=activity">Edit Activities</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/wp-admin/edit.php?post_type=bordr">Edit Bordr Stories</a></li>';
+        $items .= '<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/wp-admin/edit-comments.php">Moderate Comments</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="'.wp_logout_url( get_permalink() ).'">Logout</a></li></ul></li>';
 	}
 	return $items;
 }
@@ -458,42 +465,42 @@ function prefix_hide_personal_options() {
 <?php
 }
 // ACTIVITY FILTER FUNCTIONS
-$GLOBALS['my_query_filters'] = array( 
+$GLOBALS['my_query_filters'] = array(
 	'author'	=> 'hub',
 	'location'	=> 'ctry',
 	'relact'	=> 'relact'
 );
 // array of filters (field key => field name)
-$GLOBALS['my_meta_query_filters'] = array( 
-	'field_1'	=> 'method', 
-	'field_2'	=> 'char', 
+$GLOBALS['my_meta_query_filters'] = array(
+	'field_1'	=> 'method',
+	'field_2'	=> 'char',
 	'field_3'	=> 'perception'
 );
 // action
 add_action('pre_get_posts', 'my_pre_get_posts', 20);
 function my_pre_get_posts( $query ) {
-	
+
   if( $query->is_main_query() ){
 	// bail early if is in admin
 	if( is_admin() ) {
-		
+
 		return;
-		
+
 	}
-	
+
 	// loop over filters
 	foreach( $GLOBALS['my_query_filters'] as $key => $name ) {
-		
+
 		// continue if not found in url
 		if( empty($_GET[ $name ]) && empty($_SESSION[ $name ])) {
-			
+
 			continue;
-			
+
 		}
-		
+
 		if ($key == "author") {
 			if (!empty($_GET[ $name ])) {
-				// set session 
+				// set session
 				$_SESSION[$name] = $_GET[ $name ];
 				$value = explode(',', $_GET[ $name ]);
 				$addQ = 1;
@@ -504,15 +511,15 @@ function my_pre_get_posts( $query ) {
 				unset($_SESSION[ $name ]);
 				$addQ = 0;
 			}
-			if ($addQ > 0) {		
+			if ($addQ > 0) {
 				// append to query
-				$query->set( 'author__in' , $value ); 
+				$query->set( 'author__in' , $value );
 			}
-		} 
-		
+		}
+
 		if ($key == "location") {
 			if (!empty($_GET[ $name ])) {
-				// set session 
+				// set session
 				$_SESSION[$name] = $_GET[ $name ];
 				$value = $_GET[ $name ];
 				$addQ = 1;
@@ -523,7 +530,7 @@ function my_pre_get_posts( $query ) {
 				unset($_SESSION[ $name ]);
 				$addQ = 0;
 			}
-			
+
 			if ($addQ > 0) {
 				$arg = array(
 						'meta_key'		=> 'organization_location',
@@ -531,14 +538,14 @@ function my_pre_get_posts( $query ) {
 						'meta_compare'	=>'LIKE',
 						'fields'	=> 'ID'
 				);
-			
+
 				$ctryusers = get_users($arg);
-				$query->set( 'author__in' , $ctryusers ); 
+				$query->set( 'author__in' , $ctryusers );
 			}
-		} 
+		}
 		if ($key == "relact") {
 			if (!empty($_GET[ $name ])) {
-				// set session 
+				// set session
 				$_SESSION[$name] = $_GET[ $name ];
 				$value = $_GET[ $name ];
 				$addQ = 1;
@@ -549,7 +556,7 @@ function my_pre_get_posts( $query ) {
 				unset($_SESSION[ $name ]);
 				$addQ = 0;
 			}
-			if ($addQ > 0) {			
+			if ($addQ > 0) {
 				$arg = array(
 						'post_type'         => 'bordr',
 						'meta_query'        => array(
@@ -562,25 +569,25 @@ function my_pre_get_posts( $query ) {
 				$query->set('meta_query', $arg);
 			}
 		}
-        
-	} 
-	
+
+	}
+
 	// get meta query
 	$meta_query = $query->get('meta_query');
-	
+
 	// loop over filters
 	foreach( $GLOBALS['my_meta_query_filters'] as $key => $name ) {
-		
+
 		// continue if not found in url
 		if( empty($_GET[ $name ]) && empty($_SESSION[ $name ])) {
-			
+
 			continue;
-			
+
 		}
-		
+
 		if ((isset($_GET[ $name ]) && $name == 'char') || (isset($_SESSION[ $name ]) && $name == 'char')) {
 			if (!empty($_GET[ 'char' ])) {
-				// set session 
+				// set session
 				$_SESSION['char'] = $_GET[ 'char' ];
 				$_SESSION['charval'] = $_GET[ 'charval' ];
 				$ckey = $_GET[ 'char' ];
@@ -597,9 +604,9 @@ function my_pre_get_posts( $query ) {
 				unset($_SESSION[ 'charval' ]);
 				$addQ = 0;
 			}
-		
+
 			if ($addQ > 0) {
-				if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
+				if ($cvalue == 100) { $cvalue = 60; $compare = ">"; }
 				else { $cvalue = 40; $compare = "<"; }
 				// append meta query
 				$meta_query[] = array(
@@ -612,12 +619,12 @@ function my_pre_get_posts( $query ) {
 					'key'		=> $ckey."_rel",
 					'value'		=> 1,
 					'compare'	=> '='
-				);		
-			}	
-			
+				);
+			}
+
 		} else if ((isset($_GET[ $name ]) && $name == 'perception') || (isset($_SESSION[ $name ]) && $name == 'perception')) {
 			if (!empty($_GET[ 'perception' ])) {
-				// set session 
+				// set session
 				$_SESSION['perception'] = $_GET[ 'perception' ];
 				$_SESSION['perceptionval'] = $_GET[ 'perceptionval' ];
 				$ckey = $_GET[ 'perception' ];
@@ -634,9 +641,9 @@ function my_pre_get_posts( $query ) {
 				unset($_SESSION[ 'perceptionval' ]);
 				$addQ = 0;
 			}
-		
+
 			if ($addQ > 0) {
-				if ($cvalue == 100) { $cvalue = 60; $compare = ">"; } 
+				if ($cvalue == 100) { $cvalue = 60; $compare = ">"; }
 				else { $cvalue = 40; $compare = "<"; }
 				// append meta query
 				$meta_query[] = array(
@@ -646,10 +653,10 @@ function my_pre_get_posts( $query ) {
 					'type' => 'numeric'
 				);
 			}
-		
+
 		} else if ((isset($_GET[ $name ]) && $name == 'method') || (isset($_SESSION[ $name ]) && $name == 'method')) {
 			if (!empty($_GET[ 'method' ])) {
-				// set session 
+				// set session
 				$_SESSION['method'] = $_GET[ 'method' ];
 				$ckey = $_GET[ 'method' ];
 				$addQ = 1;
@@ -662,9 +669,9 @@ function my_pre_get_posts( $query ) {
 				unset($_SESSION[ 'method' ]);
 				$addQ = 0;
 			}
-		
+
 			if ($addQ > 0) {
-		
+
 				// append meta query
 				$meta_query[] = array(
 					'key'		=> 'method_icons',
@@ -672,10 +679,10 @@ function my_pre_get_posts( $query ) {
 					'compare'	=> 'LIKE'
 				);
 			}
-			
+
 		} else {
 			if (!empty($_GET[ $name ])) {
-				// set session 
+				// set session
 				$_SESSION[$name] = $_GET[ $name ];
 				$value = explode(',', $_GET[ $name ]);
 				$addQ = 1;
@@ -688,7 +695,7 @@ function my_pre_get_posts( $query ) {
 				unset($_SESSION[ $name ]);
 				$addQ = 0;
 			}
-			if ($addQ > 0) {		
+			if ($addQ > 0) {
 				// append meta query
 				$meta_query[] = array(
 					'key'		=> $key,
@@ -697,9 +704,9 @@ function my_pre_get_posts( $query ) {
 				);
 			}
 		}
-        
-	} 
-	
+
+	}
+
 		if ($addFQ > 0) {
 			// update meta query
 			$query->set('meta_query', $meta_query);
@@ -2486,50 +2493,50 @@ function infinite_scroll_init() {
 add_action( 'after_setup_theme', 'infinite_scroll_init' );
 // add_filter( 'infinite_scroll_query_args', 'my_auto_args' );
 function renderMasonry() {
-	while ( have_posts() ) : the_post(); 
+	while ( have_posts() ) : the_post();
 		if (get_post_type( get_the_ID() ) == 'activity') {
 		 get_template_part( 'activityloop', get_post_format() );
 		} else if (get_post_type( get_the_ID() ) == 'bordr') {
-		 get_template_part( 'bordrloop', get_post_format() ); 
+		 get_template_part( 'bordrloop', get_post_format() );
 		}
 	endwhile;
 }
 function my_auto_args($args) {
-		
+
 	// loop over filters
 	foreach( $GLOBALS['my_query_filters'] as $key => $name ) {
-	
+
 		// continue if not found in url
 		if( empty($_SESSION[ $name ]) ) {
-			
+
 			continue;
-			
+
 		}
-			
+
 		if ($key == "author") {
 			// get the value for this filter
 			$value = explode(',', $_SESSION[ $name ]);
-		
+
 			// append to query
 			$args['author__in'] = $value;
 		}
-		
+
 		if ($key == "location") {
 			$value = $_SESSION[ $name ];
-			
+
 			$arg = array(
 					'meta_key'		=> 'organization_location',
 					'meta_value'	=> sprintf('%s";', $value),
 					'meta_compare'	=>'LIKE',
 					'fields'	=> 'ID'
 			);
-			
+
 			$ctryusers = get_users($arg);
 			$args['author__in'] = $ctryusers;
 		}
 		if ($key == "relact") {
 			$value = $_SESSION[ $name ];
-			
+
 			$arg = array(
 					'post_type'         => 'bordr',
 					'meta_query'        => array(
@@ -2541,9 +2548,9 @@ function my_auto_args($args) {
 			);
 			$args['meta_query'] = $arg;
 		}
-        
-	} 
-		
+
+	}
+
 	return $args;
 }
 ?>

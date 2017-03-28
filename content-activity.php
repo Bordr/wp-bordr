@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Nu Themes
+ * @package Bordr
  */
 
 global $post;
@@ -21,7 +21,7 @@ $posts = get_posts(array(
 ?>
 
 <?php if(current_user_can('edit_post')): ?>
-  <div class="row"> 
+  <div class="row">
   	<div class="col-xs-12" style="text-align:right;">
 	  <div style="margin: 0 0 1em;">
 		<a href="/add-activity?post_id=<?php the_ID() ?>" class="btn btn-primary">
@@ -88,13 +88,13 @@ if( $gallery ): ?>
 	    if ($( window ).width() > 1200) {
 		    $('.site-sidebar').fadeIn();
 		} else {
-			el.removeClass('hidden');		
+			el.removeClass('hidden');
 		}
 	  } else {
 	    if ($( window ).width() > 1200) {
 		    $('.site-sidebar').fadeOut();
 		} else {
-			el.addClass('hidden');		
+			el.addClass('hidden');
 		}
 	  }
     }
@@ -147,7 +147,7 @@ if( $gallery ): ?>
 		<?php endfor; ?>
 
 		<p class="before-header"><a href="/activity">Activity</a></p>
-		
+
 		<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" class="activity-title">
 		<h1><?php the_title(); ?></h1>
 		</a>
@@ -546,7 +546,7 @@ if( $gallery ): ?>
 		<?php $image_id = get_field('hub_logo','user_'.get_the_author_meta( 'ID' )); ?>
 			An activity by <?php nuthemes_posted_by(); ?>
 		</small>
-		
+
 		<h5>Contents</h5>
         <ul style="list-style: none;padding-left: 10px;">
 		  <?php if (get_field('why_description')) : ?>

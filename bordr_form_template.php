@@ -5,15 +5,15 @@
  * Template Name: Bordr Form
  */
 function my_kses_post( $value ) {
-	
+
 	// is array
 	if( is_array($value) ) {
-	
+
 		return array_map('my_kses_post', $value);
-	
+
 	}
-	
-	
+
+
 	// return
 	return wp_kses_post( $value );
 
@@ -44,7 +44,7 @@ acf_form_head(); ?>
 										'post_status'		=> 'publish'
 									),
 									'uploader' => 'basic',
-									'return' => '/bordr/#GuestStoryAdded',
+									'return' => '%post_url%#GuestStoryAdded',
 									'submit_value'		=> 'Add a bordr story'
 								)); ?>
 
@@ -54,7 +54,7 @@ acf_form_head(); ?>
 									'post_id'		=> 'new_post',
 									'fields'		=> array(
 										'field_57d820ae30eea',
-										'field_57d820c230eeb', 
+										'field_57d820c230eeb',
 										'field_57d82e9f34b90',
 										'field_57d82ee034b91',
 										'field_57d82ff134b93',
@@ -62,14 +62,14 @@ acf_form_head(); ?>
 										'field_57d8306d34b95',
 										'field_57d8310a34b97',
 										'field_57d8319e34b98'
-									), 
+									),
 									'html_after_fields' => '<input type="hidden" name="acf[field_57d82e1934b8f]" value="697"/>',
 									'new_post'		=> array(
 										'post_type'		=> 'bordr',
 										'post_status'		=> 'publish'
 									),
 									'uploader' => 'basic',
-									'return' => '/bordr/#StoryAdded',
+									'return' => '%post_url%#StoryAdded',
 									'submit_value'		=> 'Add a bordr story'
 								)); ?>
 
@@ -84,11 +84,11 @@ acf_form_head(); ?>
 
 <script type="text/javascript">
 (function($) {
-	
+
 	// setup fields
 	acf.do_action('append', $('#popup-id'));
-	
-})(jQuery);	
+
+})(jQuery);
 </script>
 
 <?php
