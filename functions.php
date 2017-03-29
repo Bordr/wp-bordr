@@ -671,13 +671,36 @@ function my_pre_get_posts( $query ) {
 			}
 
 			if ($addQ > 0) {
+        if ($ckey == "bordr") {
 
-				// append meta query
-				$meta_query[] = array(
-					'key'		=> 'method_icons',
-					'value'		=> '"'.$ckey.'"',
-					'compare'	=> 'LIKE'
-				);
+          $hub_q = new WP_Query(array(
+                    'post_type' => 'bordr',
+                    'posts_per_page' => -1
+                  ));
+
+  				if ( $hub_q->have_posts() ) :
+  					while ( $hub_q->have_posts() ) : $hub_q->the_post();
+              $bordr_in = get_field('related_activity');
+              if( $bordr_in )
+              {
+              		$bordr_acts[] = $bordr_in->ID;
+              }
+            endwhile;
+  					wp_reset_query();
+  				endif;
+
+          $bordr_acts = array_unique($bordr_acts);
+
+          $query->set('post__in', $bordr_acts);
+
+        } else {
+  				// append meta query
+  				$meta_query[] = array(
+  					'key'		=> 'method_icons',
+  					'value'		=> '"'.$ckey.'"',
+  					'compare'	=> 'LIKE'
+  				);
+        }
 			}
 
 		} else {

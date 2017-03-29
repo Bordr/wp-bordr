@@ -270,7 +270,7 @@ get_header(); ?>
 				<li><a href="#methodfilter" data-method="">All Methods</a></li>
 				<?php
 				if( $bordrposts ): ?>
-					<li><a href="#methodfilter" data-method="bordr"><img src="/wp-content/themes/bordr/img/ggc-arrows-96x104.png" width="18"> Bordr Stories</a></li>
+					<li><a href="#methodfilter" data-method="bordr" class="filter" data-filter="method"><img src="/wp-content/themes/bordr/img/ggc-arrows-96x104.png" width="18"> Bordr Stories</a></li>
 				<?php endif;
 
 				$field_key = "field_570d4d3b389ea";

@@ -31,10 +31,9 @@ $related_activity = get_field('related_activity');
 			<div class="row story-preview">
 					<?php
 					  if($image) {
-						 ?><img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" class="img-responsive story-img"/><?php
-					  }
-					  else {
-						?><img src="/wp-content/themes/bordr/img/ggc-default-img.png" class="img-responsive story-img"/><?php
+							?><img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" class="img-responsive"/><?php
+					  } else {
+							?><img src="/wp-content/themes/bordr/img/ggc-default-img.png" class="img-responsive"/><?php
 					  }
 					?>
 					<div class="expand-story">Learn more...</div>
