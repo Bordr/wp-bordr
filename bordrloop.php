@@ -26,18 +26,15 @@ $related_activity = get_field('related_activity');
 		<div class="down-arrow">
 			<img class="arrow-img" src="/wp-content/themes/bordr/img/down-arrow.png" />
 		</div>
-
-		<div class="clearfix entry-summary">
-			<div class="row story-preview">
-					<?php
-					  if($image) {
-							?><img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" class="img-responsive"/><?php
-					  } else {
-							?><img src="/wp-content/themes/bordr/img/ggc-default-img.png" class="img-responsive"/><?php
-					  }
-					?>
-					<div class="expand-story">Learn more...</div>
-			</div>
+		<div class="story-preview">
+				<?php
+				  if($image) {
+						?><img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>" class="img-responsive"/><?php
+				  } else {
+						?><img src="/wp-content/themes/bordr/img/ggc-default-img.png" class="img-responsive"/><?php
+				  }
+				?>
+				<div class="expand-story">Learn more...</div>
 		</div>
 		<div class="up-arrow">
 			<img class="arrow-img" src="/wp-content/themes/bordr/img/up-arrow.png" />

@@ -160,11 +160,12 @@ img.arrow-img {
 }
 
 .story-preview {
+  margin-right: -15px;
+  margin-left: -15px;
 	margin-top: -55px;
 	margin-bottom: -55px;
 	padding-left: 0 !important;
 	padding-right: 0 !important;
-	float:left;
 	position: relative;
 	z-index: 0;
 	opacity: 0.5;
@@ -308,7 +309,7 @@ img.related-story-img-even {
 }
 .tlabel .detail {
   font-size: 1.2rem;
-  overflow: hidden; 
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 .tlabel:before {
@@ -347,7 +348,7 @@ html {
     font-size: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
 }
-body { 
+body {
 /*     padding-top: 65px;  */
 }
 #infoMenu {
@@ -378,8 +379,8 @@ margin: 0px 10px 4px;
 	display:inline-block;	margin: 5px;	color: #000;
 	background:#fff;
 	background: rgba(255,255,255, 0.5);
-	-webkit-border-radius: 5px; 
-            border-radius: 5px; 
+	-webkit-border-radius: 5px;
+            border-radius: 5px;
 }
 #infoMenu .dk ul li.active{
 	background:#666;
@@ -396,8 +397,8 @@ margin: 0px 10px 4px;
 	background:#666;
 	background: rgba(0,0,0, 0.3);
 	color: #000;
-	-webkit-border-radius: 5px; 
-            border-radius: 5px; 
+	-webkit-border-radius: 5px;
+            border-radius: 5px;
 }
 #infoMenu .dk ul li:hover{
 	background: rgba(255,255,255, 0.8);
@@ -422,35 +423,35 @@ margin: 0px 10px 4px;
 #infoMenu ul li {
 /* 	display:inline-block; */
 /* 	margin: 5px; */
-/* 
+/*
 	color: #000;
 	background:#fff;
 	background: rgba(255,255,255, 0.5);
-	-webkit-border-radius: 5px; 
-            border-radius: 5px; 
+	-webkit-border-radius: 5px;
+            border-radius: 5px;
  */
 }
 #infoMenu ul li.active{
-/* 
+/*
 	background:#666;
 	background: rgba(0,0,0, 0.5);
 	color: #fff;
  */
 }
 #infoMenu ul li a{
-/* 
+/*
 	text-decoration:none;
 	color: #000;
  */
   	padding: 8px 11px;
 }
 #infoMenu ul li.active a:hover{
-/* 
+/*
 	background:#666;
 	background: rgba(0,0,0, 0.3);
 	color: #000;
-	-webkit-border-radius: 5px; 
-            border-radius: 5px; 
+	-webkit-border-radius: 5px;
+            border-radius: 5px;
  */
 }
 #infoMenu ul li:hover{
@@ -458,7 +459,7 @@ margin: 0px 10px 4px;
 }
 #infoMenu ul li a,
 #infoMenu ul li.active a{
-/* 
+/*
 	padding: 8px 14px;
 	display:block;
  */
@@ -480,7 +481,7 @@ margin: 0px 10px 4px;
 .bottom-up {top: auto; bottom: 100%; margin-left:-149px; }
 .navbar .dropdown-menu.bottom-up:before { border-bottom: 0px solid transparent !important; border-top: 7px solid rgba(0, 0, 0, 0.2); top: auto !important; bottom: -7px; }
 .navbar .dropdown-menu.bottom-up:after  { border-bottom: 0px solid transparent !important; border-top: 6px solid white;              top: auto !important; bottom: -6px; }
-.navbar-brand { 
+.navbar-brand {
 	font-family: "Neuton", serif; font-weight: 700; font-size: 1.75em; padding-top: 0.5em;
 }
 h1 {
@@ -502,7 +503,7 @@ small {
   float: none;
 }
 .inner-item {
-	background-size: cover; 
+	background-size: cover;
 	background-position: 50% 40%;
 	margin: 0 auto;
 }
@@ -559,7 +560,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 	color: #7f7f7f;
 }
 
-/* 
+/*
 .btn-facebook {
 	display: none;
 }
@@ -568,7 +569,7 @@ a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active {
 .btn-facebook:hover {
 	color: white;
 }
- 
+
 #map { position:relative; top:0; bottom:0; width:100%; height: 280px;}
 
 .sliders {
@@ -711,10 +712,10 @@ label {
 	#vmap { right:0; margin-top: -6%; width: 400px; z-index:-2; }
 
 	.postnote { top:0em; }
-	
+
 	.inner-item {
 		height:500px;
-		max-width:500px;	
+		max-width:500px;
 	}
 	.am-container img{
 		width:300px;
@@ -733,7 +734,7 @@ label {
 	#stats svg text {
 		font-size: 1em;
 	}
-	
+
 	#crossingmetric, #crossingmetric svg {
 		width: 700px;
 		height: 300px;
@@ -744,7 +745,7 @@ label {
 	}
 	#stats svg g .x .tick:nth-child(2n) text {
 		display: block;
-	} 
+	}
 	.captiontitle {
 		font-size: 1.4em;
 	}
@@ -765,7 +766,7 @@ label {
 		width: 100%;
 	}
 	#bordercard {
-	
+
 		width: 140%;
 		display: block;
 		left: -110px;
@@ -776,7 +777,7 @@ label {
 	}
 	#cardmetrics {
 		margin-left: -30px;
-		width: 270px; 
+		width: 270px;
 	}
 	.crdDesc {
 		height: 170px;
@@ -834,7 +835,7 @@ label {
 	}
 	#stats svg g .x .tick:nth-child(2n) text {
 		display: none;
-	} 
+	}
 	.captiontitle {
 		font-size: 1.4em;
 		text-align: center;
@@ -857,7 +858,7 @@ label {
 	}
 	#cardmetrics {
 		margin-left: 0px;
-		width: 270px; 
+		width: 270px;
 		margin-bottom: 10px;
 	}
 	.crdDesc {
@@ -869,7 +870,7 @@ label {
 		margin: 45px auto;
 	}
 	.modal-dialog-nopad {
-		padding: 0px;	
+		padding: 0px;
 	}
 	#bordercard img {
 		max-width: 320px;
@@ -884,7 +885,7 @@ label {
 	  padding: 0px;
 	  height: 320px;
 	  background-color: white;
-  
+
 	}
 	#activities-masonry, #stories-masonry {
 		display: none;
