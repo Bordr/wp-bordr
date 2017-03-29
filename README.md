@@ -4,7 +4,7 @@ A wordpress theme for sharing activities and stories
 # Where this theme is used
 http://www.globalgrandcentral.net
 
-# Plugin dependencies for this theme
+# Plugin dependencies
 - Advanced Custom Fields PRO - Elio Condon
 - Advanced Custom Fields: Number Slider - Q Studio
 - Character Limit for ACF Fields
