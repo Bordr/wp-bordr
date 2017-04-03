@@ -4,33 +4,38 @@
 
 <!-- This sets the $curauth variable -->
 
-    <?php
-    $curauth = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : get_userdata(intval($author));
-
-    $user_info = get_userdata($curauth->ID);
+<?php
+  $curauth = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : get_userdata(intval($author));
+  $user_info = get_userdata($curauth->ID);
 	$excerpt = $user_info->description;
 	$hubemail = $user_info->user_email;
-
 	$image_id = get_field('hub_logo','user_'.$curauth->ID);
 	$image = wp_get_attachment_image_src($image_id,"medium");
-
 	$hub_id = $curauth->ID;
+  $hub_name = get_field('organization_name');
+  ?>
 
-    ?>
+  <header class="entry-header">
+  	<div class="row">
+  		<div class="col-xs-12 col-sm-6 col-lg-4" style="text-align:center;">
+  		    <img src="<?php echo $image[0]; ?>" class="img-responsive"/>
+  		</div>
+  	</div>
 
-	<div class="row">
-		<div class="col-xs-12 col-sm-6 col-lg-3" style="text-align:center;">
-		<img src="<?php echo $image[0]; ?>" class="img-responsive"/>
-		</div>
-	</div>
-
-	<h1>Hub: <?php echo the_field('organization_name'); ?></h1>
-
-	<p class="lead"><?php echo esc_html($excerpt); ?></p>
+    <div class="row" style="margin-top:1em;">
+  		<div class="col-xs-12">
+        <p class="before-header"><a href="/hubs/">Hub</a></p>
+        <a href="/author/<?php echo $author_name; ?>/" title="<?php the_title_attribute(); ?>" class="hub-title">
+  	       <h1><?php echo the_field('organization_name'); ?></h1>
+        </a>
+	      <p class="lead"><?php echo esc_html($excerpt); ?></p>
+      </div>
+    </div>
+  </header>
 
 	<p><a href="<?php echo $curauth->user_url; ?>"><?php echo $curauth->user_url; ?></a></p>
 
-	<h2>Hub location</h2>
+	<h2 id="location">Hub location</h2>
 	<p>
 	<?php
 		$location = get_field('organization_location');
@@ -41,16 +46,16 @@
 	</p>
 
 	<?php if ( get_field('organization_profile') ) : ?>
-		<h2>About this hub</h2>
+		<h2 id="about">About this hub</h2>
 	<?php endif; ?>
 	<?php echo the_field('organization_profile'); ?>
 
-	<h2>Contact <?php echo the_field('organization_name'); ?></h2>
+	<h2 id="contact">Contact <?php echo the_field('organization_name'); ?></h2>
 	<?php
 
 	echo do_shortcode( '[contact-form-7 id="6076" title="Hub Contact"]' ); ?>
 
-    <h2>Activities organized by this hub</h2>
+    <h2 id="activities">Activities organized by this hub</h2>
 
 <!-- The Loop -->
 
@@ -89,7 +94,7 @@
 
 <!-- End Loop -->
 
-    <h2>Activities involving this hub</h2>
+    <h2 id="involving">Activities involving this hub</h2>
 
 <!-- The Loop -->
 
@@ -136,4 +141,71 @@
 <!-- End Loop -->
 
 </div>
+
+<?php wp_reset_postdata(); ?>
+
+<div class="site-sidebar no-print">
+  <a href="#">
+  <h4><?php echo $hub_name; ?></h4>
+  </a>
+
+  <h5>Contents</h5>
+      <ul style="list-style: none;padding-left: 10px;">
+      <li><a href="#location">Location</a></li>
+      <?php if(get_field('organization_profile')): ?>
+      <li><a href="#about">About</a></li>
+      <?php endif; ?>
+      <li><a href="#contact">Contact</a></li>
+      <?php if(count($postsone) > 0): ?>
+      <li><a href="#activities">Activities organized by <?php echo $hub_name; ?></a></li>
+      <?php endif; ?>
+      <?php if(count($poststwo) > 0): ?>
+      <li><a href="#involving">Activities involving <?php echo $hub_name; ?></a></li>
+      <?php endif; ?>
+  </ul>
+  <?php if(current_user_can('edit_post')): ?>
+  <a href="/wp-admin/user-edit.php?user_id=?<?php echo $hub_id; ?>">
+    <h5><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?></h5>
+  </a>
+  <?php endif; ?>
+  <?php the_excerpt(); ?>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  function toggleDisplay(offset) {
+    var $window = $(window);
+    return function() {
+      if($window.scrollTop() > offset) {
+  	    if ($( window ).width() > 1200) {
+    		    $('.site-sidebar').fadeIn();
+    		}
+  	  } else {
+    	  if ($( window ).width() > 1200) {
+    		    $('.site-sidebar').fadeOut();
+    		}
+  	  }
+    }
+  }
+  function initContentNavigation() {
+    var header = $('.before-header');
+  	var offset = header.offset().top;
+    var toggleMenu = toggleDisplay(offset);
+      window.tm = toggleMenu;
+  	$(window).on('scroll', toggleMenu);
+  	toggleMenu();
+    if($('#wpadminbar').exists()) {
+      header.addClass('with-wpadminbar');
+    }
+  };
+
+  $(window).load(function() {
+    var $flexslider = $('.flexslider');
+    if($flexslider.exists()) {
+      $flexslider.flexslider({ start: initContentNavigation });
+    } else {
+      // If activitiy image gallery is empty
+      initContentNavigation();
+    }
+  });
+</script>
 <?php get_footer(); ?>

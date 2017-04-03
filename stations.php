@@ -3,7 +3,7 @@
  * Template Name: All the Stations
  *
  */
- 
+
  $type_options = array('small'=>'<i class="fa fa-train" aria-hidden="true"></i>',
  						'medium' => '<i class="fa fa-industry" aria-hidden="true"></i>',
  						'large' => '<i class="fa fa-globe" aria-hidden="true"></i>');
@@ -13,9 +13,9 @@
  						'large' => 'soccer');
 
 	$blogusers = get_users('role=hub&orderby=nicename&order=DESC');
-	 
+
 	$geojson = array( 'type' => 'FeatureCollection', 'features' => array() );
-	 
+
 	// Array of WP_User objects.
 	foreach ( $blogusers as $user ) {
 		$user_info = get_userdata($user->ID);
@@ -23,13 +23,13 @@
 		$location = get_field('organization_location','user_'.$user->ID);
 		$excerpt = $user_info->description;
 		$hub_type = get_field('hub_type','user_'.$user->ID);
-		
-		if (!$hub_type[0]) { $hub_itype = 'small'; } else { $hub_itype = $hub_type[0]; } 
+
+		if (!$hub_type[0]) { $hub_itype = 'small'; } else { $hub_itype = $hub_type[0]; }
 
 		if ($location['lng']>0||$location['lng']<0) {
 
 			$feature = array(
-				'type' => 'Feature', 
+				'type' => 'Feature',
 			  'geometry' => array(
 				'type' => 'Point',
 				'coordinates' => array($location['lng'],$location['lat'])
@@ -47,13 +47,13 @@
 		}
 
 	}
- 
+
 	$mapjson = json_encode($geojson);
 
 get_header(); ?>
 
 	<div class="row">
-		<main id="content" class="col-sm-12 content-area" role="main">		
+		<main id="content" class="col-sm-12 content-area" role="main">
 		<article class="page" style="margin-bottom:0px;" >
 			<div class="row">
 				<div class="col-xs-12 col-sm-9 col-lg-9">
@@ -61,18 +61,18 @@ get_header(); ?>
 					<p>A hub is an organization or individual that work with audiences to explore borders</p>
 				</div>
 				<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
-					<a href="/join/" class="btn btn-primary start">Request to Join</a>
+					<a href="/join/" class="btn btn-primary start" style="margin-top:1.5em;">Request to Join</a>
 				</div>
 			</div>
-		
+
 			<div class="row">
 				<div id='map'></div>
 				<p></p>
 			</div>
-		
+
 		</article>
 
-			<script src='//api.tiles.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.js'></script>		
+			<script src='//api.tiles.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.js'></script>
 			<script type='text/javascript'>
 
 			mapboxgl.accessToken = 'pk.eyJ1IjoiZGVrbGVyayIsImEiOiIyLXpKZDFvIn0.qiF1bsGVvvMt6EapjAs6pQ';
@@ -88,7 +88,7 @@ get_header(); ?>
 			map.scrollZoom.disable();
 
 			map.on('style.load', function () {
-		
+
 
 				map.addSource("markers", {
 					type: "geojson",
@@ -159,7 +159,7 @@ get_header(); ?>
 						"text-size": 10
 					}
 				});
-		
+
 			});
 
 			// When a click event occurs near a marker icon, open a popup at the location of
@@ -177,8 +177,8 @@ get_header(); ?>
 				// based on the feature found.
 				var popup = new mapboxgl.Popup()
 					.setLngLat(feature.geometry.coordinates)
-					.setHTML('<h4>' + feature.properties.name + '</h4>' + 
-							'<p>' + feature.properties.description +'</p>' + 
+					.setHTML('<h4>' + feature.properties.name + '</h4>' +
+							'<p>' + feature.properties.description +'</p>' +
 							'<p><a href="http://globalgrandcentral.net/'+feature.properties.link+'">read more</a></p>')
 					.addTo(map);
 			});
@@ -189,14 +189,14 @@ get_header(); ?>
 				var features = map.queryRenderedFeatures(e.point, { layers: ['markers'] });
 				map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 			});
-	
+
 			</script>
-		
+
 		<?php
 		wp_reset_query();
 		$field_key = "field_57cf284c77dce";
 		$field = get_field_object($field_key);
-		
+
 		asort($field['choices']);
 
 		if( $field )
@@ -204,7 +204,7 @@ get_header(); ?>
 			foreach( $field['choices'] as $k => $v )
 			{
 			?><h2><?php echo $type_options[$k]; ?> <?php echo $v; ?></h2><?php
-			
+
 			$arg = array('meta_query' => array('relation' => 'AND', array(
 					'key'		=> 'hub_type',
 					'value'	=> sprintf('%s";', $k),
@@ -214,18 +214,18 @@ get_header(); ?>
 					'value'		=> 0,
 					'compare'	=>'>'
 			)));
-			
+
 			$bloguser = get_users($arg);
 
 			if ( $bloguser ) : ?>
 				<div class="row">
 
 					<div id="masonry" class="row">
-					<?php foreach ( $bloguser as $hub ) {  
-					
+					<?php foreach ( $bloguser as $hub ) {
+
 						$image_id = get_field('hub_logo','user_'.$hub->ID);
 						$image = wp_get_attachment_image_src($image_id,"thumbnail");
-						
+
 						?>
 						<div class="col-xs-6 col-sm-3 col-lg-3 masonry-item" style="text-align:center;">
 							<article class="box">
@@ -240,14 +240,14 @@ get_header(); ?>
 
 				<!-- #masonry --></div>
 				</div>
-		
+
 			<?php else : ?>
 
 				<?php get_template_part( 'no-results', 'archive' ); ?>
 
 			<?php endif;
 
-		
+
 			}
 		}
 		?>

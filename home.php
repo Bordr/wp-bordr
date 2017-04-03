@@ -11,7 +11,7 @@ get_header(); ?>
 </div>
 
 <div class="row">
-	<main id="content" class="col-sm-12 content-area" role="main">		
+	<main id="content" class="col-sm-12 content-area" role="main">
 	<article class="page" style="margin-bottom:0px;" >
 		<div class="row intro-container">
 				<h1 class="entry-title text-center" style="font-size:24px;">
@@ -41,18 +41,18 @@ get_header(); ?>
 	</div>
 
 
-	<div class="row">	
+	<div class="row">
 
 		<!-- carousel for small screens -->
 		<?php
 			$activities_query = new WP_Query( array(
 				'post_type' => 'activity',
-				'posts_per_page' => '6',
+				'posts_per_page' => '3',
 				'meta_key' => 'featured',
 				'meta_value' => 'yes',
 			));
 		?>
-		
+
 		<?php if ( $activities_query->have_posts() ) : ?>
 
 			<div id="activities-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
@@ -92,12 +92,12 @@ get_header(); ?>
 		<?php
 			$activities_query = new WP_Query( array(
 				'post_type' => 'activity',
-				'posts_per_page' => '6',
+				'posts_per_page' => '3',
 				'meta_key' => 'featured',
 				'meta_value' => 'yes',
 			));
 		?>
-		
+
 		<?php if ( $activities_query->have_posts() ) : ?>
 
 			<div id="masonry activities-masonry" class="row">
@@ -140,12 +140,12 @@ get_header(); ?>
 		<?php
 			$stories_query = new WP_Query( array(
 				'post_type' => 'bordr',
-				'posts_per_page' => '6',
+				'posts_per_page' => '3',
 				'meta_key' => 'featured',
 				'meta_value' => 'yes'
 			));
 		?>
-		
+
 		<?php if ( $stories_query->have_posts() ) : ?>
 
 			<div id="stories-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
@@ -185,12 +185,12 @@ get_header(); ?>
 		<?php
 			$stories_query = new WP_Query( array(
 				'post_type' => 'bordr',
-				'posts_per_page' => '6',
+				'posts_per_page' => '3',
 				'meta_key' => 'featured',
 				'meta_value' => 'yes'
 			));
 		?>
-		
+
 		<?php if ( $stories_query->have_posts() ) : ?>
 
 			<div id="masonry" class="row">

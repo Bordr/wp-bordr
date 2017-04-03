@@ -155,7 +155,7 @@ border-color: #d46644;
 	text-transform: UPPERCASE;
 }
 
-/* 
+/*
 .btn:after, .btn:before {
   border-color: transparent #664b52;
   content: '';
@@ -168,7 +168,7 @@ border-color: #d46644;
 }
  */
 
-/* 
+/*
 .btn:before {
       left: -17px;
       border-width: 17px 17px 17px 0;
@@ -583,7 +583,7 @@ position: relative;
 	}
 .site-header-fp {
 	margin: 10px 0;
-/* 
+/*
 	background: #fff;
 	border: #d46643 solid;
 	border-width: 0px 0px 1.5em 0;
@@ -747,7 +747,7 @@ body.single .entry-title {
     color: rgb(67, 128, 133);
     font-weight: 600;
 }
-	
+
 .welcome {
 	margin-top: 225px;
 	margin-bottom: 200px;
@@ -761,7 +761,7 @@ body.single .entry-title {
 }
 
 .entry-header .sharedaddy {
-  z-index: 10; /* Place above gallery */ 
+  z-index: 10; /* Place above gallery */
 }
 
 .entry-header .sharedaddy .sd-title {
@@ -1350,7 +1350,7 @@ a.story-title:hover {
  * 8.0 Footer
  * ----------------------------------------------------------------------------
  */
-/* 
+/*
 .site-footer {
 	font-size: 14px;
 	font-size: 1.4rem;
@@ -1389,19 +1389,19 @@ a.story-title:hover {
     .marker-title {
         font-weight: 700;
     }
-    
+
     .mapboxgl-popup-close-button {
-    
+
     	background-color: rgba(0, 0, 0, 0.90);
-    
+
     }
 
     .mapboxgl-popup-close-button:hover {
-    
+
     	background-color: rgba(0, 0, 0, 0.40);
-    
+
     }
-    
+
 	/* Hides navigation links and site footer when infinite scroll is active */
 	.infinite-scroll #navigation,
 	.infinite-scroll #nav-below,
@@ -1412,7 +1412,7 @@ a.story-title:hover {
 	.infinity-end.neverending #footer {
 		display: block;
 	}
-	
+
 	/* Loader styling */
 	.infinite-loader {
 		bottom: 0px;
@@ -1559,7 +1559,7 @@ a.story-title:hover {
 	}
 	.site-branding {
 		text-align: center;
-		width: 100%;	
+		width: 100%;
 	}
 	.navbar-collapse {
 		padding: 5px 0;
@@ -1664,58 +1664,58 @@ a.story-title:hover {
 }
 
 @media print
-{    
+{
     .no-print, .no-print *, .comment-respond
     {
         display: none !important;
     }
-    
+
     .site-title a[href]:after {
 		content: "(" attr(href) ")";
 		font-size: 0.7em;
 	}
-	
+
 	a[href]:after {
 		content: "";
 	}
-	
+
 	.featuredonpost {
 		max-height: 600px;
 		margin-bottom: 1.5em;
 	}
-	
+
 	.timeline h3 {
 		padding-top: 0;
 	}
-	
+
 	.timeline li {
 		border: 1px solid lightgrey;
-	}	
-	
+	}
+
 	.bordr {
 		max-width: 250px;
 		margin: 0;
 		padding: 0 0 0 15px;
 	}
-	
+
 	.bordr p {
 		margin: .5em;
     	padding: 0;
 	}
-	
+
 	.bordr a.story-title {
 		font-size: 1.5em;
 	}
-	
-	.activity-title[href]:before {
+
+	.activity-title[href]:before, .hub-title[href]:before {
 		content: "(" attr(href) ")";
-		font-size: 0.95em;	
+		font-size: 0.95em;
 	}
-	
+
 	.story-to, .story-header {
 		padding: 0 !important;
 	}
-	
+
 	#why {
 		page-break-before: always;
 	}
