@@ -152,9 +152,7 @@
   <h5>Contents</h5>
       <ul style="list-style: none;padding-left: 10px;">
       <li><a href="#location">Location</a></li>
-      <?php if(get_field('organization_profile')): ?>
       <li><a href="#about">About</a></li>
-      <?php endif; ?>
       <li><a href="#contact">Contact</a></li>
       <?php if(count($postsone) > 0): ?>
       <li><a href="#activities">Activities organized by <?php echo $hub_name; ?></a></li>
@@ -168,7 +166,6 @@
     <h5><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?></h5>
   </a>
   <?php endif; ?>
-  <?php the_excerpt(); ?>
 </div>
 
 <script type="text/javascript" charset="utf-8">
