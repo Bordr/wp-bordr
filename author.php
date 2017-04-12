@@ -162,7 +162,7 @@
       <?php endif; ?>
   </ul>
   <?php if(current_user_can('edit_post')): ?>
-  <a href="/wp-admin/user-edit.php?user_id=?<?php echo $hub_id; ?>">
+  <a href="/wp-admin/user-edit.php?user_id=<?php echo $hub_id; ?>">
     <h5><i class="fa fa-pencil" aria-hidden="true"></i> &nbsp; <?php echo get_post_status() == 'draft' ? 'Edit draft' : 'Edit'; ?></h5>
   </a>
   <?php endif; ?>
