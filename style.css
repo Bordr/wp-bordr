@@ -923,6 +923,10 @@ body.tax-board .entry-content {
 	line-height: 1.6;
 	}
 
+	body.tax-board .ctdb-breadcrumb-wrapper {
+		display: none;
+	}
+
 .entry-summary .barchart {
   margin-top: 20px;
   /* Make success/failure slider a bit more compressed in activity cards */
