@@ -59,6 +59,10 @@ License URI: license.txt
  	border: none;
  }
 
+ .ctdb-page-title {
+	 font-size: 2.4rem;
+ }
+
 body {
 	color: #666;
 	font-size: 14px;
@@ -759,7 +763,8 @@ position: relative;
 	}
 
 body.page .entry-title,
-body.single .entry-title {
+body.single .entry-title,
+body.tax-board .entry-title {
 	font-size: 24px;
 	font-size: 2.4rem;
 	}
@@ -911,7 +916,8 @@ body.single .entry-title {
 	}
 
 body.page .entry-content,
-body.single .entry-content {
+body.single .entry-content,
+body.tax-board .entry-content {
 	font-size: 16px;
 	font-size: 1.6rem;
 	line-height: 1.6;
