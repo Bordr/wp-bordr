@@ -6,6 +6,17 @@
 
 get_header(); ?>
 
+<?php if (!is_user_logged_in()) { ?>
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-lg-12" style="text-align:right;">
+		<p>
+		<a href="/join/" class="btn btn-primary start">Join</a>
+		<a href="/wp-login.php" class="btn btn-primary start">Login</a>
+		</p>
+	</div>
+</div>
+<?php } ?>
+
 <div class="row">
 	<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='http://player.vimeo.com/video/200638965' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
 </div>
