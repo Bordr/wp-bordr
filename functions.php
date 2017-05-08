@@ -19,7 +19,7 @@ function set_profile_avatar($content, $id='', $size = '96', $avatar_class = 'pro
     if(!$id){ $id = $current_user->ID; }
 
     //set the default avatar img
-    $default= get_stylesheet_directory().'/img/ggc-arrows-96x104.png';
+    $default = get_stylesheet_directory_uri().'/img/ggc-arrows-96x104.png';
     //check to see if user has set custom avatar
     // $gravatar_pic_url = get_user_meta($id, 'display_pic_url', true);
 
