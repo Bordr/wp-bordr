@@ -11,6 +11,13 @@ body > nav {
 	padding:0;
 }
 
+.ctdb-layout-classic .comment-form-author,
+.ctdb-layout-classic .comment-form-email,
+.ctdb-layout-classic .comment-form-url {
+	display:none;
+	visibility:hidden;	
+}
+
 /* homepage-specific styles */
 .intro-video {
 	margin:1em auto;
