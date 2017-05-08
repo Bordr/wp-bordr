@@ -10,6 +10,35 @@ add_action('init', 'register_my_session');
 function my_deregister_javascript() {
 	wp_deregister_script( 'nu-scripts' );
 }
+
+//filter for profile avatar pic
+function set_profile_avatar($content, $id='', $size = '96', $avatar_class = 'profile-avatar', $default = '', $alt = 'profile avatar') {
+
+    //get current user id
+    global $current_user;
+    if(!$id){ $id = $current_user->ID; }
+
+    //set the default avatar img
+    $default= get_stylesheet_directory().'/img/ggc-arrows-96x104.png';
+    //check to see if user has set custom avatar
+    // $gravatar_pic_url = get_user_meta($id, 'display_pic_url', true);
+
+    $image_id = get_field('hub_logo','user_'.$id);
+  	$image = wp_get_attachment_image_src($image_id,"medium");
+
+    //set the default avatar img
+    $gravatar_pic_url = $image[0];
+
+    if(!$gravatar_pic_url){
+        $gravatar_pic_url = $default;
+    }
+
+    //return the complied img tag
+    return ("<img src='$gravatar_pic_url' width='$size' height='$size' class='img-responsive' alt='$alt' />");
+}
+
+add_filter('get_avatar', 'set_profile_avatar', 10, 5);
+
 // Adds shortcode for hub email as recipient for hub contact form
 function custom_wpcf7_special_mail_tag( $output, $name, $html  ) {
 
