@@ -32,7 +32,8 @@ License URI: license.txt
 
  .ctdb-layout-classic .comment-form-author,
  .ctdb-layout-classic .comment-form-email,
- .ctdb-layout-classic .comment-form-url {
+ .ctdb-layout-classic .comment-form-url,
+ .ctdb-layout-classic .comment-subscription-form  {
  	display:none;
  	visibility:hidden;
  }
