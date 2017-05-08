@@ -569,7 +569,7 @@ position: relative;
 	background: none;
 	border: none;
 	border-radius: 0;
-	padding-top: 30px;
+	padding-top: 15px;
 	}
 .navbar-collapse {
 	padding: 5px 0;
@@ -653,7 +653,7 @@ position: relative;
 	line-height: 1.2;
 	}
 .site-title img {
-	height: 100px;
+	height: 75px;
 }
 .site-description {
 	color: #999;
@@ -1606,7 +1606,7 @@ a.story-title:hover {
 	.site-navigation {
 		padding: 0 0 1em 0;
 		width: 100%;
-		margin-top: -100px;
+		margin-top: -75px;
 		text-align: right;
 	}
 	.site-branding {
