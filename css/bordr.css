@@ -2,6 +2,8 @@ a:active,a:hover {
 	color: #d46644;
 }
 
+/* Boards of Europe */
+
 body > nav {
 	display:none;
 	visibility:hidden;
@@ -15,7 +17,29 @@ body > nav {
 .ctdb-layout-classic .comment-form-email,
 .ctdb-layout-classic .comment-form-url {
 	display:none;
-	visibility:hidden;	
+	visibility:hidden;
+}
+
+.ctdb-board-wrapper {
+	border: none;
+}
+
+.ctdb-board-header {
+	background: none;
+	padding: 0 0 5px 0;
+}
+
+.ctdb-board-thumb {
+	padding: 0;
+}
+
+.ctdb-board-description {
+	padding: 1em 0;
+}
+
+.ctdb-board-topics-link {
+	padding: none;
+	border: none;
 }
 
 /* homepage-specific styles */
