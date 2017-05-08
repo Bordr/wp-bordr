@@ -35,15 +35,19 @@
 
 	<p><a href="<?php echo $curauth->user_url; ?>"><?php echo $curauth->user_url; ?></a></p>
 
+  <?php
+	$location = get_field('organization_location');
+  if ( $location['address'] ) : ?>
 	<h2 id="location">Hub location</h2>
 	<p>
 	<?php
-		$location = get_field('organization_location');
+
 
 		echo $location['address'];
 
 		?><img src="https://api.tiles.mapbox.com/v3/deklerk.map-57h1d46y/url-bit.ly%2F18KNEkg(<?php echo $location['lng'];?>,<?php echo $location['lat'];?>)/<?php echo $location['lng'];?>,<?php echo $location['lat'];?>,4/1000x300.png" class="img-rounded img-responsive">
 	</p>
+	<?php endif; ?>
 
 	<?php if ( get_field('organization_profile') ) : ?>
 		<h2 id="about">About this hub</h2>
@@ -205,4 +209,4 @@
     }
   });
 </script>
-<?php get_footer(); ?>
+<?php get_footer(); print_r($location); ?>
