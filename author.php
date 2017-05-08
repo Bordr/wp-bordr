@@ -37,6 +37,7 @@
 
   <?php
 	$location = get_field('organization_location');
+  $locationB = get_field('organization_location','user_'.$hub_id);
   if ( $location['address'] ) : ?>
 	<h2 id="location">Hub location</h2>
 	<p>
@@ -209,4 +210,4 @@
     }
   });
 </script>
-<?php get_footer(); print_r($location); ?>
+<?php get_footer(); print_r($location); print_r($locationB); ?>
