@@ -7,6 +7,10 @@ body > nav {
 	visibility:hidden;
 }
 
+.ctdb-topic-table {
+	padding:0;
+}
+
 /* homepage-specific styles */
 .intro-video {
 	margin:1em auto;
