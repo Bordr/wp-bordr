@@ -2,6 +2,11 @@ a:active,a:hover {
 	color: #d46644;
 }
 
+body > nav {
+	display:none;
+	visibility:hidden;
+}
+
 /* homepage-specific styles */
 .intro-video {
 	margin:1em auto;
