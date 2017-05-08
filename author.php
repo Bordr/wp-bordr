@@ -26,7 +26,7 @@
   		<div class="col-xs-12">
         <p class="before-header"><a href="/hubs/">Hub</a></p>
         <a href="/author/<?php echo $author_name; ?>/" title="<?php the_title_attribute(); ?>" class="hub-title">
-  	       <h1><?php echo the_field('organization_name'); ?></h1>
+  	       <h1><?php echo the_field('organization_name','user_'.$hub_id); ?></h1>
         </a>
 	      <p class="lead"><?php echo esc_html($excerpt); ?></p>
       </div>
@@ -36,8 +36,7 @@
 	<p><a href="<?php echo $curauth->user_url; ?>"><?php echo $curauth->user_url; ?></a></p>
 
   <?php
-	$location = get_field('organization_location');
-  $locationB = get_field('organization_location','user_'.$hub_id);
+	$location = get_field('organization_location','user_'.$hub_id);
   if ( $location['address'] ) : ?>
 	<h2 id="location">Hub location</h2>
 	<p>
@@ -50,12 +49,12 @@
 	</p>
 	<?php endif; ?>
 
-	<?php if ( get_field('organization_profile') ) : ?>
+	<?php if ( get_field('organization_profile','user_'.$hub_id) ) : ?>
 		<h2 id="about">About this hub</h2>
 	<?php endif; ?>
-	<?php echo the_field('organization_profile'); ?>
+	<?php echo the_field('organization_profile','user_'.$hub_id); ?>
 
-	<h2 id="contact">Contact <?php echo the_field('organization_name'); ?></h2>
+	<h2 id="contact">Contact <?php echo the_field('organization_name','user_'.$hub_id); ?></h2>
 	<?php
 
 	echo do_shortcode( '[contact-form-7 id="6076" title="Hub Contact"]' ); ?>
@@ -210,4 +209,4 @@
     }
   });
 </script>
-<?php get_footer(); print_r($location); print_r($locationB); ?>
+<?php get_footer(); ?>
