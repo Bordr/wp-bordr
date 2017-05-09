@@ -65,10 +65,14 @@
 
 	<?php
 
+  echo $hub_id;
+
 	$postsone = get_posts(array(
-		'post_type'			=> 'activity',
+		'author'			=> $hub_id,
+    'post_type'			=> 'activity',
 		'nopaging' 			=> true,
-		'author'			=> $hub_id
+    'posts_per_page' => -1
+
 	));
 
 	$posts = $postsone;
