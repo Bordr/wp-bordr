@@ -11,19 +11,21 @@ function my_deregister_javascript() {
 	wp_deregister_script( 'nu-scripts' );
 }
 
+require_once('custom-search-acf-wordpress.php'); 
+
 //filter for profile avatar pic
 function set_profile_avatar($content, $id='', $size = '96', $avatar_class = 'profile-avatar', $default = '', $alt = 'profile avatar') {
 
     //get current user id
     global $current_user;
-    if(!$id){ $id = $current_user->ID; }
+    if(!$iid){ $iid = $current_user->ID; }
 
     //set the default avatar img
     $default = get_stylesheet_directory_uri().'/img/ggc-arrows-96x104.png';
     //check to see if user has set custom avatar
     // $gravatar_pic_url = get_user_meta($id, 'display_pic_url', true);
 
-    $image_id = get_field('hub_logo','user_'.$id);
+    $image_id = get_field('hub_logo','user_'.$iid);
   	$image = wp_get_attachment_image_src($image_id,"medium");
 
     //set the default avatar img
