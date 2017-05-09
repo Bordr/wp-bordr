@@ -69,8 +69,6 @@
 
 	$postsone = get_posts(array(
 		'author'			=> $hub_id,
-    'post_type'			=> 'activity',
-		'nopaging' 			=> true,
     'posts_per_page' => -1
 
 	));
