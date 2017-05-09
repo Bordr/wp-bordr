@@ -68,7 +68,7 @@
 	$postsone = get_posts(array(
 		'post_type'			=> 'activity',
 		'nopaging' 			=> true,
-		'author'			=> $hub_id
+		'author'			=> 'user_'.$hub_id
 	));
 
 	$posts = $postsone;
@@ -111,7 +111,7 @@
 			'relation'		=> 'OR',
 			array(
 				'key'	=> 'partner', // 'User' field type
-				'value' => sprintf(':"%s";', $hub_id),
+				'value' => sprintf(':"%s";', 'user_'.$hub_id),
 				'compare' => 'LIKE'
 			)
 		)
