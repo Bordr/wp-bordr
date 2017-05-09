@@ -67,31 +67,31 @@
 
   echo $hub_id;
 
-	$postsone = get_posts(array(
-		'author'			=> $hub_id,
-    'posts_per_page' => -1
-
+	$postsone = new WP_Query(array(
+		'post_type'			=> 'activity',
+		'nopaging' 			=> true,
+		'author'			=> $hub_id
 	));
 
 	$posts = $postsone;
 
 
-	if( $posts ): ?>
+	if( $posts->have_posts() ): ?>
 
 				<div id="masonry" class="row">
 
-	<?php foreach( $posts as $post ):
+	<?php while ( $posts->have_posts()) : $posts->the_post();
 
-		setup_postdata( $post )
+		setup_postdata( $posts )
 
 		?>
 
 		<?php get_template_part( 'activityloop', get_post_format() ); ?>
 
-	<?php endforeach; ?>
+	<?php endwhile; ?>
 			</div>
 
-	<?php wp_reset_postdata(); ?>
+	<?php wp_reset_query(); ?>
 
 <?php else: ?>
         <p><?php _e('No activities organized by this hub at this time.'); ?></p>
