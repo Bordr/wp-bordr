@@ -70,7 +70,7 @@
 	$postsone = new WP_Query(array(
 		'post_type'			=> 'activity',
 		'nopaging' 			=> true,
-		'author'			=> $hub_id
+		'author__in'			=> $hub_id
 	));
 
 	$posts = $postsone;
