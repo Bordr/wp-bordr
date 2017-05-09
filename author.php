@@ -65,7 +65,7 @@
 
 	<?php
 
-  echo $hub_id;
+  // echo $hub_id;
 
 	$postsone = new WP_Query(array(
 		'post_type'			=> 'activity',
