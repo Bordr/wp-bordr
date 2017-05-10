@@ -12,7 +12,7 @@
 	$image_id = get_field('hub_logo','user_'.$curauth->ID);
 	$image = wp_get_attachment_image_src($image_id,"medium");
 	$hub_id = $curauth->ID;
-  $hub_name = get_field('organization_name');
+  $hub_name = get_field('organization_name','user_'.$hub_id);
   ?>
 
   <header class="entry-header">
