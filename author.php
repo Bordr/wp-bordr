@@ -150,7 +150,7 @@
 
 <?php wp_reset_postdata(); ?>
 
-<h2 id="activities">Conversations started by this hub</h2>
+<h2 id="topics">Topics started by this hub</h2>
 
 <!-- The Loop -->
 
@@ -158,13 +158,13 @@
 
 // echo $hub_id;
 
-$postsone = new WP_Query(array(
+$poststhree = new WP_Query(array(
 'post_type'			=> 'discussion-topics',
 'nopaging' 			=> true,
 'author__in'			=> $hub_id
 ));
 
-$posts = $postsone;
+$posts = $poststhree;
 
 
 if( $posts->have_posts() ): ?>
@@ -206,6 +206,9 @@ setup_postdata( $posts )
       <?php endif; ?>
       <?php if(count($poststwo) > 0): ?>
       <li><a href="#involving">Activities involving <?php echo $hub_name; ?></a></li>
+      <?php endif; ?>
+      <?php if(count($poststhree) > 0): ?>
+      <li><a href="#topics">Topics started by <?php echo $hub_name; ?></a></li>
       <?php endif; ?>
   </ul>
   <?php if(current_user_can('edit_post')): ?>
