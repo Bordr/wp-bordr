@@ -150,6 +150,47 @@
 
 <?php wp_reset_postdata(); ?>
 
+<h2 id="activities">Conversations started by this hub</h2>
+
+<!-- The Loop -->
+
+<?php
+
+// echo $hub_id;
+
+$postsone = new WP_Query(array(
+'post_type'			=> 'discussion',
+'nopaging' 			=> true,
+'author__in'			=> $hub_id
+));
+
+$posts = $postsone;
+
+
+if( $posts->have_posts() ): ?>
+
+    <div id="masonry" class="row">
+
+<?php while ( $posts->have_posts()) : $posts->the_post();
+
+setup_postdata( $posts )
+
+?>
+
+<?php get_template_part( 'activityloop', get_post_format() ); ?>
+
+<?php endwhile; ?>
+  </div>
+
+<?php wp_reset_query(); ?>
+
+<?php else: ?>
+    <p><?php _e('No activities organized by this hub at this time.'); ?></p>
+
+<?php endif; ?>
+
+<!-- End Loop -->
+
 <div class="site-sidebar no-print">
   <a href="#">
   <h4><?php echo $hub_name; ?></h4>
