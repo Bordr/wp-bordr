@@ -159,7 +159,7 @@
 // echo $hub_id;
 
 $postsone = new WP_Query(array(
-'post_type'			=> 'topics',
+'post_type'			=> 'Topics',
 'nopaging' 			=> true,
 'author__in'			=> $hub_id
 ));
