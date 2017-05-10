@@ -159,7 +159,7 @@
 // echo $hub_id;
 
 $postsone = new WP_Query(array(
-'post_type'			=> 'topics',
+'post_type'			=> 'topic',
 'nopaging' 			=> true,
 'author__in'			=> $hub_id
 ));
@@ -185,7 +185,7 @@ setup_postdata( $posts )
 <?php wp_reset_query(); ?>
 
 <?php else: ?>
-    <p><?php _e('No activities organized by this hub at this time.'); ?></p>
+    <p><?php _e('No topics started by this hub at this time.'); ?></p>
 
 <?php endif; ?>
 
