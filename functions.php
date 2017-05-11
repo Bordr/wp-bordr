@@ -55,7 +55,7 @@ function tsm_acf_profile_avatar( $avatar, $id_or_email, $size, $default, $alt ) 
       $avatar_url = get_stylesheet_directory_uri().'/img/ggc-arrows-96x104.png';
     } else {
       // Get the file size
-      $image_url  = wp_get_attachment_image_src( $image_id, 'thumbnail' ); // Set image size by name
+      $image_url  = wp_get_attachment_image_src( $image_id, 'medium' ); // Set image size by name
       // Get the file url
       $avatar_url = $image_url[0];
     }
@@ -93,7 +93,7 @@ function tsm_acf_profile_avatar( $avatar, $id_or_email, $size, $default, $alt ) 
 //     return ("<img src='$gravatar_pic_url' width='$size' height='$size' class='img-responsive' alt='$alt' />");
 // }
 
-add_filter('get_avatar', 'set_profile_avatar', 10, 5);
+// add_filter('get_avatar', 'set_profile_avatar', 10, 5);
 
 // Adds shortcode for hub email as recipient for hub contact form
 function custom_wpcf7_special_mail_tag( $output, $name, $html  ) {
