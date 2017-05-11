@@ -13,7 +13,6 @@ function my_deregister_javascript() {
 
 require_once('custom-search-acf-wordpress.php');
 
-<?php
 /**
  * Use ACF image field as avatar
  * @author Mike Hemberger
