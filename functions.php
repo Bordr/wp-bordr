@@ -13,31 +13,85 @@ function my_deregister_javascript() {
 
 require_once('custom-search-acf-wordpress.php');
 
-//filter for profile avatar pic
-function set_profile_avatar($content, $id='', $size = '96', $avatar_class = 'profile-avatar', $default = '', $alt = 'profile avatar') {
+<?php
+/**
+ * Use ACF image field as avatar
+ * @author Mike Hemberger
+ * @link http://thestizmedia.com/acf-pro-simple-local-avatars/
+ * @uses ACF Pro image field (tested return value set as Array )
+ */
+add_filter('get_avatar', 'tsm_acf_profile_avatar', 10, 5);
+function tsm_acf_profile_avatar( $avatar, $id_or_email, $size, $default, $alt ) {
 
-    //get current user id
-    global $current_user;
-    if(!$iid){ $iid = $current_user->ID; }
+    // Get user by id or email
+    if ( is_numeric( $id_or_email ) ) {
 
-    //set the default avatar img
-    $default = get_stylesheet_directory_uri().'/img/ggc-arrows-96x104.png';
-    //check to see if user has set custom avatar
-    // $gravatar_pic_url = get_user_meta($id, 'display_pic_url', true);
+        $id   = (int) $id_or_email;
+        $user = get_user_by( 'id' , $id );
 
-    $image_id = get_field('hub_logo','user_'.$iid);
-  	$image = wp_get_attachment_image_src($image_id,"medium");
+    } elseif ( is_object( $id_or_email ) ) {
 
-    //set the default avatar img
-    $gravatar_pic_url = $image[0];
+        if ( ! empty( $id_or_email->user_id ) ) {
+            $id   = (int) $id_or_email->user_id;
+            $user = get_user_by( 'id' , $id );
+        }
 
-    if(!$gravatar_pic_url){
-        $gravatar_pic_url = $default;
+    } else {
+        $user = get_user_by( 'email', $id_or_email );
     }
 
-    //return the complied img tag
-    return ("<img src='$gravatar_pic_url' width='$size' height='$size' class='img-responsive' alt='$alt' />");
+    if ( ! $user ) {
+        return $avatar;
+    }
+
+    // Get the user id
+    $user_id = $user->ID;
+
+    // Get the file id
+    $image_id = get_user_meta($user_id, 'hub_logo', true); // CHANGE TO YOUR FIELD NAME
+
+    // Bail if we don't have a local avatar
+    if ( ! $image_id ) {
+      $avatar_url = get_stylesheet_directory_uri().'/img/ggc-arrows-96x104.png';
+    } else {
+      // Get the file size
+      $image_url  = wp_get_attachment_image_src( $image_id, 'thumbnail' ); // Set image size by name
+      // Get the file url
+      $avatar_url = $image_url[0];
+    }
+
+    // Get the img markup
+    $avatar = '<img alt="' . $alt . '" src="' . $avatar_url . '" class="avatar avatar-' . $size . '" height="' . $size . '" width="' . $size . '"/>';
+
+    // Return our new avatar
+    return $avatar;
 }
+
+// //filter for profile avatar pic
+// function set_profile_avatar($content, $id='', $size = '96', $avatar_class = 'profile-avatar', $default = '', $alt = 'profile avatar') {
+//
+//     //get current user id
+//     global $current_user;
+//     if(!$iid){ $iid = $current_user->ID; }
+//
+//     //set the default avatar img
+//     $default = get_stylesheet_directory_uri().'/img/ggc-arrows-96x104.png';
+//     //check to see if user has set custom avatar
+//     // $gravatar_pic_url = get_user_meta($id, 'display_pic_url', true);
+//
+//     $image_id = get_field('hub_logo','user_'.$iid);
+//   	$image = wp_get_attachment_image_src($image_id,"medium");
+//
+//     //set the default avatar img
+//     $gravatar_pic_url = $image[0];
+//
+//     if(!$gravatar_pic_url){
+//         $gravatar_pic_url = $default;
+//     }
+//
+//     //return the complied img tag
+//     return ("<img src='$gravatar_pic_url' width='$size' height='$size' class='img-responsive' alt='$alt' />");
+// }
 
 add_filter('get_avatar', 'set_profile_avatar', 10, 5);
 
