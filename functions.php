@@ -16,13 +16,9 @@ require_once('custom-search-acf-wordpress.php');
 //filter for profile avatar pic
 function set_profile_avatar($content, $id='', $size = '96', $avatar_class = 'profile-avatar', $default = '', $alt = 'profile avatar') {
 
-  if( is_admin() ) {
-    return;
-  }
-
     //get current user id
     global $current_user;
-    if(!$id){ $iid = $current_user->ID; } else { $iid = $id; }
+    if(!$iid){ $iid = $current_user->ID; }
 
     //set the default avatar img
     $default = get_stylesheet_directory_uri().'/img/ggc-arrows-96x104.png';
