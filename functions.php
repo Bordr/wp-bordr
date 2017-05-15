@@ -66,33 +66,35 @@ function tsm_acf_profile_avatar( $avatar, $id_or_email, $size, $default, $alt ) 
     return $avatar;
 }
 
-// //filter for profile avatar pic
-// function set_profile_avatar($content, $id='', $size = '96', $avatar_class = 'profile-avatar', $default = '', $alt = 'profile avatar') {
-//
-//     //get current user id
-//     global $current_user;
-//     if(!$iid){ $iid = $current_user->ID; }
-//
-//     //set the default avatar img
-//     $default = get_stylesheet_directory_uri().'/img/ggc-arrows-96x104.png';
-//     //check to see if user has set custom avatar
-//     // $gravatar_pic_url = get_user_meta($id, 'display_pic_url', true);
-//
-//     $image_id = get_field('hub_logo','user_'.$iid);
-//   	$image = wp_get_attachment_image_src($image_id,"medium");
-//
-//     //set the default avatar img
-//     $gravatar_pic_url = $image[0];
-//
-//     if(!$gravatar_pic_url){
-//         $gravatar_pic_url = $default;
-//     }
-//
-//     //return the complied img tag
-//     return ("<img src='$gravatar_pic_url' width='$size' height='$size' class='img-responsive' alt='$alt' />");
-// }
+function auth_link_filter( $return, $author, $comment_id ) {
+    $comment = get_comment( $comment_id );
+    $id_or_email = $comment->user_id;
+    // Get user by id or email
+    if ( is_numeric( $id_or_email ) ) {
 
-// add_filter('get_avatar', 'set_profile_avatar', 10, 5);
+        $id   = (int) $id_or_email;
+        $user = get_user_by( 'id' , $id );
+
+    } elseif ( is_object( $id_or_email ) ) {
+
+        if ( ! empty( $id_or_email->user_id ) ) {
+            $id   = (int) $id_or_email->user_id;
+            $user = get_user_by( 'id' , $id );
+        }
+
+    } else {
+        $user = get_user_by( 'email', $id_or_email );
+    }
+
+    if ( ! $user ) {
+        return $id_or_email;
+    }
+
+    // Get the user id
+    $url = "/author/".$user->user_nicename."/";
+		return "<a href='$url' rel='external nofollow' class='url'>$author</a>";
+}
+add_filter( 'get_comment_author_link', 'auth_link_filter', 10, 3 );
 
 // Adds shortcode for hub email as recipient for hub contact form
 function custom_wpcf7_special_mail_tag( $output, $name, $html  ) {

@@ -1105,6 +1105,10 @@ a.story-title:hover {
 	text-align: center;
 	}
 
+.comments-and-form .comment ul.children {
+      margin: 0px;
+}
+
 /* 5.12.1. Comment List */
 .comment,
 .pingback {
@@ -1367,7 +1371,7 @@ a.story-title:hover {
 	top: 10px;
 	left: 20px;
 	float: left;
-	z-index: 99;
+	z-index: -1;
 	width: 150px;
 	}
 

@@ -2,6 +2,9 @@ a:active,a:hover {
 	color: #d46644;
 }
 
+.hentry {
+	z-index: 1;
+}
 
 
 /* homepage-specific styles */
