@@ -13,6 +13,14 @@ function my_deregister_javascript() {
 
 require_once('custom-search-acf-wordpress.php');
 
+function activity_posted_by() {
+	printf( __( '<span class="byline">%1$s</span>', 'nuthemes' ),
+		sprintf( '<span class="author vcard">%1$s</span>',
+			esc_html( get_the_author() )
+		)
+	);
+}
+
 /**
  * Use ACF image field as avatar
  * @author Mike Hemberger

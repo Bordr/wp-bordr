@@ -62,7 +62,7 @@ $method_options = array('photography'=>'<i class="fa fa-camera-retro" aria-hidde
 
 		<?php if ( 'activity' == get_post_type() ) : ?>
 		<div class="entry-meta">
-			by<br> <?php nuthemes_posted_by(); ?> in <?php echo $location_ctry; ?>
+			by<br> <?php activity_posted_by(); ?> in <?php echo $location_ctry; ?>
 		<!-- .entry-meta --></div>
 		<?php endif; ?>
 	<!-- .entry-header --></header>
