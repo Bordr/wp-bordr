@@ -296,8 +296,8 @@ if( $gallery ): ?>
 					  'totalMax': 100,
 					  'totalAverage': 50,
 					  'postTotal': <?php the_field('one_many'); ?>,
-					  'leftField': 'Affects one person',
-					  'rightField': 'Affects many people'
+					  'leftField': 'Involves one person',
+					  'rightField': 'Involves many people'
 					}
 					var chart = ".chart_one";
 					drawdotchart(data, chart);
@@ -315,8 +315,8 @@ if( $gallery ): ?>
 					  'totalMax': 100,
 					  'totalAverage': 50,
 					  'postTotal': <?php the_field('young_old'); ?>,
-					  'leftField': 'Affects youth',
-					  'rightField': 'Affects the eldery'
+					  'leftField': 'Involves youth',
+					  'rightField': 'Involves the eldery'
 					}
 					var chart = ".chart_one";
 					drawdotchart(data, chart);
@@ -334,8 +334,8 @@ if( $gallery ): ?>
 					  'totalMax': 100,
 					  'totalAverage': 50,
 					  'postTotal': <?php the_field('known_unknown'); ?>,
-					  'leftField': 'Affects known people',
-					  'rightField': 'Affects unknown people'
+					  'leftField': 'Involves known people',
+					  'rightField': 'Involves unknown people'
 					}
 					var chart = ".chart_known";
 					drawdotchart(data, chart);
