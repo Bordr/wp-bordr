@@ -25,12 +25,12 @@ get_header(); ?>
 	<main id="content" class="col-sm-12 content-area" role="main">
 	<article class="page" style="margin-bottom:0px;" >
 		<div class="row intro-container">
-				<h1 class="entry-title text-center" style="font-size:24px;">
-					Because all people cross borders.
-				</h1>
 				<span class="intro-text text-center">
-					<p>Global Grand Central is a meeting place for organizations and individuals working to make the world a better place through inclusion, curiosity and empowerment.</p>
-					<p>We provide an evolving platform to ease, connect and socialize sharing, reporting and mutual learning.</p>
+					<p>Global Grand Central is a global community of local inclusion.
+						A meeting place for organizations and individuals working to turn
+						suspicion of "Others" into curiosity.
+					</p>
+					<p>We build an evolving platform to ease experience sharing, and mutual learning.</p>
 				</span>
 			</div>
 		</article>
