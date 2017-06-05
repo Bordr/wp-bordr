@@ -1371,7 +1371,7 @@ a.story-title:hover {
 	top: 10px;
 	left: 20px;
 	float: left;
-	z-index: -1;
+	/*z-index: -1;*/
 	width: 150px;
 	}
 
