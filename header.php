@@ -24,22 +24,20 @@
 	    <link href='//api.tiles.mapbox.com/mapbox-gl-js/v0.25.1/mapbox-gl.css' rel='stylesheet' />
 
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/flexslider.css" type="text/css">
-	    
+
 <!-- BORDR APP -->
-	    
+
 		<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/arrayToTable.js"></script>
 		<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/d3.js"></script>
 		<script src="<?php echo get_stylesheet_directory_uri(); ?>/js/nv.d3.min.js"></script>
-		
+
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" type="text/css">
-				
+
 		<!-- Custom CSS -->
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/nv.d3.css">
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/css/bordr.css">
 
-		<head>
-		  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-		</head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
 <!-- END BORDR APP -->
 
@@ -86,7 +84,7 @@
 								'container_class'	=> 'navbar-collapse collapse main-navigation',
 								'fallback_cb'		=> 'nuthemes_bootstrap_navwalker::fallback',
 								'walker'			=> new nuthemes_bootstrap_navwalker()
-							) );						
+							) );
 						endif;
 					?>
 				<!-- .site-navigation --></div>
