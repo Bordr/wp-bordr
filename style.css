@@ -868,6 +868,15 @@ body.tax-board .entry-title {
 	padding: 0 5px;
 }
 
+/*shorten long names*/
+li.menu-item.menu-item-type-custom.menu-item-object-custom a {
+    word-wrap: break-word;
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 /* 5.3. Entry Meta */
 .entry-meta {
 	color: #222;
