@@ -871,7 +871,7 @@ body.tax-board .entry-title {
 /*shorten long names*/
 li.menu-item.menu-item-type-custom.menu-item-object-custom a {
     word-wrap: break-word;
-    max-width: 200px;
+    /*max-width: 200px;*/
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

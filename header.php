@@ -53,7 +53,7 @@
 					<?php $heading_tag = ( is_home() || is_front_page() ) ? 'div' : 'div'; ?>
 					<<?php echo $heading_tag; ?> class="site-title">
 						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-							<img src="/wp-content/themes/bordr/img/egc_logo_350x200.jpg">
+							<img src="/wp-content/themes/bordr/img/egc_logo_350x200.png">
 						</a>
 					</<?php echo $heading_tag; ?>>
 				<!-- .site-branding --></div>
