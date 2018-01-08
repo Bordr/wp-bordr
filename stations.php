@@ -58,7 +58,7 @@ get_header(); ?>
 			<div class="row">
 				<div class="col-xs-12 col-sm-9 col-lg-9">
 					<h1 class="entry-title" style="font-size:24px;">Hubs</h1>
-					<p>A hub is an organization or individual that work with audiences to explore borders</p>
+					<p>Hubs are organizations and individuals that carry out Activities.</p>
 				</div>
 				<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
 					<a href="/join/" class="btn btn-primary start" style="margin-top:1.5em;">Request to Join</a>

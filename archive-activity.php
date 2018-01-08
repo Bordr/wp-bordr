@@ -11,7 +11,7 @@ get_header(); ?>
 			<div class="row">
 			<div class="col-xs-12 col-sm-9 col-lg-9">
 				<h1 class="entry-title" style="font-size:24px;">Activities</h1>
-				<p>Activities are projects, actions, or interventions that explore borders and enable people to meet others.</p>
+				<p>Activities are reports from projects, actions, and interventions.</p>
 			</div>
 			<div class="col-xs-12 col-sm-3 col-lg-3 no-print" style="text-align:right;" >
 				<?php if (is_user_logged_in()) : ?>

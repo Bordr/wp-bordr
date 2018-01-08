@@ -26,11 +26,12 @@ get_header(); ?>
 	<article class="page" style="margin-bottom:0px;" >
 		<div class="row intro-container">
 				<span class="intro-text text-center">
-					<p>Global Grand Central is a global community of local inclusion.
-						A meeting place for organizations and individuals working to turn
-						suspicion of "Others" into curiosity.
+					<p>Global Grand Central is an open platform and living
+                        archives for learning and exchange between artistic,
+                        social and cultural activists worldwide.
 					</p>
-					<p>We build an evolving platform to ease experience sharing, and mutual learning.</p>
+					<p>We build an evolving platform to ease experience sharing,
+                        and mutual learning.</p>
 				</span>
 			</div>
 		</article>
@@ -40,7 +41,7 @@ get_header(); ?>
 	<div class="row section-head">
 		<div class="col-xs-12 col-sm-9 col-lg-9">
 			<h1 class="entry-title" style="font-size:24px;">Activities</h1>
-			<p>Activities are projects, actions, or interventions that explore borders and enable people to meet others.</p>
+			<p>Activities are descriptions of projects, actions, and interventions.</p>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-lg-12" style="text-align:right;" >
 			<?php if (is_user_logged_in()) : ?>
@@ -134,99 +135,6 @@ get_header(); ?>
 </div><!-- end actitivies teaser -->
 <div class="see-all text-center">
 	<a href="/activity">See more Activities...</a>
-</div>
-
-<div class="page-teaser"><!-- begin stories teaser -->
-	<div class="row section-head">
-		<div class="col-xs-12 col-sm-9 col-lg-9">
-			<h1 class="entry-title" style="font-size:24px;">Bordr stories</h1>
-			<p>Bordr stories are impressions and experiences of a border.</p>
-		</div>
-		<div class="col-xs-12 col-sm-3 col-lg-3" style="text-align:right;" >
-			<a href="/add-bordr-story/" class="btn btn-primary start" style="margin-top:1.5em;">Add Bordr Story</a>
-		</div>
-	</div>
-
-	<div class="row">
-		<?php
-			$stories_query = new WP_Query( array(
-				'post_type' => 'bordr',
-				'posts_per_page' => '3',
-				'meta_key' => 'featured',
-				'meta_value' => 'yes'
-			));
-		?>
-
-		<?php if ( $stories_query->have_posts() ) : ?>
-
-			<div id="stories-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
-				<ol class="carousel-indicators">
-					<li data-target="#stories-carousel" data-slide-to="0" class="active"></li>
-					<li data-target="#stories-carousel" data-slide-to="1"></li>
-					<li data-target="#stories-carousel" data-slide-to="2"></li>
-				</ol>
-
-				<div class="carousel-inner" role="listbox">
-					<?php $i=0; ?>
-					<?php while ( $stories_query->have_posts() ) : $stories_query->the_post(); ?>
-						<?php
-							if ( $i == 0 )
-								$itemClass = "item active";
-							else
-								$itemClass = "item";
-						?>
-						<div id="story-<?php echo $i; ?>" class="<?php echo $itemClass ?>" >
-							<?php get_template_part( 'bordrteaser', get_post_format() ); ?>
-						</div>
-						<?php $i++; ?>
-					<?php endwhile; ?>
-				</div>
-			</div>
-
-		<?php else : ?>
-
-			<?php get_template_part( 'no-results', 'archive' ); ?>
-
-		<?php
-			endif;
-			wp_reset_postdata();
-		?>
-
-		<!-- more at once for bigger screens -->
-		<?php
-			$stories_query = new WP_Query( array(
-				'post_type' => 'bordr',
-				'posts_per_page' => '3',
-				'meta_key' => 'featured',
-				'meta_value' => 'yes'
-			));
-		?>
-
-		<?php if ( $stories_query->have_posts() ) : ?>
-
-			<div id="masonry" class="row">
-				<?php $i=0; ?>
-				<?php while ( $stories_query->have_posts() ) : $stories_query->the_post(); ?>
-					<div id="story-<?php echo $i; ?>" >
-						<?php get_template_part( 'bordrloop', get_post_format() ); ?>
-					</div>
-					<?php $i++; ?>
-				<?php endwhile; ?>
-
-			<!-- #masonry --></div>
-
-			<?php nuthemes_content_nav( 'nav-below' ); ?>
-
-		<?php else : ?>
-
-			<?php get_template_part( 'no-results', 'archive' ); ?>
-
-		<?php endif; ?>
-	</div><!-- .row -->
-
-</div><!-- end stories teaser -->
-<div class="see-all text-center">
-	<a href="/bordr">See more Bordr Stories...</a>
 </div>
 
 <?php get_footer(); ?>
