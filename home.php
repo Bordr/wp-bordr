@@ -112,7 +112,7 @@ get_header(); ?>
 
 		<?php if ( $activities_query->have_posts() ) : ?>
 
-			<div id="masonry activities-masonry" class="row">
+			<div id="masonry" class="row">
 				<?php $i=0; ?>
 				<?php while ( $activities_query->have_posts() ) : $activities_query->the_post(); ?>
 					<div id="story-<?php echo $i; ?>" >
