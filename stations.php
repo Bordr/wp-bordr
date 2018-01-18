@@ -26,27 +26,25 @@
 
 		if (!$hub_type[0]) { $hub_itype = 'small'; } else { $hub_itype = $hub_type[0]; }
 
-        if (is_array($location) {
-    		if ($location['lng']>0||$location['lng']<0) {
+		if ($location['lng']>0||$location['lng']<0) {
 
-    			$feature = array(
-    				'type' => 'Feature',
-    			  'geometry' => array(
-    				'type' => 'Point',
-    				'coordinates' => array($location['lng'],$location['lat'])
-    					),
-    			  'properties' => array(
-    					'name' => $hub,
-    					'description' => esc_html($excerpt)."<br/>",
-    					'link' => 'author/'.$user->user_login,
-    					'marker-color' => '#ffe267',
-    					'marker-symbol' => $map_icos[$hub_itype]
-    					)
-    				);
-    			array_push($geojson['features'], $feature);
+			$feature = array(
+				'type' => 'Feature',
+			  'geometry' => array(
+				'type' => 'Point',
+				'coordinates' => array($location['lng'],$location['lat'])
+					),
+			  'properties' => array(
+					'name' => $hub,
+					'description' => esc_html($excerpt)."<br/>",
+					'link' => 'author/'.$user->user_login,
+					'marker-color' => '#ffe267',
+					'marker-symbol' => $map_icos[$hub_itype]
+					)
+				);
+			array_push($geojson['features'], $feature);
 
-    		}
-        }
+		}
 
 	}
 
