@@ -1,3 +1,5 @@
+$=jQuery.noConflict();
+
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
@@ -406,7 +408,7 @@ function embedVids() {
 
 // END VIDEO EMBED CODE
 
-	 jQuery(document).ready(function() {
+	 jQuery(document).ready(function($) {
 	 	var hubval = getUrlParameter('hub');
 	 	var ctryval = getUrlParameter('ctry');
 	 	if (hubval) {
