@@ -272,7 +272,7 @@ function ValidURL(str) {
 	var bdborder = url[2];
 	var pathc = window.location.pathname.split('/').length - 1;
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($){
 
 	$('.btn-facebook').on('click', function() {
 		FB.login();
