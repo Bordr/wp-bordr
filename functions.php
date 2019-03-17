@@ -1125,6 +1125,267 @@ acf_add_local_field_group(array (
 	'key' => 'group_5703f201f38b0',
 	'title' => 'Activity',
 	'fields' => array (
+    		array(
+    			'key' => 'field_5c82195d761f0',
+    			'label' => 'Reporting for Roberto Cimetta Fund Grantee.',
+    			'name' => '',
+    			'type' => 'message',
+    			'instructions' => '',
+    			'required' => 0,
+                'conditional_logic' => array (
+                    array (
+                        array (
+                            'field' => 'field_5c8889b6b5d7f',
+                            'operator' => '==',
+                            'value' => '1',
+                        ),
+                    ),
+                ),
+    			'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'message' => 'Reporting is required in line with your Grant agreement.
+
+    Your reporting is done in two parts:
+
+    <b>Part 1 - Cimetta Fund Questions</b>
+    Includes questions that the Cimetta Fund needs to evaluate this grant.
+
+    <b>Part 2 - Global Grand Central Activity Reporting</b>
+    Includes questions about your work, how do you do it, and what others can learn from you.
+
+    Mandatory questions are marked with *
+
+    You will have access to this form during the whole course of your Cimetta funded activity, and to part 2 also after your grant is approved.
+
+    You are encouraged to read through the whole form, before your Activity begins, and keep filling it out as part of your work.',
+    			'new_lines' => 'wpautop',
+    			'esc_html' => 0,
+    		),
+    		array(
+    			'key' => 'field_5c821c59761f2',
+    			'label' => 'Part 1. Cimetta Fund Questions',
+    			'name' => '',
+    			'type' => 'message',
+    			'instructions' => '',
+    			'required' => 0,
+                'conditional_logic' => array (
+                    array (
+                        array (
+                            'field' => 'field_5c8889b6b5d7f',
+                            'operator' => '==',
+                            'value' => '1',
+                        ),
+                    ),
+                ),
+    			'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'message' => '- These answers are mandatory
+    - They will not be made public',
+    			'new_lines' => 'wpautop',
+    			'esc_html' => 0,
+    		),
+    		array(
+    			'key' => 'field_5c821c88761f3',
+    			'label' => '',
+    			'name' => 'cimetta_grant_impact',
+    			'type' => 'textarea',
+    			'instructions' => '1. How did this grant contribute to the realization of your project, and particularly to artistic exchange, local cultural development and/or the promotion of cultural diversity?',
+    			'required' => 1,
+                'conditional_logic' => array (
+    				array (
+    					array (
+    						'field' => 'field_5c8889b6b5d7f',
+    						'operator' => '==',
+    						'value' => '1',
+    					),
+    				),
+    			),
+    			'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'default_value' => '',
+    			'placeholder' => '',
+    			'maxlength' => '',
+    			'rows' => '',
+    			'new_lines' => '',
+    		),
+            array(
+    			'key' => 'field_5c821c88761f4',
+    			'label' => '',
+    			'name' => 'cimetta_communication',
+    			'type' => 'textarea',
+    			'instructions' => '2. Please indicate how you communicated the support received from RCF and provide any links to communication material.',
+    			'required' => 1,
+                'conditional_logic' => array (
+    				array (
+    					array (
+    						'field' => 'field_5c8889b6b5d7f',
+    						'operator' => '==',
+    						'value' => '1',
+    					),
+    				),
+    			),
+    			'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'default_value' => '',
+    			'placeholder' => '',
+    			'maxlength' => '',
+    			'rows' => '',
+    			'new_lines' => '',
+    		),
+            array(
+    			'key' => 'field_5c821c88761f5',
+    			'label' => '',
+    			'name' => 'cimetta_exchange',
+    			'type' => 'textarea',
+    			'instructions' => '3. How does exchange, networking and international contacts contribute to the development of your artistic and cultural project?',
+    			'required' => 1,
+                'conditional_logic' => array (
+    				array (
+    					array (
+    						'field' => 'field_5c8889b6b5d7f',
+    						'operator' => '==',
+    						'value' => '1',
+    					),
+    				),
+    			),
+    			'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'default_value' => '',
+    			'placeholder' => '',
+    			'maxlength' => '',
+    			'rows' => '',
+    			'new_lines' => '',
+    		),
+            array(
+                'key' => 'field_5c821c88761f6',
+                'label' => '',
+                'name' => 'cimetta_needs',
+                'type' => 'textarea',
+                'instructions' => '4. In your opinion, what are the specific needs of your artistic field in your country and how should they be taken into account?',
+                'required' => 1,
+                'conditional_logic' => array (
+                    array (
+                        array (
+                            'field' => 'field_5c8889b6b5d7f',
+                            'operator' => '==',
+                            'value' => '1',
+                        ),
+                    ),
+                ),
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'default_value' => '',
+                'placeholder' => '',
+                'maxlength' => '',
+                'rows' => '',
+                'new_lines' => '',
+            ),
+            array(
+                'key' => 'field_5c821c88761f7',
+                'label' => '',
+                'name' => 'cimetta_financial_support',
+                'type' => 'textarea',
+                'instructions' => '5. Have you received other financial supports for your project apart from the Roberto Cimetta Fund? If yes, please indicate.',
+                'required' => 1,
+                'conditional_logic' => array (
+                    array (
+                        array (
+                            'field' => 'field_5c8889b6b5d7f',
+                            'operator' => '==',
+                            'value' => '1',
+                        ),
+                    ),
+                ),
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'default_value' => '',
+                'placeholder' => '',
+                'maxlength' => '',
+                'rows' => '',
+                'new_lines' => '',
+            ),
+            array(
+                'key' => 'field_5c821c88761f8',
+                'label' => '',
+                'name' => 'cimetta_comments',
+                'type' => 'textarea',
+                'instructions' => '6. Do you have other comments on the grant or its execution that you wish to extend to the Roberto Cimetta Fund? If so, please elaborate.',
+                'required' => 1,
+                'conditional_logic' => array (
+                    array (
+                        array (
+                            'field' => 'field_5c8889b6b5d7f',
+                            'operator' => '==',
+                            'value' => '1',
+                        ),
+                    ),
+                ),
+                'wrapper' => array(
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'default_value' => '',
+                'placeholder' => '',
+                'maxlength' => '',
+                'rows' => '',
+                'new_lines' => '',
+            ),
+            array(
+    			'key' => 'field_5c821c59761g2',
+    			'label' => 'Part 2. Global Grand Central Activity Reporting',
+    			'name' => '',
+    			'type' => 'message',
+    			'instructions' => '',
+    			'required' => 0,
+                'conditional_logic' => array (
+                    array (
+                        array (
+                            'field' => 'field_5c8889b6b5d7f',
+                            'operator' => '==',
+                            'value' => '1',
+                        ),
+                    ),
+                ),
+                'wrapper' => array(
+    				'width' => '',
+    				'class' => '',
+    				'id' => '',
+    			),
+    			'message' => '
+                Global Grand Central has been co-developed by the Roberto Cimetta fund and it is grantees to enable sharing of relevant knowledge and experience. Read more on www.globalgrandcentral.net/about/
+
+                - Most answers are voluntary, mandatory questions are marked. *
+                - If you accept the Creative Commons License (at the bottom of the form) your answers will be made public - to share with colleagues and epers, and to inspire and get inspired by others.
+                - You are free to keep using the service also for other projects, afer the period of the grant.
+
+                Questions refer to your Cimetta funded activity.',
+    			'new_lines' => 'wpautop',
+    			'esc_html' => 0
+            ),
+
+
 		array (
 			'key' => 'field_57c088f00aefe',
 			'label' => 'What is an activity?',
@@ -1353,7 +1614,7 @@ acf_add_local_field_group(array (
 			'name' => 'why_description',
 			'type' => 'wysiwyg',
 			'instructions' => 'Why are you doing this? Explain using images, drawings, photographs, film, sound, or text.',
-			'required' => 0,
+			'required' => 1,
 			'conditional_logic' => 0,
 			'wrapper' => array (
 				'width' => '',
@@ -1821,12 +2082,62 @@ Unknown people (100)',
 			'slider_units' => '%',
 			'default_value' => 0,
 		),
+        array (
+			'key' => 'field_570d2d7a799fg',
+			'label' => '<h2>What was negative/difficult?</h2>',
+			'name' => 'success_negative_desc',
+			'type' => 'textarea',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'rows' => 4,
+		),
+        array (
+			'key' => 'field_570d2d7a799fh',
+			'label' => '<h2>What was positive/easy?</h2>',
+			'name' => 'success_positive_desc',
+			'type' => 'textarea',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'rows' => 4,
+		),
 		array (
 			'key' => 'field_570d2d7a799fe',
 			'label' => '<h2>Main lessons</h2>',
 			'name' => 'success_desc',
 			'type' => 'wysiwyg',
-			'instructions' => 'In what way did it succeed/fail, and what were the main lessons? Explain using images, drawings, photographs, film, sound, or text.',
+			'instructions' => 'Explain using images, drawings, photographs, film, sound, or text.',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array (
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'tabs' => 'all',
+			'toolbar' => 'basic',
+			'media_upload' => 1,
+		),
+        array (
+			'key' => 'field_570d2d7a788fe',
+			'label' => '<h2>New Activities</h2>',
+			'name' => 'activity_influence',
+			'type' => 'wysiwyg',
+			'instructions' => 'Will this activity contirbute to other work? Please tell',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -1844,7 +2155,7 @@ Unknown people (100)',
 			'label' => '<h2>Inspiration</h2>',
 			'name' => 'inspiration_description',
 			'type' => 'wysiwyg',
-			'instructions' => 'What were your inspirations? Explain using images, drawings, photographs, film, sound, or text.',
+			'instructions' => 'What inspired you? Explain using images, drawings, photographs, film, sound, or text.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array (
@@ -2379,6 +2690,25 @@ Please take a moment and describe your hub.',
 			'toggle' => 0,
 			'return_format' => 'value',
 		),
+        array(
+            'key' => 'field_5c8889b6b5d7f',
+            'label' => 'Cimetta Grantee',
+            'name' => 'cimetta_grantee',
+            'type' => 'true_false',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => '',
+            'default_value' => 0,
+            'ui' => 0,
+            'ui_on_text' => '',
+            'ui_off_text' => '',
+        ),
 		array (
 			'key' => 'field_57042530881b3',
 			'label' => 'Hub Name',
