@@ -120,4 +120,4 @@ function advanced_custom_search( $search, &$wp_query ) {
 } // closes function advanced_custom_search
 
 // 8- use add_filter to put advanced_custom_search into the posts_search results
-add_filter( 'posts_search', 'advanced_custom_search', 500, 2 );
+// add_filter( 'posts_search', 'advanced_custom_search', 500, 2 );
