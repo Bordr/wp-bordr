@@ -2019,7 +2019,7 @@ Unknown people (100)',
 		),
         array(
             'key' => 'field_5c8889b6b5d7f',
-            'label' => 'Did you receive support from the Cimetta Fund for this activity?',
+            'label' => 'Did you receive support from the Fanak Fund for this activity?',
             'name' => 'cimetta_grantee',
             'type' => 'true_false',
             'instructions' => '',
@@ -2036,10 +2036,10 @@ Unknown people (100)',
             'ui_on_text' => '',
             'ui_off_text' => '',
         ),
-        // Begin Cimetta Section
+        // Begin Fanak Section
         array(
             'key' => 'field_5c82195d761f0',
-            'label' => 'Reporting for Roberto Cimetta Fund Grantee.',
+            'label' => 'Reporting for Fanak Fund Grantee.',
             'name' => '',
             'type' => 'message',
             'instructions' => '',
@@ -2065,12 +2065,12 @@ Your reporting is done in two parts:
 <b>Global Grand Central Activity Reporting</b>
 Includes questions about your work, how do you do it, and what others can learn from you.
 
-<b>Cimetta Fund Questions</b>
-Includes questions that the Cimetta Fund needs to evaluate this grant.
+<b>Fanak Fund Questions</b>
+Includes questions that the Fanak Fund needs to evaluate this grant.
 
 Mandatory questions are marked with *
 
-You will have access to this form during the whole course of your Cimetta funded activity, and to your Global Grand Central Activity Report also after your grant is approved.
+You will have access to this form during the whole course of your Fanak funded activity, and to your Global Grand Central Activity Report also after your grant is approved.
 
 You are encouraged to read through the whole form, before your Activity begins, and keep filling it out as part of your work.',
             'new_lines' => 'wpautop',
@@ -2078,7 +2078,7 @@ You are encouraged to read through the whole form, before your Activity begins, 
         ),
         array(
             'key' => 'field_5c821c59761f2',
-            'label' => 'Cimetta Fund Questions',
+            'label' => 'Fanak Fund Questions',
             'name' => '',
             'type' => 'message',
             'instructions' => '',
@@ -2134,7 +2134,7 @@ You are encouraged to read through the whole form, before your Activity begins, 
             'label' => '',
             'name' => 'cimetta_communication',
             'type' => 'textarea',
-            'instructions' => '2. Please indicate how you communicated the support received from RCF and provide any links to communication material.',
+            'instructions' => '2. Please indicate how you communicated the support received from Fanak and provide any links to communication material.',
             'required' => 1,
             'conditional_logic' => array (
                 array (
@@ -2215,7 +2215,7 @@ You are encouraged to read through the whole form, before your Activity begins, 
             'label' => '',
             'name' => 'cimetta_financial_support',
             'type' => 'textarea',
-            'instructions' => '5. Have you received other financial supports for your project apart from the Roberto Cimetta Fund? If yes, please indicate.',
+            'instructions' => '5. Have you received other financial supports for your project apart from the Fanak Fund? If yes, please indicate.',
             'required' => 1,
             'conditional_logic' => array (
                 array (
@@ -2242,7 +2242,7 @@ You are encouraged to read through the whole form, before your Activity begins, 
             'label' => '',
             'name' => 'cimetta_comments',
             'type' => 'textarea',
-            'instructions' => '6. Do you have other comments on the grant or its execution that you wish to extend to the Roberto Cimetta Fund? If so, please elaborate.',
+            'instructions' => '6. Do you have other comments on the grant or its execution that you wish to extend to the Fanak Fund? If so, please elaborate.',
             'required' => 1,
             'conditional_logic' => array (
                 array (
@@ -2286,17 +2286,17 @@ You are encouraged to read through the whole form, before your Activity begins, 
                 'id' => '',
             ),
             'message' => '
-            Global Grand Central has been co-developed by the Roberto Cimetta fund and it is grantees to enable sharing of relevant knowledge and experience. Read more on www.globalgrandcentral.net/about/
+            Global Grand Central has been co-developed by the Fanak fund and it is grantees to enable sharing of relevant knowledge and experience. Read more on www.globalgrandcentral.net/about/
 
             - Most answers are voluntary, mandatory questions are marked. *
             - If you accept the Creative Commons License (at the bottom of the form) your answers will be made public - to share with colleagues and epers, and to inspire and get inspired by others.
             - You are free to keep using the service also for other projects, afer the period of the grant.
 
-            Questions refer to your Cimetta funded activity.',
+            Questions refer to your Fanak funded activity.',
             'new_lines' => 'wpautop',
             'esc_html' => 0
         ),
-        // End Cimetta Section
+        // End Fanak Section
 		array (
 			'key' => 'field_573a10c1e94bd',
 			'label' => 'Creative Commons License',
